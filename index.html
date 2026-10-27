@@ -16,15 +16,15 @@ gtag('config','G-XCVJ1YB5QR',{send_page_view:true,page_location:location.origin+
 <meta property="og:title" content="Auction List | Rashidah Juremi">
 <meta property="og:description" content="Bank auction properties below market value. Contact Rashidah Juremi: 018-2808043">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#2f6f7c">
+<meta name="theme-color" content="#0f2a44">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.45 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 
 <style>
 /* Layout: phone-first card list, sticky search bar, bottom-sheet filters with Reset */
-:root{--prem:#b8731a;--prem-bg:#fff3e0;--bg:#edf1f4;--surface:#fbfcfd;--fg:#22303a;--muted:#4f5d68;--line:#d3dde4;--accent:#2f6f7c;--accent-fg:#fff;--warn:#9a5526;--warn-bg:#f7ebe1;--ok-bg:#dff0ee;--scrim:rgba(20,30,38,.45);--red:#b3261e;--red-bg:#fbe3e1;--wa:#1d7a45;--wa-fg:#fff;--fs:1;
+:root{--prem:#8a6512;--prem-bg:#fbf3dc;--bg:#f6f4ef;--surface:#ffffff;--fg:#13212e;--muted:#56636f;--line:#e4dfd3;--accent:#0f2a44;--accent-fg:#fff;--warn:#9a5526;--warn-bg:#f7ebe1;--ok-bg:#e8f3ec;--gold:#c9a227;--gold-fg:#1a1405;--save:#1d6b3a;--scrim:rgba(20,30,38,.45);--red:#b3261e;--red-bg:#fbe3e1;--wa:#1d7a45;--wa-fg:#fff;--fs:1;
 --display:'Fraunces',Georgia,serif;--body:'IBM Plex Sans',system-ui,sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12171b;--surface:#1b2227;--fg:#e4eaee;--muted:#a9b6bf;--line:#2f3a42;--accent:#7cc0cc;--prem:#f3bd63;--prem-bg:#3a2c14;--accent-fg:#0d2327;--warn:#e5a77c;--warn-bg:#33261c;--ok-bg:#17323a;--scrim:rgba(0,0,0,.6);--red:#ff9b94;--red-bg:#3d1c1a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#12171b;--surface:#1b2227;--fg:#e4eaee;--muted:#a9b6bf;--line:#2f3a42;--accent:#7cc0cc;--prem:#f3bd63;--prem-bg:#3a2c14;--accent-fg:#0d2327;--warn:#e5a77c;--warn-bg:#33261c;--ok-bg:#17323a;--scrim:rgba(0,0,0,.6);--red:#ff9b94;--red-bg:#3d1c1a;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1520;--surface:#12202d;--fg:#e8edf2;--muted:#a7b4c1;--line:#253649;--accent:#d9b54a;--prem:#e6c25a;--prem-bg:#3a2e10;--accent-fg:#0f1a26;--warn:#e5a77c;--warn-bg:#33261c;--ok-bg:#16301f;--gold:#d9b54a;--gold-fg:#1a1405;--save:#7fd39a;--scrim:rgba(0,0,0,.6);--red:#ff9b94;--red-bg:#3d1c1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1520;--surface:#12202d;--fg:#e8edf2;--muted:#a7b4c1;--line:#253649;--accent:#d9b54a;--prem:#e6c25a;--prem-bg:#3a2e10;--accent-fg:#0f1a26;--warn:#e5a77c;--warn-bg:#33261c;--ok-bg:#16301f;--gold:#d9b54a;--gold-fg:#1a1405;--save:#7fd39a;--scrim:rgba(0,0,0,.6);--red:#ff9b94;--red-bg:#3d1c1a;color-scheme:dark}
 /* text size: A / A+ / A++ buttons, remembered on the device (every rem size scales with it) */
 :root[data-size="l"]{--fs:1.15}
 :root[data-size="xl"]{--fs:1.3}
@@ -71,12 +71,16 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .vseg button{min-height:40px;font-size:.92rem;padding:0 12px}
 .reset-inline{border:0;background:var(--warn-bg);color:var(--warn);border-radius:99px;padding:0 14px;min-height:40px;font-weight:700}
 .loadmore{display:block;margin:16px auto 0;padding:12px 28px;border-radius:12px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-weight:700;cursor:pointer}.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:22px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;border-width:2px;box-shadow:0 4px 14px rgba(20,40,50,.10);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 22px rgba(15,42,68,.08);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 /* category picture (img/<cat>.webp, generated 25/10/2026): an illustration of the TYPE of property, never the actual unit; tap = Google Maps */
 .hero{position:relative;display:block;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--bg);color:#fff;text-decoration:none}
 .hero img{width:100%;height:100%;object-fit:cover;display:block}
 .hero-note{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;max-width:92%;padding:9px 14px;border-radius:999px;background:rgba(14,20,24,.74);font-weight:700;font-size:.95rem;line-height:1.25;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 .hero-note .pin{width:18px;height:18px;flex:none;fill:#5fd38d}
+.hchip{position:absolute;top:10px;z-index:1;max-width:58%;border-radius:999px;padding:5px 11px;font-size:.8rem;font-weight:800;line-height:1.2;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hchip.gold{left:10px;background:var(--gold);color:var(--gold-fg)}.hchip.when{right:10px;background:#0f2a44;color:#fff}.hchip .cd{all:unset}
+.save{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin-top:6px;background:var(--ok-bg);color:var(--save);border-radius:10px;padding:8px 12px;font-weight:800;font-size:.95rem}.save small{font-weight:600;opacity:.9}
+.eyebrow{display:block;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--prem)}
 .hero-cap{position:absolute;left:8px;bottom:7px;padding:2px 7px;border-radius:6px;background:rgba(14,20,24,.6);font-size:.72rem;font-weight:600;letter-spacing:.02em}
 a.hero:hover .hero-note,a.hero:focus-visible .hero-note{background:rgba(14,20,24,.9)}
 /* free preview (TRIAL): paid values become this link; the bar at the top says what the visitor is looking at */
@@ -104,7 +108,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .pl{display:flex;align-items:center;gap:6px;font-size:.92rem;font-weight:700;color:var(--muted)}
 .mv{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;color:var(--fg);font-size:1.05rem;font-weight:600}.mv small{color:var(--muted);font-weight:600;font-size:.95rem}.mv b{white-space:nowrap}
 .bmvrow{display:flex;align-items:center;gap:6px;margin-top:4px}
-.bmv{align-self:flex-start;background:var(--ok-bg);color:var(--accent);border-radius:99px;padding:6px 14px;font-weight:800;font-size:1rem}
+.bmv{align-self:flex-start;background:var(--prem-bg);color:var(--prem);border-radius:99px;padding:6px 14px;font-weight:800;font-size:1rem}
 .addr{font-size:1.15rem;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
 .card.simple .addr{font-size:1.25rem}.card.simple .price{font-size:2rem}
 .dims{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -288,7 +292,7 @@ body{padding-block-end:100px}
 <p style="font-size:.85rem">Rashidah Juremi · 018-2808043</p>
 </form></div>
 <div class="wrap">
-<div class="hd"><div class="hd-title"><h1 data-i18n="h1">Auction List</h1><img class="tier-badge" id="tierBadge" alt="" width="60" height="60" hidden><img class="tier-badge agent" id="agentBadge" alt="" width="60" height="60" hidden></div><div class="hd-acts"><button class="btn theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode" title="Light / dark mode">🌙</button><button class="btn share-all" id="shareAll" type="button" data-i18n="share">Share</button></div></div>
+<div class="hd"><div class="hd-title"><div><span class="eyebrow" data-i18n="eyebrow">Members-only list</span><h1 data-i18n="h1">Auction List</h1></div><img class="tier-badge" id="tierBadge" alt="" width="60" height="60" hidden><img class="tier-badge agent" id="agentBadge" alt="" width="60" height="60" hidden></div><div class="hd-acts"><button class="btn theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode" title="Light / dark mode">🌙</button><button class="btn share-all" id="shareAll" type="button" data-i18n="share">Share</button></div></div>
 <p class="upd" id="upd"></p>
 <div class="trial-bar" id="trialBar" hidden><span data-i18n="trial_msg">You are viewing the free preview. Full details are for premium members.</span><a class="btn" id="trialCta" href="premium/" data-i18n="lock">Unlock Premium RM50 only</a></div>
 <div class="tools">
@@ -368,7 +372,7 @@ const ls={get:k=>{try{return localStorage.getItem(KP+k)}catch(e){return null}},s
 let LANG=ls.get('lang')==='ms'?'ms':'en';
 // English / Bahasa Melayu. {name} and {phone} are the agent's; other {x} are filled in by the caller.
 const I18N={en:{
-title:'Auction List | {name}',h1:'Auction List',updated:'Updated {d}',loading:'Loading listings…',load_err:'Could not load listings. Refresh the page to try again.',
+title:'Auction List | {name}',h1:'Auction List',updated:'Updated {d} · from official auction notices',eyebrow:'Members-only list',save_lbl:'You save {v}',mo_lbl:'≈ {v} / month',mo_note:'Estimate: 90% loan, 35 years, 4.25% a year. Ask your bank for the real figure.',loading:'Loading listings…',load_err:'Could not load listings. Refresh the page to try again.',
 banner:'Interested? Contact {name}: {phone}',call:'📞 Call',wa_hi:'Hi {name}, I would like to know more about the auction list.',
 qf_btn:'🔎 Quick Find',qf_sub:'3 easy questions',guide_btn:'❓ How to use',guide_sub:'this page',
 search_ph:'🔎 Address or bank',search_ph_s:'🔎 Address / bank',search_al:'Search address or bank',filter:'Filter',shared_t:'Showing a shared unit',view_all:'View all listings',status_al:'Listing status',
@@ -441,7 +445,7 @@ h_count:'<p><b>1st auction</b> - the first time the bank offers this unit.</p><p
 h_cy_t:'Completion year',
 h_cy:'<p>The year the building was completed.</p><p>It is only available for Condominium / Apartment / SOHO. Picking a year changes the Property Category to Condominium / Apartment / SOHO.</p>'
 },ms:{
-title:'Senarai Lelong | {name}',h1:'Senarai Lelong',updated:'Dikemas kini {d}',loading:'Memuatkan senarai…',load_err:'Senarai tidak dapat dimuatkan. Muat semula halaman dan cuba lagi.',
+title:'Senarai Lelong | {name}',h1:'Senarai Lelong',updated:'Dikemas kini {d} · daripada notis lelong rasmi',eyebrow:'Senarai eksklusif ahli',save_lbl:'Jimat {v}',mo_lbl:'± {v} / bulan',mo_note:'Anggaran: pinjaman 90%, 35 tahun, 4.25% setahun. Semak angka sebenar dengan bank.',loading:'Memuatkan senarai…',load_err:'Senarai tidak dapat dimuatkan. Muat semula halaman dan cuba lagi.',
 banner:'Berminat? Hubungi {name}: {phone}',call:'📞 Telefon',wa_hi:'Hi {name}, saya nak tahu lebih lanjut tentang senarai lelong.',
 qf_btn:'🔎 Carian Mudah',qf_sub:'3 soalan mudah',guide_btn:'❓ Cara guna',guide_sub:'laman ini',
 search_ph:'🔎 Alamat atau bank',search_ph_s:'🔎 Alamat / bank',search_al:'Cari alamat atau bank',filter:'Tapis',shared_t:'Menunjukkan unit yang dikongsi',view_all:'Lihat semua senarai',status_al:'Status senarai',
@@ -614,7 +618,16 @@ const artOf=r=>r[28]==='Flat'?'flat':ART[r[21]]||'';
 const PIN='<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>';
 const satUrl=u=>{const m=/[?&]query=([^&#]+)/.exec(u||'');return m?'https://maps.google.com/maps?q='+m[1]+'&t=k':u};   // same place, satellite layer on
 // r[32] photo = 'u:<hash>' (this unit) or 'b:<hash>' (its building), from our own listing posts; trial pages keep the illustration
-function hero(r){const ph=!TRIAL&&/^[ub]:[0-9a-f]{20}$/.test(r[32]||'')?r[32]:'';const k=artOf(r);if(!k&&!ph)return '';const m=/^https:\/\//i.test(r[4]||'')?satUrl(r[4]):'';const img='<img src="'+IMG+(ph?'tg/'+ph.slice(2):k)+'.webp" width="960" height="540" alt="" loading="lazy" decoding="async">';
+// chips on the photo (palette A, 28/10/2026): the discount in gold and the days left, for units that can still be bought
+function heroChips(r){const s=stOf(r);if(s!=='active'&&s!=='unsold')return '';const b=bmvTxt(r),c=dt(r[12])>=T0?cdChip(r[12]):'';
+ return (b?'<span class="hchip gold">'+esc(b)+'</span>':'')+(c?'<span class="hchip when">'+c+'</span>':'')}
+// savings and a monthly instalment estimate (homes only): price vs market value, 90% loan over 35 years at 4.25% a year
+const HOME_CATS=()=>[CATS[0],CATS[1],CATS[2],CATS[5]];
+function saveRow(r,ex){if(ex)return '';const p=num(r[7]);if(!p)return '';const mv=suspect(r)||locked(r[8])?0:num(r[8]),cut=mv>p?mv-p:0;
+ const home=HOME_CATS().includes(r[21]),L=p*.9,i=.0425/12,n=420,mo=home?Math.round(L*i/(1-Math.pow(1+i,-n))):0;if(!cut&&!mo)return '';
+ const rm=v=>'RM '+Math.round(v).toLocaleString('en-MY');
+ return '<div class="save">'+(cut?'<span>'+tx('save_lbl',{v:rm(cut)})+'</span>':'')+(mo?'<span title="'+esc(tx('mo_note'))+'"><small>'+tx('mo_lbl',{v:rm(mo)})+'</small></span>':'')+'</div>'}
+function hero(r){const ph=!TRIAL&&/^[ub]:[0-9a-f]{20}$/.test(r[32]||'')?r[32]:'';const k=artOf(r);if(!k&&!ph)return '';const m=/^https:\/\//i.test(r[4]||'')?satUrl(r[4]):'';const img='<img src="'+IMG+(ph?'tg/'+ph.slice(2):k)+'.webp" width="960" height="540" alt="" loading="lazy" decoding="async">'+heroChips(r);
  const cap='<span class="hero-cap">'+tx(ph?'hero_cap_'+ph[0]:'hero_cap')+'</span>';
  return m?'<a class="hero" href="'+esc(m)+'" target="_blank" rel="noopener" aria-label="'+esc(tx('hero_note'))+'">'+img+'<span class="hero-note">'+PIN+tx('hero_note')+'</span>'+cap+'</a>':TRIAL?'<a class="hero" href="'+esc(LANDING)+'" aria-label="'+esc(tx('hero_lock'))+'">'+img+'<span class="hero-note">\uD83D\uDD13 '+tx('hero_lock')+'</span>'+cap+'</a>':'<div class="hero">'+img+cap+'</div>'}
 function catOf(r){if(r[18]&&r[18]!=='-')return r[18];const s=String(r[5]||'').toLowerCase();
@@ -891,11 +904,12 @@ function card(r,i){
  const condo=(r[21]===CATS[0]||r[21]===CATS[5]);
  const bt=bmvTxt(r),cn=nthTxt(r),fav=FAV.has(r[20]);
  const cal=!ex&&dt(r[12])>=T0?calUrl(r):'';
- return '<article class="card'+(ex?' expired':'')+(simple?' simple':'')+(sharedId?' hl':'')+'" data-k="'+i+'" data-id="'+esc(r[20])+'">'+hero(r)+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
+ const hz=hero(r),onPhoto=!!(hz&&bt&&!ex);
+ return '<article class="card'+(ex?' expired':'')+(simple?' simple':'')+(sharedId?' hl':'')+'" data-k="'+i+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +'<div class="head"><span class="num">'+(i+1)+'</span><div class="addr">'+esc(r[1])+'</div></div>'
  +'<div class="pricebox"><div class="kindt">'+dash(typeName(r))+(ok(r[9])?' · '+esc(r[9])+qb('tenure'):'')+'</div><span class="pl">'+tx('auction_price')+qb('price')+'</span><div class="price">'+dash(r[7])+(fire?' 🔥':'')+'</div>'
- +(simple?'':'<div class="mv"><small>'+tx('market_value')+'</small> <b>'+(suspect(r)?'N/A':dash(r[8]))+'</b>'+(bt?'':qb('bmv'))+'</div>')
- +(bt?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+qb('bmv')+'</div>':'')+scoreChip(r,ex)+'</div>'
+ +(simple?'':'<div class="mv"><small>'+tx('market_value')+'</small> <b>'+(suspect(r)?'N/A':dash(r[8]))+'</b>'+(bt&&!onPhoto?'':qb('bmv'))+'</div>')
+ +(bt&&!onPhoto?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+qb('bmv')+'</div>':'')+saveRow(r,ex)+scoreChip(r,ex)+'</div>'
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')
  +(simple?facts(r,condo):dims(r,condo))+posBtn(r)
  +'<div class="when"><span class="dlab">'+tx('date')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+'</span></span></div>'
@@ -1000,7 +1014,7 @@ const isDark=()=>{const t=document.documentElement.getAttribute('data-theme');re
 function themeUI(){const d=isDark(),b=$('themeBtn');if(!b)return;b.textContent=d?'☀️':'🌙';const lbl=tx(d?'theme_light':'theme_dark');b.setAttribute('aria-label',lbl);b.title=lbl;
  const t=$('themeTop');if(t){t.textContent=b.textContent;t.setAttribute('aria-label',lbl);t.title=lbl}
  document.querySelectorAll('[data-theme-toggle]').forEach(x=>{x.textContent=(d?'☀️ ':'🌙 ')+lbl});
- const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d?'#12171b':'#2f6f7c')}
+ const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d?'#0b1520':'#0f2a44')}
 function toggleTheme(){const t=isDark()?'light':'dark';document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('rashidahjuremi.theme',t)}catch(e){}themeUI();track('theme_change',{theme:t})}
 $('themeBtn').onclick=toggleTheme;$('themeTop').onclick=toggleTheme;THEMEUI=themeUI;THEMETOGGLE=toggleTheme;
 if(darkMQ&&darkMQ.addEventListener)darkMQ.addEventListener('change',()=>{if(!document.documentElement.getAttribute('data-theme'))themeUI()});
