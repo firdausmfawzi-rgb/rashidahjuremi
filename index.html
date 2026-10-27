@@ -744,7 +744,11 @@ function riskFlags(r){const f=[],t=String(r[9]||''),now=new Date().getFullYear()
  if(isCom(r))f.push(['rk_com',{l:SIP.ltvCom}]);
  return f}
 const srow=(k,val,neg,o,cls)=>'<div'+(cls?' class="'+cls+'"':'')+'><span>'+tx(k,o||{})+'</span><b'+(neg?' class="neg"':'')+'>'+val+'</b></div>';
+// 27/10/2026: the VIP Investor analysis section (calculator) is hidden for everyone for now, VIP members included.
+// The rest of the VIP Investor Plan (12-month history, badge, investor score) stays. true = show it again.
+const SIP_CALC=false;
 function sipHtml(r){
+ if(!SIP_CALC)return '';
  if(!canSip())return '<div style="grid-column:1/-1" class="sip-lock"><b>'+tx('sip_t')+'</b><span>'+tx('sip_lock_sub')+'</span>'+lockLink2()+'</div>';
  const mv=suspect(r)?0:num(r[8]),p=num(r[7]),bn=!locked2(r[31])&&num(r[31])>0,rent=baseRent(r),beds=bedsOf(r)||3;
  const v={mv,p,rent,furn:SIP.furn,grow:SIP.grow,ltv:isCom(r)?SIP.ltvCom:SIP.ltv,yrs:SIP.yrs,rpgt:rpgtRate(SIP.yrs),
