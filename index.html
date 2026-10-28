@@ -161,10 +161,10 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .posrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}.posbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border:1px solid var(--accent);border-radius:10px;background:var(--surface);color:var(--accent);font-weight:700;text-decoration:none}.posbtn:hover,.posbtn:focus-visible{background:var(--ok-bg)}.pos-lbl{font-weight:700;color:var(--muted)}
 .posdl{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:8px 16px 8px 10px;border:1px solid #d93025;border-radius:12px;background:var(--surface);color:var(--fg);font:inherit;text-align:left;cursor:pointer}.posdl:hover,.posdl:focus-visible{background:rgba(217,48,37,.08)}
 .posdl .pdfi{flex:none}.posdl b{display:block;font-size:1rem;line-height:1.2}.posdl small{display:block;font-size:.78rem;font-weight:600;color:var(--muted);line-height:1.25}
-.dims.d3{grid-template-columns:repeat(3,1fr);margin-top:8px}.dims.d3>div{padding:8px 8px}.dims>div{background:var(--bg);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.dims>div{background:var(--bg);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .dims span{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.88rem;font-weight:600;color:var(--muted)}
 .dims b{font-size:1.1rem;overflow-wrap:anywhere}
-:root[data-size] .dims.d3{grid-template-columns:1fr 1fr}
+:root[data-size] 
 .dims .q{width:26px;height:26px;min-height:26px;font-size:13px;margin-left:2px}
 .facts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:1.08rem;font-weight:600}
 .upd{margin:0 0 8px;color:var(--muted);font-size:.92rem}
@@ -1003,7 +1003,7 @@ function facts(r,condo){const f=[];
  if(condo){if(ok(r[23]))f.push('🛏 '+tx('f_bed',{n:esc(r[23])}));if(ok(r[24]))f.push('🛁 '+tx('f_bath',{n:esc(r[24])}));if(ok(r[11]))f.push('📐 '+esc(r[11]));if(ok(r[19]))f.push(tx('f_built',{y:dash(r[19])}))}
  else{if(ok(r[11]))f.push('📐 '+tx('f_bu',{v:esc(r[11])}));if(ok(r[10]))f.push(tx('f_land',{v:esc(r[10])}))}
  return f.length?'<div class="facts">'+f.map(x=>'<span>'+x+'</span>').join('')+'</div>':''}
-function dims(r,condo){return condo?'<div class="dims"><div><span>'+tx('built_up')+'</span><b>'+dash(r[11])+'</b></div><div><span>'+tx('cy')+'</span><b>'+dash(r[19])+'</b></div></div><div class="dims d3"><div><span>'+tx('bed')+'</span><b>'+dash(r[23])+'</b></div><div><span>'+tx('bath')+'</span><b>'+dash(r[24])+'</b></div><div><span>'+tx('car')+'</span><b>'+dash(r[25])+'</b></div></div>'
+function dims(r,condo){return condo?'<div class="dims"><div><span>'+tx('built_up')+'</span><b>'+dash(r[11])+'</b></div><div><span>'+tx('cy')+'</span><b>'+dash(r[19])+'</b></div></div>'   // the Bedrooms / Bathrooms / Car parks row was removed (28/10/2026)
  :'<div class="dims"><div><span>'+tx('land')+'</span><b>'+dash(r[10])+'</b></div><div><span>'+tx('built_up')+'</span><b>'+dash(r[11])+'</b></div></div>'}
 function chips(r){const lc=ok(r[17])?r[17]:'',rs=ok(r[15])?r[15]:'';if(!lc&&!rs)return '';
  return '<div class="chips">'+(lc?'<span class="chip '+(lc==='LACA'?'ok':'non')+'">'+esc(lc)+'</span>'+qb('laca'):'')+(rs?'<span class="chip red">'+esc(rs)+'</span>'+qb('restr'):'')+'</div>'}
