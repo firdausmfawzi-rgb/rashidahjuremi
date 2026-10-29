@@ -1188,7 +1188,7 @@ function clearShared(){if(!sharedId)return;sharedId=null;try{history.replaceStat
 function reset(quiet){clearShared();favMode=false;LASTON=false;NEWONLY=false;ls.del('last');status='available';['q','negeri','jenis','cat'].forEach(k=>$(k).value='');selD.clear();selT.clear();selY.clear();tarikhToggle(false);cyToggle(false);cyFlag(false);$('daerahQ').value='';daerahOpts();$('pMin').value='';$('pMax').value='';bmv=0;laca='';if(!quiet){paint();render()}}
 document.querySelectorAll('.rs').forEach(b=>b.onclick=()=>reset());
 $('resetInline').onclick=()=>reset();
-$('resetBar').onclick=()=>{reset(true);$('sort').value='new';paint();render();sheet(false);try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){window.scrollTo(0,0)}track('reset_top',{})};   // dock: everything back to the defaults, back to the top
+$('resetBar').onclick=()=>{reset(true);$('sort').value=$('sort').querySelector('option[value=score]')?'score':'new';paint();render();sheet(false);try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){window.scrollTo(0,0)}track('reset_top',{})};   // dock: everything back to the defaults, back to the top
 $('startOver').onclick=()=>{track('start_over');reset()};
 function toggleFav(id,btn){const on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);saveFav();
  btn.setAttribute('aria-pressed',String(on));btn.textContent=tx(on?'saved':'save');toast(tx(on?'fav_added':'fav_removed'));track(on?'fav_add':'fav_remove',{unit_id:id});
@@ -1360,7 +1360,7 @@ async function loadListings(){if(TRIAL)return getData(true);
   j.listings=j.listings.concat((hj.listings||[]).filter(o=>o&&o.id&&!ids.has(o.id)));j.vip_days=hj.days||365}catch(x){j.vip_err=true}}   // the member is told under the status buttons
  return j}
 let STARTED=false;
-function addScoreSort(){try{const so=G('sort');if(!so||TRIAL||TIER!=='sip'||so.querySelector('option[value=score]'))return;const o=document.createElement('option');o.value='score';o.dataset.i18n='s_score';o.textContent=(typeof tx==='function'?tx('s_score'):'Highest investor score');so.insertBefore(o,so.options[1]||null)}catch(e){}}   // runs before the main block exists: TRIAL / TIER only
+function addScoreSort(){try{const so=G('sort');if(!so||TRIAL||TIER!=='sip'||so.querySelector('option[value=score]'))return;const o=document.createElement('option');o.value='score';o.dataset.i18n='s_score';o.textContent=(typeof tx==='function'?tx('s_score'):'Highest investor score');so.insertBefore(o,so.options[1]||null);so.value='score'}catch(e){}}   // runs before the main block exists: TRIAL / TIER only; VIP opens on the investor score sort (29/10/2026)
 // the member's label under the title: an agent's own code (access.json agent:1) shows Agent Specialist only, otherwise the plan
 const TAG={vip:['VIP Investor','<path d="M6 3h12l4 6-10 12L2 9z" fill="currentColor"/><path d="M2 9h20M9 3l3 18M15 3l-3 18" stroke="#0f2a44" stroke-width=".9" fill="none" opacity=".55"/>'],
  agent:['Agent Specialist','<path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" fill="currentColor"/><path d="M8 12l3 3 5-6" fill="none" stroke="#fcf7e8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'],
