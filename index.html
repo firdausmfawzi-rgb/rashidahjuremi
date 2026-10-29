@@ -1223,9 +1223,9 @@ $('list').addEventListener('input',e=>{const d=e.target.closest('details.sip');i
 ['jenis','cat','sort'].forEach(k=>$(k).addEventListener('input',render));
 $('q').addEventListener('input',()=>{clearTimeout(QDEB);QDEB=setTimeout(render,160)});   // typing: one redraw after a short pause, not one per letter
 // search button / Enter (29/10/2026): results drawn now, keyboard closed, then the first listing just under the sticky bar
-function qGo(){clearTimeout(QDEB);render();$('q').blur();track('search_go',{});
- setTimeout(()=>{const el=$('list').firstElementChild;if(!el)return;const y=el.getBoundingClientRect().top+window.scrollY-document.querySelector('.top').offsetHeight-8;
-  try{window.scrollTo({top:y,behavior:'smooth'})}catch(e){window.scrollTo(0,y)}},120)}
+function toFirst(now){const el=$('list').firstElementChild;if(!el)return;const y=el.getBoundingClientRect().top+window.scrollY-document.querySelector('.top').offsetHeight-8;
+ if(now){window.scrollTo(0,y);return}try{window.scrollTo({top:y,behavior:'smooth'})}catch(e){window.scrollTo(0,y)}}
+function qGo(){clearTimeout(QDEB);render();$('q').blur();track('search_go',{});setTimeout(toFirst,120)}
 $('qGo').onclick=qGo;
 $('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();qGo()}});
 $('cat').addEventListener('input',()=>cyFlag(false));
@@ -1318,6 +1318,7 @@ LASTON=restoreLast();
 if(sharedId)track('shared_unit_open',{unit_id:sharedId});
 viewUI();paint();render();LASTSNAP=JSON.stringify(snapNow());
 if(!ls.get('guide')&&!sharedId)setTimeout(showGuide,500);
+if(sharedId)setTimeout(()=>toFirst(true),350);   // shared unit link (#id, 29/10/2026): open straight on that unit's card, not the top of the page
 }
 // Access lock (19/10/2026): data.json is encrypted. A valid code unwraps the data key from access.json (format: tools/sitecrypt.py),
 // so the listings cannot be read without one. The slow PBKDF2 step is remembered on the device: a returning client waits only once.
