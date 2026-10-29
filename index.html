@@ -371,6 +371,7 @@ body{padding-block-end:100px}
 <input id="gateCode" type="text" inputmode="text" autocomplete="one-time-code" placeholder="ACCESS CODE" data-i18n-ph="gate_ph" aria-label="Access code" data-i18n-al="gate_al" maxlength="32">
 <div class="err" id="gateErr" role="alert"></div>
 <button class="btn" type="submit" style="background:var(--accent);color:var(--accent-fg);border-color:var(--accent);font-weight:700" data-i18n="gate_open">Open list</button>
+<button class="btn" type="button" id="gateBack" hidden data-i18n="gate_back">Back to the free preview</button>
 <a class="btn wa" id="gateWa" href="https://wa.me/60182808043?text=Hi%20Rashidah%20Juremi%2C%20saya%20nak%20minta%20kod%20akses%20untuk%20senarai%20lelong." target="_blank" rel="noopener" data-i18n="gate_wa">Request access on WhatsApp</a>
 <p style="font-size:.85rem">Rashidah Juremi · 018-2808043</p>
 </form></div>
@@ -379,7 +380,7 @@ body{padding-block-end:100px}
 <div class="tier-row"><span class="tier-tag" id="tierTag" hidden></span><span class="ai-tag" id="aiTag" role="img" aria-label="Agentic AI Powered Data"><span class="ai-in"><svg class="ai-chip" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M12 2v4M15 2v4M9 18v4M12 18v4M15 18v4M2 9h4M2 12h4M2 15h4M18 9h4M18 12h4M18 15h4"/></svg><span class="ai-txt" data-text="Agentic AI Powered Data">Agentic AI Powered Data</span><i class="ai-cur" aria-hidden="true"></i></span></span></div><p class="aview-note" id="aviewNote" hidden data-i18n="aview_note">This view is for your client</p>
 <p class="upd" id="upd"></p>
 <div class="stats" id="stats" aria-live="polite"></div>
-<div class="trial-bar" id="trialBar" hidden><span data-i18n="trial_msg">You are viewing the free preview. Full details are for premium members.</span><a class="btn" id="trialCta" href="premium/" data-i18n="lock">Unlock Premium RM50 only</a></div>
+<div class="trial-bar" id="trialBar" hidden><span data-i18n="trial_msg">You are viewing the free preview. Full details are for premium members.</span><a class="btn" id="trialCta" href="premium/" data-i18n="lock">Unlock Premium RM50 only</a><button type="button" class="btn" id="haveCode" hidden data-i18n="have_code">I have an access code</button></div>
 <div class="tools">
 <div class="tgrp ts" role="group" aria-label="Text size" data-i18n-al="size_al"><button type="button" data-s="" aria-label="Normal text" data-i18n-al="size0">A</button><button type="button" data-s="l" aria-label="Bigger text" data-i18n-al="size1">A+</button><button type="button" data-s="xl" aria-label="Biggest text" data-i18n-al="size2">A++</button></div>
 
@@ -448,7 +449,8 @@ body{padding-block-end:100px}
 </div>
 
 <script>
-const FIELDS=["no", "address", "state", "district", "maps", "type", "bmv", "price", "market_value", "tenure", "land", "built_up", "auction_date", "auction_time", "auction_count", "restrictions", "bank", "laca","category","completion_year","id","_cat","first_seen","bedroom","bathroom","carpark","outcome","sold_price","kind","history","borrower","rental","photo","rental_ads"];
+const FIELDS=["no", "address", "state", "district", "maps", "type", "bmv", "price", "market_value", "tenure", "land", "built_up", "auction_date", "auction_time", "auction_count", "restrictions", "bank", "laca","category","completion_year","id","_cat","first_seen","bedroom","bathroom","carpark","outcome","sold_price","kind","history","borrower","rental","photo","rental_ads","sid"];
+const SID=FIELDS.indexOf('sid');   // share id (30/10/2026): a shared link carries this keyed hash, never the real id (the full address)
 const G=id=>document.getElementById(id);const gtrack=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(e){}};
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 // The agent this page belongs to: the call / WhatsApp buttons, the pre-filled messages and the help texts take the name and number from here.
@@ -461,7 +463,7 @@ const I18N={en:{
 title:'Auction List | {name}',h1:'Auction List',updated:'Updated {d} · from official auction notices',eyebrow:'Members-only list',save_lbl:'You save {v}',mo_lbl:'Installment ≈ {v} / month',mo_note:'Estimate only: banks usually lend 90% for a first or second home and 70% from the third. Ask your bank for the real figure.',mo_mar:'Loan margin',mo_m:'Loan {n}%',mo_ten:'Loan tenure',mo_rate:'Interest rate a year',mo_y:'{n} yrs',mo_y1:'{n} yr',mo_avg:'avg',new_tag:'NEW',psf:'RM {v} / sq ft',drop:'Price cut {n} times',drop1:'Price cut once',since:' since {d}',st_av:'units you can still bid on',st_bmv:'{p}%+ below market value',st_new:'new in the last 3 days',totop:'Back to top',st_tap:'Show these units',s_psf:'Lowest price per sq ft',f_new:'New (last 3 days)',chip_rm:'Remove filter: {f}',chip_all:'Clear all',cmp_btn:'⚖ Compare',cmp_t:'Compare saved units',cmp_more:'Showing the first 4 units of your list.',cmp_best:'★ = best in that row.',cmp_disc:'Below market value',cmp_psf:'Price per sq ft',cmp_ten:'Tenure',cmp_nth:'Auction round',sim:'🔍 {n} other {c} units for sale in {d}',sim1:'🔍 1 other {c} unit for sale in {d}',copy_al:'Copy address',addr_copied:'Address copied',pos_dl:'Download POS',pos_only:'(Only agent can do this)',pos_wait:'Opening the POS in a new tab… (a few seconds)',loading:'Loading listings…',load_err:'Could not load listings. Refresh the page to try again.',
 banner:'Interested? Contact {name}: {phone}',call:'📞 Call',wa_hi:'Hi {name}, I would like to know more about the auction list.',
 qf_btn:'🔎 Quick Find',qf_sub:'3 easy questions',guide_btn:'❓ How to use',guide_sub:'this page',
-search_ph:'Address or bank',search_ph_s:'Address / bank',search_al:'Search address or bank',search_go_al:'Search and go to the first listing',aview_note:'This view is for your client',aview_al:'Switch the view: agent, VIP client or free visitor',filter:'Filter',shared_t:'Showing a shared unit',view_all:'View all listings',status_al:'Listing status',
+search_ph:'Address or bank',search_ph_s:'Address / bank',search_al:'Search address or bank',search_go_al:'Search and go to the first listing',aview_note:'This view is for your client',aview_al:'Switch the view: agent, VIP client or free visitor',have_code:'I have an access code',gate_back:'Back to the free preview',filter:'Filter',shared_t:'Showing a shared unit',view_all:'View all listings',status_al:'Listing status',
 fav_btn:'♥ My list ({n})',fav_lbl:'♥ My list',fav_count:'My list: {n} units',fav_send:'💬 Send my list to {name}',print:'🖨 Print',back_all:'Back to all units',
 fav_empty:'Your list is empty. Tap <b>♡ Save</b> on a unit to keep it here.',fav_wa:'Hi {name}, I am interested in these auction units:',fav_more:'(+{n} more in my list)',
 fav_added:'Saved to My list',fav_removed:'Removed from My list',save:'♡ Save',saved:'♥ Saved',
@@ -534,7 +536,7 @@ h_cy:'<p>The year the building was completed.</p><p>It is only available for Con
 title:'Senarai Lelong | {name}',h1:'Senarai Lelong',updated:'Dikemas kini {d} · daripada notis lelong rasmi',eyebrow:'Senarai eksklusif ahli',save_lbl:'Jimat {v}',mo_lbl:'Ansuran ± {v} / bulan',mo_note:'Anggaran sahaja: bank biasanya beri pinjaman 90% untuk rumah pertama dan kedua, 70% untuk rumah ketiga. Semak angka sebenar dengan bank.',mo_mar:'Margin pinjaman',mo_m:'Margin {n}%',mo_ten:'Tempoh pinjaman',mo_rate:'Kadar faedah setahun',mo_y:'{n} thn',mo_y1:'{n} thn',mo_avg:'purata',new_tag:'BAHARU',psf:'RM {v} / kps',drop:'Harga sudah turun {n} kali',drop1:'Harga sudah turun sekali',since:' sejak {d}',st_av:'unit masih boleh dibida',st_bmv:'≥{p}% bawah nilai pasaran',st_new:'unit baharu (3 hari)',totop:'Kembali ke atas',st_tap:'Tunjuk unit ini',s_psf:'Harga sekaki terendah',f_new:'Baharu (3 hari)',chip_rm:'Buang penapis: {f}',chip_all:'Kosongkan semua',cmp_btn:'⚖ Banding',cmp_t:'Banding unit simpanan',cmp_more:'Menunjukkan 4 unit pertama dalam senarai anda.',cmp_best:'★ = terbaik dalam baris itu.',cmp_disc:'Bawah nilai pasaran',cmp_psf:'Harga sekaki',cmp_ten:'Pegangan',cmp_nth:'Pusingan lelong',sim:'🔍 {n} unit {c} lain dijual di {d}',sim1:'🔍 1 unit {c} lain dijual di {d}',copy_al:'Salin alamat',addr_copied:'Alamat disalin',pos_dl:'Muat turun POS',pos_only:'(Hanya ejen boleh buat ini)',pos_wait:'Membuka POS di tab baharu… (beberapa saat)',loading:'Memuatkan senarai…',load_err:'Senarai tidak dapat dimuatkan. Muat semula halaman dan cuba lagi.',
 banner:'Berminat? Hubungi {name}: {phone}',call:'📞 Telefon',wa_hi:'Hi {name}, saya nak tahu lebih lanjut tentang senarai lelong.',
 qf_btn:'🔎 Carian Mudah',qf_sub:'3 soalan mudah',guide_btn:'❓ Cara guna',guide_sub:'laman ini',
-search_ph:'Alamat atau bank',search_ph_s:'Alamat / bank',search_al:'Cari alamat atau bank',search_go_al:'Cari dan pergi ke listing pertama',aview_note:'Paparan ini untuk klien anda',aview_al:'Tukar paparan: agent, klien VIP atau pelawat percuma',filter:'Tapis',shared_t:'Menunjukkan unit yang dikongsi',view_all:'Lihat semua senarai',status_al:'Status senarai',
+search_ph:'Alamat atau bank',search_ph_s:'Alamat / bank',search_al:'Cari alamat atau bank',search_go_al:'Cari dan pergi ke listing pertama',aview_note:'Paparan ini untuk klien anda',aview_al:'Tukar paparan: agent, klien VIP atau pelawat percuma',have_code:'Saya ada kod akses',gate_back:'Kembali ke paparan percuma',filter:'Tapis',shared_t:'Menunjukkan unit yang dikongsi',view_all:'Lihat semua senarai',status_al:'Status senarai',
 fav_btn:'♥ Senarai saya ({n})',fav_lbl:'♥ Senarai saya',fav_count:'Senarai saya: {n} unit',fav_send:'💬 Hantar senarai kepada {name}',print:'🖨 Cetak',back_all:'Kembali ke semua unit',
 fav_empty:'Senarai anda kosong. Tekan <b>♡ Simpan</b> pada unit untuk menyimpannya di sini.',fav_wa:'Hi {name}, saya berminat dengan unit lelong berikut:',fav_more:'(+{n} lagi dalam senarai saya)',
 fav_added:'Disimpan dalam Senarai saya',fav_removed:'Dibuang dari Senarai saya',save:'♡ Simpan',saved:'♥ Disimpan',
@@ -669,8 +671,8 @@ fill($('jenis'),uniq(28),tx('all_type',{n:DATA.length}));
 const selT=new Set();   // Auction Date: any number of dates can be ticked at once
 const selY=new Set();   // Completion Year (only offered under Condominium / Apartment / SOHO): any number of years
 let bmv=0,laca='',status='available';   // 'available' = Active + Unsold (shown as "No bidder"): what a client's search shows by default
-let sharedId=(location.hash||'').slice(1)||null;
-if(sharedId&&!DATA.some(r=>r[20]===sharedId))sharedId=null;
+let sharedId=(location.hash||'').slice(1)||null;   // a shared link's unit: its share id (sid), or the real id in links made before 30/10/2026
+if(sharedId){const m=DATA.find(r=>r[20]===sharedId||r[SID]===sharedId);sharedId=m?m[20]:null}
 const track=gtrack;
 const BASE=location.origin+location.pathname;
 const ok=v=>v&&v!=='-'&&v!=='N/A';
@@ -688,7 +690,7 @@ function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTime
 // sh: the photo chip, e.g. "42% Below Market Value" in a smaller type that fits one line (28/10/2026); elsewhere "42% below market value"
 const bmvTxt=(r,sh)=>{if(TRIAL&&/^XX%/.test(String(r[6]||'')))return sh?tx('bmv_chip',{p:'XX'}):tx('bmv_lock');const v=suspect(r)||!ok(r[6])?'':String(r[6]);if(!v||/^\s*0%/.test(v))return '';const m=/^\s*(\d+(?:\.\d+)?)%\s*(?:BMV)?\s*$/i.exec(v);return m?tx(sh?'bmv_chip':'bmv_txt',{p:m[1]}):v};
 async function doShare(kind,r){
- const url=BASE+'?utm_source=share&utm_medium='+(r?'unit':'list')+'&utm_campaign=client_share'+(r?'#'+r[20]:'');
+ const url=BASE+'?utm_source=share&utm_medium='+(r?'unit':'list')+'&utm_campaign=client_share'+(r?'#'+(r[SID]||r[20]):'');
  const b=r?bmvTxt(r):'';
  const text=r?tx('share_unit',{t:pv(typeName(r)),d:pv(r[3]),s:pv(r[2]),p:pv(r[7]),b:b?' ('+b+')':'',a:fmtDay(r[12])}):tx('share_list');
  track('share_click',{share_type:kind,unit_id:r?r[20]:'list',category:r?(r[21]||''):''});
@@ -1354,15 +1356,16 @@ async function access(){
  for(const c of [code,stored]){if(!c)continue;const e=await checkCode(c);if(e&&e!=='expired'){CLIENT=e.label||'';TIER=e.tier==='sip'?'sip':'premium';ISAGENT=!!e.agent;ACODE=normCode(c);try{gtag('set','user_properties',{client:CLIENT,tier:TIER})}catch(x){}try{localStorage.setItem('rashidahjuremi.code',normCode(c))}catch(x){}gtrack('access_ok',{client:CLIENT});return true}
   if(e==='expired')expired=true}   // an expired link code still lets a valid saved code in
  if(expired){openGate('gate_exp');renewMode();return false}
+ if(SHAREH&&!code){gtrack('shared_free_open',{});return 'free'}   // a shared unit link without a code: the free preview of that unit (freeShare)
  openGate(code?'gate_invalid':'');gtrack('access_gate',{});return false}
-G('gateForm').addEventListener('submit',async ev=>{ev.preventDefault();const c=G('gateCode').value;gateMsg('gate_checking');const e=await checkCode(c);if(e&&e!=='expired'){CLIENT=e.label||'';TIER=e.tier==='sip'?'sip':'premium';ISAGENT=!!e.agent;ACODE=normCode(c);try{gtag('set','user_properties',{client:CLIENT,tier:TIER})}catch(x){}try{localStorage.setItem('rashidahjuremi.code',normCode(c))}catch(x){}G('gate').hidden=true;gateMsg('');gtrack('access_ok',{client:CLIENT});start()}else{if(e==='expired')renewMode();gateMsg(e==='expired'?'gate_exp2':'gate_bad')}});
+G('gateForm').addEventListener('submit',async ev=>{ev.preventDefault();const c=G('gateCode').value;gateMsg('gate_checking');const e=await checkCode(c);if(e&&e!=='expired'){CLIENT=e.label||'';TIER=e.tier==='sip'?'sip':'premium';ISAGENT=!!e.agent;ACODE=normCode(c);try{gtag('set','user_properties',{client:CLIENT,tier:TIER})}catch(x){}try{localStorage.setItem('rashidahjuremi.code',normCode(c))}catch(x){}G('gate').hidden=true;gateMsg('');gtrack('access_ok',{client:CLIENT});if(RTRIAL)location.reload();else start()}else{if(e==='expired')renewMode();gateMsg(e==='expired'?'gate_exp2':'gate_bad')}});
 // access.json and data.json from two different publishes (a CDN copy is a few minutes old): read access.json fresh and unwrap again
 async function rekey(){try{ACCESS=await fetch('https://lelongbidgroup.com/rashidahjuremi/access.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null)}catch(e){ACCESS=null}
  let c='';try{c=localStorage.getItem('rashidahjuremi.code')||''}catch(e){}const e=c?await checkCode(c):null;return !!e&&e!=='expired'}
 const getData=fresh=>fetch('https://lelongbidgroup.com/data.json'+(fresh?'?v='+Date.now():''),{cache:'no-store'}).then(r=>r.json());
 async function gunzip(buf){if(window.DecompressionStream)return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
  const f=await import('https://cdn.jsdelivr.net/npm/fflate@0.8.2/esm/browser.js');return f.strFromU8(f.gunzipSync(new Uint8Array(buf)))}   // Safari before iOS 16.4
-async function loadListings(){if(TRIAL)return REALAGENT?fetch(TRIAL_DATA+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()):getData(true);
+async function loadListings(){if(TRIAL)return RTRIAL?fetch(TRIAL_DATA+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()):getData(true);
  const hp=(TIER==='sip'&&DKEY2)?fetch('https://lelongbidgroup.com/vip/history.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null):null;   // VIP history downloads alongside the main data
  let env=await getData(false);
  if(env.kid!==ACCESS.kid){if(!(await rekey()))throw new Error('code');if(env.kid!==ACCESS.kid)env=await getData(true);if(env.kid!==ACCESS.kid)throw new Error('key')}
@@ -1382,12 +1385,17 @@ const TAG={vip:['VIP Investor','<path d="M6 3h12l4 6-10 12L2 9z" fill="currentCo
  free:['Free','<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/>']};
 // agent view switch (30/10/2026): an agent's own code can show the page the way a VIP client or a free visitor sees it, to show a
 // client; the choice lives in this tab only (sessionStorage) and the page reloads into it. VIP is offered only to a VIP agent code.
-var REALAGENT=false,AVIEW='agent';
+var REALAGENT=false,AVIEW='agent',RTRIAL=false;   // RTRIAL: the free preview switched on in this page (an agent's Free view, a shared link without a code)
+const SHAREH=(location.hash||'').length>1;
 const TRIAL_DATA='https://lelongbidgroup.com/trial/data.json';   // the free preview's masked listings, the same file every trial site reads
 function agentView(){REALAGENT=!!ISAGENT;if(!REALAGENT)return;let v='agent';try{v=sessionStorage.getItem(KP+'aview')||'agent'}catch(e){}
  if(v==='vip'&&TIER==='sip'){AVIEW='vip';ISAGENT=false}
- else if(v==='free'){AVIEW='free';ISAGENT=false;TRIAL=true;LANDING=SIP_URL.replace(/#.*$/,'');document.documentElement.classList.add('trial');
-  G('trialBar').hidden=false;G('trialCta').href=LANDING;trialLocks()}}
+ else if(v==='free'){AVIEW='free';ISAGENT=false;freeMode()}}
+function freeMode(){RTRIAL=TRIAL=true;LANDING=SIP_URL.replace(/#.*$/,'');document.documentElement.classList.add('trial');
+ G('trialBar').hidden=false;G('trialCta').href=LANDING;trialLocks()}
+// a shared unit link opened with no access code on this phone (30/10/2026): the free preview of that unit, never a member's view;
+// a client who has a code taps "I have an access code" and the page reloads into the client's own plan
+function freeShare(){freeMode();G('haveCode').hidden=false;G('haveCode').onclick=()=>openGate('');G('gateBack').hidden=false;G('gateBack').onclick=()=>{G('gate').hidden=true};start()}
 function agentSwitch(t){const k=AVIEW;t.className='tier-tag aview '+k;
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span><svg class="aview-car" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  const s=document.createElement('select');s.id='aviewSel';s.dataset.i18nAl='aview_al';s.setAttribute('aria-label',tx('aview_al'));
@@ -1406,7 +1414,7 @@ function trialLocks(){const so=G('sort');['bmv','lbmv'].forEach(v=>{const o=so.q
  ['bmvFld','cyFld'].forEach(id=>{const f=G(id);if(f&&!f.querySelector('.lock-row'))f.insertAdjacentHTML('beforeend','<div class="lock-row"><a class="lock" data-i18n="lock_link" href="'+String(LANDING).replace(/"/g,'&quot;')+'"></a></div>')});
  applyI18n();
  so.addEventListener('input',e=>{if(/bmv/.test(so.value)){e.stopImmediatePropagation();so.value='new';try{gtrack('premium_click',{from:'sort'})}catch(x){}location.href=LANDING}},true)}
-if(TRIAL){G('trialBar').hidden=false;G('trialCta').href=LANDING;trialLocks();start()}else access().then(ok=>{if(ok)start()}).catch(()=>openGate('gate_err'));
+if(TRIAL){G('trialBar').hidden=false;G('trialCta').href=LANDING;trialLocks();start()}else access().then(ok=>{if(ok==='free')freeShare();else if(ok)start()}).catch(()=>openGate('gate_err'));
 </script>
 
 </body>
