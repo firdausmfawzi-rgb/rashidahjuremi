@@ -1422,7 +1422,9 @@ async function access(){
  for(const c of [code,stored]){if(!c)continue;const e=await checkCode(c);if(e&&e!=='expired'){CLIENT=e.label||'';TIER=e.tier==='sip'?'sip':'premium';ISAGENT=!!e.agent;ACODE=normCode(c);try{gtag('set','user_properties',{client:CLIENT,tier:TIER})}catch(x){}try{localStorage.setItem('rashidahjuremi.code',normCode(c))}catch(x){}gtrack('access_ok',{client:CLIENT});return true}
   if(e==='expired')expired=true}   // an expired link code still lets a valid saved code in
  if(expired){openGate('gate_exp');renewMode();return false}
- if(SHAREH&&!code){gtrack('shared_free_open',{});return 'free'}   // a shared unit link without a code: the free preview of that unit (freeShare)
+ // no code in the link and none saved on this phone (1/11/2026): the free preview, with 'I have an access code' at hand, never the
+ // code screen first. A shared list link (Share button) opens like a shared unit link; a wrong code in the link still says so.
+ if(!code){gtrack(SHAREH?'shared_free_open':'free_open',{});return 'free'}
  openGate(code?'gate_invalid':'');gtrack('access_gate',{});return false}
 G('gateForm').addEventListener('submit',async ev=>{ev.preventDefault();const c=G('gateCode').value;gateMsg('gate_checking');const e=await checkCode(c);if(e&&e!=='expired'){CLIENT=e.label||'';TIER=e.tier==='sip'?'sip':'premium';ISAGENT=!!e.agent;ACODE=normCode(c);try{gtag('set','user_properties',{client:CLIENT,tier:TIER})}catch(x){}try{localStorage.setItem('rashidahjuremi.code',normCode(c))}catch(x){}G('gate').hidden=true;gateMsg('');gtrack('access_ok',{client:CLIENT});if(RTRIAL)location.reload();else start()}else{if(e==='expired')renewMode();gateMsg(e==='expired'?'gate_exp2':'gate_bad')}});
 // access.json and data.json from two different publishes (a CDN copy is a few minutes old): read access.json fresh and unwrap again
