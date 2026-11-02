@@ -187,6 +187,13 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .addr{font-size:1.15rem;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
 .card.simple .addr{font-size:1.25rem}.card.simple .price{font-size:2rem}
 .dims{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px;padding:10px 12px;background:var(--bg);border-radius:12px}
+.specs.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.specs>div{min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:2px}
+.specs span{font-size:.8rem;font-weight:600;color:var(--muted);line-height:1.25}
+.specs b{font-size:.98rem;font-weight:700;line-height:1.3;overflow-wrap:anywhere}
+.specs .sp-bank{grid-column:1/-1;flex-direction:row;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:7px}
+.specs .sp-bank span{flex:none}.specs .sp-bank b{text-align:right}
 .posrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}.posbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 12px;border:1px solid var(--accent);border-radius:10px;background:var(--surface);color:var(--accent);font-weight:700;text-decoration:none}.posbtn:hover,.posbtn:focus-visible{background:var(--ok-bg)}.pos-lbl{font-weight:700;color:var(--muted)}
 .posdl{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:8px 16px 8px 10px;border:1px solid #d93025;border-radius:12px;background:var(--surface);color:var(--fg);font:inherit;text-align:left;cursor:pointer}.posdl:hover,.posdl:focus-visible{background:rgba(217,48,37,.08)}
 .posdl .pdfi{flex:none}.posdl b{display:block;font-size:1rem;line-height:1.2}.posdl small{display:block;font-size:.78rem;font-weight:600;color:var(--muted);line-height:1.25}
@@ -451,20 +458,38 @@ body{padding-block-end:100px}
 <script>/* apply the client's saved light / dark choice, text size and language before first paint (no flash); KP = this site's settings prefix */var ISAGENT=false;var KP='rashidahjuremi.',TRIAL=false,LANDING='premium/',SIP_URL='https://clientrashidahjuremi.lelongbidgroup.com/premium/#sip',TIER='premium';if(TRIAL)document.documentElement.classList.add('trial');try{var _t=localStorage.getItem('rashidahjuremi.theme');if(_t==='dark')document.documentElement.setAttribute('data-theme','dark');var _s=localStorage.getItem(KP+'size');if(_s==='l'||_s==='xl')document.documentElement.setAttribute('data-size',_s);if(localStorage.getItem(KP+'lang')==='ms')document.documentElement.lang='ms'}catch(e){}</script>
 <style id="aiCss">
 /* AI assistant (2/11/2026): the character button, the chat panel, the guided-tour spotlight */
+/* AI_HIDDEN (2/11/2026, owner order): character hidden until the system is improved; delete the next line to show it again */
+.ai-fab,.ai-panel,.ai-spot,.ai-bub{display:none!important}
 .ai-fab{position:fixed;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:44;width:76px;height:96px;cursor:pointer;transition:top .45s ease,right .45s ease,bottom .45s ease;-webkit-tap-highlight-color:transparent}
 .ai-fab .ai-av{width:76px;height:96px;filter:drop-shadow(0 6px 10px rgba(15,42,68,.35))}
 .ai-fab.open .ai-av{transform:scale(.92)}
 .ai-fab.offscreen{display:none}
 .totop{right:100px}
 .ai-av svg{width:100%;height:100%;display:block}.ai-av svg.hide{display:none}
+.ai-av .head{transform-box:view-box;transform-origin:100px 124px;animation:aiHead 7s ease-in-out infinite}
+.ai-av .torso{transform-box:view-box;transform-origin:100px 260px;animation:aiBreathe 3.6s ease-in-out infinite}
 .ai-av .eye{transform-box:fill-box;transform-origin:center;animation:aiBlink 4.6s ease-in-out infinite}
-.ai-av.talk .mouth{transform-box:fill-box;transform-origin:center;animation:aiTalk .32s ease-in-out infinite alternate}
+.ai-av .pupil{animation:aiGlance 9s ease-in-out infinite}
+.ai-av.talk .mouth{transform-box:fill-box;transform-origin:center;animation:aiTalk .3s ease-in-out infinite alternate}
+.ai-av .arm{transform-box:view-box;transform-origin:160px 175px}
+.ai-av .armL{transform-box:view-box;transform-origin:40px 176px;animation:aiArmIdle 5.2s ease-in-out infinite}
+.ai-av.wave .arm{animation:aiWave 1.2s ease-in-out 2}
 .ai-fab.point .ai-av .arm{animation:aiPoint 1.1s ease-in-out infinite alternate}
+.ai-fab.point .ai-av .armL{animation:none}
 .ai-fab:not(.point) .ai-av{animation:aiBob 3.2s ease-in-out infinite}
-@keyframes aiBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
-@keyframes aiTalk{from{transform:scaleY(1)}to{transform:scaleY(1.7) translateY(1px)}}
-@keyframes aiBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.ai-fab.enter{animation:aiWalkIn 1.5s cubic-bezier(.22,.8,.3,1) both}
+.ai-fab.enter .ai-av{animation:aiSteps .36s ease-in-out 4 alternate}
+@keyframes aiHead{0%,100%{transform:rotate(0)}30%{transform:rotate(-2.5deg) translateY(.5px)}65%{transform:rotate(2deg)}}
+@keyframes aiBreathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.012,1.022)}}
+@keyframes aiBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.06)}}
+@keyframes aiGlance{0%,38%,62%,100%{transform:translate(0,0)}45%,55%{transform:translate(-2.2px,.4px)}78%,88%{transform:translate(1.8px,-.3px)}}
+@keyframes aiTalk{from{transform:scaleY(1)}to{transform:scaleY(1.55) translateY(1px)}}
+@keyframes aiArmIdle{0%,100%{transform:rotate(0)}50%{transform:rotate(-3deg)}}
+@keyframes aiWave{0%,100%{transform:rotate(0)}20%{transform:rotate(160deg)}40%{transform:rotate(176deg)}60%{transform:rotate(156deg)}80%{transform:rotate(175deg)}}
 @keyframes aiPoint{from{transform:rotate(104deg)}to{transform:rotate(118deg)}}
+@keyframes aiBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes aiWalkIn{from{transform:translateX(130px)}to{transform:translateX(0)}}
+@keyframes aiSteps{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-5px) rotate(2deg)}}
 .ai-bub{position:absolute;right:70px;top:18px;white-space:nowrap;background:var(--surface);color:var(--fg);border:1px solid var(--gold,#c9a227);border-radius:14px 14px 4px 14px;padding:8px 12px;font-size:.88rem;font-weight:700;box-shadow:0 6px 18px rgba(15,42,68,.18)}
 .ai-panel{position:fixed;left:0;right:0;bottom:0;z-index:46;height:min(74vh,640px);background:var(--surface);color:var(--fg);border-radius:20px 20px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden;animation:aiUp .28s ease}
 @keyframes aiUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
@@ -489,9 +514,9 @@ body{padding-block-end:100px}
 .ai-box{position:absolute;border:2px solid #c9a227;border-radius:14px;box-shadow:0 0 0 9999px rgba(10,20,30,.5),0 0 22px rgba(201,162,74,.6);transition:all .35s ease}
 .ai-say{position:absolute;left:12px;right:100px;background:var(--surface);color:var(--fg);border:1px solid #c9a227;border-radius:14px;padding:10px 12px;font-size:.95rem;font-weight:700;line-height:1.35;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .ai-stop{position:absolute;left:12px;top:calc(12px + env(safe-area-inset-top,0px));pointer-events:auto;min-height:40px;padding:6px 14px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:999px;font-weight:700}
-@media (prefers-reduced-motion:reduce){.ai-av .eye,.ai-av.talk .mouth,.ai-fab .ai-av,.ai-fab.point .ai-av .arm{animation:none}.ai-panel{animation:none}}
+@media (prefers-reduced-motion:reduce){.ai-av .eye,.ai-av .head,.ai-av .torso,.ai-av .pupil,.ai-av .armL,.ai-av.talk .mouth,.ai-av.wave .arm,.ai-fab .ai-av,.ai-fab.point .ai-av .arm,.ai-fab.enter{animation:none}.ai-panel{animation:none}}
 @media print{.ai-fab,.ai-panel,.ai-spot{display:none!important}}
-.ai-av.m svg.f-svg,.ai-av.f svg.m-svg{display:none}.ai-av .arm{transform-box:view-box;transform-origin:160px 175px}
+.ai-av.m svg.f-svg,.ai-av.f svg.m-svg{display:none}
 </style>
 </head>
 <body>
@@ -542,137 +567,191 @@ body{padding-block-end:100px}
 <div class="empty" id="empty" hidden><span id="emptyMsg"></span><br><button class="btn primary rs" id="emptyReset" type="button" data-i18n="reset_all_f">Reset all filters</button></div>
 </div>
 <footer class="legal" id="legal"><nav><button type="button" class="lnk" data-legal="privacy" data-i18n="lg_privacy">Privacy Notice</button><span>·</span><button type="button" class="lnk" data-legal="terms" data-i18n="lg_terms">Terms of Use</button><span>·</span><button type="button" class="lnk" data-legal="disc" data-i18n="lg_disc">Disclaimer</button></nav><p><span id="lgCopy"></span> <span data-i18n="lg_rights">All rights reserved. Copying, scraping or republishing this list is prohibited.</span></p><p data-i18n="lg_src">Data from public auction notices. Verify every detail with the Proclamation of Sale before bidding.</p></footer>
-<div class="ai-fab" id="aiFab" role="button" tabindex="0" hidden aria-label="Ask the assistant"><div class="ai-av m" id="aiAv"><svg class="m-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly male AI assistant in a navy suit and gold tie">
-  <g class="avatar">
-    <rect x="88" y="110" width="24" height="46" fill="#c8956c"/>
-    <path fill="#b07f58" d="M88 120q12 10 24 0v6q-12 9-24 0z"/>
-    <path fill="#0f2a44" d="M84 148Q52 152 38 162Q30 168 30 180V260H170V180Q170 168 162 162Q148 152 116 148Z"/>
-    <path fill="#ffffff" d="M84 148H116L100 200Z"/>
-    <path fill="#173d63" d="M84 148L70 166L100 212L100 200Z"/>
-    <path fill="#173d63" d="M116 148L130 166L100 212L100 200Z"/>
-    <path fill="#ffffff" d="M86 146L98 150L94 164L80 156Z"/>
-    <path fill="#ffffff" d="M114 146L102 150L106 164L120 156Z"/>
-    <path fill="#c9a227" d="M95 152H105L106 164H94Z"/>
-    <path id="m-tie" fill="#c9a227" d="M94 164H106L110 220L100 230L90 220Z"/>
-    <path fill="#000" opacity=".12" d="M100 164H106L110 220L100 230Z"/>
-    <circle cx="81" cy="172" r="2" fill="#c9a227"/>
-    <circle cx="100" cy="241" r="1.8" fill="#173d63"/>
-    <circle cx="100" cy="255" r="1.8" fill="#173d63"/>
-    <ellipse cx="65" cy="89" rx="5" ry="8.5" fill="#c8956c"/>
-    <ellipse cx="135" cy="89" rx="5" ry="8.5" fill="#c8956c"/>
-    <ellipse id="m-head" cx="100" cy="85" rx="35" ry="41" fill="#c8956c"/>
-    <path id="m-hair" fill="#1c1c1c" d="M65 84C61 58 76 42 101 42C125 42 140 58 135 84C131 74 124 66 113 64C98 68 84 66 74 72C70 75 67 79 65 84Z"/>
-    <path fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".12" d="M84 52Q98 46 116 50"/>
-    <path fill="none" stroke="#1c1c1c" stroke-width="2.6" stroke-linecap="round" d="M80 79Q86 75 92 78M108 78Q114 75 120 79"/>
-    <ellipse class="eye" cx="86" cy="88" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <ellipse class="eye" cx="114" cy="88" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <path fill="none" stroke="#b07f58" stroke-width="1.8" stroke-linecap="round" d="M101 92q-3 7-1 10q2 1 4 0"/>
-    <path class="mouth" fill="none" stroke="#6b3a2a" stroke-width="2.6" stroke-linecap="round" d="M88 111q12 12 24 0"/>
-    <path fill="#0f2a44" d="M30 175Q40 168 50 175L43 224H25Z"/>
-    <path fill="#000" opacity=".12" d="M50 176L43 224L46.5 224L53.5 176Z"/>
-    <path fill="#ffffff" d="M24.5 223H43.5V228H24.5Z"/>
-    <path fill="#c8956c" d="M42 228H26L27 244Q29 252 34 252Q40 252 41 244Z"/>
-    <g class="arm">
-      <path fill="#0f2a44" d="M150 175Q160 168 170 175L175 224H157Z"/>
-      <path fill="#000" opacity=".12" d="M150 176L157 224L153.5 224L146.5 176Z"/>
-      <path fill="#ffffff" d="M156.5 223H175.5V228H156.5Z"/>
-      <path fill="#c8956c" d="M158 228H174L173 244Q171 252 166 252Q160 252 159 244Z"/>
-    </g>
+<!-- shared paint servers: one copy, referenced by every character on the page -->
+<svg id="aiDefs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+ <radialGradient id="aiSkin" cx="42%" cy="34%" r="78%"><stop offset="0" stop-color="#f0c6a0"/><stop offset=".5" stop-color="#d49f74"/><stop offset="1" stop-color="#9c6741"/></radialGradient>
+ <radialGradient id="aiSkinF" cx="42%" cy="34%" r="78%"><stop offset="0" stop-color="#f6d4b4"/><stop offset=".5" stop-color="#deae88"/><stop offset="1" stop-color="#ab7651"/></radialGradient>
+ <linearGradient id="aiNeck" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f4327"/><stop offset=".55" stop-color="#b9815a"/><stop offset="1" stop-color="#c8956c"/></linearGradient>
+ <linearGradient id="aiHair" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#432c1d"/><stop offset=".55" stop-color="#1b100a"/><stop offset="1" stop-color="#0a0503"/></linearGradient>
+ <linearGradient id="aiSuit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#23527a"/><stop offset=".5" stop-color="#143b5c"/><stop offset="1" stop-color="#0a1f33"/></linearGradient>
+ <linearGradient id="aiSleeve" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b4568"/><stop offset="1" stop-color="#0b2237"/></linearGradient>
+ <linearGradient id="aiShirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe6ee"/></linearGradient>
+ <linearGradient id="aiTie" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d366"/><stop offset=".5" stop-color="#cfa533"/><stop offset="1" stop-color="#9c7716"/></linearGradient>
+ <linearGradient id="aiHijab" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6df8a"/><stop offset=".35" stop-color="#d9b445"/><stop offset=".6" stop-color="#f0d06a"/><stop offset="1" stop-color="#b8902a"/></linearGradient>
+ <radialGradient id="aiIris" cx="40%" cy="38%" r="65%"><stop offset="0" stop-color="#a8743e"/><stop offset=".55" stop-color="#4b2c13"/><stop offset="1" stop-color="#1b0e05"/></radialGradient>
+ <linearGradient id="aiLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c97b63"/><stop offset="1" stop-color="#9c5341"/></linearGradient>
+ <linearGradient id="aiLipF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e08a86"/><stop offset="1" stop-color="#b65a5b"/></linearGradient>
+ <linearGradient id="aiSclera" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe6ec"/><stop offset=".4" stop-color="#ffffff"/></linearGradient>
+</defs></svg>
+
+<template id="aiTplM"><svg class="m-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly male AI assistant in a navy suit and gold tie">
+ <g class="avatar">
+  <g class="torso">
+   <path fill="url(#aiSuit)" d="M80 150C50 156 36 166 32 184V260H168V184C164 166 150 156 120 150Z"/>
+   <path fill="#000" opacity=".16" d="M32 200Q60 206 70 260H32Z"/>
+   <path fill="#fff" opacity=".06" d="M168 184V260H150Q150 220 140 190Z"/>
+   <path fill="url(#aiShirt)" d="M84 146H116L100 206Z"/>
+   <path fill="#c9d3de" d="M86 146L98 152L94 168L80 158Z"/>
+   <path fill="#c9d3de" d="M114 146L102 152L106 168L120 158Z"/>
+   <path fill="#fff" d="M86 146L98 152L95 164L82 156Z"/>
+   <path fill="#fff" d="M114 146L102 152L105 164L118 156Z"/>
+   <path fill="#1d4a6e" d="M80 150L68 170L100 214V200Z"/>
+   <path fill="#1d4a6e" d="M120 150L132 170L100 214V200Z"/>
+   <path fill="none" stroke="#2f6490" stroke-width="1.2" opacity=".7" d="M80 150L68 170L100 214M120 150L132 170L100 214"/>
+   <path fill="url(#aiTie)" d="M95 152H105L107 164H93Z"/>
+   <path fill="url(#aiTie)" d="M94 164H106L111 222L100 234L89 222Z"/>
+   <path fill="#000" opacity=".16" d="M100 164H106L111 222L100 234Z"/>
+   <path fill="#fff" opacity=".2" d="M95 166L98 166L97 215L95 214Z"/>
+   <path fill="#fff" d="M136 186L150 184L148 190Z"/>
+   <circle cx="100" cy="241" r="2" fill="#0a1f33"/><circle cx="100" cy="254" r="2" fill="#0a1f33"/>
+   <path fill="url(#aiNeck)" d="M87 108H113V150Q100 160 87 150Z"/>
   </g>
-</svg><svg class="f-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly female AI assistant in a navy blazer and gold hijab">
-  <g class="avatar">
-    <path fill="#0f2a44" d="M84 148Q52 152 38 162Q30 168 30 180V260H170V180Q170 168 162 162Q148 152 116 148Z"/>
-    <path fill="#ffffff" d="M76 150H124L112 214H88Z"/>
-    <path fill="#173d63" d="M76 150L62 170L100 218L88 214Z"/>
-    <path fill="#173d63" d="M124 150L138 170L100 218L112 214Z"/>
-    <path fill="#0f2a44" d="M30 175Q40 168 50 175L43 224H25Z"/>
-    <path fill="#000" opacity=".12" d="M50 176L43 224L46.5 224L53.5 176Z"/>
-    <path fill="#ffffff" d="M24.5 223H43.5V228H24.5Z"/>
-    <path fill="#c8956c" d="M42 228H26L27 244Q29 252 34 252Q40 252 41 244Z"/>
-    <g class="arm">
-      <path fill="#0f2a44" d="M150 175Q160 168 170 175L175 224H157Z"/>
-      <path fill="#000" opacity=".12" d="M150 176L157 224L153.5 224L146.5 176Z"/>
-      <path fill="#ffffff" d="M156.5 223H175.5V228H156.5Z"/>
-      <path fill="#c8956c" d="M158 228H174L173 244Q171 252 166 252Q160 252 159 244Z"/>
-    </g>
-    <ellipse id="f-face" cx="100" cy="86" rx="33" ry="40" fill="#c8956c"/>
-    <path fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" d="M80 79Q86 75 92 78M108 78Q114 75 120 79"/>
-    <ellipse class="eye" cx="86" cy="87" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <ellipse class="eye" cx="114" cy="87" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <path fill="none" stroke="#b07f58" stroke-width="1.8" stroke-linecap="round" d="M101 91q-3 6-1 9q2 1 4 0"/>
-    <path class="mouth" fill="none" stroke="#6b3a2a" stroke-width="2.6" stroke-linecap="round" d="M88 110q12 12 24 0"/>
-    <path id="f-hijab" fill="#d8b85a" fill-rule="evenodd" stroke="#0f2a44" stroke-width="2.5" stroke-linejoin="round" d="M100 28C64 28 50 56 50 92C50 118 40 146 30 172L60 180C74 170 84 162 100 160C116 162 126 170 140 180L170 172C160 146 150 118 150 92C150 56 136 28 100 28ZM67 86a33 40 0 1 0 66 0a33 40 0 1 0-66 0Z"/>
-    <path fill="none" stroke="#0f2a44" stroke-width="2" stroke-linecap="round" opacity=".45" d="M46 124Q40 146 46 166M154 124Q160 146 154 166"/>
-    <circle cx="100" cy="146" r="5" fill="#c9a227"/>
-    <circle cx="100" cy="146" r="2" fill="#0f2a44"/>
+  <g class="head">
+   <ellipse cx="65" cy="93" rx="5.5" ry="9" fill="url(#aiSkin)"/><ellipse cx="135" cy="93" rx="5.5" ry="9" fill="url(#aiSkin)"/>
+   <path fill="none" stroke="#9a6a46" stroke-width="1.2" opacity=".6" d="M64 88q-3 5 0 10M136 88q3 5 0 10"/>
+   <!-- face: defined jaw, cheekbones -->
+   <path fill="url(#aiSkin)" d="M100 40C74 40 64 60 65 88C66 108 76 124 88 130C94 133 106 133 112 130C124 124 134 108 135 88C136 60 126 40 100 40Z"/>
+   <path fill="#000" opacity=".07" d="M66 86Q70 112 88 128Q74 120 66 98Z"/>
+   <path fill="#000" opacity=".07" d="M134 86Q130 112 112 128Q126 120 134 98Z"/>
+   <path fill="#000" opacity=".1" d="M72 104Q100 140 128 104Q126 124 100 133Q74 124 72 104Z"/>
+   <ellipse cx="86" cy="60" rx="14" ry="8" fill="#fff" opacity=".12"/>
+   <ellipse cx="78" cy="100" rx="6" ry="3" fill="#fff" opacity=".08"/><ellipse cx="122" cy="100" rx="6" ry="3" fill="#fff" opacity=".08"/>
+   <!-- hair -->
+   <path fill="url(#aiHair)" d="M62 92C56 58 72 32 100 32C128 32 144 56 138 92C136 76 130 66 121 61C112 70 94 70 83 63C72 67 66 78 62 92Z"/>
+   <path fill="url(#aiHair)" d="M78 60C86 48 102 46 112 52C106 56 92 58 84 66Z"/>
+   <path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".16" d="M82 48Q98 40 118 46"/>
+   <path fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".12" d="M74 60Q86 50 104 50M112 52Q124 56 130 68"/>
+   <path fill="url(#aiHair)" d="M62 92L66 110Q62 100 60 92ZM138 92L134 110Q138 100 140 92Z"/>
+   <!-- brows -->
+   <path class="brow" fill="#1b100a" d="M71 79Q84 70 97 76L96 80Q84 76 73 83Z"/>
+   <path class="brow" fill="#1b100a" d="M129 79Q116 70 103 76L104 80Q116 76 127 83Z"/>
+   <!-- eyes -->
+   <path fill="#000" opacity=".1" d="M72 86Q85 76 98 86Q85 80 72 86Z"/><path fill="#000" opacity=".1" d="M102 86Q115 76 128 86Q115 80 102 86Z"/>
+   <g class="eye">
+    <path fill="url(#aiSclera)" d="M72 90Q85 79 98 90Q85 99 72 90Z"/>
+    <g class="pupil"><circle cx="85" cy="90" r="5.6" fill="url(#aiIris)"/><circle cx="85" cy="90" r="2.6" fill="#0a0503"/><circle cx="83" cy="88" r="1.4" fill="#fff"/></g>
+    <path fill="none" stroke="#2a170c" stroke-width="2" stroke-linecap="round" d="M72 90Q85 78 98 89"/>
+    <path fill="none" stroke="#000" stroke-width="1" opacity=".22" d="M74 92Q85 98 97 91"/>
+   </g>
+   <g class="eye">
+    <path fill="url(#aiSclera)" d="M102 90Q115 79 128 90Q115 99 102 90Z"/>
+    <g class="pupil"><circle cx="115" cy="90" r="5.6" fill="url(#aiIris)"/><circle cx="115" cy="90" r="2.6" fill="#0a0503"/><circle cx="113" cy="88" r="1.4" fill="#fff"/></g>
+    <path fill="none" stroke="#2a170c" stroke-width="2" stroke-linecap="round" d="M102 89Q115 78 128 90"/>
+    <path fill="none" stroke="#000" stroke-width="1" opacity=".22" d="M103 91Q115 98 126 92"/>
+   </g>
+   <!-- nose -->
+   <path fill="#000" opacity=".1" d="M99 93Q96 104 93 108Q100 112 107 108Q104 104 101 93Z"/>
+   <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".16" d="M99 94Q98 100 98 104"/>
+   <path fill="none" stroke="#8d5e3c" stroke-width="1.6" stroke-linecap="round" d="M94 108q3 3 6 2M106 108q-3 3 -6 2"/>
+   <ellipse cx="100" cy="105" rx="2.4" ry="1.4" fill="#fff" opacity=".22"/>
+   <!-- mouth -->
+   <path fill="#000" opacity=".08" d="M90 112Q100 108 110 112Q100 110 90 112Z"/>
+   <g class="mouth">
+    <path fill="url(#aiLip)" d="M87 115Q93 110 100 112Q107 110 113 115Q108 122 100 123Q92 122 87 115Z"/>
+    <path fill="#3b1a12" d="M89 115.5Q100 118 111 115.5Q100 119 89 115.5Z"/>
+    <path fill="#fff" opacity=".25" d="M94 119Q100 121 106 119Q100 122 94 119Z"/>
+   </g>
+   <path fill="#000" opacity=".08" d="M90 127Q100 132 110 127Q100 135 90 127Z"/>
   </g>
-</svg></div><span class="ai-bub" id="aiBub" hidden>Ask the assistant</span></div>
+  <!-- arms last, so a wave or a point passes in front of the body -->
+  <g class="armL">
+   <path fill="url(#aiSleeve)" d="M30 176Q40 168 52 176L46 226H26Z"/>
+   <path fill="#000" opacity=".14" d="M52 177L46 226H42L48 177Z"/>
+   <path fill="#fff" d="M24.5 224H46.5V230H24.5Z"/>
+   <path fill="url(#aiSkin)" d="M44 230H27L28 247Q30 255 35.5 255Q41 255 42 247Z"/>
+   <path fill="none" stroke="#9a6a46" stroke-width="1" opacity=".6" d="M32 244V251M36 245V252M40 244V250"/>
+  </g>
+  <g class="arm">
+   <path fill="url(#aiSleeve)" d="M148 176Q160 168 170 176L174 226H154Z"/>
+   <path fill="#000" opacity=".14" d="M148 177L154 226H158L152 177Z"/>
+   <path fill="#fff" d="M153.5 224H175.5V230H153.5Z"/>
+   <path fill="url(#aiSkin)" d="M156 230H173L172 247Q170 255 164.5 255Q159 255 158 247Z"/>
+   <path fill="none" stroke="#9a6a46" stroke-width="1" opacity=".6" d="M160 244V251M164 245V252M168 244V250"/>
+  </g>
+ </g>
+</svg></template>
+
+<template id="aiTplF"><svg class="f-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly female AI assistant in a navy blazer and gold hijab">
+ <g class="avatar">
+  <g class="torso">
+   <path fill="url(#aiSuit)" d="M80 152C50 158 36 168 32 186V260H168V186C164 168 150 158 120 152Z"/>
+   <path fill="#000" opacity=".16" d="M32 202Q60 208 70 260H32Z"/>
+   <path fill="url(#aiShirt)" d="M78 152H122L112 218H88Z"/>
+   <path fill="#1d4a6e" d="M78 152L64 172L100 222L88 218Z"/>
+   <path fill="#1d4a6e" d="M122 152L136 172L100 222L112 218Z"/>
+   <path fill="none" stroke="#2f6490" stroke-width="1.2" opacity=".7" d="M78 152L64 172L100 222M122 152L136 172L100 222"/>
+   <circle cx="100" cy="236" r="2" fill="#0a1f33"/><circle cx="100" cy="250" r="2" fill="#0a1f33"/>
+  </g>
+  <g class="head">
+   <!-- hijab, back layer -->
+   <path fill="url(#aiHijab)" d="M100 26C62 26 48 56 48 94C48 120 40 148 28 176L62 186C76 176 86 166 100 164C114 166 124 176 138 186L172 176C160 148 152 120 152 94C152 56 138 26 100 26Z"/>
+   <path fill="#000" opacity=".12" d="M48 100Q44 150 28 176L50 182Q56 140 56 100Z"/>
+   <path fill="#fff" opacity=".2" d="M152 100Q156 150 172 176L150 182Q144 140 144 100Z"/>
+   <path fill="none" stroke="#8a6a18" stroke-width="1.6" stroke-linecap="round" opacity=".5" d="M46 122Q40 148 44 170M154 122Q160 148 156 170M60 140Q58 160 56 176"/>
+   <!-- face (starts lower: the hijab covers the top of the forehead) -->
+   <path fill="url(#aiSkinF)" d="M100 52C78 52 69 70 70 92C71 110 80 126 90 131C95 134 105 134 110 131C120 126 129 110 130 92C131 70 122 52 100 52Z"/>
+   <path fill="#000" opacity=".07" d="M71 90Q74 112 90 128Q77 120 71 100Z"/>
+   <path fill="#000" opacity=".07" d="M129 90Q126 112 110 128Q123 120 129 100Z"/>
+   <path fill="#000" opacity=".1" d="M76 104Q100 140 124 104Q122 124 100 133Q78 124 76 104Z"/>
+   <ellipse cx="88" cy="66" rx="12" ry="6" fill="#fff" opacity=".14"/>
+   <ellipse cx="80" cy="106" rx="7" ry="4" fill="#e07a7a" opacity=".24"/><ellipse cx="120" cy="106" rx="7" ry="4" fill="#e07a7a" opacity=".24"/>
+   <!-- shadow under the hijab rim, then the rim itself -->
+   <path fill="none" stroke="#000" stroke-width="7" opacity=".14" d="M100 52C78 52 69 70 70 92C71 110 80 126 90 131C95 134 105 134 110 131C120 126 129 110 130 92C131 70 122 52 100 52Z"/>
+   <path fill="url(#aiHijab)" fill-rule="evenodd" d="M100 34C64 34 55 62 57 96C59 124 72 142 100 142C128 142 141 124 143 96C145 62 136 34 100 34ZM100 52C78 52 69 70 70 92C71 110 80 126 90 131C95 134 105 134 110 131C120 126 129 110 130 92C131 70 122 52 100 52Z"/>
+   <path fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".35" d="M70 56Q84 42 104 42"/>
+   <path fill="none" stroke="#8a6a18" stroke-width="1.2" opacity=".6" d="M62 96Q64 126 92 141"/>
+   <circle cx="100" cy="150" r="5" fill="url(#aiTie)"/><circle cx="100" cy="150" r="2" fill="#0a1f33"/>
+   <!-- brows -->
+   <path class="brow" fill="#2a170c" d="M73 80Q85 72 97 77L96 81Q85 77 75 84Z"/>
+   <path class="brow" fill="#2a170c" d="M127 80Q115 72 103 77L104 81Q115 77 125 84Z"/>
+   <!-- eyes: lash wedge on the upper lid -->
+   <path fill="#000" opacity=".1" d="M72 86Q85 76 98 86Q85 80 72 86Z"/><path fill="#000" opacity=".1" d="M102 86Q115 76 128 86Q115 80 102 86Z"/>
+   <g class="eye">
+    <path fill="url(#aiSclera)" d="M72 90Q85 79 98 90Q85 99 72 90Z"/>
+    <g class="pupil"><circle cx="85" cy="90" r="5.6" fill="url(#aiIris)"/><circle cx="85" cy="90" r="2.6" fill="#0a0503"/><circle cx="83" cy="88" r="1.4" fill="#fff"/></g>
+    <path fill="#1a0d05" d="M72 90Q85 76 98 89Q85 82.5 72 90Z"/>
+    <path fill="none" stroke="#1a0d05" stroke-width="1.3" stroke-linecap="round" d="M73 89L70 86.5M76 86L74.5 83.5"/>
+    <path fill="none" stroke="#000" stroke-width="1" opacity=".22" d="M74 92Q85 98 97 91"/>
+   </g>
+   <g class="eye">
+    <path fill="url(#aiSclera)" d="M102 90Q115 79 128 90Q115 99 102 90Z"/>
+    <g class="pupil"><circle cx="115" cy="90" r="5.6" fill="url(#aiIris)"/><circle cx="115" cy="90" r="2.6" fill="#0a0503"/><circle cx="113" cy="88" r="1.4" fill="#fff"/></g>
+    <path fill="#1a0d05" d="M102 89Q115 76 128 90Q115 82.5 102 89Z"/>
+    <path fill="none" stroke="#1a0d05" stroke-width="1.3" stroke-linecap="round" d="M127 89L130 86.5M124 86L125.5 83.5"/>
+    <path fill="none" stroke="#000" stroke-width="1" opacity=".22" d="M103 91Q115 98 126 92"/>
+   </g>
+   <!-- nose -->
+   <path fill="#000" opacity=".09" d="M99 94Q97 103 94 107Q100 111 106 107Q103 103 101 94Z"/>
+   <path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".16" d="M99 95Q98 100 98 104"/>
+   <path fill="none" stroke="#9a6a46" stroke-width="1.4" stroke-linecap="round" d="M95 107q3 3 5 2M105 107q-3 3 -5 2"/>
+   <ellipse cx="100" cy="104" rx="2.2" ry="1.3" fill="#fff" opacity=".22"/>
+   <!-- mouth -->
+   <path fill="#000" opacity=".08" d="M90 112Q100 108 110 112Q100 110 90 112Z"/>
+   <g class="mouth">
+    <path fill="url(#aiLipF)" d="M88 115Q94 109 100 112Q106 109 112 115Q107 123 100 124Q93 123 88 115Z"/>
+    <path fill="#4a1a1c" d="M90 115.5Q100 118 110 115.5Q100 119 90 115.5Z"/>
+    <path fill="#fff" opacity=".3" d="M95 119.5Q100 121.5 105 119.5Q100 122.5 95 119.5Z"/>
+   </g>
+  </g>
+  <g class="armL">
+   <path fill="url(#aiSleeve)" d="M30 178Q40 170 52 178L46 228H26Z"/>
+   <path fill="#000" opacity=".14" d="M52 179L46 228H42L48 179Z"/>
+   <path fill="#fff" d="M24.5 226H46.5V231H24.5Z"/>
+   <path fill="url(#aiSkinF)" d="M44 231H27L28 247Q30 255 35.5 255Q41 255 42 247Z"/>
+   <path fill="none" stroke="#a8724e" stroke-width="1" opacity=".6" d="M32 244V251M36 245V252M40 244V250"/>
+  </g>
+  <g class="arm">
+   <path fill="url(#aiSleeve)" d="M148 178Q160 170 170 178L174 228H154Z"/>
+   <path fill="#000" opacity=".14" d="M148 179L154 228H158L152 179Z"/>
+   <path fill="#fff" d="M153.5 226H175.5V231H153.5Z"/>
+   <path fill="url(#aiSkinF)" d="M156 231H173L172 247Q170 255 164.5 255Q159 255 158 247Z"/>
+   <path fill="none" stroke="#a8724e" stroke-width="1" opacity=".6" d="M160 244V251M164 245V252M168 244V250"/>
+  </g>
+ </g>
+</svg></template>
+<div class="ai-fab" id="aiFab" role="button" tabindex="0" hidden aria-label="Ask the assistant"><div class="ai-av m" id="aiAv"></div><span class="ai-bub" id="aiBub" hidden>Ask the assistant</span></div>
 <div class="ai-panel" id="aiPanel" hidden role="dialog" aria-label="Auction Assistant">
- <div class="ai-head"><div class="ai-av sm m" id="aiAv2"><svg class="m-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly male AI assistant in a navy suit and gold tie">
-  <g class="avatar">
-    <rect x="88" y="110" width="24" height="46" fill="#c8956c"/>
-    <path fill="#b07f58" d="M88 120q12 10 24 0v6q-12 9-24 0z"/>
-    <path fill="#0f2a44" d="M84 148Q52 152 38 162Q30 168 30 180V260H170V180Q170 168 162 162Q148 152 116 148Z"/>
-    <path fill="#ffffff" d="M84 148H116L100 200Z"/>
-    <path fill="#173d63" d="M84 148L70 166L100 212L100 200Z"/>
-    <path fill="#173d63" d="M116 148L130 166L100 212L100 200Z"/>
-    <path fill="#ffffff" d="M86 146L98 150L94 164L80 156Z"/>
-    <path fill="#ffffff" d="M114 146L102 150L106 164L120 156Z"/>
-    <path fill="#c9a227" d="M95 152H105L106 164H94Z"/>
-    <path fill="#c9a227" d="M94 164H106L110 220L100 230L90 220Z"/>
-    <path fill="#000" opacity=".12" d="M100 164H106L110 220L100 230Z"/>
-    <circle cx="81" cy="172" r="2" fill="#c9a227"/>
-    <circle cx="100" cy="241" r="1.8" fill="#173d63"/>
-    <circle cx="100" cy="255" r="1.8" fill="#173d63"/>
-    <ellipse cx="65" cy="89" rx="5" ry="8.5" fill="#c8956c"/>
-    <ellipse cx="135" cy="89" rx="5" ry="8.5" fill="#c8956c"/>
-    <ellipse cx="100" cy="85" rx="35" ry="41" fill="#c8956c"/>
-    <path fill="#1c1c1c" d="M65 84C61 58 76 42 101 42C125 42 140 58 135 84C131 74 124 66 113 64C98 68 84 66 74 72C70 75 67 79 65 84Z"/>
-    <path fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".12" d="M84 52Q98 46 116 50"/>
-    <path fill="none" stroke="#1c1c1c" stroke-width="2.6" stroke-linecap="round" d="M80 79Q86 75 92 78M108 78Q114 75 120 79"/>
-    <ellipse class="eye" cx="86" cy="88" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <ellipse class="eye" cx="114" cy="88" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <path fill="none" stroke="#b07f58" stroke-width="1.8" stroke-linecap="round" d="M101 92q-3 7-1 10q2 1 4 0"/>
-    <path class="mouth" fill="none" stroke="#6b3a2a" stroke-width="2.6" stroke-linecap="round" d="M88 111q12 12 24 0"/>
-    <path fill="#0f2a44" d="M30 175Q40 168 50 175L43 224H25Z"/>
-    <path fill="#000" opacity=".12" d="M50 176L43 224L46.5 224L53.5 176Z"/>
-    <path fill="#ffffff" d="M24.5 223H43.5V228H24.5Z"/>
-    <path fill="#c8956c" d="M42 228H26L27 244Q29 252 34 252Q40 252 41 244Z"/>
-    <g class="arm">
-      <path fill="#0f2a44" d="M150 175Q160 168 170 175L175 224H157Z"/>
-      <path fill="#000" opacity=".12" d="M150 176L157 224L153.5 224L146.5 176Z"/>
-      <path fill="#ffffff" d="M156.5 223H175.5V228H156.5Z"/>
-      <path fill="#c8956c" d="M158 228H174L173 244Q171 252 166 252Q160 252 159 244Z"/>
-    </g>
-  </g>
-</svg><svg class="f-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="Friendly female AI assistant in a navy blazer and gold hijab">
-  <g class="avatar">
-    <path fill="#0f2a44" d="M84 148Q52 152 38 162Q30 168 30 180V260H170V180Q170 168 162 162Q148 152 116 148Z"/>
-    <path fill="#ffffff" d="M76 150H124L112 214H88Z"/>
-    <path fill="#173d63" d="M76 150L62 170L100 218L88 214Z"/>
-    <path fill="#173d63" d="M124 150L138 170L100 218L112 214Z"/>
-    <path fill="#0f2a44" d="M30 175Q40 168 50 175L43 224H25Z"/>
-    <path fill="#000" opacity=".12" d="M50 176L43 224L46.5 224L53.5 176Z"/>
-    <path fill="#ffffff" d="M24.5 223H43.5V228H24.5Z"/>
-    <path fill="#c8956c" d="M42 228H26L27 244Q29 252 34 252Q40 252 41 244Z"/>
-    <g class="arm">
-      <path fill="#0f2a44" d="M150 175Q160 168 170 175L175 224H157Z"/>
-      <path fill="#000" opacity=".12" d="M150 176L157 224L153.5 224L146.5 176Z"/>
-      <path fill="#ffffff" d="M156.5 223H175.5V228H156.5Z"/>
-      <path fill="#c8956c" d="M158 228H174L173 244Q171 252 166 252Q160 252 159 244Z"/>
-    </g>
-    <ellipse cx="100" cy="86" rx="33" ry="40" fill="#c8956c"/>
-    <path fill="none" stroke="#1c1c1c" stroke-width="2.4" stroke-linecap="round" d="M80 79Q86 75 92 78M108 78Q114 75 120 79"/>
-    <ellipse class="eye" cx="86" cy="87" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <ellipse class="eye" cx="114" cy="87" rx="3" ry="3.8" fill="#1c1c1c"/>
-    <path fill="none" stroke="#b07f58" stroke-width="1.8" stroke-linecap="round" d="M101 91q-3 6-1 9q2 1 4 0"/>
-    <path class="mouth" fill="none" stroke="#6b3a2a" stroke-width="2.6" stroke-linecap="round" d="M88 110q12 12 24 0"/>
-    <path fill="#d8b85a" fill-rule="evenodd" stroke="#0f2a44" stroke-width="2.5" stroke-linejoin="round" d="M100 28C64 28 50 56 50 92C50 118 40 146 30 172L60 180C74 170 84 162 100 160C116 162 126 170 140 180L170 172C160 146 150 118 150 92C150 56 136 28 100 28ZM67 86a33 40 0 1 0 66 0a33 40 0 1 0-66 0Z"/>
-    <path fill="none" stroke="#0f2a44" stroke-width="2" stroke-linecap="round" opacity=".45" d="M46 124Q40 146 46 166M154 124Q160 146 154 166"/>
-    <circle cx="100" cy="146" r="5" fill="#c9a227"/>
-    <circle cx="100" cy="146" r="2" fill="#0f2a44"/>
-  </g>
-</svg></div><div class="ai-hd"><b data-i18n="ai_name">Auction Assistant</b><small data-i18n="ai_sub">Answers about this list only</small></div>
+ <div class="ai-head"><div class="ai-av sm m" id="aiAv2"></div><div class="ai-hd"><b data-i18n="ai_name">Auction Assistant</b><small data-i18n="ai_sub">Answers about this list only</small></div>
   <div class="ai-sw" role="group" aria-label="Look"><button type="button" data-who="m" aria-pressed="true" aria-label="Male assistant">&#128100;</button><button type="button" data-who="f" aria-pressed="false" aria-label="Female assistant">&#129507;</button></div>
   <button type="button" class="ai-x" id="aiClose" aria-label="Close" data-i18n-al="ai_close">&times;</button></div>
  <div class="ai-msgs" id="aiMsgs" aria-live="polite"></div>
@@ -1164,6 +1243,7 @@ const sqftOf=r=>{const m=/([\d,.]+)\s*sq\.?\s*(ft|m)\b/i.exec(String(r[11]||''))
 const bedsOf=r=>{const b=parseInt(r[23],10);return b>0&&b<10?b:0};
 const isHigh=r=>r[21]===CATS[0]||r[21]===CATS[5];
 const RESTRICT=/bumi|malay|native/i;
+const SHOW_RESTR=false;   // 2/11/2026: bumi / non-bumi labels hidden everywhere (chip, risk flag, score) until the labels are verified against the POS; set true to show them again
 const isCom=r=>r[21]===CATS[3]||r[21]===CATS[4]||r[21]===CATS[6];
 const runDef=r=>{if(isHigh(r)){const q=sqftOf(r);return q?Math.max(150,Math.round(q*0.35/10)*10):250}return isCom(r)?200:100};
 const baseRent=r=>{const mv=suspect(r)?0:num(r[8]),rr=locked2(r[31])?0:num(r[31]);return rr>0?Math.round(rr):Math.round(mv*SIP.yield/12)};
@@ -1185,7 +1265,7 @@ function scoreParts(r){const mv=suspect(r)?0:num(r[8]),p=num(r[7]);if(!(p>0&&mv>
  const ar=areaOf(r),q=sqftOf(r);P.push(['area',ar&&q&&ar.pp?Math.max(0,Math.min(15,7.5+(1-(p/q)/ar.pp)*50)):6,15,{ar,q,p}]);   // price per sq ft vs the area median
  const ltv=isCom(r)?SIP.ltvCom:SIP.ltv,inst=pmt(SIP.rate,SIP.ten,p*ltv/100),net=rent*(12-SIP.vac)/12,run=runDef(r),cf=net-inst-run;
  P.push(['cf',cf>=0?15:cf>-300?8:cf>-800?3:0,15,{net,inst,run,cf,ltv}]);
- if(RESTRICT.test(String(r[15]||'')))M.push(['bumi',10,{}]);
+ if(SHOW_RESTR&&RESTRICT.test(String(r[15]||'')))M.push(['bumi',10,{}]);
  const yr=parseInt(r[19],10);if(yr>1900&&now-yr>30)M.push(['age',5,{n:now-yr}]);
  const ac=parseInt(r[14],10);if(ac>=5)M.push(['auc',3,{n:ac}]);
  const raw=P.reduce((x,o)=>x+o[1],0)-M.reduce((x,o)=>x+o[1],0);
@@ -1229,7 +1309,7 @@ function riskFlags(r){const f=[],t=String(r[9]||''),now=new Date().getFullYear()
  if(/leasehold/i.test(t)){const m=/(\d{4})\)/.exec(t);if(m){const left=+m[1]-now;if(left<60)f.push(['rk_lease',{n:Math.max(0,left)}])}else f.push(['rk_lease_unk',{}])}
  const n=parseInt(r[14],10);if(n>=5)f.push(['rk_auc',{n}]);
  const yr=parseInt(r[19],10);if(yr>1900&&now-yr>30)f.push(['rk_age',{n:now-yr}]);
- if(RESTRICT.test(String(r[15]||'')))f.push(['rk_bumi',{}]);
+ if(SHOW_RESTR&&RESTRICT.test(String(r[15]||'')))f.push(['rk_bumi',{}]);
  if(suspect(r)||!num(r[8]))f.push(['rk_mv',{}]);
  if(isCom(r))f.push(['rk_com',{l:SIP.ltvCom}]);
  return f}
@@ -1384,27 +1464,27 @@ function facts(r,condo){const f=[];
  return f.length?'<div class="facts">'+f.map(x=>'<span>'+x+'</span>').join('')+'</div>':''}
 function dims(r,condo){return condo?'<div class="dims"><div><span>'+tx('built_up')+'</span><b>'+dash(r[11])+'</b></div><div><span>'+tx('cy')+'</span><b>'+dash(r[19])+'</b></div></div>'   // the Bedrooms / Bathrooms / Car parks row was removed (28/10/2026)
  :'<div class="dims"><div><span>'+tx('land')+'</span><b>'+dash(r[10])+'</b></div><div><span>'+tx('built_up')+'</span><b>'+dash(r[11])+'</b></div></div>'}
-function chips(r,compact){const lc=ok(r[17])?r[17]:'',rs=ok(r[15])?r[15]:'';if(!lc&&!rs)return '';
+function chips(r,compact){const lc=ok(r[17])?r[17]:'',rs=SHOW_RESTR&&ok(r[15])?r[15]:'';if(!lc&&!rs)return '';
  return '<div class="chips">'+(lc?'<span class="chip '+(lc==='LACA'?'ok':'non')+'">'+esc(lc)+'</span>'+(compact?'':qb('laca')):'')+(rs?'<span class="chip red">'+esc(rs)+'</span>'+(compact?'':qb('restr')):'')+'</div>'}
 // Card (1/11/2026 redesign): the key facts up front, like the auction sites' cards on a phone: photo with the date chip, type and
 // tenure, address, reserve price with the discount, auction date and chips. Premium / VIP extras sit in one closed dropdown; the
 // 'Full details' button opens everything in one window (detailHtml). Locked items show XX and an activate link, never nothing.
 const XX='<span class="xx">XX</span>';
 function xxRow(k,v){return '<div><span>'+tx(k)+'</span><b>'+v+'</b></div>'}
-function lockRows(kind,r,ex){   // what a lower plan sees of the Premium / VIP values: XX where a value exists ('-' where none) and one activate link (1/11/2026)
+function lockRows(kind,r,ex,noBank){   // what a lower plan sees of the Premium / VIP values: XX where a value exists ('-' where none) and one activate link (1/11/2026)
  const v=x=>ok(x)?XX:'-';
- if(kind==='prem')return '<div class="xxbox"><div class="xxl">'+xxRow('market_value',suspect(r)?'-':v(r[8]))+xxRow('bank',v(r[16]))+xxRow('borrower',v(r[30]))+xxRow('save_t',ok(r[8])&&num(r[7])?XX:'-')+'</div>'+lockLink()+'</div>';
+ if(kind==='prem')return '<div class="xxbox"><div class="xxl">'+xxRow('market_value',suspect(r)?'-':v(r[8]))+(noBank?'':xxRow('bank',v(r[16])))+xxRow('borrower',v(r[30]))+xxRow('save_t',ok(r[8])&&num(r[7])?XX:'-')+'</div>'+lockLink()+'</div>';
  return '<div class="xxbox"><div class="xxl">'+(ex?'':xxRow('score_t',(TRIAL?num(r[7])>0:invScore(r)!=null)?XX+'<small>/100</small>':'-'))+xxRow('hist',Array.isArray(r[29])&&r[29].length?XX:'-')+xxRow('rental_t',v(r[31]))+'</div>'+lockLink2()+'</div>'}
-function premRows(r,ex){   // Premium values (also VIP, agents): market value, savings and instalment, price per sq ft and cuts, bank, borrower
- if(TRIAL)return lockRows('prem',r,ex);
+function premRows(r,ex,noBank){   // Premium values (also VIP, agents): market value, savings and instalment, price per sq ft and cuts, bank, borrower
+ if(TRIAL)return lockRows('prem',r,ex,noBank);
  return '<div class="mv"><small>'+tx('market_value')+'</small> <b>'+(suspect(r)?'N/A':dash(r[8]))+'</b>'+qb('bmv')+'</div>'+psfDrop(r,ex)+saveRow(r,ex)
-  +'<dl class="more open"><div><dt>'+tx('bank')+'</dt><dd>'+dash(r[16])+'</dd></div><div><dt>'+tx('borrower')+'</dt><dd>'+dash(r[30])+'</dd></div></dl>'}
+  +'<dl class="more open">'+(noBank?'':'<div><dt>'+tx('bank')+'</dt><dd>'+dash(r[16])+'</dd></div>')+'<div><dt>'+tx('borrower')+'</dt><dd>'+dash(r[30])+'</dd></div></dl>'}
 function vipRows(r,ex,full){   // VIP values: investor score (and the breakdown), 12-month history; others see XX
  if(!canSip())return lockRows('vip',r,ex);
  return scoreChip(r,ex)+(full?'<dl class="more open">'+histHtml(r)+sipHtml(r)+'</dl>':'')}
 function xtraDrop(r,ex){
  return '<details class="xtra"><summary><span>'+tx('xtra_t')+'</span></summary><div class="xtra-b">'
-  +'<div class="xtra-h"><i class="tg-p">'+tx('xtra_prem')+'</i></div>'+premRows(r,ex)+'<div class="xtra-h"><i class="tg-v">'+tx('xtra_vip')+'</i></div>'+vipRows(r,ex,false)+'<small class="lgnote">'+tx('est_note')+'</small></div></details>'}
+  +'<div class="xtra-h"><i class="tg-p">'+tx('xtra_prem')+'</i></div>'+premRows(r,ex,true)+'<div class="xtra-h"><i class="tg-v">'+tx('xtra_vip')+'</i></div>'+vipRows(r,ex,false)+'<small class="lgnote">'+tx('est_note')+'</small></div></details>'}
 function kindLine(r,cn,help){return '<div class="kindt">'+dash(typeName(r))+(ok(r[9])?' \u00b7 '+esc(r[9])+(help?qb('tenure'):''):'')+(cn?' \u00b7 '+cn:'')+'</div>'}   // card: type, tenure and the auction count in one small line (2/11/2026)
 function priceBox(r,ex,fire,bt,onPhoto,help){
  return '<div class="pricebox"><span class="pl">'+tx('auction_price')+(help?qb('price'):'')+'</span><div class="price">'+dash(r[7])+(fire?' \uD83D\uDD25':'')+'</div>'
@@ -1413,6 +1493,9 @@ function whenRows(r,ex,cn,cal,full){   // card: one line (date, time, days left)
  const main='<div class="when"><span class="dlab">'+(full?tx('date'):tx('when_lbl')+':')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+'</span></span></div>';
  if(!full)return main+chips(r,true);
  return main+(cn||cal?'<div class="when2">'+(cn?'<span class="cnt">'+cn+qb('count')+'</span>':'<span></span>')+(cal?'<a class="calbtn" href="'+esc(cal)+'" target="_blank" rel="noopener">'+tx('cal_add')+'</a>':'')+'</div>':'')+chips(r)}
+// Card front (2/11/2026): size, completion year and bank in one tidy block; free-preview values stay XX
+function specBox(r){const v=x=>locked(x)?XX:dash(x),c=(k,x)=>'<div><span>'+tx(k)+'</span><b>'+v(x)+'</b></div>',high=isHigh(r);
+ return '<div class="specs'+(high?'':' three')+'">'+(high?'':c('land',r[10]))+c('built_up',r[11])+c('cy',r[19])+'<div class="sp-bank"><span>'+tx('bank')+'</span><b>'+v(r[16])+'</b></div></div>'}
 function mapBtn(r,short){return /^https:\/\//i.test(r[4]||'')?'<a class="map" href="'+esc(satUrl(r[4]))+'" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z" fill="#e53935"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg>'+(short?tx('map_short'):'Google Maps')+'</a>':''}
 function calBtn(cal){return cal?'<a class="calbtn ic" href="'+esc(cal)+'" target="_blank" rel="noopener">'+CALI+tx('cal_short')+'</a>':''}
 const CALI='<svg class="cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12.5v5M9.5 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -1436,6 +1519,7 @@ function card(r,i){
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')   // the No bidder note right under the address (30/10/2026)
  +priceBox(r,ex,fire,bt,onPhoto)
  +whenRows(r,ex,cn,cal)
+ +specBox(r)
  +(simple?'':xtraDrop(r,ex))
  +'<div class="acts v2 three"><button type="button" class="detbtn" data-id="'+esc(r[20])+'">'+tx('detail_btn')+'\u00a0\u203A</button><a class="wa-unit sm" href="'+esc(waUnit(r,st))+'" target="_blank" rel="noopener">'+tx('wa_short')+'</a>'+posCard(r)+'</div>'
  +'<div class="acts v3 icons">'+mapBtn(r,true)+favBtn(r,fav)+shareBtn(r)+calBtn(cal)+'</div></article>';
@@ -1851,11 +1935,14 @@ function aiSrc(){const K=AI.know;return '<small class="ai-src">'+esc(aiT('src',{
 // --- the chat panel
 function aiMsg(html,who,acts){const m=document.createElement('div');m.className='ai-m '+(who||'a');m.innerHTML=html;if(acts&&acts.length){const w=document.createElement('div');w.className='ai-acts';acts.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='btn ai-act';b.textContent=a.label;b.onclick=()=>{gtrack('ai_action',{label:a.label});a.run()};w.appendChild(b)});m.appendChild(w)}
  $('aiMsgs').appendChild(m);$('aiMsgs').scrollTop=$('aiMsgs').scrollHeight;if(who!=='u'){aiTalk()}return m}
-function aiTalk(){const av=$('aiAv');av.classList.add('talk');clearTimeout(aiTalk.t);aiTalk.t=setTimeout(()=>av.classList.remove('talk'),1400)}
+function aiTalk(){const avs=[$('aiAv'),$('aiAv2')].filter(Boolean);avs.forEach(a=>a.classList.add('talk'));clearTimeout(aiTalk.t);aiTalk.t=setTimeout(()=>avs.forEach(a=>a.classList.remove('talk')),1400)}
+function aiWave(){const av=$('aiAv');if(!av)return;av.classList.remove('wave');void av.offsetWidth;av.classList.add('wave');clearTimeout(aiWave.t);aiWave.t=setTimeout(()=>av.classList.remove('wave'),2500)}
+/* Sims-style character (2/11/2026): one copy of each look lives in <template>, cloned into the button and the panel head; the paint servers sit in #aiDefs */
+function aiMount(){document.querySelectorAll('.ai-av').forEach(el=>{if(el.querySelector('svg'))return;['aiTplM','aiTplF'].forEach(id=>{const t=$(id);if(t)el.appendChild(t.content.cloneNode(true))})})}
 function aiAsk(text){const t=String(text||'').trim();if(!t)return;aiMsg(esc(t),'u');gtrack('ai_ask',{len:t.length});const a=aiAnswer(t);setTimeout(()=>{const m=aiMsg(a.html,'a',a.acts);m.querySelectorAll('.ai-units li').forEach(li=>{li.onclick=()=>{const r=DATA.find(x=>x[20]===li.dataset.id);if(r){AI.last=r;openDetail(r)}}})},350)}
 function aiChips(){const W=aiT('chips');$('aiChips').innerHTML=W.map(c=>'<button type="button" class="aiq-chip">'+esc(c)+'</button>').join('');$('aiChips').querySelectorAll('button').forEach(b=>{b.onclick=()=>{if(/kod akses|access code/i.test(b.textContent)){aiOpen(false);goCode();return}aiAsk(b.textContent)}})}
 function aiOpen(o,fromBack){const p=$('aiPanel');const was=!p.hidden;if(o===was)return;p.hidden=!o;$('aiFab').classList.toggle('open',o);$('aiBub').hidden=true;
- if(o){if(!AI.greeted){AI.greeted=true;aiMsg(aiT('hi'),'a')}aiChips();histPush('ai');setTimeout(()=>$('aiIn').focus(),250);gtrack('ai_open',{})}else if(!fromBack)histDone('ai')}
+ if(o){if(!AI.greeted){AI.greeted=true;aiMsg(aiT('hi'),'a')}aiWave();aiChips();histPush('ai');setTimeout(()=>$('aiIn').focus(),250);gtrack('ai_open',{})}else if(!fromBack)histDone('ai')}
 function aiWho(w){AI.who=w==='f'?'f':'m';document.querySelectorAll('.ai-av').forEach(a=>{a.classList.toggle('f',AI.who==='f');a.classList.toggle('m',AI.who==='m')});document.querySelectorAll('.ai-sw button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.who===AI.who)));ls.set('aiwho',AI.who)}
 // --- the guided tour: highlight a control, say one line, then tap it for the client
 const AIG={filter:[['#openFab','click'],['#negeri','focus'],['#apply','click']],search:[['#q','focus'],['#qGo','click']],detail:[['#list .card .detbtn','click']],pos:[['#list .card .posreq, #list .card .posdl, #list .card .posbtn','point']],save:[['#list .card .fav','click']],share:[['#list .card .sh','point']],cal:[['#list .card .calbtn','point']],map:[['#list .card .map','point']],code:[['#haveCode, .havecode','point']],wa:[['#list .card .wa-unit','point']],prem:[['#trialCta','point']]};
@@ -1870,7 +1957,8 @@ function aiGuideStep(){const g=AI.guide;if(!g)return;if(g.i>=g.steps.length){aiG
   const fab=$('aiFab');fab.classList.add('point');fab.style.top=Math.max(8,Math.min(innerHeight-130,(below?r.bottom+10:r.top-130)))+'px';fab.style.right='10px';fab.style.bottom='auto';aiTalk();
   setTimeout(()=>{if(!AI.guide)return;try{if(st.act==='click')el.click();else if(st.act==='focus')el.focus()}catch(e){}g.i++;setTimeout(aiGuideStep,st.act==='click'?900:1200)},st.act==='point'?2600:1700)},420)}
 function aiGuideStop(fromBack){AI.guide=null;$('aiSpot').hidden=true;const fab=$('aiFab');fab.classList.remove('point');fab.style.top='';fab.style.right='';fab.style.bottom='';if(!fromBack)histDone('ai')}
-function aiBoot(){if(!$('aiFab'))return;$('aiFab').hidden=false;try{aiWho(ls.get('aiwho')||'m')}catch(e){aiWho('m')}
+function aiBoot(){if(!$('aiFab'))return;aiMount();$('aiFab').hidden=false;try{aiWho(ls.get('aiwho')||'m')}catch(e){aiWho('m')}
+ $('aiFab').classList.add('enter');setTimeout(()=>{$('aiFab').classList.remove('enter');aiWave()},1500);
  $('aiFab').onclick=()=>{if(AI.guide){aiGuideStop();return}aiOpen(true)};$('aiFab').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();aiOpen(true)}};
  $('aiClose').onclick=()=>aiOpen(false);$('aiStop').onclick=()=>aiGuideStop();document.querySelectorAll('.ai-sw button').forEach(b=>b.onclick=()=>aiWho(b.dataset.who));
  $('aiForm').onsubmit=e=>{e.preventDefault();const v=$('aiIn').value;$('aiIn').value='';aiAsk(v)};
