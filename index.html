@@ -2079,8 +2079,9 @@ function showTierBadge(){addScoreSort();const t=G('tierTag');if(!t)return;if(REA
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span>';t.hidden=false}   // the cyberpunk "Agentic AI Powered Data" tag (#aiTag) shows on every tier, the free preview included (29/10/2026)
 function start(){if(STARTED)return;STARTED=true;agentView();showTierBadge();G('count').textContent=tx('loading');loadListings().then(j=>{// Only Active units and units with a recorded result (Sold / Call Off / Unsold) are shown. A unit whose auction date has passed
 // and has no result is not listed (a result usually appears within a day or two and the unit then comes back under its tab).
+// Non-LACA is the exception (4/11/2026): its data never carries a result, and it has its own tab where the bidder confirms with the agent.
 const t0=new Date();t0.setHours(0,0,0,0);
-const listed=o=>o.outcome||!(Date.parse(o.auction_date)>0&&Date.parse(o.auction_date)<t0.getTime());
+const listed=o=>o.outcome||o.laca==='Non-LACA'||!(Date.parse(o.auction_date)>0&&Date.parse(o.auction_date)<t0.getTime());
 boot(j.listings.filter(listed).map(o=>FIELDS.map(f=>o[f])),j);}).catch(()=>{G('count').textContent=tx('load_err');G('list').innerHTML=''})}
 function trialLocks(){const so=G('sort');so.value='rich';   // the free preview opens on the units with a photo and an exact pin (2/11/2026)
  ['bmv','lbmv'].forEach(v=>{const o=so.querySelector('option[value='+v+']');if(o)o.dataset.i18n='s_'+v+'_lock'});
