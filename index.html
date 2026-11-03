@@ -216,6 +216,32 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .exp-tag.unsold,.exp-tag.nonlaca{background:var(--warn-bg);color:var(--warn)}
 .unsold-note{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:1rem;line-height:1.4;display:flex;flex-direction:column;gap:2px}
 .unsold-note b{display:flex;align-items:center;gap:6px}
+.pval{margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}.pval-r{display:flex;justify-content:space-between;align-items:center;gap:8px}.pval-r span{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.92rem;font-weight:700}.pval-r b{font-size:1.2rem;font-weight:800;font-variant-numeric:tabular-nums}
+.pbar{display:flex;height:26px;margin-top:6px;border-radius:8px;overflow:hidden;font-size:.8rem;font-weight:800;line-height:26px;text-align:center}.pbar i{font-style:normal;background:var(--accent);color:var(--accent-fg);white-space:nowrap;overflow:hidden}.pbar u{flex:1;min-width:0;text-decoration:none;background:#23804d;color:#fff;white-space:nowrap;overflow:hidden}
+.pval-s{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px;margin-top:6px;color:var(--save);font-weight:800;font-size:1.02rem}.pval-s span{font-size:.88rem;font-weight:700}
+.wcalc{flex-direction:column;justify-content:flex-start}.w-l{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 8px;font-size:.92rem}.wsel{min-height:42px;max-width:100%;padding:4px 8px;border:1px solid var(--save);border-radius:9px;background:var(--surface);color:var(--fg);font:inherit;font-weight:700}.w-r{display:flex;flex-direction:column;gap:2px;font-size:.92rem;line-height:1.35}.w-o{color:var(--warn)}.w-u{color:var(--fg);font-weight:700}
+.tools>button.at-i{position:relative;flex:none;width:54px;height:54px;min-height:0;margin-left:14px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;isolation:isolate;-webkit-tap-highlight-color:transparent;transition:transform .18s ease}.tools>button.at-i[hidden]{display:none}.at-i:hover{transform:scale(1.08)}.at-i:active{transform:scale(.92)}.at-i:focus-visible{outline:3px solid #5ee7ff;outline-offset:3px}
+.at-i>span{position:absolute;border-radius:50%}.at-i-halo{inset:0;z-index:-1;background:radial-gradient(circle,rgba(94,231,255,.75),rgba(177,108,255,.35) 55%,transparent 72%);animation:atIHalo 2.2s ease-out infinite}
+.at-i-ring{inset:0;background:conic-gradient(from 0deg,#5ee7ff,#7a7bff,#e65cff,#f3d67a,#5ee7ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));filter:drop-shadow(0 0 5px rgba(94,231,255,.9));animation:atISpin 3s linear infinite}
+.at-i-orbit{inset:-1px;animation:atISpin 1.9s linear infinite reverse}.at-i-orbit::after{content:'';position:absolute;top:0;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px #5ee7ff}
+.at-i-core{inset:6px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 34% 26%,#2c628f,#0a1d33 62%,#050d18);box-shadow:inset 0 0 12px rgba(94,231,255,.55),0 0 10px rgba(94,231,255,.4);overflow:hidden}.at-i-core::after{content:'';position:absolute;top:-30%;left:-60%;width:40%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(22deg);animation:atIShine 3.4s ease-in-out infinite}
+.at-i-core svg{width:29px;height:29px;filter:drop-shadow(0 0 5px rgba(124,240,255,.95));animation:atIBreath 2.2s ease-in-out infinite}
+@keyframes atISpin{to{transform:rotate(360deg)}}@keyframes atIHalo{0%{transform:scale(.82);opacity:.95}70%,100%{transform:scale(1.42);opacity:0}}@keyframes atIShine{0%,55%{left:-60%}85%,100%{left:125%}}@keyframes atIBreath{50%{transform:scale(1.1)}}
+.at-x{flex:none;min-width:40px;min-height:38px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:9px;background:transparent;color:#fff;font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer}.at-x:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.at-i-halo,.at-i-ring,.at-i-orbit,.at-i-core::after,.at-i-core svg{animation:none}}
+#atWrap .at-b{position:fixed;z-index:100000;background:rgba(3,10,20,.8)}#atWrap .at-cover{display:none;position:fixed;inset:0;z-index:100001}#atWrap.at-info .at-cover,#atWrap.at-intro .at-cover,#atWrap.at-end .at-cover{display:block}
+#atWrap .at-ring{position:fixed;z-index:100002;pointer-events:none;border-radius:12px;border:3px solid #5ee7ff;box-shadow:0 0 0 2px rgba(94,231,255,.35),0 0 26px 6px rgba(94,231,255,.75);animation:atPulse 1.5s ease-in-out infinite}
+@keyframes atPulse{50%{box-shadow:0 0 0 7px rgba(94,231,255,.2),0 0 38px 12px rgba(94,231,255,.95)}}
+#atCard{position:fixed;z-index:100003;left:50%;margin-left:0;width:min(94vw,520px);max-height:62vh;overflow:auto;transform:translateX(-50%);box-sizing:border-box;padding:14px 16px 16px;border-radius:18px;border:1px solid rgba(94,231,255,.55);background:linear-gradient(155deg,#0a1727,#123253);color:#f3f8fc;box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 24px rgba(94,231,255,.28);font-family:var(--body,system-ui),system-ui,sans-serif}
+.at-top{display:flex;align-items:center;gap:9px;color:#5ee7ff;font-size:1rem;letter-spacing:.03em}.at-orb{flex:none;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5ee7ff 45%,#0c6f96);box-shadow:0 0 12px #5ee7ff;animation:atOrb 2s ease-in-out infinite}@keyframes atOrb{50%{transform:scale(1.18)}}
+.at-lang{margin-left:auto;display:flex;gap:4px}.at-lang button{min-width:44px;min-height:38px;padding:0 8px;border:1px solid rgba(94,231,255,.6);border-radius:9px;background:transparent;color:#f3f8fc;font:inherit;font-weight:700;cursor:pointer}.at-lang button.on{background:#5ee7ff;color:#04202e}
+.at-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;margin-top:9px;color:#bcd6e6;font-size:.92rem}.at-bar{height:7px;margin-top:5px;border-radius:9px;background:rgba(255,255,255,.14);overflow:hidden}.at-bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#5ee7ff,#e6c25a);transition:width .35s ease}
+#atCard h3{margin:11px 0 5px;color:#fff;font-size:1.28rem;line-height:1.25}#atCard .at-do{margin:0;color:#fff;font-size:1.12rem;line-height:1.4}#atCard .at-why{margin:8px 0 0;color:#d7e7f1;font-size:1rem;line-height:1.4}#atCard .at-why b{color:#e6c25a}
+.at-btns{display:flex;align-items:stretch;gap:8px;margin-top:12px}.at-btns .at-wait{flex:1 1 0;margin-top:0;min-width:0}.at-back{flex:none;min-width:104px;min-height:56px;padding:0 12px;border:1px solid rgba(94,231,255,.7);border-radius:13px;background:transparent;color:#f3f8fc;font:inherit;font-size:1.08rem;font-weight:700;cursor:pointer}.at-back:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.at-next{display:block;flex:1 1 0;min-width:0;min-height:56px;border:0;border-radius:13px;background:linear-gradient(90deg,#e6c25a,#f3dc8e);color:#1a1405;font:inherit;font-size:1.15rem;font-weight:800;cursor:pointer}.at-next:focus-visible,.at-lang button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.at-wait{margin-top:12px;padding:12px;border:1px dashed #5ee7ff;border-radius:13px;color:#5ee7ff;font-size:1.08rem;font-weight:800;text-align:center;line-height:1.35}.at-wait.bad{border-color:#ff9b94;color:#ffb4ae}
+.at-big #tierTag{transform:scale(1.3);transform-origin:left center}.at-big #aiTag{visibility:hidden}#atCard .at-do{white-space:pre-line}
+@media (prefers-reduced-motion:reduce){#atWrap .at-ring,.at-orb{animation:none}.at-bar i{transition:none}}
 .unsold-note span{color:var(--fg)}.unsold-next{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px;margin-top:6px}.unsold-next span{font-size:.95rem}.unsold-next b{color:var(--fg);font-size:1.15rem}.unsold-note small{margin-top:4px;color:var(--muted);font-size:.85rem;line-height:1.35}
 .chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .chip{font-size:.95rem;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:4px 12px;color:var(--fg)}
@@ -543,6 +569,7 @@ body{padding-block-end:100px}
 <div class="trial-bar" id="trialBar" hidden><span data-i18n="trial_msg">You are viewing the free preview. Full details are for premium members.</span><a class="btn" id="trialCta" href="premium/" data-i18n="lock">Unlock Premium RM50 only</a><button type="button" class="btn" id="haveCode" hidden><svg class="key" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2a7.5 7.5 0 0 0-7.1 9.9L2 17.3V22h4.7l1.2-1.2v-2.3h2.3l1.4-1.4v-2.2h2.2l.9-.9A7.5 7.5 0 1 0 14.5 2zm2 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg><span data-i18n="have_code">I have an access code</span></button></div>
 <div class="tools">
 <div class="tgrp ts" role="group" aria-label="Text size" data-i18n-al="size_al"><button type="button" data-s="" aria-label="Normal text" data-i18n-al="size0">A</button><button type="button" data-s="l" aria-label="Bigger text" data-i18n-al="size1">A+</button><button type="button" data-s="xl" aria-label="Biggest text" data-i18n-al="size2">A++</button></div>
+<button class="at-i" id="atInfo" type="button" hidden aria-label="Agent guide" data-i18n-al="at_info_al"><span class="at-i-halo"></span><span class="at-i-ring"></span><span class="at-i-orbit"></span><span class="at-i-core"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="atIg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#7cf0ff"/><stop offset="1" stop-color="#f3d67a"/></linearGradient></defs><circle cx="12" cy="5.6" r="2.5" fill="url(#atIg)"/><rect x="9.9" y="10.2" width="4.2" height="11" rx="2.1" fill="url(#atIg)"/></svg></span></button>
 
 </div>
 <div class="sub"><span data-i18n="banner">Interested? Contact Rashidah Juremi: 018-2808043</span><span class="sub-acts"><a id="bannerCall" href="#" data-i18n="call">📞 Call</a><a class="sub-wa" id="bannerWa" href="https://wa.me/60182808043" target="_blank" rel="noopener">💬 WhatsApp</a></span></div>
@@ -816,10 +843,10 @@ const ls={get:k=>{try{return localStorage.getItem(KP+k)}catch(e){return null}},s
 let LANG=ls.get('lang')==='ms'?'ms':'en';
 // English / Bahasa Melayu. {name} and {phone} are the agent's; other {x} are filled in by the caller.
 const I18N={en:{
-title:'Auction List | {name}',h1:'Auction List',updated:'Updated {d} · from official auction notices',eyebrow:'Members-only list',save_lbl:'You save {v}',mo_lbl:'Installment ≈ {v} / month',mo_line:'Loan {l} · Downpayment {d}',mo_note:'Estimate only: banks usually lend 90% for a first or second home and 70% from the third. Ask your bank for the real figure.',mo_mar:'Loan margin',mo_m:'Loan {n}%',mo_ten:'Loan tenure',mo_rate:'Interest rate a year',mo_y:'{n} yrs',mo_y1:'{n} yr',mo_avg:'avg',new_tag:'NEW',psf:'RM {v} / sq ft',drop:'Price cut {n} times',drop1:'Price cut once',since:' since {d}',st_av:'units you can still bid on',st_bmv:'{p}%+ below market value',st_new:'new in the last 3 days',totop:'Back to top',st_tap:'Show these units',s_psf:'Lowest price per sq ft',f_new:'New (last 3 days)',chip_rm:'Remove filter: {f}',chip_all:'Clear all',cmp_btn:'⚖ Compare',cmp_t:'Compare saved units',cmp_more:'Showing the first 4 units of your list.',cmp_best:'★ = best in that row.',cmp_disc:'Below market value',cmp_psf:'Price per sq ft',cmp_ten:'Tenure',cmp_nth:'Auction round',sim:'🔍 {n} other {c} units for sale in {d}',sim1:'🔍 1 other {c} unit for sale in {d}',copy_al:'Copy address',addr_copied:'Address copied',pos_dl:'Download POS',pos_only:'Only agents can see this button. VIP and Premium clients only see the "Request POS from agent" button.',pos_wait:'Opening the POS in a new tab… (a few seconds)',loading:'Loading listings…',load_err:'Could not load listings. Refresh the page to try again.',
+title:'Auction List | {name}',h1:'Auction List',updated:'Updated {d} · from official auction notices',eyebrow:'Members-only list',save_lbl:'You save {v}',pv_price:'Price {p}%',pv_save:'Save {p}%',pv_below:'{p}% below market value',win_lbl:'If you win at',win_base:'auction price',win_below:'{p}% below market value · you save {v}',win_over:'At or above market value',win_up:'Instalment goes up {v} / month',mo_lbl:'Installment ≈ {v} / month',mo_line:'Loan {l} · Downpayment {d}',mo_note:'Estimate only: banks usually lend 90% for a first or second home and 70% from the third. Ask your bank for the real figure.',mo_mar:'Loan margin',mo_m:'Loan {n}%',mo_ten:'Loan tenure',mo_rate:'Interest rate a year',mo_y:'{n} yrs',mo_y1:'{n} yr',mo_avg:'avg',new_tag:'NEW',psf:'RM {v} / sq ft',drop:'Price cut {n} times',drop1:'Price cut once',since:' since {d}',st_av:'units you can still bid on',st_bmv:'{p}%+ below market value',st_new:'new in the last 3 days',totop:'Back to top',st_tap:'Show these units',s_psf:'Lowest price per sq ft',f_new:'New (last 3 days)',chip_rm:'Remove filter: {f}',chip_all:'Clear all',cmp_btn:'⚖ Compare',cmp_t:'Compare saved units',cmp_more:'Showing the first 4 units of your list.',cmp_best:'★ = best in that row.',cmp_disc:'Below market value',cmp_psf:'Price per sq ft',cmp_ten:'Tenure',cmp_nth:'Auction round',sim:'🔍 {n} other {c} units for sale in {d}',sim1:'🔍 1 other {c} unit for sale in {d}',copy_al:'Copy address',addr_copied:'Address copied',pos_dl:'Download POS',pos_only:'Only agents can see this button. VIP and Premium clients only see the "Request POS from agent" button.',pos_wait:'Opening the POS in a new tab… (a few seconds)',loading:'Loading listings…',load_err:'Could not load listings. Refresh the page to try again.',
 banner:'Interested? Contact {name}: {phone}',call:'📞 Call',wa_hi:'Hi {name}, I would like to know more about the auction list.',
 qf_btn:'🔎 Quick Find',qf_sub:'3 easy questions',guide_btn:'❓ How to use',guide_sub:'this page',
-search_ph:'Address or bank',search_ph_s:'Address / bank',search_al:'Search address or bank',sort_by:'Sort by:',search_go_al:'Search and go to the first listing',aview_note:'This view is for your client',aview_agent:'Only agents can see this menu and every gold-marked part. VIP, Premium and Free clients cannot see them.',wel_agent_flag:'Only agents can see this message. VIP, Premium and Free clients cannot see it.',aview_al:'Switch the view: agent, VIP client or free visitor',have_code:'I have an access code',gate_back:'Back to the free preview',filter:'Filter',shared_t:'Showing a shared unit',view_all:'View all listings',status_al:'Listing status',
+search_ph:'Address or bank',search_ph_s:'Address / bank',search_al:'Search address or bank',sort_by:'Sort by:',search_go_al:'Search and go to the first listing',aview_note:'This view is for your client',at_info_al:'Watch the agent guide again',aview_agent:'Only agents can see this menu and every gold-marked part. VIP, Premium and Free clients cannot see them.',wel_agent_flag:'Only agents can see this message. VIP, Premium and Free clients cannot see it.',aview_al:'Switch the view: agent, VIP client or free visitor',have_code:'I have an access code',gate_back:'Back to the free preview',filter:'Filter',shared_t:'Showing a shared unit',view_all:'View all listings',status_al:'Listing status',
 fav_btn:'♥ My list ({n})',fav_lbl:'♥ My list',fav_count:'My list: {n} units',fav_send:'💬 Send my list to {name}',print:'🖨 Print',back_all:'Back to all units',
 fav_empty:'Your list is empty. Tap <b>♡ Save</b> on a unit to keep it here.',fav_wa:'Hi {name}, I am interested in these auction units:',fav_more:'(+{n} more in my list)',
 fav_added:'Saved to My list',fav_removed:'Removed from My list',save:'♡ Save',saved:'♥ Saved',
@@ -889,10 +916,10 @@ h_count:'<p><b>1st auction</b> - the first time the bank offers this unit.</p><p
 h_cy_t:'Completion year',
 h_cy:'<p>The year the building was completed.</p><p>It is only available for Condominium / Apartment / SOHO. Picking a year changes the Property Category to Condominium / Apartment / SOHO.</p>'
 },ms:{
-title:'Senarai Lelong | {name}',h1:'Senarai Lelong',updated:'Dikemas kini {d} · daripada notis lelong rasmi',eyebrow:'Senarai eksklusif ahli',save_lbl:'Jimat {v}',mo_lbl:'Ansuran ± {v} / bulan',mo_line:'Pinjaman {l} · Bayaran pendahuluan {d}',mo_note:'Anggaran sahaja: bank biasanya beri pinjaman 90% untuk rumah pertama dan kedua, 70% untuk rumah ketiga. Semak angka sebenar dengan bank.',mo_mar:'Margin pinjaman',mo_m:'Margin {n}%',mo_ten:'Tempoh pinjaman',mo_rate:'Kadar faedah setahun',mo_y:'{n} thn',mo_y1:'{n} thn',mo_avg:'purata',new_tag:'BAHARU',psf:'RM {v} / kps',drop:'Harga sudah turun {n} kali',drop1:'Harga sudah turun sekali',since:' sejak {d}',st_av:'unit masih boleh dibida',st_bmv:'≥{p}% bawah nilai pasaran',st_new:'unit baharu (3 hari)',totop:'Kembali ke atas',st_tap:'Tunjuk unit ini',s_psf:'Harga sekaki terendah',f_new:'Baharu (3 hari)',chip_rm:'Buang penapis: {f}',chip_all:'Kosongkan semua',cmp_btn:'⚖ Banding',cmp_t:'Banding unit simpanan',cmp_more:'Menunjukkan 4 unit pertama dalam senarai anda.',cmp_best:'★ = terbaik dalam baris itu.',cmp_disc:'Bawah nilai pasaran',cmp_psf:'Harga sekaki',cmp_ten:'Pegangan',cmp_nth:'Pusingan lelong',sim:'🔍 {n} unit {c} lain dijual di {d}',sim1:'🔍 1 unit {c} lain dijual di {d}',copy_al:'Salin alamat',addr_copied:'Alamat disalin',pos_dl:'Muat turun POS',pos_only:'Hanya ejen nampak butang ini. Klien VIP dan Premium hanya nampak butang "Minta POS daripada ejen".',pos_wait:'Membuka POS di tab baharu… (beberapa saat)',loading:'Memuatkan senarai…',load_err:'Senarai tidak dapat dimuatkan. Muat semula halaman dan cuba lagi.',
+title:'Senarai Lelong | {name}',h1:'Senarai Lelong',updated:'Dikemas kini {d} · daripada notis lelong rasmi',eyebrow:'Senarai eksklusif ahli',save_lbl:'Jimat {v}',pv_price:'Harga {p}%',pv_save:'Jimat {p}%',pv_below:'{p}% bawah nilai pasaran',win_lbl:'Kalau menang pada harga',win_base:'harga lelong',win_below:'{p}% bawah nilai pasaran · jimat {v}',win_over:'Sama atau lebih daripada nilai pasaran',win_up:'Ansuran naik {v} / bulan',mo_lbl:'Ansuran ± {v} / bulan',mo_line:'Pinjaman {l} · Bayaran pendahuluan {d}',mo_note:'Anggaran sahaja: bank biasanya beri pinjaman 90% untuk rumah pertama dan kedua, 70% untuk rumah ketiga. Semak angka sebenar dengan bank.',mo_mar:'Margin pinjaman',mo_m:'Margin {n}%',mo_ten:'Tempoh pinjaman',mo_rate:'Kadar faedah setahun',mo_y:'{n} thn',mo_y1:'{n} thn',mo_avg:'purata',new_tag:'BAHARU',psf:'RM {v} / kps',drop:'Harga sudah turun {n} kali',drop1:'Harga sudah turun sekali',since:' sejak {d}',st_av:'unit masih boleh dibida',st_bmv:'≥{p}% bawah nilai pasaran',st_new:'unit baharu (3 hari)',totop:'Kembali ke atas',st_tap:'Tunjuk unit ini',s_psf:'Harga sekaki terendah',f_new:'Baharu (3 hari)',chip_rm:'Buang penapis: {f}',chip_all:'Kosongkan semua',cmp_btn:'⚖ Banding',cmp_t:'Banding unit simpanan',cmp_more:'Menunjukkan 4 unit pertama dalam senarai anda.',cmp_best:'★ = terbaik dalam baris itu.',cmp_disc:'Bawah nilai pasaran',cmp_psf:'Harga sekaki',cmp_ten:'Pegangan',cmp_nth:'Pusingan lelong',sim:'🔍 {n} unit {c} lain dijual di {d}',sim1:'🔍 1 unit {c} lain dijual di {d}',copy_al:'Salin alamat',addr_copied:'Alamat disalin',pos_dl:'Muat turun POS',pos_only:'Hanya ejen nampak butang ini. Klien VIP dan Premium hanya nampak butang "Minta POS daripada ejen".',pos_wait:'Membuka POS di tab baharu… (beberapa saat)',loading:'Memuatkan senarai…',load_err:'Senarai tidak dapat dimuatkan. Muat semula halaman dan cuba lagi.',
 banner:'Berminat? Hubungi {name}: {phone}',call:'📞 Telefon',wa_hi:'Hi {name}, saya nak tahu lebih lanjut tentang senarai lelong.',
 qf_btn:'🔎 Carian Mudah',qf_sub:'3 soalan mudah',guide_btn:'❓ Cara guna',guide_sub:'laman ini',
-search_ph:'Alamat atau bank',search_ph_s:'Alamat / bank',search_al:'Cari alamat atau bank',sort_by:'Susun ikut:',search_go_al:'Cari dan pergi ke listing pertama',aview_note:'Paparan ini untuk klien anda',aview_agent:'Hanya ejen nampak menu ini dan semua bahagian bertanda emas. Klien VIP, Premium dan Free tidak nampak.',wel_agent_flag:'Hanya ejen nampak mesej ini. Klien VIP, Premium dan Free tidak nampak.',aview_al:'Tukar paparan: agent, klien VIP atau pelawat percuma',have_code:'Saya ada kod akses',gate_back:'Kembali ke paparan percuma',filter:'Tapis',shared_t:'Menunjukkan unit yang dikongsi',view_all:'Lihat semua senarai',status_al:'Status senarai',
+search_ph:'Alamat atau bank',search_ph_s:'Alamat / bank',search_al:'Cari alamat atau bank',sort_by:'Susun ikut:',search_go_al:'Cari dan pergi ke listing pertama',aview_note:'Paparan ini untuk klien anda',at_info_al:'Tonton semula panduan ejen',aview_agent:'Hanya ejen nampak menu ini dan semua bahagian bertanda emas. Klien VIP, Premium dan Free tidak nampak.',wel_agent_flag:'Hanya ejen nampak mesej ini. Klien VIP, Premium dan Free tidak nampak.',aview_al:'Tukar paparan: agent, klien VIP atau pelawat percuma',have_code:'Saya ada kod akses',gate_back:'Kembali ke paparan percuma',filter:'Tapis',shared_t:'Menunjukkan unit yang dikongsi',view_all:'Lihat semua senarai',status_al:'Status senarai',
 fav_btn:'♥ Senarai saya ({n})',fav_lbl:'♥ Senarai saya',fav_count:'Senarai saya: {n} unit',fav_send:'💬 Hantar senarai kepada {name}',print:'🖨 Cetak',back_all:'Kembali ke semua unit',
 fav_empty:'Senarai anda kosong. Tekan <b>♡ Simpan</b> pada unit untuk menyimpannya di sini.',fav_wa:'Hi {name}, saya berminat dengan unit lelong berikut:',fav_more:'(+{n} lagi dalam senarai saya)',
 fav_added:'Disimpan dalam Senarai saya',fav_removed:'Dibuang dari Senarai saya',save:'♡ Simpan',saved:'♥ Disimpan',
@@ -1133,10 +1160,15 @@ const loanSel=()=>'<span class="mo-s"><select class="lsel" data-loan="m" aria-la
  +'</select><select class="lsel" data-loan="r" aria-label="'+esc(tx('mo_rate'))+'">'
  +RATES.map(v=>'<option value="'+v+'"'+(v===LOAN.r?' selected':'')+'>'+v+'%'+(v===4?' '+tx('mo_avg'):'')+'</option>').join('')+'</select></span>';
 const HOME_CATS=()=>[CATS[0],CATS[1],CATS[2],CATS[5]];
-function saveRow(r,ex){if(ex)return '';const p=num(r[7]);if(!p)return '';const mv=suspect(r)||locked(r[8])?0:num(r[8]),cut=mv>p?mv-p:0;
- const home=HOME_CATS().includes(r[21]),mo=home?moOf(p):0;if(!cut&&!mo)return '';
- const rm=v=>'RM '+Math.round(v).toLocaleString('en-MY');
- return '<div class="save">'+(cut?'<span>'+tx('save_lbl',{v:rm(cut)})+'</span>':'')+(mo?'<details class="mo" data-p="'+p+'"><summary class="mo-v">'+tx('mo_lbl',{v:rm(mo)})+'</summary><div class="mo-b">'+loanSel()+'<small class="mo-l">'+moLine(p)+'</small><small class="mo-n">'+esc(tx('mo_note'))+'</small></div></details>':'')+'</div>'}   // installment: a dropdown, opened by a tap (30/10/2026)
+// the winning price (4/11/2026): the client picks a price above the auction price and sees the % below market value and the instalment at that price
+const winRm=v=>'RM '+Math.round(v).toLocaleString('en-MY');
+const winOpts=(p,mv)=>{const seen=new Set([p]);let o='<option value="'+p+'">'+winRm(p)+' ('+tx('win_base')+')</option>';[2,5,10,15,20,25,30,40,50].forEach(s=>{const v=Math.round(p*(1+s/100)/1000)*1000;if(seen.has(v)||(mv&&v>mv*1.05))return;seen.add(v);o+='<option value="'+v+'">'+winRm(v)+' (+'+s+'%)</option>'});return o};
+const winRes=(p,w,mv,home)=>(mv?(w<mv?'<span class="w-b">'+tx('win_below',{p:Math.round((1-w/mv)*100),v:winRm(mv-w)})+'</span>':'<span class="w-o">'+tx('win_over')+'</span>'):'')+(home&&w>p?'<span class="w-u">'+tx('win_up',{v:winRm(moOf(w)-moOf(p))})+'</span>':'');
+function winPaint(b){const p=+b.dataset.p,mv=+b.dataset.mv,home=b.dataset.home==='1',w=+b.querySelector('.wsel').value||p;b.querySelector('.w-r').innerHTML=winRes(p,w,mv,home);
+ const m=b.querySelector('.mo');if(m){m.dataset.p=w;m.querySelector('.mo-v').textContent=tx('mo_lbl',{v:winRm(moOf(w))});m.querySelector('.mo-l').textContent=moLine(w)}}
+function saveRow(r,ex){if(ex)return '';const p=num(r[7]);if(!p)return '';const mv=suspect(r)||locked(r[8])?0:num(r[8]),home=HOME_CATS().includes(r[21]);if(!mv&&!home)return '';
+ return '<div class="save wcalc" data-p="'+p+'" data-mv="'+mv+'" data-home="'+(home?1:0)+'"><label class="w-l"><span>'+tx('win_lbl')+'</span><select class="wsel" aria-label="'+esc(tx('win_lbl'))+'">'+winOpts(p,mv)+'</select></label><div class="w-r">'+winRes(p,p,mv,home)+'</div>'
+  +(home?'<details class="mo" data-p="'+p+'"><summary class="mo-v">'+tx('mo_lbl',{v:winRm(moOf(p))})+'</summary><div class="mo-b">'+loanSel()+'<small class="mo-l">'+moLine(p)+'</small><small class="mo-n">'+esc(tx('mo_note'))+'</small></div></details>':'')+'</div>'}   // installment: a dropdown, opened by a tap (30/10/2026)
 // 1/11/2026: the free preview shows the real photo too (data2.json carries it); the map link too when the data has one
 function hero(r){const ph=/^[ub]:[0-9a-f]{20}$/.test(r[32]||'')?r[32]:'';const k=artOf(r);if(!k&&!ph)return '';const m=/^https:\/\//i.test(r[4]||'')?satUrl(r[4]):'';const img='<img src="'+IMG+(ph?'tg/'+ph.slice(2):k)+'.webp" width="960" height="540" alt="" loading="lazy" decoding="async" onload="this.classList.add(\'ok\')" onerror="this.classList.add(\'ok\')">'+heroChips(r);
  const cap='<span class="hero-cap">'+tx(ph?'hero_cap_'+ph[0]:'hero_cap')+'</span>';
@@ -1476,11 +1508,12 @@ const XX='<span class="xx">XX</span>';
 function xxRow(k,v){return '<div><span>'+tx(k)+'</span><b>'+v+'</b></div>'}
 function lockRows(kind,r,ex,noBank){   // what a lower plan sees of the Premium / VIP values: XX where a value exists ('-' where none) and one activate link (1/11/2026)
  const v=x=>ok(x)?XX:'-';
- if(kind==='prem')return '<div class="xxbox"><div class="xxl">'+xxRow('market_value',suspect(r)?'-':v(r[8]))+(noBank?'':xxRow('bank',v(r[16])))+xxRow('borrower',v(r[30]))+xxRow('save_t',ok(r[8])&&num(r[7])?XX:'-')+'</div>'+lockLink()+'</div>';
+ const mvOpen=!locked(r[8]);   // the free file carries the market value since 4/11/2026: it then sits under the price, not here
+ if(kind==='prem')return '<div class="xxbox"><div class="xxl">'+(mvOpen?'':xxRow('market_value',suspect(r)?'-':v(r[8])))+(noBank?'':xxRow('bank',v(r[16])))+xxRow('borrower',v(r[30]))+(mvOpen?'':xxRow('save_t',ok(r[8])&&num(r[7])?XX:'-'))+'</div>'+lockLink()+'</div>';
  return '<div class="xxbox"><div class="xxl">'+(ex?'':xxRow('score_t',(TRIAL?num(r[7])>0:invScore(r)!=null)?XX+'<small>/100</small>':'-'))+xxRow('hist',Array.isArray(r[29])&&r[29].length?XX:'-')+xxRow('rental_t',v(r[31]))+'</div>'+lockLink2()+'</div>'}
 function premRows(r,ex,noBank){   // Premium values (also VIP, agents): market value, savings and instalment, price per sq ft and cuts, bank, borrower
  if(TRIAL)return lockRows('prem',r,ex,noBank);
- return '<div class="mv"><small>'+tx('market_value')+'</small> <b>'+(suspect(r)?'N/A':dash(r[8]))+'</b>'+qb('bmv')+'</div>'+psfDrop(r,ex)+saveRow(r,ex)
+ return (!ex&&!suspect(r)&&num(r[7])&&num(r[8])?'':'<div class="mv"><small>'+tx('market_value')+'</small> <b>'+(suspect(r)?'N/A':dash(r[8]))+'</b>'+qb('bmv')+'</div>')+psfDrop(r,ex)+saveRow(r,ex)
   +'<dl class="more open">'+(noBank?'':'<div><dt>'+tx('bank')+'</dt><dd>'+dash(r[16])+'</dd></div>')+'<div><dt>'+tx('borrower')+'</dt><dd>'+dash(r[30])+'</dd></div></dl>'}
 function vipRows(r,ex,full){   // VIP values: investor score (and the breakdown), 12-month history; others see XX
  if(!canSip())return lockRows('vip',r,ex);
@@ -1489,9 +1522,14 @@ function xtraDrop(r,ex){
  return '<details class="xtra"><summary><span>'+tx('xtra_t')+'</span></summary><div class="xtra-b">'
   +'<div class="xtra-h"><i class="tg-p">'+tx('xtra_prem')+'</i></div>'+premRows(r,ex,true)+'<div class="xtra-h"><i class="tg-v">'+tx('xtra_vip')+'</i></div>'+vipRows(r,ex,false)+'<small class="lgnote">'+tx('est_note')+'</small></div></details>'}
 function kindLine(r,cn,help){return '<div class="kindt">'+dash(typeName(r))+(ok(r[9])?' \u00b7 '+esc(r[9])+(help?qb('tenure'):''):'')+(cn?' \u00b7 '+cn:'')+'</div>'}   // card: type, tenure and the auction count in one small line (2/11/2026)
-function priceBox(r,ex,fire,bt,onPhoto,help){
- return '<div class="pricebox"><span class="pl">'+tx(stOf(r)==='unsold'?'auction_price_last':'auction_price')+(help?qb('price'):'')+'</span><div class="price">'+dash(r[7])+(fire?' \uD83D\uDD25':'')+'</div>'
-  +(bt&&!onPhoto?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+(help?qb('bmv'):'')+'</div>':'')+'</div>'}
+// market value under the price, with a bar of the price against it, on every plan (4/11/2026)
+function valueBox(r,ex,help){if(ex)return '';const p=num(r[7]),mv=suspect(r)||locked(r[8])?0:num(r[8]);if(!p||!mv)return '';
+ let o='<div class="pval"><div class="pval-r"><span>'+tx('market_value')+(help?qb('bmv'):'')+'</span><b>'+winRm(mv)+'</b></div>';
+ if(mv>p){const s=Math.round((1-p/mv)*100),k=100-s;o+='<div class="pbar" role="img" aria-label="'+esc(tx('pv_below',{p:s}))+'"><i style="width:'+k+'%">'+tx('pv_price',{p:k})+'</i><u>'+(s>=18?tx('pv_save',{p:s}):'')+'</u></div><div class="pval-s"><b>'+tx('save_lbl',{v:winRm(mv-p)})+'</b><span>'+tx('pv_below',{p:s})+'</span></div>'}
+ return o+'</div>'}
+function priceBox(r,ex,fire,bt,onPhoto,help){const pv=valueBox(r,ex,help);
+ return '<div class="pricebox"><span class="pl">'+tx(stOf(r)==='unsold'?'auction_price_last':'auction_price')+(help?qb('price'):'')+'</span><div class="price">'+dash(r[7])+(fire?' \uD83D\uDD25':'')+'</div>'+pv
+  +(bt&&!onPhoto&&!pv?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+(help?qb('bmv'):'')+'</div>':'')+'</div>'}
 function whenRows(r,ex,cn,cal,full){   // card: one line (date, time, days left) + chips; Full details: the long form with the count and the calendar row
  const main='<div class="when"><span class="dlab">'+(full?tx('date'):tx('when_lbl')+':')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+(full?'':chips(r,true))+'</span></span></div>';
  if(!full)return main;
@@ -1707,7 +1745,8 @@ document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.mat
  LOAN[el.dataset.loan]=+el.value;ls.set('loan',JSON.stringify(LOAN));track('loan_change',{margin:LOAN.m,years:LOAN.y,rate:LOAN.r});
  document.querySelectorAll('.mo').forEach(m=>{const v=m.querySelector('.mo-v');if(v)v.textContent=tx('mo_lbl',{v:'RM '+moOf(+m.dataset.p).toLocaleString('en-MY')});
   const l=m.querySelector('.mo-l');if(l)l.textContent=moLine(+m.dataset.p);
-  m.querySelectorAll('select[data-loan]').forEach(x=>{if(x!==el)x.value=String(LOAN[x.dataset.loan])})})});
+  m.querySelectorAll('select[data-loan]').forEach(x=>{if(x!==el)x.value=String(LOAN[x.dataset.loan])})});document.querySelectorAll('.wcalc').forEach(winPaint)});
+document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('.wsel'))return;winPaint(el.closest('.wcalc'));track('win_price_change',{price:+el.value})});
 document.addEventListener('input',e=>{const d=e.target.closest&&e.target.closest('details.sip');if(d&&e.target.matches('input[data-k]'))sipRecalc(d,e.target)});
 ['jenis','cat','sort'].forEach(k=>$(k).addEventListener('input',render));
 $('q').addEventListener('input',()=>{clearTimeout(QDEB);QDEB=setTimeout(render,160)});   // typing: one redraw after a short pause, not one per letter
@@ -1809,7 +1848,8 @@ daerahOpts();
 LASTON=restoreLast();
 if(sharedId)track('shared_unit_open',{unit_id:sharedId});
 viewUI();paint();render();LASTSNAP=JSON.stringify(snapNow());
-if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(showGuide,500);   // a fresh code: the welcome first, the guide after it
+atRentRow=id=>{const r=DATA.find(x=>x[20]===id);return !!r&&Array.isArray(r[33])&&r[33].some(a=>Array.isArray(a)&&num(a[0])>0)};
+if(!sharedId&&agTourDue())setTimeout(agTourStart,500);else if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(showGuide,500);   // an agent's first visit: the required walkthrough; a fresh code: the welcome first, the guide after it
 if(sharedId)setTimeout(()=>toFirst(true),350);   // shared unit link (#id, 29/10/2026): open straight on that unit's card, not the top of the page
 // ===== AI assistant (2/11/2026): an on-screen character (two looks) that answers questions about the auction data in this page,
 // shows the client around by highlighting and tapping the page's own controls, and reads the daily market summary written by the
@@ -2073,10 +2113,135 @@ function agentSwitch(t){const k=AVIEW;t.className='tier-tag aview '+k;
  const s=document.createElement('select');s.id='aviewSel';s.dataset.i18nAl='aview_al';s.setAttribute('aria-label',tx('aview_al'));
  ['agent'].concat(RTIER==='sip'?['vip']:[],['prem','free']).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=TAG[v][0];o.selected=v===k;s.appendChild(o)});
  s.onchange=()=>{try{sessionStorage.setItem(KP+'aview',s.value)}catch(e){}try{gtrack('agent_view',{view:s.value})}catch(e){}location.reload()};
- t.appendChild(s);t.hidden=false;const n=G('aviewNote');n.className=k==='agent'?'agflag':'aview-note';n.dataset.i18n=k==='agent'?'aview_agent':'aview_note';n.textContent=tx(n.dataset.i18n);n.hidden=false}
+ t.appendChild(s);t.hidden=false;const ib=G('atInfo');if(ib){ib.hidden=false;ib.onclick=atReplay}const n=G('aviewNote');n.className=k==='agent'?'agflag':'aview-note';n.dataset.i18n=k==='agent'?'aview_agent':'aview_note';n.textContent=tx(n.dataset.i18n);n.hidden=false}
 function showTierBadge(){addScoreSort();const t=G('tierTag');if(!t)return;if(REALAGENT){agentSwitch(t);return}if(TRIAL||!TIER){t.hidden=true;return}
  const k=ISAGENT?'agent':TIER==='sip'?'vip':'prem';t.className='tier-tag '+k;
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span>';t.hidden=false}   // the cyberpunk "Agentic AI Powered Data" tag (#aiTag) shows on every tier, the free preview included (29/10/2026)
+// Agent walkthrough (4/11/2026): an agent's first visit on this device opens a required tour through the four views; it cannot be closed,
+// only finished. Each step shows one thing, what to do and why it exists. The place is kept per code, so the reloads of a view switch resume it.
+const AT_TXT={ms:{ai:'Pembantu AI',step:'Langkah {a} daripada {b}',view:'Paparan',why:'Kenapa:',note:'Ingat:',back:'‹ Kembali',xal:'Tutup panduan',next:'Seterusnya ›',start:'Mula ›',finish:'Mula guna laman',tap:'Tekan butang yang bercahaya',pick:'Tekan lencana yang bercahaya, kemudian pilih: {v}',wrong:'Bukan yang itu. Sila pilih: {v}',
+ a_hi:['Selamat datang, {name}','Saya akan tunjuk laman ini satu persatu, melalui 4 paparan. Panduan ini wajib dan mengambil masa sekitar 5 minit.','Laman ini membantu anda mencari maklumat untuk menasihati klien, dan menawarkan data berbayar terus kepada klien.'],
+ a_badge:['Ini paparan anda: Agent Specialist','Lihat lencana yang bercahaya. Ia menunjukkan paparan yang sedang dibuka.','Paparan ejen paling lengkap, kerana anda perlu semua maklumat untuk membantu klien.'],
+ a_val:['Nilai pasaran','Lihat nilai pasaran, bar perbezaan dan jumlah jimat di bawah harga lelong.','Klien nampak terus sama ada unit ini berbaloi. Semua pelan nampak bahagian ini.'],
+ a_pos:['Butang POS','Butang ini membuka POS unit. Jangan tekan lagi.','Bila klien minta POS, anda boleh dapatkannya sendiri dengan cepat.'],
+ a_win:['Kiraan harga menang','Pilih harga menang di sini untuk melihat % bawah nilai pasaran dan ansuran.','Klien boleh menetapkan had bidaan sebelum hari lelong. Pelan Free tidak nampak bahagian ini.'],
+ a_det:['Buka butiran unit','Tekan butang yang bercahaya.','Semua maklumat satu unit ada dalam satu tetingkap.'],
+ a_box:['Maklumat lelong','Baca jadual ini: pelelong, peguam, tempat lelong dan deposit.','Untuk tindakan susulan anda. Klien tidak nampak jadual ini.'],
+ close:['Tutup tetingkap','Tekan butang yang bercahaya.','Untuk kembali ke senarai unit.'],
+ a_vip:['Tukar ke paparan VIP Investor','Tekan lencana, kemudian pilih VIP Investor.','Supaya anda tahu apa yang klien VIP dapat sebelum anda menawarkannya.'],
+ a_prem:['Tukar ke paparan Premium','Tekan lencana, kemudian pilih Premium Member.','Supaya anda tahu apa yang klien Premium dapat sebelum anda menawarkannya.'],
+ v_badge:['Ini yang klien VIP nampak','Lihat lencana. Kini ia tertulis VIP Investor.','Butang POS ejen dan jadual emas sudah hilang, kerana itu untuk ejen sahaja.'],
+ xtra:['Buka Premium & VIP','Tekan butang yang bercahaya.','Di sini tersimpan maklumat berbayar bagi setiap unit.'],
+ v_paid:['Skor pelabur VIP','Lihat skor pelabur unit ini. Hanya klien VIP nampak skor ini.','Gunakan untuk menasihati klien tentang unit yang lebih berbaloi.'],
+ v_sc:['Lihat cara skor dikira','Unit ini sudah ada data sewa. Tekan butang yang bercahaya.','Skor pelabur membantu klien menilai unit dalam beberapa saat.'],
+ v_sb:['Skor pelabur','Ini skor unit daripada 100. Di bawahnya ada pecahan setiap bahagian.','Anda boleh menerangkan kepada klien kenapa skor unit tinggi atau rendah.'],
+ v_adsb:['Lihat data iklan sewa','Tekan butang yang bercahaya.','Supaya klien nampak dari mana angka sewa datang.'],
+ v_ads:['Data iklan sewa','Data sewa ini dikumpul oleh AI daripada iklan rumah yang pernah ada di pasaran.','AI memilih harga tengah, supaya sewa tidak terlalu tinggi atau terlalu rendah.'],
+ v_green:['Angka warna hijau','Angka hijau ialah harga sewa yang AI pilih, dibundarkan ke RM100.','Sewa inilah yang digunakan untuk mengira pulangan unit.'],
+ v_det:['Buka butiran unit','Tekan butang yang bercahaya.','Klien VIP dapat maklumat paling banyak di dalam tetingkap ini.'],
+ v_hist:['Sejarah 12 bulan','Bahagian ini menunjukkan lelong lepas bagi unit ini.','Klien boleh lihat berapa kali unit dilelong dan perubahan harganya.'],
+ v_roi:['Kiraan pelaburan','Bahagian ini mengira sewa, pinjaman dan pulangan.','Klien pelabur boleh menilai unit sebelum membida.'],
+ v_req:['Butang Minta POS','Klien VIP dan Premium hanya nampak butang ini. Jangan tekan lagi.','Permintaan klien sampai kepada ejen melalui WhatsApp. Itu peluang anda berhubung dengan klien.'],
+ v_prem:['Tukar ke paparan Premium','Tekan lencana, kemudian pilih Premium Member.','Premium ialah pelan permulaan yang mudah ditawarkan kepada klien.'],
+ p_badge:['Ini yang klien Premium nampak','Lihat lencana. Kini ia tertulis Premium Member.','Klien Premium nampak maklumat utama, tetapi bukan semua maklumat VIP.'],
+ p_lock:['Bahagian dikunci','Lihat XX dan pautan naik taraf ini.','Inilah sebab klien Premium mahu naik ke VIP. Anda boleh menawarkannya terus.'],
+ p_free:['Tukar ke paparan Free','Tekan lencana, kemudian pilih Free.','Supaya anda nampak apa yang pelawat belum bayar lihat.'],
+ f_badge:['Ini yang pelawat percuma nampak','Lihat lencana. Kini ia tertulis Free.','Inilah pandangan pertama bakal klien anda.'],
+ f_bar:['Mesej tawaran','Baca mesej ini. Ia mengajak pelawat membuka Premium.','Pelawat tahu masih ada maklumat yang belum dibuka.'],
+ f_addr:['Alamat disorok','Lihat XX pada alamat ini.','Hanya pelan berbayar nampak alamat penuh. Inilah nilai yang anda tawarkan.'],
+ f_val:['Nilai pasaran terbuka','Pelawat percuma juga nampak nilai pasaran dan jumlah jimat.','Bila mereka nampak unit berbaloi, mereka mahu alamat penuh. Itu peluang anda menawarkan pelan berbayar.'],
+ f_cta:['Butang naik taraf','Butang ini ke halaman tawaran. Jangan tekan lagi.','Pelawat boleh terus membeli, atau anda boleh membantu mereka.'],
+ f_agent:['Kembali ke paparan ejen','Tekan lencana, kemudian pilih Agent Specialist.','Paparan ejen ialah paparan kerja harian anda.'],
+ z_end:['Tahniah, panduan selesai!','1. Cari unit untuk klien.\n2. Nasihat klien dengan maklumat di sini.\n3. Tawarkan Premium atau VIP terus kepada klien.','Anda boleh menukar paparan bila-bila masa melalui lencana emas di atas.']},
+ en:{ai:'AI Assistant',step:'Step {a} of {b}',view:'View',why:'Why:',note:'Remember:',back:'‹ Back',xal:'Close the guide',next:'Next ›',start:'Start ›',finish:'Start using the site',tap:'Press the glowing button',pick:'Press the glowing badge, then choose: {v}',wrong:'Not that one. Please choose: {v}',
+ a_hi:['Welcome, {name}','I will show you this site one step at a time, through 4 views. This guide is required and takes about 5 minutes.','This site helps you find information to advise clients, and offer paid data directly to them.'],
+ a_badge:['This is your view: Agent Specialist','Look at the glowing badge. It shows the view that is open.','The agent view is the most complete, because you need everything to help clients.'],
+ a_val:['Market value','See the market value, the difference bar and the saving under the auction price.','Clients see at once whether the unit is worth it. Every plan sees this part.'],
+ a_pos:['POS button','This button opens the POS of a unit. Do not press it yet.','When a client asks for a POS, you can get it yourself quickly.'],
+ a_win:['Winning price calculator','Choose a winning price here to see the % below market value and the instalment.','Clients can set a bidding limit before the auction. The Free plan does not see this part.'],
+ a_det:['Open the unit details','Press the glowing button.','Everything about one unit is in one window.'],
+ a_box:['Auction contacts','Read this table: auctioneer, lawyer, venue and deposit.','For your own follow-up. Clients cannot see this table.'],
+ close:['Close the window','Press the glowing button.','To go back to the list of units.'],
+ a_vip:['Switch to the VIP Investor view','Press the badge, then choose VIP Investor.','So you know what a VIP client gets before you offer it.'],
+ a_prem:['Switch to the Premium view','Press the badge, then choose Premium Member.','So you know what a Premium client gets before you offer it.'],
+ v_badge:['This is what a VIP client sees','Look at the badge. It now says VIP Investor.','The agent POS button and the gold table are gone, because they are for agents only.'],
+ xtra:['Open Premium & VIP','Press the glowing button.','This holds the paid information for each unit.'],
+ v_paid:['VIP investor score','See the investor score of this unit. Only VIP clients see this score.','Use it to advise clients on which unit is better value.'],
+ v_sc:['See how the score works','This unit already has rental data. Press the glowing button.','The investor score helps clients judge a unit in seconds.'],
+ v_sb:['Investor score','This is the score out of 100. Below it is the breakdown of each part.','You can explain to clients why a score is high or low.'],
+ v_adsb:['See the rental ads data','Press the glowing button.','So clients can see where the rent figure comes from.'],
+ v_ads:['Rental ads data','AI collects this rental data from home ads that have been on the market.','AI picks the middle price, so the rent is not too high or too low.'],
+ v_green:['The figure in green','The green figure is the rent AI picked, rounded to the nearest RM100.','This rent is used to work out the return of the unit.'],
+ v_det:['Open the unit details','Press the glowing button.','VIP clients get the most information in this window.'],
+ v_hist:['12-month history','This part shows past auctions of this unit.','Clients can see how often it was auctioned and how the price changed.'],
+ v_roi:['Investment figures','This part works out rent, loan and returns.','Investor clients can judge a unit before bidding.'],
+ v_req:['Request POS button','VIP and Premium clients only see this button. Do not press it yet.','The client request reaches the agent on WhatsApp. That is your chance to connect.'],
+ v_prem:['Switch to the Premium view','Press the badge, then choose Premium Member.','Premium is the easy starting plan to offer clients.'],
+ p_badge:['This is what a Premium client sees','Look at the badge. It now says Premium Member.','Premium clients see the main information, but not everything in VIP.'],
+ p_lock:['Locked part','Look at the XX and the upgrade link.','This is why Premium clients want VIP. You can offer it directly.'],
+ p_free:['Switch to the Free view','Press the badge, then choose Free.','So you can see what a visitor sees before paying.'],
+ f_badge:['This is what a free visitor sees','Look at the badge. It now says Free.','This is the first look your future clients get.'],
+ f_bar:['Offer message','Read this message. It invites visitors to open Premium.','Visitors know there is more information to unlock.'],
+ f_addr:['Hidden address','Look at the XX in this address.','Only paid plans see the full address. This is the value you offer.'],
+ f_val:['Market value is open','Free visitors also see the market value and the saving.','When they see a unit is worth it, they want the full address. That is your chance to offer a paid plan.'],
+ f_cta:['Upgrade button','This button goes to the offer page. Do not press it yet.','Visitors can buy directly, or you can help them.'],
+ f_agent:['Back to the agent view','Press the badge, then choose Agent Specialist.','The agent view is your daily working view.'],
+ z_end:['Well done, the guide is finished!','1. Find units for clients.\n2. Advise clients with the information here.\n3. Offer Premium or VIP directly to clients.','You can switch views any time with the gold badge at the top.']}};
+const atT=k=>(AT_TXT[LANG]||AT_TXT.en)[k];
+function atRentBtn(){return [...document.querySelectorAll('#list .card .scbtn')].find(b=>atRentRow&&atRentRow(b.dataset.id))||null}   // the first listed unit whose score has rental ads to show
+function atSteps(){const c='#list .card ',S=(id,v,kind,sel,to,txt,m)=>({id,v,kind,sel,to,txt:txt||id,m});const vip=RTIER==='sip';
+ return [S('a_hi','agent','intro'),S('a_badge','agent','info','#tierTag'),S('a_val','agent','info',c+'.pval'),S('a_pos','agent','info',c+'.posdl.sm'),S('a_win','agent','info',c+'.wcalc'),S('a_det','agent','tap',c+'.detbtn'),S('a_box','agent','info','#mdl .agbox'),S('a_x','agent','tap','#mdlX','','close'),
+  vip?S('a_vip','agent','switch','#tierTag','vip'):S('a_prem','agent','switch','#tierTag','prem')].concat(vip?[
+  S('v_badge','vip','info','#tierTag'),S('v_x','vip','tap',c+'.xtra summary','','xtra'),S('v_paid','vip','info',c+'.xtra-b .score'),S('v_sc','vip','tap',atRentBtn),S('v_sb','vip','info','#mdl .sb-top','','','score'),S('v_adsb','vip','tap','#mdl .sbdata summary','','','score'),S('v_ads','vip','info','#mdl .sbads','','','score'),S('v_green','vip','info','#mdl .rentok','','','score'),S('v_sx','vip','tap','#mdlX','','close','score'),S('v_det','vip','tap',c+'.detbtn'),S('v_hist','vip','info','#mdl .hist'),S('v_roi','vip','info','#mdl .sip-live'),S('v_c','vip','tap','#mdlX','','close'),S('v_req','vip','info',c+'.posreq'),S('v_prem','vip','switch','#tierTag','prem')]:[],
+  [S('p_badge','prem','info','#tierTag'),S('p_x','prem','tap',c+'.xtra summary','','xtra'),S('p_lock','prem','info',c+'.xtra-b .xxbox'),S('p_free','prem','switch','#tierTag','free'),
+  S('f_badge','free','info','#tierTag'),S('f_bar','free','info','#trialBar'),S('f_addr','free','info',c+'.addr'),S('f_val','free','info',c+'.pval'),S('f_cta','free','info','#trialCta'),S('f_agent','free','switch','#tierTag','agent'),S('z_end','agent','end')])}
+let AT=null,atRentRow=null;
+const atKey=()=>'agtour_'+ACODE;
+function agTourDue(){return REALAGENT&&!!ACODE&&ls.get(atKey())!=='done'}
+function agTourStart(){try{sessionStorage.removeItem('lelong.welcome')}catch(e){}ls.set('guide','1');
+ const steps=atSteps(),i=Math.max(0,steps.findIndex(s=>s.id===ls.get(atKey())));
+ if(steps[i].v!==AVIEW){try{sessionStorage.setItem(KP+'aview',steps[i].v);location.reload();return}catch(e){return}}
+ const w=document.createElement('div');w.id='atWrap';w.innerHTML='<div class="at-b"></div><div class="at-b"></div><div class="at-b"></div><div class="at-b"></div><div class="at-cover"></div><div class="at-ring"></div><div id="atCard" role="dialog" aria-modal="true" aria-live="polite"></div>';document.body.appendChild(w);
+ AT={steps,i,el:null,msg:'',dir:1,replay:ls.get('agtour_replay')==='1'};document.addEventListener('click',atClick,true);document.addEventListener('change',atChange,true);if(i===0)gtrack('agent_tour_start',{});atShow();AT.timer=setInterval(atTick,100)}
+// puts the page in the state a step needs, so Back and a resumed tour work: the unit window open or closed, Premium & VIP open or closed
+function atPrep(s){const fn=typeof s.sel==='function',sel=fn?'':(s.sel||''),want=s.m||(sel.startsWith('#mdl')?'det':''),kind=G('mdl').hidden?'':G('mdlB').querySelector('.sb-top')?'score':'det';let wait=false;if(!want)G('mdlB').style.paddingBottom='';
+ if(kind!==want){if(kind&&MDL){closeModal();wait=true}const o=want==='score'?atRentBtn():want==='det'?document.querySelector('#list .card .detbtn'):null;if(o){o.click();wait=true}}
+ if(fn){const b=s.sel(),x=b&&b.closest('details');if(x)x.open=true;return wait}
+ const x=document.querySelector('#list .card .xtra');if(x&&sel){if(sel.includes('.xtra-b')||sel.includes('.wcalc'))x.open=true;else if(sel.includes('.xtra summary'))x.open=false}
+ const a=G('mdlB').querySelector('.sbdata');if(a&&s.m==='score'){if(sel.includes('.sbads')||sel.includes('.rentok'))a.open=true;else if(sel.includes('.sbdata summary'))a.open=false}
+ return wait}
+function atShow(){const g=AT;if(!g)return;const s=g.steps[g.i];if(!s)return atDone();
+ if(s.v!==AVIEW){ls.set(atKey(),s.id);try{sessionStorage.setItem(KP+'aview',s.v)}catch(e){}location.reload();return}
+ g.el=null;if(atPrep(s))setTimeout(atPlace,120);else atPlace()}
+function atPlace(){const g=AT;if(!g)return;const s=g.steps[g.i];let el=null;
+ if(s.sel){try{el=typeof s.sel==='function'?s.sel():document.querySelector(s.sel)}catch(e){}const cd=el&&el.closest('.card');if(cd)cd.style.contentVisibility='visible';   // an off-screen card is not laid out, so its real place is unknown until this
+  if(!el||!el.getClientRects().length){if(s.kind==='switch')return atDone();g.i+=g.dir;if(g.i<0){g.i=0;g.dir=1}return atShow()}}   // a part this unit or plan does not have is skipped; a missing view switch must not trap the agent
+ g.el=el;g.msg='';ls.set(atKey(),s.id);atCard();
+ if(el){const b=G('mdlB'),inM=b.contains(el),tall=el.offsetHeight>innerHeight*.4||(inM&&el.offsetHeight>120);b.style.paddingBottom=inM&&tall?'60vh':'';   // room to scroll a tall part clear of the guide card
+  const go=()=>{if(AT&&AT.el===el){el.style.scrollMarginTop=inM?'10px':'96px';el.scrollIntoView({block:tall?'start':'center'})}};go();setTimeout(go,250)}}
+function atBack(){const g=AT;if(!g||g.busy||g.i<1)return;g.dir=-1;g.i--;atShow()}
+function atCard(){const g=AT,s=g.steps[g.i],t=atT(s.txt),on=s.to?TAG[s.to][0]:'',done=g.steps.filter((x,k)=>k<g.i).length;
+ const act='<div class="at-btns">'+(g.i>0?'<button type="button" class="at-back" data-at="back">'+atT('back')+'</button>':'')+(s.kind==='intro'?'<button type="button" class="at-next" data-at="next">'+atT('start')+'</button>':s.kind==='end'?'<button type="button" class="at-next" data-at="next">'+atT('finish')+'</button>':s.kind==='info'?'<button type="button" class="at-next" data-at="next">'+atT('next')+'</button>':'<div class="at-wait'+(g.msg?' bad':'')+'">'+esc(g.msg||(s.kind==='tap'?atT('tap'):atT('pick').replace('{v}',on)))+'</div>')+'</div>';
+ G('atCard').innerHTML='<div class="at-top"><span class="at-orb" aria-hidden="true"></span><b>'+atT('ai')+'</b><span class="at-lang"><button type="button" data-at="ms"'+(LANG==='ms'?' class="on"':'')+'>BM</button><button type="button" data-at="en"'+(LANG==='en'?' class="on"':'')+'>EN</button></span>'+(g.replay?'<button type="button" class="at-x" data-at="exit" aria-label="'+esc(atT('xal'))+'">✕</button>':'')+'</div>'
+  +'<div class="at-meta"><span>'+atT('step').replace('{a}',done+1).replace('{b}',g.steps.length)+'</span><span>'+atT('view')+': '+TAG[s.v][0]+'</span></div><div class="at-bar"><i style="width:'+Math.round((done+1)*100/g.steps.length)+'%"></i></div>'
+  +'<h3>'+esc(t[0].replace('{name}',CLIENT||''))+'</h3><p class="at-do">'+esc(t[1])+'</p><p class="at-why"><b>'+atT(s.kind==='end'?'note':'why')+'</b> '+esc(t[2])+'</p>'+act;
+ G('atWrap').className='at-'+s.kind;document.documentElement.classList.toggle('at-big',s.kind==='switch');atTick()}
+function atTick(){const g=AT;if(!g)return;const W=innerWidth,H=innerHeight,b=document.querySelectorAll('#atWrap .at-b'),ring=document.querySelector('#atWrap .at-ring'),card=G('atCard');
+ const set=(e,l,t,w,h)=>{e.style.cssText='left:'+l+'px;top:'+t+'px;width:'+Math.max(0,w)+'px;height:'+Math.max(0,h)+'px'};
+ if(g.el&&document.contains(g.el)){const r=g.el.getBoundingClientRect(),p=6,l=Math.max(0,r.left-p),t=Math.max(0,r.top-p),R=Math.min(W,r.right+p),B=Math.min(H,r.bottom+p);
+  set(b[0],0,0,W,t);set(b[1],0,B,W,H-B);set(b[2],0,t,l,B-t);set(b[3],R,t,W-R,B-t);set(ring,l,t,R-l,B-t);ring.style.display='block';
+  const top=(r.top+r.bottom)/2>H/2;card.style.top=top?'12px':'';card.style.bottom=top?'':'12px';card.style.transform=''}
+ else{set(b[0],0,0,W,H);set(b[1],0,0,0,0);set(b[2],0,0,0,0);set(b[3],0,0,0,0);ring.style.display='none';card.style.top='50%';card.style.bottom='';card.style.transform='translate(-50%,-50%)'}}
+function atClick(e){const g=AT;if(!g)return;const s=g.steps[g.i],a=e.target.closest&&e.target.closest('[data-at]');
+ if(a){e.preventDefault();e.stopPropagation();const k=a.dataset.at;if(k==='next'){g.dir=1;g.i++;atShow();return}if(k==='back'){atBack();return}if(k==='exit'){atExit();return}setLang(k);setTimeout(atShow,60);return}
+ if(s.kind==='tap'&&!g.busy&&g.el&&g.el.contains(e.target)){g.busy=true;setTimeout(()=>{if(AT){g.busy=false;g.dir=1;g.i++;atShow()}},450)}}
+function atChange(e){const g=AT;if(!g||e.target.id!=='aviewSel')return;const s=g.steps[g.i];
+ if(s.kind==='switch'&&e.target.value===s.to){g.i++;if(g.steps[g.i])ls.set(atKey(),g.steps[g.i].id);return}   // the right view: the page reloads and the tour resumes on the next step
+ e.stopImmediatePropagation();e.target.value=AVIEW;g.msg=atT('wrong').replace('{v}',s.to?TAG[s.to][0]:TAG[AVIEW][0]);atCard()}
+// the i button (4/11/2026): an agent can watch the guide again at any time; a replay can be closed, only the first run is required
+function atReplay(){if(AT)return;ls.set('agtour_replay','1');ls.del(atKey());gtrack('agent_tour_replay',{});agTourStart()}
+function atExit(){const back=AVIEW!=='agent';atDone();if(MDL)closeModal();G('mdlB').style.paddingBottom='';if(back){try{sessionStorage.setItem(KP+'aview','agent')}catch(e){}location.reload()}}
+function atDone(){const g=AT;if(!g)return;AT=null;clearInterval(g.timer);ls.del('agtour_replay');ls.set(atKey(),'done');document.removeEventListener('click',atClick,true);document.removeEventListener('change',atChange,true);const w=G('atWrap');if(w)w.remove();document.documentElement.classList.remove('at-big');gtrack('agent_tour_done',{})}
 function start(){if(STARTED)return;STARTED=true;agentView();showTierBadge();G('count').textContent=tx('loading');loadListings().then(j=>{// Only Active units and units with a recorded result (Sold / Call Off / Unsold) are shown. A unit whose auction date has passed
 // and has no result is not listed (a result usually appears within a day or two and the unit then comes back under its tab).
 // Non-LACA is the exception (4/11/2026): its data never carries a result, and it has its own tab where the bidder confirms with the agent.
