@@ -257,7 +257,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .card.v2 .kindt{font-size:.72rem;letter-spacing:.08em;line-height:1.3}
 .card.v2 .head{gap:8px}.card.v2 .head .num{min-width:28px;height:28px;font-size:.9rem;border-radius:8px;padding:0 6px}.card.v2 .head .addr{font-size:1.02rem;line-height:1.3;padding-top:3px}.card.v2 .cpy{width:32px;height:32px;margin-top:0}
 .card.v2 .pricebox{flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 10px;padding:8px 12px}.card.v2 .pl{font-size:.85rem}.card.v2 .price{font-size:1.4rem}.card.v2 .bmvrow{flex-basis:100%;margin-top:0}
-.card.v2 .when{padding-top:8px;font-size:.95rem;align-items:center}.card.v2 .when .dtx{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 8px}.card.v2 .when .dtx b{font-size:.98rem}.card.v2 .when .tm{font-size:.9rem;gap:4px 8px}
+.card.v2 .when{padding-top:8px;font-size:.95rem;align-items:center;flex-wrap:wrap;gap:4px 8px}.card.v2 .when .dtx{display:contents}.card.v2 .when .dtx b{font-size:.98rem}.card.v2 .when .tm{font-size:.9rem;gap:4px 8px;flex:1 1 100%}.card.v2 .when .tm .chips{margin-left:auto}.card.v2 .when .tm .chip{font-size:1rem;font-weight:700;padding:5px 14px}
 .card.v2 .chips{gap:5px}.card.v2 .chip{font-size:.8rem;padding:2px 9px}
 .card.v2 .xtra summary{min-height:40px;padding:6px 12px;font-size:.95rem}
 .acts.v2.three{grid-template-columns:1.2fr 1fr 1.1fr;gap:6px}.acts.v2.three .detbtn,.acts.v2.three .wa-unit.sm{min-height:44px;font-size:.9rem;padding:4px 5px}.acts.v2.three .detbtn{white-space:nowrap}.acts .detbtn{background:var(--accent);color:var(--accent-fg);border:0}.acts .wa-unit{background:var(--wa);color:var(--wa-fg);border-color:transparent}.acts.v2.three .posdl.sm{border-color:#d93025}   /* the generic .acts a / button rule must not grey the CTAs */
@@ -840,7 +840,7 @@ fl_bmv:'Discount from market value (at least)',
 st_available:'Active + No bidder',st_active:'Active',st_unsold:'No bidder',st_calloff:'Cancelled',st_sold:'Sold',st_nonlaca:'Non-LACA (date passed)',st_expired:'Expired',
 sp_next:' · next {t}',sp_last:' · last {t}',months:'{n} months',day1:'{n} day',days:'{n} days',
 tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',tag_nonlaca:'Non-LACA · auction date passed · result unknown',nl_note:'We cannot know whether this Non-LACA unit was sold. Please confirm with the agent whether it is still available.',wa_btn_nl:'💬 Confirm availability with {name}',wa_unit_nl:'Hi {name}, the auction date of this Non-LACA unit has passed. Is it still available?',
-unsold_t:'No bidder, Pending Next Auction',unsold_p:'Next auction price (estimate)',unsold_h:'Nobody bid at the last auction price. The next auction may be about 10% lower. This is only an estimate; the real price is known when the new auction is announced.',auction_price_last:'Last auction price',
+unsold_t:'No bidder, Pending Next Auction',unsold_p:'Estimated next price',unsold_h:'About 10% lower. The real price is known when the new auction is announced.',auction_price_last:'Last auction price',
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
 f_bed:'Bedrooms: {n}',f_bath:'Bathrooms: {n}',f_built:'Completed {y}',f_bu:'Built-up {v}',f_land:'Land {v}',
@@ -913,7 +913,7 @@ fl_bmv:'Diskaun dari nilai pasaran (sekurang-kurangnya)',
 st_available:'Aktif + Tiada pembida',st_active:'Aktif',st_unsold:'Tiada pembida',st_calloff:'Dibatalkan',st_sold:'Terjual',st_nonlaca:'Non-LACA (tarikh lepas)',st_expired:'Tamat',
 sp_next:' · {t} akan datang',sp_last:' · {t} lepas',months:'{n} bulan',day1:'{n} hari',days:'{n} hari',
 tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',tag_nonlaca:'Non-LACA · tarikh lelong sudah lepas · keputusan tidak diketahui',nl_note:'Kami tidak dapat tahu sama ada unit Non-LACA ini sudah terjual. Sila sahkan dengan ejen sama ada unit ini masih ada.',wa_btn_nl:'💬 Sahkan dengan {name}',wa_unit_nl:'Hi {name}, tarikh lelong unit Non-LACA ini sudah lepas. Adakah unit ini masih ada?',
-unsold_t:'Tiada pembida, menunggu lelong seterusnya',unsold_p:'Harga lelong seterusnya (anggaran)',unsold_h:'Tiada siapa bida pada harga lelong lepas. Lelong seterusnya mungkin turun sekitar 10%. Ini anggaran sahaja; harga sebenar diketahui bila lelong baharu diumumkan.',auction_price_last:'Harga lelong lepas',
+unsold_t:'Tiada pembida pada lelong ini',unsold_p:'Anggaran harga baharu',unsold_h:'Turun sekitar 10%. Harga sebenar diketahui bila lelong baharu diumumkan.',auction_price_last:'Harga lelong lepas',
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
 f_bed:'Bilik tidur: {n}',f_bath:'Bilik air: {n}',f_built:'Siap {y}',f_bu:'Binaan {v}',f_land:'Tanah {v}',
@@ -1493,8 +1493,8 @@ function priceBox(r,ex,fire,bt,onPhoto,help){
  return '<div class="pricebox"><span class="pl">'+tx(stOf(r)==='unsold'?'auction_price_last':'auction_price')+(help?qb('price'):'')+'</span><div class="price">'+dash(r[7])+(fire?' \uD83D\uDD25':'')+'</div>'
   +(bt&&!onPhoto?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+(help?qb('bmv'):'')+'</div>':'')+'</div>'}
 function whenRows(r,ex,cn,cal,full){   // card: one line (date, time, days left) + chips; Full details: the long form with the count and the calendar row
- const main='<div class="when"><span class="dlab">'+(full?tx('date'):tx('when_lbl')+':')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+'</span></span></div>';
- if(!full)return main+chips(r,true);
+ const main='<div class="when"><span class="dlab">'+(full?tx('date'):tx('when_lbl')+':')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+(full?'':chips(r,true))+'</span></span></div>';
+ if(!full)return main;
  return main+(cn||cal?'<div class="when2">'+(cn?'<span class="cnt">'+cn+qb('count')+'</span>':'<span></span>')+(cal?'<a class="calbtn" href="'+esc(cal)+'" target="_blank" rel="noopener">'+tx('cal_add')+'</a>':'')+'</div>':'')+chips(r)}
 // Card front (2/11/2026): size, completion year and bank in one tidy block; free-preview values stay XX
 function specBox(r){const v=x=>locked(x)?XX:dash(x),c=(k,x)=>'<div><span>'+tx(k)+'</span><b>'+v(x)+'</b></div>',high=isHigh(r);
