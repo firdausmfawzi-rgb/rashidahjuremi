@@ -65,6 +65,7 @@ h1{font-family:var(--display);font-size:1.35rem;margin:4px 0 2px;text-wrap:balan
 .top .top-lang{flex:0 0 auto;display:flex;gap:0}.top .top-lang button{min-height:46px;padding:0 8px;font-weight:700;border-radius:0}.top .top-lang button:first-child{border-radius:10px 0 0 10px}.top .top-lang button:last-child{border-radius:0 10px 10px 0;margin-left:-1px}
 #themeTop{flex:0 0 auto;min-height:46px;min-width:44px;padding:0 8px;font-size:1.15rem}#openTop{flex:0 0 auto;padding:0 12px}
 @media (max-width:420px){.top{gap:6px}.top input{padding-left:10px;padding-right:8px}.top .top-lang button{padding:0 7px;font-size:.92rem}#openTop{padding:0 10px}}
+.nl-note{margin:6px 0 8px;padding:8px 10px;border-radius:8px;background:var(--warn-bg);color:var(--warn);font-weight:600;font-size:.92rem}
 @media (max-width:699px){.top.qopen .top-lang,.top.qopen #themeTop,.top.qopen #openTop{display:none}}   /* phones: while typing, the search box takes the whole row */
 #openTop{min-height:46px;background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
 input,select{font:inherit;font-size:calc(16px * var(--fs));color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-width:0;width:100%}
@@ -208,11 +209,11 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .seg-row{display:flex;align-items:flex-start;gap:8px;margin:4px 0 2px}
 .seg-row .seg{flex:1;min-width:0}
 .seg-row>.q{margin-top:6px}
-.card.expired>*:not(.exp-tag.sold):not(.wa-unit):not(.acts){opacity:.62}
+.card.expired>*:not(.exp-tag.sold):not(.exp-tag.nonlaca):not(.nl-note):not(.wa-unit):not(.acts){opacity:.62}
 .exp-tag{align-self:flex-start;background:var(--line);color:var(--fg);border-radius:6px;padding:4px 10px;font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 .exp-tag.sold{background:var(--accent);color:var(--accent-fg);border-radius:10px;padding:7px 14px;font-size:1.05rem;font-weight:800;letter-spacing:.05em}
 .exp-tag.calloff{background:var(--red-bg);color:var(--red)}
-.exp-tag.unsold{background:var(--warn-bg);color:var(--warn)}
+.exp-tag.unsold,.exp-tag.nonlaca{background:var(--warn-bg);color:var(--warn)}
 .unsold-note{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:1rem;line-height:1.4;display:flex;flex-direction:column;gap:2px}
 .unsold-note b{display:flex;align-items:center;gap:6px}
 .unsold-note span{color:var(--fg)}
@@ -836,9 +837,9 @@ cy_note:'Completion Year is only available for <b>Condominium / Apartment / SOHO
 fl_state:'State',fl_district:'District',fl_cat:'Property Category',fl_type:'Type',fl_date:'Auction Date',fl_price:'Auction Price (RM) - your budget',
 p_from_l:'From',p_to_l:'To',p_from:'e.g. 100,000',p_to:'e.g. 300,000',p_from_al:'Minimum auction price in RM',p_to_al:'Maximum auction price in RM',
 fl_bmv:'Discount from market value (at least)',
-st_available:'Active + No bidder',st_active:'Active',st_unsold:'No bidder',st_calloff:'Cancelled',st_sold:'Sold',st_expired:'Expired',
+st_available:'Active + No bidder',st_active:'Active',st_unsold:'No bidder',st_calloff:'Cancelled',st_sold:'Sold',st_nonlaca:'Non-LACA (date passed)',st_expired:'Expired',
 sp_next:' · next {t}',sp_last:' · last {t}',months:'{n} months',day1:'{n} day',days:'{n} days',
-tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',
+tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',tag_nonlaca:'Non-LACA · auction date passed · result unknown',nl_note:'We cannot know whether this Non-LACA unit was sold. Please confirm with the agent whether it is still available.',wa_btn_nl:'💬 Confirm availability with {name}',wa_unit_nl:'Hi {name}, the auction date of this Non-LACA unit has passed. Is it still available?',
 unsold_t:'No bidder, Pending Next Auction',unsold_p:'Price might reduce 10%',unsold_np:' - New Price: {p} (Estimate)',
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
@@ -872,7 +873,7 @@ guide:'<ol class="steps">'
 +'<li><span class="si" aria-hidden="true">🔠</span><div><strong>Bigger text, language and view</strong>Tap <b>A+</b> or <b>A++</b> for bigger text, <b>English</b> or <b>BM</b> for the language, and <b>Simple</b> to see only the main facts on each unit.</div></li>'
 +'</ol><p class="tip">This page remembers your settings, saved units and last search on this phone. Tap <b>Start over</b> to clear the search.</p>',
 h_status_t:'What the status buttons mean',
-h_status:'<p><b>Active</b> - the auction has not happened yet. You can still bid.</p><p><b>No bidder</b> (shown as "Unsold" on auction websites) - nobody bid at the last auction. The bank may auction it again, often about 10% cheaper.</p><p><b>Cancelled</b> (shown as "Call Off") - the auction was stopped, for example because the owner paid the loan.</p><p><b>Sold</b> - someone bought it at the auction.</p><p><b>Active + No bidder</b> (the first button) shows both: the units you may still be able to buy.</p><p>The note in brackets shows how far the auction dates go: "next 9 months" for Active, "last 30 days" for the others (VIP Investor Plan members: up to 12 months).</p>',
+h_status:'<p><b>Active</b> - the auction has not happened yet. You can still bid.</p><p><b>Non-LACA (date passed)</b> - the auction date has passed and the result cannot be known. Confirm with the agent whether the unit is still available.</p><p><b>No bidder</b> (shown as "Unsold" on auction websites) - nobody bid at the last auction. The bank may auction it again, often about 10% cheaper.</p><p><b>Cancelled</b> (shown as "Call Off") - the auction was stopped, for example because the owner paid the loan.</p><p><b>Sold</b> - someone bought it at the auction.</p><p><b>Active + No bidder</b> (the first button) shows both: the units you may still be able to buy.</p><p>The note in brackets shows how far the auction dates go: "next 9 months" for Active, "last 30 days" for the others (VIP Investor Plan members: up to 12 months).</p>',
 h_price_t:'Auction price',
 h_price:'<p>The <b>auction price</b> is the starting price (reserve price) set by the bank. Bidding starts at this price, so the final price can be higher.</p><p>To bid, you usually pay a 10% deposit of this price before the auction.</p>',
 h_bmv_t:'Market value and discount',
@@ -909,9 +910,9 @@ cy_note:'Tahun Siap hanya ada untuk <b>Kondominium / Apartmen / SOHO</b>. Katego
 fl_state:'Negeri',fl_district:'Daerah',fl_cat:'Kategori Hartanah',fl_type:'Jenis',fl_date:'Tarikh Lelong',fl_price:'Harga Lelong (RM) - bajet anda',
 p_from_l:'Dari',p_to_l:'Hingga',p_from:'cth. 100,000',p_to:'cth. 300,000',p_from_al:'Harga lelong minimum dalam RM',p_to_al:'Harga lelong maksimum dalam RM',
 fl_bmv:'Diskaun dari nilai pasaran (sekurang-kurangnya)',
-st_available:'Aktif + Tiada pembida',st_active:'Aktif',st_unsold:'Tiada pembida',st_calloff:'Dibatalkan',st_sold:'Terjual',st_expired:'Tamat',
+st_available:'Aktif + Tiada pembida',st_active:'Aktif',st_unsold:'Tiada pembida',st_calloff:'Dibatalkan',st_sold:'Terjual',st_nonlaca:'Non-LACA (tarikh lepas)',st_expired:'Tamat',
 sp_next:' · {t} akan datang',sp_last:' · {t} lepas',months:'{n} bulan',day1:'{n} hari',days:'{n} hari',
-tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',
+tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',tag_nonlaca:'Non-LACA · tarikh lelong sudah lepas · keputusan tidak diketahui',nl_note:'Kami tidak dapat tahu sama ada unit Non-LACA ini sudah terjual. Sila sahkan dengan ejen sama ada unit ini masih ada.',wa_btn_nl:'💬 Sahkan dengan {name}',wa_unit_nl:'Hi {name}, tarikh lelong unit Non-LACA ini sudah lepas. Adakah unit ini masih ada?',
 unsold_t:'Tiada pembida, menunggu lelong seterusnya',unsold_p:'Harga mungkin turun 10%',unsold_np:' - Harga baharu: {p} (anggaran)',
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
@@ -945,7 +946,7 @@ guide:'<ol class="steps">'
 +'<li><span class="si" aria-hidden="true">🔠</span><div><strong>Tulisan besar, bahasa dan paparan</strong>Tekan <b>A+</b> atau <b>A++</b> untuk tulisan lebih besar, <b>English</b> atau <b>BM</b> untuk bahasa, dan <b>Ringkas</b> untuk lihat maklumat utama sahaja pada setiap unit.</div></li>'
 +'</ol><p class="tip">Laman ini mengingati tetapan, unit yang disimpan dan carian terakhir anda di telefon ini. Tekan <b>Mula semula</b> untuk kosongkan carian.</p>',
 h_status_t:'Maksud butang status',
-h_status:'<p><b>Aktif</b> - lelong belum berlaku. Anda masih boleh membida.</p><p><b>Tiada pembida</b> (ditulis "Unsold" di laman lelong) - tiada sesiapa membida pada lelong lepas. Bank mungkin melelong semula, selalunya kira-kira 10% lebih murah.</p><p><b>Dibatalkan</b> (ditulis "Call Off") - lelong dihentikan, contohnya kerana pemilik sudah menjelaskan pinjaman.</p><p><b>Terjual</b> - ada pembeli di lelong.</p><p><b>Aktif + Tiada pembida</b> (butang pertama) menunjukkan kedua-duanya: unit yang mungkin masih boleh anda beli.</p><p>Nota dalam kurungan menunjukkan julat tarikh lelong: "9 bulan akan datang" untuk Aktif, "30 hari lepas" untuk yang lain (ahli VIP Investor Plan: sehingga 12 bulan).</p>',
+h_status:'<p><b>Aktif</b> - lelong belum berlaku. Anda masih boleh membida.</p><p><b>Non-LACA (tarikh lepas)</b> - tarikh lelong sudah lepas dan keputusannya tidak dapat diketahui. Sahkan dengan ejen sama ada unit masih ada.</p><p><b>Tiada pembida</b> (ditulis "Unsold" di laman lelong) - tiada sesiapa membida pada lelong lepas. Bank mungkin melelong semula, selalunya kira-kira 10% lebih murah.</p><p><b>Dibatalkan</b> (ditulis "Call Off") - lelong dihentikan, contohnya kerana pemilik sudah menjelaskan pinjaman.</p><p><b>Terjual</b> - ada pembeli di lelong.</p><p><b>Aktif + Tiada pembida</b> (butang pertama) menunjukkan kedua-duanya: unit yang mungkin masih boleh anda beli.</p><p>Nota dalam kurungan menunjukkan julat tarikh lelong: "9 bulan akan datang" untuk Aktif, "30 hari lepas" untuk yang lain (ahli VIP Investor Plan: sehingga 12 bulan).</p>',
 h_price_t:'Harga lelong',
 h_price:'<p><b>Harga lelong</b> ialah harga permulaan (harga rizab) yang ditetapkan oleh bank. Bidaan bermula pada harga ini, jadi harga akhir boleh lebih tinggi.</p><p>Untuk membida, anda biasanya perlu membayar deposit 10% daripada harga ini sebelum lelong.</p>',
 h_bmv_t:'Nilai pasaran dan diskaun',
@@ -1203,7 +1204,8 @@ const T0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime()})();
 const isExp=r=>{const d=dt(r[12]);return d>0&&d<T0};
 // A checked outcome (Sold / Call Off / Unsold) wins over the auction date. No outcome + date passed = plain Expired.
 const OUTC={unsold:1,calloff:1,sold:1};
-const stOf=r=>OUTC[r[26]]?r[26]:(isExp(r)?'expired':'active');
+// Non-LACA with its date passed: nobody can tell whether it sold, so any result is ignored and the bidder confirms with the agent (3/11/2026; same test as tools/nonlaca.py)
+const stOf=r=>r[17]==='Non-LACA'&&isExp(r)?'nonlaca':OUTC[r[26]]?r[26]:(isExp(r)?'expired':'active');
 const RECENT=30*864e5;const liveUnsold=r=>stOf(r)==='unsold'&&dt(r[12])>=T0-RECENT;   // a 'No bidder' unit still worth watching: ended within 30 days (older ones are history only)
 const isAvail=r=>stOf(r)==='active'||liveUnsold(r);
 const dkey=r=>{const t=dt(r[12])||9e15;return t>=T0?t:2e15-t};
@@ -1211,7 +1213,7 @@ const dkey=r=>{const t=dt(r[12])||9e15;return t>=T0?t:2e15-t};
 const hasPhoto=r=>/^[ub]:[0-9a-f]{20}$/.test(String(r[32]||''));const hasPin=r=>r[35]===true||/query_place_id=/.test(String(r[4]||''));
 const richK=r=>(hasPhoto(r)?0:2)+(hasPin(r)?0:1);   // 'Nearest auction date': upcoming first (soonest), then ended units newest first
 const stName=st=>tx('st_'+st);
-const cnt={active:0,unsold:0,calloff:0,sold:0,expired:0};DATA.forEach(r=>{cnt[stOf(r)]++});
+const cnt={active:0,unsold:0,calloff:0,sold:0,nonlaca:0,expired:0};DATA.forEach(r=>{cnt[stOf(r)]++});
 // Unsold (shown as "No bidder") = nobody bid; it goes to another auction, normally at a lower reserve. Estimate = price less 10%.
 // past auction rounds of the unit (history field: [[date, reserve price], ...] newest first) + the current round on top for comparison
 const dow=i=>new Date(Date.UTC(2024,0,1+i)).toLocaleDateString(LOC(),{weekday:'long',timeZone:'UTC'});   // 0 = Monday (trial/data.json keeps only the weekday of a past round)
@@ -1378,7 +1380,7 @@ function sipRecalc(d,inp){const v={};d.querySelectorAll('input[data-k]').forEach
  d.querySelector('.sip-live').innerHTML=sipOut(v)}
 const unsoldNote=r=>{const p=num(r[7]);const np=p>0?'RM '+Math.round(p*0.9).toLocaleString('en-US'):'';
  return '<div class="unsold-note"><b>'+tx('unsold_t')+'</b><span>'+tx('unsold_p')+(np?tx('unsold_np',{p:'<b>'+np+'</b>'}):'')+'</span></div>'};
-const tagText=(r,st)=>st==='sold'?tx('tag_sold')+(ok(r[27])?' · '+dash(r[27]):''):st==='calloff'?tx('tag_calloff'):st==='unsold'?tx('tag_unsold'):tx('tag_expired');
+const tagText=(r,st)=>st==='sold'?tx('tag_sold')+(ok(r[27])?' · '+dash(r[27]):''):st==='calloff'?tx('tag_calloff'):st==='unsold'?tx('tag_unsold'):st==='nonlaca'?tx('tag_nonlaca'):tx('tag_expired');
 // summary under the title: units that can still be bid on, how many sit far below market value, how many arrived in the last 3 days
 let STATS=null;function statsLine(){const el=$('stats');if(!el)return;
  if(!STATS){const av=DATA.filter(isAvail),lim=TRIAL?10:30;
@@ -1390,11 +1392,11 @@ updLine();
 function seg(el,opts,get,set){el.innerHTML=opts.map(o=>'<button type="button" data-v="'+o[0]+'">'+o[1]+'</button>').join('');
  el.onclick=e=>{const b=e.target.closest('button');if(!b)return;set(b.dataset.v);paint();render()};}
 // each status button shows how far its auction dates reach: Active = ahead of today, No bidder / Cancelled / Sold = back from today
-const spanN={};['active','unsold','calloff','sold'].forEach(st=>{const ds=DATA.filter(r=>stOf(r)===st).map(r=>dt(r[12])).filter(d=>d>0);
+const spanN={};['active','unsold','calloff','sold','nonlaca'].forEach(st=>{const ds=DATA.filter(r=>stOf(r)===st).map(r=>dt(r[12])).filter(d=>d>0);
  spanN[st]=ds.length?Math.max(1,Math.round(Math.abs((st==='active'?Math.max(...ds):Math.min(...ds))-T0)/864e5)):0});
 const sp=st=>{const n=spanN[st];if(!n)return '';const t=n>60?tx('months',{n:Math.round(n/30.4)}):tx(n===1?'day1':'days',{n});return tx(st==='active'?'sp_next':'sp_last',{t})};
 function segUI(){
- seg($('statusSeg'),[['available',stName('available')+' ('+DATA.filter(isAvail).length+')'],['active',stName('active')+' ('+cnt.active+sp('active')+')'],['unsold',stName('unsold')+' ('+cnt.unsold+sp('unsold')+')'],['calloff',stName('calloff')+' ('+cnt.calloff+sp('calloff')+')'],['sold',stName('sold')+' ('+cnt.sold+sp('sold')+')']],0,v=>{status=v;favMode=false;clearShared()});
+ seg($('statusSeg'),[['available',stName('available')+' ('+DATA.filter(isAvail).length+')'],['active',stName('active')+' ('+cnt.active+sp('active')+')'],['unsold',stName('unsold')+' ('+cnt.unsold+sp('unsold')+')'],['calloff',stName('calloff')+' ('+cnt.calloff+sp('calloff')+')'],['sold',stName('sold')+' ('+cnt.sold+sp('sold')+')'],['nonlaca',stName('nonlaca')+' ('+cnt.nonlaca+sp('nonlaca')+')']],0,v=>{status=v;favMode=false;clearShared()});
  const vn=$('vipNote');if(vn){if(canSip()){vn.hidden=!META.vip_err;vn.innerHTML=META.vip_err?tx('vip_err'):''}else{vn.hidden=false;vn.innerHTML=tx('vip_hist')+' '+lockLink2()}}   // Premium / free preview: what the VIP plan adds here
  seg($('bmvSeg'),[[0,tx('all')],[10,'10%+'],[20,'20%+'],[30,'30%+'],[40,'40%+'],[50,'50%+']],0,v=>bmv=+v);
  seg($('lacaSeg'),[['',tx('all')],['LACA','LACA'],['Non-LACA','Non-LACA']],0,v=>laca=v)}
@@ -1456,7 +1458,7 @@ function posDownload(id){const f=document.createElement('form');f.method='POST';
 function posBtn(r){if(ISAGENT&&ACODE&&!TRIAL)return '<div class="posrow"><button type="button" class="posdl" data-id="'+esc(r[20])+'">'+PDFI+'<span><b>'+tx('pos_dl')+'</b><small>'+tx('pos_only')+'</small></span></button></div>';
  return '<div class="posrow">'+(TRIAL?'<span class="pos-lbl">'+PDFI+tx('pos_btn')+'</span>'+lockLink():'<a class="posbtn" href="'+esc(waPos(r))+'" target="_blank" rel="noopener">'+PDFI+tx('pos_btn')+'</a>')+'</div>'}
 function waUnit(r,st){const end=st==='sold'||st==='calloff';
- const L=[end?tx('wa_unit_end',{st:stName(st)}):tx('wa_unit'),'',pv(typeName(r))+', '+pv(r[1]),tx('wa_price',{p:pv(r[7])}),tx('wa_date',{d:fmtDay(r[12])+(ok(r[13])?' '+r[13]:'')}),BASE+'#'+r[20]];
+ const L=[st==='nonlaca'?tx('wa_unit_nl'):end?tx('wa_unit_end',{st:stName(st)}):tx('wa_unit'),'',pv(typeName(r))+', '+pv(r[1]),tx('wa_price',{p:pv(r[7])}),tx('wa_date',{d:fmtDay(r[12])+(ok(r[13])?' '+r[13]:'')}),BASE+'#'+r[20]];
  return AGENT.wa+'?text='+encodeURIComponent(L.join('\n'))}
 const nthTxt=r=>{if(!ok(r[14]))return '';const v=String(r[14]);return esc(tx('nth',{v:LANG==='ms'?((v.match(/\d+/)||[v])[0]):v}))};
 function facts(r,condo){const f=[];
@@ -1518,6 +1520,7 @@ function card(r,i){
  +kindLine(r,cn)
  +'<div class="head"><span class="num">'+(i+1)+'</span><div class="addr">'+hlAddr(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')   // the No bidder note right under the address (30/10/2026)
+ +(st==='nonlaca'?'<p class="nl-note">'+tx('nl_note')+'</p>':'')
  +priceBox(r,ex,fire,bt,onPhoto)
  +whenRows(r,ex,cn,cal)
  +specBox(r)
@@ -1535,13 +1538,14 @@ function detailHtml(r){
  return '<div class="card detail'+(ex?' expired':'')+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,'',true)+'<div class="head"><div class="addr">'+esc(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')
+ +(st==='nonlaca'?'<p class="nl-note">'+tx('nl_note')+'</p>':'')
  +priceBox(r,ex,fire,bt,false,true)
  +dims(r,condo)+whenRows(r,ex,cn,cal,true)+posBtn(r)
  +'<dl class="more open"><div><dt>'+tx('district')+'</dt><dd>'+dash(r[3])+'</dd></div><div><dt>'+tx('state')+'</dt><dd>'+dash(r[2])+'</dd></div></dl>'
  +'<div class="dsec"><div class="xtra-h"><i class="tg-p">'+tx('xtra_prem')+'</i></div>'+premRows(r,ex)+'</div>'
  +'<div class="dsec"><div class="xtra-h"><i class="tg-v">'+tx('xtra_vip')+'</i></div>'+vipRows(r,ex,true)+'</div>'
  +(ISAGENT&&AGINFO&&!TRIAL?'<dl class="more open">'+agHtml(r)+'</dl>':'')
- +'<a class="wa-unit" href="'+esc(waUnit(r,st))+'" target="_blank" rel="noopener">'+tx(st==='sold'||st==='calloff'?'wa_btn_end':'wa_btn')+'</a>'
+ +'<a class="wa-unit" href="'+esc(waUnit(r,st))+'" target="_blank" rel="noopener">'+tx(st==='nonlaca'?'wa_btn_nl':st==='sold'||st==='calloff'?'wa_btn_end':'wa_btn')+'</a>'
  +'<div class="acts v3">'+mapBtn(r)+favBtn(r,fav)+shareBtn(r)+'</div>'+simBtn(r)
  +'<p class="lgnote">'+tx('risk_note')+' <button type="button" class="lnk" data-legal="disc">'+tx('lg_disc')+' \u203A</button></p></div>'}
 function openDetail(r){if(!r)return;openModal(tx('detail_t'),detailHtml(r),'<button class="btn primary" type="button" data-close>'+esc(tx('close'))+'</button>',{onClick:listClick,wide:true});track('detail_open',{unit_id:r[20]})}
@@ -1837,7 +1841,7 @@ en:{hi:'Hi! I am the assistant for this auction list. Ask me about units, prices
  h_code:'Tap I have an access code, enter your code and the list opens with your plan.',h_wa:'Tap WhatsApp on a unit: the message is ready with the unit details, just send it to the agent.',
  h_prem:'Premium (RM50 for 30 days) opens the exact address, market value, discount, bank and price history. VIP Investor (RM99) adds 12 months of results and the investor score. Pay by DuitNow QR, send the receipt on WhatsApp and you get your code.',
  h_bid:'Read the Proclamation of Sale, check the unit, then register with the auctioneer before the auction day with the deposit (usually 10%, some LACA units 5%). The balance is due within 90 to 120 days.',
- h_status:'No bidder: nobody bid, the bank usually relists at a lower reserve. Cancelled: the auction was called off. Sold: a bidder won it.',
+ h_status:'No bidder: nobody bid, the bank usually relists at a lower reserve. Cancelled: the auction was called off. Sold: a bidder won it. Non-LACA (date passed): the result cannot be known, so confirm with the agent whether the unit is still available.',
  h_count:'1st auction: the first time the bank offers the unit. 2nd, 3rd and later: nobody bought it before; the reserve is usually cut by about 10% each round.',
  m_state:'Most active units by state:',m_bank:'Banks with the most active units:',m_kind:'Active units by type:',m_out:'Results in the last 28 days: {s} sold, {u} no bidder, {c} cancelled.',m_next:'Auctions in the next 7 days: {n}. Next 30 days: {m}.',m_med:'Median discount below market value: {v}%.',m_yield:'Median gross rental yield in the list: {v}%.',m_none:'The daily market summary is not loaded yet; try again later.',
  fab:'Ask the assistant',name:'Auction Assistant',sub:'Answers about this list only',send:'Send',ph:'Ask about the auction units...',close:'Close',look:'Look'},
@@ -1864,7 +1868,7 @@ ms:{hi:'Hai! Saya pembantu untuk senarai lelong ini. Tanya saya tentang unit, ha
  h_code:'Tekan Saya ada kod akses, masukkan kod anda dan senarai terbuka mengikut pelan anda.',h_wa:'Tekan WhatsApp pada unit: mesej sudah sedia dengan butiran unit, terus hantar kepada ejen.',
  h_prem:'Premium (RM50 untuk 30 hari) membuka alamat tepat, nilai pasaran, diskaun, bank dan sejarah harga. VIP Investor (RM99) menambah keputusan 12 bulan dan skor pelabur. Bayar dengan QR DuitNow, hantar resit di WhatsApp dan anda terima kod.',
  h_bid:'Baca Perisytiharan Jualan, semak unit, kemudian daftar dengan pelelong sebelum hari lelong bersama deposit (biasanya 10%, sesetengah unit LACA 5%). Baki perlu dijelaskan dalam 90 hingga 120 hari.',
- h_status:'Tiada pembida: tiada siapa membida, bank biasanya lelong semula dengan harga rizab lebih rendah. Dibatalkan: lelong ditarik balik. Terjual: ada pembida yang menang.',
+ h_status:'Tiada pembida: tiada siapa membida, bank biasanya lelong semula dengan harga rizab lebih rendah. Dibatalkan: lelong ditarik balik. Terjual: ada pembida yang menang. Non-LACA (tarikh lepas): keputusan tidak dapat diketahui, jadi sahkan dengan ejen sama ada unit masih ada.',
  h_count:'Lelong ke-1: kali pertama bank menawarkan unit itu. Ke-2, ke-3 dan seterusnya: tiada pembeli sebelum ini; harga rizab biasanya diturunkan kira-kira 10% setiap pusingan.',
  m_state:'Unit aktif paling banyak ikut negeri:',m_bank:'Bank dengan unit aktif paling banyak:',m_kind:'Unit aktif ikut jenis:',m_out:'Keputusan 28 hari lepas: {s} terjual, {u} tiada pembida, {c} dibatalkan.',m_next:'Lelong dalam 7 hari: {n}. Dalam 30 hari: {m}.',m_med:'Median diskaun bawah nilai pasaran: {v}%.',m_yield:'Median hasil sewa kasar dalam senarai: {v}%.',m_none:'Ringkasan pasaran harian belum dimuatkan; cuba lagi sebentar.',
  fab:'Tanya pembantu',name:'Pembantu Lelong',sub:'Jawab tentang senarai ini sahaja',send:'Hantar',ph:'Tanya tentang unit lelong...',close:'Tutup',look:'Rupa'}};
