@@ -65,6 +65,7 @@ h1{font-family:var(--display);font-size:1.35rem;margin:4px 0 2px;text-wrap:balan
 .top .top-lang{flex:0 0 auto;display:flex;gap:0}.top .top-lang button{min-height:46px;padding:0 8px;font-weight:700;border-radius:0}.top .top-lang button:first-child{border-radius:10px 0 0 10px}.top .top-lang button:last-child{border-radius:0 10px 10px 0;margin-left:-1px}
 #themeTop{flex:0 0 auto;min-height:46px;min-width:44px;padding:0 8px;font-size:1.15rem}#openTop{flex:0 0 auto;padding:0 12px}
 @media (max-width:420px){.top{gap:6px}.top input{padding-left:10px;padding-right:8px}.top .top-lang button{padding:0 7px;font-size:.92rem}#openTop{padding:0 10px}}
+@media (max-width:699px){.top.qopen .top-lang,.top.qopen #themeTop,.top.qopen #openTop{display:none}}   /* phones: while typing, the search box takes the whole row */
 #openTop{min-height:46px;background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
 input,select{font:inherit;font-size:calc(16px * var(--fs));color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-width:0;width:100%}
 button{font:inherit;cursor:pointer;min-height:44px}
@@ -1712,6 +1713,9 @@ function toFirst(now){const el=$('list').firstElementChild;if(!el)return;const y
 function qGo(){clearTimeout(QDEB);render();$('q').blur();track('search_go',{});setTimeout(toFirst,120)}
 $('qGo').onclick=qGo;
 $('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();qGo()}});
+// the box widens on focus and shrinks a moment after blur, so the search button does not move away under a tap
+$('q').addEventListener('focus',()=>document.querySelector('.top').classList.add('qopen'));
+$('q').addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==$('q'))document.querySelector('.top').classList.remove('qopen')},300));
 $('cat').addEventListener('input',()=>cyFlag(false));
 ['pMin','pMax'].forEach(id=>$(id).addEventListener('input',e=>{const el=e.target;el.value=fmtNum(el.value);track('filter_price',{from:priceLo(),to:priceHi()});render()}));
 $('tarikhList').addEventListener('change',e=>{const c=e.target;if(!c||c.type!=='checkbox')return;c.checked?selT.add(c.value):selT.delete(c.value);track('filter_date',{count:selT.size});render()});
