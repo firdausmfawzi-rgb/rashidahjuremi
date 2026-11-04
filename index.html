@@ -65,7 +65,6 @@ h1{font-family:var(--display);font-size:1.35rem;margin:4px 0 2px;text-wrap:balan
 .top .top-lang{flex:0 0 auto;display:flex;gap:0}.top .top-lang button{min-height:46px;padding:0 8px;font-weight:700;border-radius:0}.top .top-lang button:first-child{border-radius:10px 0 0 10px}.top .top-lang button:last-child{border-radius:0 10px 10px 0;margin-left:-1px}
 #themeTop{flex:0 0 auto;min-height:46px;min-width:44px;padding:0 8px;font-size:1.15rem}#openTop{flex:0 0 auto;padding:0 12px}
 @media (max-width:420px){.top{gap:6px}.top input{padding-left:10px;padding-right:8px}.top .top-lang button{padding:0 7px;font-size:.92rem}#openTop{padding:0 10px}}
-.nl-note{margin:6px 0 8px;padding:8px 10px;border-radius:8px;background:var(--warn-bg);color:var(--warn);font-weight:600;font-size:.92rem}
 @media (max-width:699px){.top.qopen .top-lang,.top.qopen #themeTop,.top.qopen #openTop{display:none}}   /* phones: while typing, the search box takes the whole row */
 #openTop{min-height:46px;background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
 input,select{font:inherit;font-size:calc(16px * var(--fs));color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;min-width:0;width:100%}
@@ -209,7 +208,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .seg-row{display:flex;align-items:flex-start;gap:8px;margin:4px 0 2px}
 .seg-row .seg{flex:1;min-width:0}
 .seg-row>.q{margin-top:6px}
-.card.expired>*:not(.exp-tag.sold):not(.exp-tag.nonlaca):not(.nl-note):not(.wa-unit):not(.acts){opacity:.62}
+.card.expired>*:not(.exp-tag.sold):not(.exp-tag.nonlaca):not(.wa-unit):not(.acts){opacity:.62}
 .exp-tag{align-self:flex-start;background:var(--line);color:var(--fg);border-radius:6px;padding:4px 10px;font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
 .exp-tag.sold{background:var(--accent);color:var(--accent-fg);border-radius:10px;padding:7px 14px;font-size:1.05rem;font-weight:800;letter-spacing:.05em}
 .exp-tag.calloff{background:var(--red-bg);color:var(--red)}
@@ -869,7 +868,7 @@ p_from_l:'From',p_to_l:'To',p_from:'e.g. 100,000',p_to:'e.g. 300,000',p_from_al:
 fl_bmv:'Discount from market value (at least)',
 st_available:'Active + No bidder',st_active:'Active',st_unsold:'No bidder',st_calloff:'Cancelled',st_sold:'Sold',st_nonlaca:'Non-LACA (date passed)',st_expired:'Expired',
 sp_next:' · next {t}',sp_last:' · last {t}',months:'{n} months',day1:'{n} day',days:'{n} days',
-tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',tag_nonlaca:'Non-LACA · auction date passed · result unknown',nl_note:'We cannot know whether this Non-LACA unit was sold. Please confirm with the agent whether it is still available.',wa_btn_nl:'💬 Confirm availability with {name}',wa_unit_nl:'Hi {name}, the auction date of this Non-LACA unit has passed. Is it still available?',
+tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',tag_nonlaca:'Non-LACA · auction date passed · result unknown · please confirm with the agent whether it is still available',wa_btn_nl:'💬 Confirm availability with {name}',wa_unit_nl:'Hi {name}, the auction date of this Non-LACA unit has passed. Is it still available?',
 tag_unsold_u:'No bidder (not confirmed) · please confirm with the agent',unsold_tu:'No bidder (not confirmed)',unsold_hu:'This result is not confirmed yet, so please check with the agent. The real price is known when the new auction is announced.',unsold_t:'No bidder, Pending Next Auction',unsold_p:'Estimated next price',unsold_h:'About 10% lower. The real price is known when the new auction is announced.',auction_price_last:'Last auction price',
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
@@ -942,7 +941,7 @@ p_from_l:'Dari',p_to_l:'Hingga',p_from:'cth. 100,000',p_to:'cth. 300,000',p_from
 fl_bmv:'Diskaun dari nilai pasaran (sekurang-kurangnya)',
 st_available:'Aktif + Tiada pembida',st_active:'Aktif',st_unsold:'Tiada pembida',st_calloff:'Dibatalkan',st_sold:'Terjual',st_nonlaca:'Non-LACA (tarikh lepas)',st_expired:'Tamat',
 sp_next:' · {t} akan datang',sp_last:' · {t} lepas',months:'{n} bulan',day1:'{n} hari',days:'{n} hari',
-tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',tag_nonlaca:'Non-LACA · tarikh lelong sudah lepas · keputusan tidak diketahui',nl_note:'Kami tidak dapat tahu sama ada unit Non-LACA ini sudah terjual. Sila sahkan dengan ejen sama ada unit ini masih ada.',wa_btn_nl:'💬 Sahkan dengan {name}',wa_unit_nl:'Hi {name}, tarikh lelong unit Non-LACA ini sudah lepas. Adakah unit ini masih ada?',
+tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',tag_nonlaca:'Non-LACA · tarikh lelong sudah lepas · keputusan tidak diketahui · sila sahkan dengan ejen sama ada unit ini masih ada',wa_btn_nl:'💬 Sahkan dengan {name}',wa_unit_nl:'Hi {name}, tarikh lelong unit Non-LACA ini sudah lepas. Adakah unit ini masih ada?',
 tag_unsold_u:'Tiada pembida (belum disahkan) · sila sahkan dengan ejen',unsold_tu:'Tiada pembida (belum disahkan)',unsold_hu:'Keputusan ini belum disahkan, jadi sila semak dengan ejen. Harga sebenar diketahui bila lelong baharu diumumkan.',unsold_t:'Tiada pembida pada lelong ini',unsold_p:'Anggaran harga baharu',unsold_h:'Turun sekitar 10%. Harga sebenar diketahui bila lelong baharu diumumkan.',auction_price_last:'Harga lelong lepas',
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
@@ -1560,7 +1559,6 @@ function card(r,i){
  return '<article class="card v2'+(ex?' expired':'')+(simple?' simple':'')+(sharedId?' hl':'')+'" data-k="'+i+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,cn)
  +'<div class="head"><span class="num">'+(i+1)+'</span><div class="addr">'+hlAddr(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
- +(st==='nonlaca'?'<p class="nl-note">'+tx('nl_note')+'</p>':'')
  +priceBox(r,ex,fire,bt,onPhoto)
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')   // the No bidder note right under the last price it refers to (4/11/2026)
  +whenRows(r,ex,cn,cal)
@@ -1578,7 +1576,6 @@ function detailHtml(r){
  const hz=hero(r).replace('loading="lazy"','loading="eager"');
  return '<div class="card detail'+(ex?' expired':'')+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,'',true)+'<div class="head"><div class="addr">'+esc(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
- +(st==='nonlaca'?'<p class="nl-note">'+tx('nl_note')+'</p>':'')
  +priceBox(r,ex,fire,bt,false,true)
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')
  +dims(r,condo)+whenRows(r,ex,cn,cal,true)+posBtn(r)
