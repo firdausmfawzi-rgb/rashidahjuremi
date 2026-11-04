@@ -229,7 +229,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 @keyframes atISpin{to{transform:rotate(360deg)}}@keyframes atIHalo{0%{transform:scale(.82);opacity:.95}70%,100%{transform:scale(1.42);opacity:0}}@keyframes atIShine{0%,55%{left:-60%}85%,100%{left:125%}}@keyframes atIBreath{50%{transform:scale(1.1)}}
 .at-x{flex:none;min-width:40px;min-height:38px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:9px;background:transparent;color:#fff;font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer}.at-x:focus-visible{outline:3px solid #fff;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.at-i-halo,.at-i-ring,.at-i-orbit,.at-i-core::after,.at-i-core svg{animation:none}}
-#atWrap .at-b{position:fixed;z-index:100000;background:rgba(3,10,20,.8)}#atWrap .at-cover{display:none;position:fixed;inset:0;z-index:100001}#atWrap.at-info .at-cover,#atWrap.at-intro .at-cover,#atWrap.at-end .at-cover{display:block}
+#atWrap .at-b{position:fixed;z-index:100000;background:rgba(3,10,20,.7);touch-action:none}#atWrap .at-cover{display:none;position:fixed;inset:0;z-index:100001;touch-action:none}#atWrap.at-info .at-cover,#atWrap.at-intro .at-cover,#atWrap.at-end .at-cover{display:block}
 #atWrap .at-ring{position:fixed;z-index:100002;pointer-events:none;border-radius:12px;border:3px solid #5ee7ff;box-shadow:0 0 0 2px rgba(94,231,255,.35),0 0 26px 6px rgba(94,231,255,.75);animation:atPulse 1.5s ease-in-out infinite}
 @keyframes atPulse{50%{box-shadow:0 0 0 7px rgba(94,231,255,.2),0 0 38px 12px rgba(94,231,255,.95)}}
 #atCard{position:fixed;z-index:100003;left:50%;margin-left:0;width:min(94vw,520px);max-height:62vh;overflow:auto;transform:translateX(-50%);box-sizing:border-box;padding:14px 16px 16px;border-radius:18px;border:1px solid rgba(94,231,255,.55);background:linear-gradient(155deg,#0a1727,#123253);color:#f3f8fc;box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 24px rgba(94,231,255,.28);font-family:var(--body,system-ui),system-ui,sans-serif}
@@ -241,6 +241,8 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .at-next{display:block;flex:1 1 0;min-width:0;min-height:56px;border:0;border-radius:13px;background:linear-gradient(90deg,#e6c25a,#f3dc8e);color:#1a1405;font:inherit;font-size:1.15rem;font-weight:800;cursor:pointer}.at-next:focus-visible,.at-lang button:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .at-wait{margin-top:12px;padding:12px;border:1px dashed #5ee7ff;border-radius:13px;color:#5ee7ff;font-size:1.08rem;font-weight:800;text-align:center;line-height:1.35}.at-wait.bad{border-color:#ff9b94;color:#ffb4ae}
 .at-big #tierTag{transform:scale(1.3);transform-origin:left center}.at-big #aiTag{visibility:hidden}#atCard .at-do{white-space:pre-line}
+#atCard .at-more{margin:5px 0 0;color:#5ee7ff;font-size:.9rem;font-weight:700;line-height:1.3}
+@media (max-width:640px){#atCard{width:calc(100vw - 16px);max-height:52vh;padding:9px 12px 11px}.at-top{font-size:.92rem;gap:7px}.at-orb{width:14px;height:14px}.at-lang button{min-width:38px;min-height:34px;padding:0 6px;font-size:.85rem}.at-meta{margin-top:4px;font-size:.8rem}.at-bar{height:5px;margin-top:3px}#atCard h3{margin:6px 0 2px;font-size:1.05rem}#atCard .at-do{font-size:.98rem;line-height:1.3}#atCard .at-why{margin-top:3px;font-size:.88rem;line-height:1.3}#atWrap.at-intro #atCard,#atWrap.at-end #atCard{max-height:80vh}.at-btns{margin-top:7px;position:sticky;bottom:0;background:#123253;box-shadow:0 -7px 9px -5px #123253}.at-back{min-width:80px;min-height:42px;font-size:.95rem}.at-next{min-height:42px;font-size:1rem}.at-wait{padding:5px 8px;font-size:.9rem}}
 @media (prefers-reduced-motion:reduce){#atWrap .at-ring,.at-orb{animation:none}.at-bar i{transition:none}}
 .unsold-note span{color:var(--fg)}.unsold-next{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px;margin-top:6px}.unsold-next span{font-size:.95rem}.unsold-next b{color:var(--fg);font-size:1.15rem}.unsold-note small{margin-top:4px;color:var(--muted);font-size:.85rem;line-height:1.35}
 .chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
@@ -832,7 +834,8 @@ body{padding-block-end:100px}
 </div>
 
 <script>
-const FIELDS=["no", "address", "state", "district", "maps", "type", "bmv", "price", "market_value", "tenure", "land", "built_up", "auction_date", "auction_time", "auction_count", "restrictions", "bank", "laca","category","completion_year","id","_cat","first_seen","bedroom","bathroom","carpark","outcome","sold_price","kind","history","borrower","rental","photo","rental_ads","sid","pin"];   // pin (2/11/2026): an exact Google pin is known (data2 flag; paid rows: query_place_id in the maps link)
+const FIELDS=["no", "address", "state", "district", "maps", "type", "bmv", "price", "market_value", "tenure", "land", "built_up", "auction_date", "auction_time", "auction_count", "restrictions", "bank", "laca","category","completion_year","id","_cat","first_seen","bedroom","bathroom","carpark","outcome","sold_price","kind","history","borrower","rental","photo","rental_ads","sid","pin","nb_unproven"];   // pin (2/11/2026): an exact Google pin is known (data2 flag; paid rows: query_place_id in the maps link)
+const NBU=FIELDS.indexOf('nb_unproven');   // 4/11/2026: a No bidder with no BidNow page behind it: labelled 'not confirmed'
 const SID=FIELDS.indexOf('sid');   // share id (30/10/2026): a shared link carries this keyed hash, never the real id (the full address)
 const G=id=>document.getElementById(id);const gtrack=(n,p)=>{try{if(window.gtag)gtag('event',n,p||{})}catch(e){}};
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
@@ -867,7 +870,7 @@ fl_bmv:'Discount from market value (at least)',
 st_available:'Active + No bidder',st_active:'Active',st_unsold:'No bidder',st_calloff:'Cancelled',st_sold:'Sold',st_nonlaca:'Non-LACA (date passed)',st_expired:'Expired',
 sp_next:' · next {t}',sp_last:' · last {t}',months:'{n} months',day1:'{n} day',days:'{n} days',
 tag_sold:'Sold',tag_calloff:'Cancelled · auction called off',tag_unsold:'No bidder · not sold at auction',tag_expired:'Expired · auction date passed',tag_nonlaca:'Non-LACA · auction date passed · result unknown',nl_note:'We cannot know whether this Non-LACA unit was sold. Please confirm with the agent whether it is still available.',wa_btn_nl:'💬 Confirm availability with {name}',wa_unit_nl:'Hi {name}, the auction date of this Non-LACA unit has passed. Is it still available?',
-unsold_t:'No bidder, Pending Next Auction',unsold_p:'Estimated next price',unsold_h:'About 10% lower. The real price is known when the new auction is announced.',auction_price_last:'Last auction price',
+tag_unsold_u:'No bidder (not confirmed) · please confirm with the agent',unsold_tu:'No bidder (not confirmed)',unsold_hu:'This result is not confirmed yet, so please check with the agent. The real price is known when the new auction is announced.',unsold_t:'No bidder, Pending Next Auction',unsold_p:'Estimated next price',unsold_h:'About 10% lower. The real price is known when the new auction is announced.',auction_price_last:'Last auction price',
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
 f_bed:'Bedrooms: {n}',f_bath:'Bathrooms: {n}',f_built:'Completed {y}',f_bu:'Built-up {v}',f_land:'Land {v}',
@@ -940,7 +943,7 @@ fl_bmv:'Diskaun dari nilai pasaran (sekurang-kurangnya)',
 st_available:'Aktif + Tiada pembida',st_active:'Aktif',st_unsold:'Tiada pembida',st_calloff:'Dibatalkan',st_sold:'Terjual',st_nonlaca:'Non-LACA (tarikh lepas)',st_expired:'Tamat',
 sp_next:' · {t} akan datang',sp_last:' · {t} lepas',months:'{n} bulan',day1:'{n} hari',days:'{n} hari',
 tag_sold:'Terjual',tag_calloff:'Dibatalkan · lelong tidak diteruskan',tag_unsold:'Tiada pembida · tidak terjual di lelong',tag_expired:'Tamat · tarikh lelong sudah lepas',tag_nonlaca:'Non-LACA · tarikh lelong sudah lepas · keputusan tidak diketahui',nl_note:'Kami tidak dapat tahu sama ada unit Non-LACA ini sudah terjual. Sila sahkan dengan ejen sama ada unit ini masih ada.',wa_btn_nl:'💬 Sahkan dengan {name}',wa_unit_nl:'Hi {name}, tarikh lelong unit Non-LACA ini sudah lepas. Adakah unit ini masih ada?',
-unsold_t:'Tiada pembida pada lelong ini',unsold_p:'Anggaran harga baharu',unsold_h:'Turun sekitar 10%. Harga sebenar diketahui bila lelong baharu diumumkan.',auction_price_last:'Harga lelong lepas',
+tag_unsold_u:'Tiada pembida (belum disahkan) · sila sahkan dengan ejen',unsold_tu:'Tiada pembida (belum disahkan)',unsold_hu:'Keputusan ini belum disahkan, jadi sila semak dengan ejen. Harga sebenar diketahui bila lelong baharu diumumkan.',unsold_t:'Tiada pembida pada lelong ini',unsold_p:'Anggaran harga baharu',unsold_h:'Turun sekitar 10%. Harga sebenar diketahui bila lelong baharu diumumkan.',auction_price_last:'Harga lelong lepas',
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
 f_bed:'Bilik tidur: {n}',f_bath:'Bilik air: {n}',f_built:'Siap {y}',f_bu:'Binaan {v}',f_land:'Tanah {v}',
@@ -1411,8 +1414,8 @@ function sipRecalc(d,inp){const v={};d.querySelectorAll('input[data-k]').forEach
  if(inp&&inp.dataset.k==='yrs'){const r=d.querySelector('input[data-k=rpgt]');r.value=rpgtRate(Math.max(1,Math.ceil(v.yrs)));v.rpgt=+r.value}
  d.querySelector('.sip-live').innerHTML=sipOut(v)}
 const unsoldNote=r=>{const p=num(r[7]);const np=p>0?'RM '+Math.round(p*0.9).toLocaleString('en-US'):'';
- return '<div class="unsold-note"><b>'+tx('unsold_t')+'</b>'+(np?'<div class="unsold-next"><span>'+tx('unsold_p')+'</span><b>'+np+'</b></div>':'')+'<small>'+tx('unsold_h')+'</small></div>'};
-const tagText=(r,st)=>st==='sold'?tx('tag_sold')+(ok(r[27])?' · '+dash(r[27]):''):st==='calloff'?tx('tag_calloff'):st==='unsold'?tx('tag_unsold'):st==='nonlaca'?tx('tag_nonlaca'):tx('tag_expired');
+ return '<div class="unsold-note"><b>'+tx(r[NBU]?'unsold_tu':'unsold_t')+'</b>'+(np?'<div class="unsold-next"><span>'+tx('unsold_p')+'</span><b>'+np+'</b></div>':'')+'<small>'+tx(r[NBU]?'unsold_hu':'unsold_h')+'</small></div>'};
+const tagText=(r,st)=>st==='sold'?tx('tag_sold')+(ok(r[27])?' · '+dash(r[27]):''):st==='calloff'?tx('tag_calloff'):st==='unsold'?tx(r[NBU]?'tag_unsold_u':'tag_unsold'):st==='nonlaca'?tx('tag_nonlaca'):tx('tag_expired');
 // summary under the title: units that can still be bid on, how many sit far below market value, how many arrived in the last 3 days
 let STATS=null;function statsLine(){const el=$('stats');if(!el)return;
  if(!STATS){const av=DATA.filter(isAvail),lim=TRIAL?10:30;
@@ -2119,7 +2122,7 @@ function showTierBadge(){addScoreSort();const t=G('tierTag');if(!t)return;if(REA
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span>';t.hidden=false}   // the cyberpunk "Agentic AI Powered Data" tag (#aiTag) shows on every tier, the free preview included (29/10/2026)
 // Agent walkthrough (4/11/2026): an agent's first visit on this device opens a required tour through the four views; it cannot be closed,
 // only finished. Each step shows one thing, what to do and why it exists. The place is kept per code, so the reloads of a view switch resume it.
-const AT_TXT={ms:{ai:'Pembantu AI',step:'Langkah {a} daripada {b}',view:'Paparan',why:'Kenapa:',note:'Ingat:',back:'‹ Kembali',xal:'Tutup panduan',next:'Seterusnya ›',start:'Mula ›',finish:'Mula guna laman',tap:'Tekan butang yang bercahaya',pick:'Tekan lencana yang bercahaya, kemudian pilih: {v}',wrong:'Bukan yang itu. Sila pilih: {v}',
+const AT_TXT={ms:{more:'Leret atau tatal pada bahagian bercahaya untuk lihat selebihnya.',ai:'Pembantu AI',step:'Langkah {a} daripada {b}',view:'Paparan',why:'Kenapa:',note:'Ingat:',back:'‹ Kembali',xal:'Tutup panduan',next:'Seterusnya ›',start:'Mula ›',finish:'Mula guna laman',tap:'Tekan butang yang bercahaya',pick:'Tekan lencana yang bercahaya, kemudian pilih: {v}',wrong:'Bukan yang itu. Sila pilih: {v}',
  a_hi:['Selamat datang, {name}','Saya akan tunjuk laman ini satu persatu, melalui 4 paparan. Panduan ini wajib dan mengambil masa sekitar 5 minit.','Laman ini membantu anda mencari maklumat untuk menasihati klien, dan menawarkan data berbayar terus kepada klien.'],
  a_badge:['Ini paparan anda: Agent Specialist','Lihat lencana yang bercahaya. Ia menunjukkan paparan yang sedang dibuka.','Paparan ejen paling lengkap, kerana anda perlu semua maklumat untuk membantu klien.'],
  a_val:['Nilai pasaran','Lihat nilai pasaran, bar perbezaan dan jumlah jimat di bawah harga lelong.','Klien nampak terus sama ada unit ini berbaloi. Semua pelan nampak bahagian ini.'],
@@ -2153,7 +2156,7 @@ const AT_TXT={ms:{ai:'Pembantu AI',step:'Langkah {a} daripada {b}',view:'Paparan
  f_cta:['Butang naik taraf','Butang ini ke halaman tawaran. Jangan tekan lagi.','Pelawat boleh terus membeli, atau anda boleh membantu mereka.'],
  f_agent:['Kembali ke paparan ejen','Tekan lencana, kemudian pilih Agent Specialist.','Paparan ejen ialah paparan kerja harian anda.'],
  z_end:['Tahniah, panduan selesai!','1. Cari unit untuk klien.\n2. Nasihat klien dengan maklumat di sini.\n3. Tawarkan Premium atau VIP terus kepada klien.','Anda boleh menukar paparan bila-bila masa melalui lencana emas di atas.']},
- en:{ai:'AI Assistant',step:'Step {a} of {b}',view:'View',why:'Why:',note:'Remember:',back:'‹ Back',xal:'Close the guide',next:'Next ›',start:'Start ›',finish:'Start using the site',tap:'Press the glowing button',pick:'Press the glowing badge, then choose: {v}',wrong:'Not that one. Please choose: {v}',
+ en:{more:'Swipe or scroll on the lit part to see the rest.',ai:'AI Assistant',step:'Step {a} of {b}',view:'View',why:'Why:',note:'Remember:',back:'‹ Back',xal:'Close the guide',next:'Next ›',start:'Start ›',finish:'Start using the site',tap:'Press the glowing button',pick:'Press the glowing badge, then choose: {v}',wrong:'Not that one. Please choose: {v}',
  a_hi:['Welcome, {name}','I will show you this site one step at a time, through 4 views. This guide is required and takes about 5 minutes.','This site helps you find information to advise clients, and offer paid data directly to them.'],
  a_badge:['This is your view: Agent Specialist','Look at the glowing badge. It shows the view that is open.','The agent view is the most complete, because you need everything to help clients.'],
  a_val:['Market value','See the market value, the difference bar and the saving under the auction price.','Clients see at once whether the unit is worth it. Every plan sees this part.'],
@@ -2202,6 +2205,10 @@ function agTourStart(){try{sessionStorage.removeItem('lelong.welcome')}catch(e){
  const steps=atSteps(),i=Math.max(0,steps.findIndex(s=>s.id===ls.get(atKey())));
  if(steps[i].v!==AVIEW){try{sessionStorage.setItem(KP+'aview',steps[i].v);location.reload();return}catch(e){return}}
  const w=document.createElement('div');w.id='atWrap';w.innerHTML='<div class="at-b"></div><div class="at-b"></div><div class="at-b"></div><div class="at-b"></div><div class="at-cover"></div><div class="at-ring"></div><div id="atCard" role="dialog" aria-modal="true" aria-live="polite"></div>';document.body.appendChild(w);
+ let y0=null;const sc=d=>{const el=AT&&AT.el,b=G('mdlB');if(!el)return;if(b.contains(el))b.scrollTop+=d;else if(!el.closest('#mdl'))window.scrollBy(0,d)};   // a swipe outside the guide card moves the lit part: a part taller than the room left can still be read to its end
+ w.addEventListener('wheel',e=>{if(e.target.closest('#atCard'))return;e.preventDefault();sc(e.deltaY)},{passive:false});
+ w.addEventListener('touchstart',e=>{y0=e.target.closest('#atCard')?null:e.touches[0].clientY},{passive:true});
+ w.addEventListener('touchmove',e=>{if(y0===null)return;e.preventDefault();const y=e.touches[0].clientY;sc(y0-y);y0=y},{passive:false});
  AT={steps,i,el:null,msg:'',dir:1,replay:ls.get('agtour_replay')==='1'};document.addEventListener('click',atClick,true);document.addEventListener('change',atChange,true);if(i===0)gtrack('agent_tour_start',{});atShow();AT.timer=setInterval(atTick,100)}
 // puts the page in the state a step needs, so Back and a resumed tour work: the unit window open or closed, Premium & VIP open or closed
 function atPrep(s){const fn=typeof s.sel==='function',sel=fn?'':(s.sel||''),want=s.m||(sel.startsWith('#mdl')?'det':''),kind=G('mdl').hidden?'':G('mdlB').querySelector('.sb-top')?'score':'det';let wait=false;if(!want)G('mdlB').style.paddingBottom='';
@@ -2216,21 +2223,27 @@ function atShow(){const g=AT;if(!g)return;const s=g.steps[g.i];if(!s)return atDo
 function atPlace(){const g=AT;if(!g)return;const s=g.steps[g.i];let el=null;
  if(s.sel){try{el=typeof s.sel==='function'?s.sel():document.querySelector(s.sel)}catch(e){}const cd=el&&el.closest('.card');if(cd)cd.style.contentVisibility='visible';   // an off-screen card is not laid out, so its real place is unknown until this
   if(!el||!el.getClientRects().length){if(s.kind==='switch')return atDone();g.i+=g.dir;if(g.i<0){g.i=0;g.dir=1}return atShow()}}   // a part this unit or plan does not have is skipped; a missing view switch must not trap the agent
- g.el=el;g.msg='';ls.set(atKey(),s.id);atCard();
- if(el){const b=G('mdlB'),inM=b.contains(el),tall=el.offsetHeight>innerHeight*.4||(inM&&el.offsetHeight>120);b.style.paddingBottom=inM&&tall?'60vh':'';   // room to scroll a tall part clear of the guide card
-  const go=()=>{if(AT&&AT.el===el){el.style.scrollMarginTop=inM?'10px':'96px';el.scrollIntoView({block:tall?'start':'center'})}};go();setTimeout(go,250)}}
+ g.el=el;g.msg='';g.side='';ls.set(atKey(),s.id);atCard();
+ if(el){const go=()=>{if(AT&&AT.el===el)atFit()};go();setTimeout(go,250)}}
+// the guide card never sits on the part it explains (4/11/2026): the card goes to the bottom and the part scrolls into the room left above it; a part that cannot move sends the card to the top
+function atFit(){const g=AT,el=g.el,H=innerHeight,card=G('atCard'),ch=card.offsetHeight+16,b=G('mdlB'),inM=b.contains(el),box=inM?b.getBoundingClientRect():null;
+ if(inM)b.style.paddingBottom='70vh';   // room to scroll the last part of the window clear of the guide card
+ const lo=inM?box.top+8:96,hi=inM?Math.min(box.bottom,H-ch):H-ch,room=hi-lo,r=el.getBoundingClientRect(),d=r.top-(r.height>=room?lo:lo+(room-r.height)/2);
+ if(inM)b.scrollTop+=d;else if(!el.closest('#mdl'))window.scrollBy(0,d);
+ const a=el.getBoundingClientRect(),tall=a.height>=room,m=card.querySelector('.at-more');
+ g.side=tall||a.bottom<=H-ch+2||a.top<=H-a.bottom?'bottom':'top';if(m)m.hidden=!tall;atTick()}
 function atBack(){const g=AT;if(!g||g.busy||g.i<1)return;g.dir=-1;g.i--;atShow()}
 function atCard(){const g=AT,s=g.steps[g.i],t=atT(s.txt),on=s.to?TAG[s.to][0]:'',done=g.steps.filter((x,k)=>k<g.i).length;
  const act='<div class="at-btns">'+(g.i>0?'<button type="button" class="at-back" data-at="back">'+atT('back')+'</button>':'')+(s.kind==='intro'?'<button type="button" class="at-next" data-at="next">'+atT('start')+'</button>':s.kind==='end'?'<button type="button" class="at-next" data-at="next">'+atT('finish')+'</button>':s.kind==='info'?'<button type="button" class="at-next" data-at="next">'+atT('next')+'</button>':'<div class="at-wait'+(g.msg?' bad':'')+'">'+esc(g.msg||(s.kind==='tap'?atT('tap'):atT('pick').replace('{v}',on)))+'</div>')+'</div>';
  G('atCard').innerHTML='<div class="at-top"><span class="at-orb" aria-hidden="true"></span><b>'+atT('ai')+'</b><span class="at-lang"><button type="button" data-at="ms"'+(LANG==='ms'?' class="on"':'')+'>BM</button><button type="button" data-at="en"'+(LANG==='en'?' class="on"':'')+'>EN</button></span>'+(g.replay?'<button type="button" class="at-x" data-at="exit" aria-label="'+esc(atT('xal'))+'">✕</button>':'')+'</div>'
   +'<div class="at-meta"><span>'+atT('step').replace('{a}',done+1).replace('{b}',g.steps.length)+'</span><span>'+atT('view')+': '+TAG[s.v][0]+'</span></div><div class="at-bar"><i style="width:'+Math.round((done+1)*100/g.steps.length)+'%"></i></div>'
-  +'<h3>'+esc(t[0].replace('{name}',CLIENT||''))+'</h3><p class="at-do">'+esc(t[1])+'</p><p class="at-why"><b>'+atT(s.kind==='end'?'note':'why')+'</b> '+esc(t[2])+'</p>'+act;
+  +'<h3>'+esc(t[0].replace('{name}',CLIENT||''))+'</h3><p class="at-do">'+esc(t[1])+'</p><p class="at-why"><b>'+atT(s.kind==='end'?'note':'why')+'</b> '+esc(t[2])+'</p><p class="at-more" hidden>'+esc(atT('more'))+'</p>'+act;
  G('atWrap').className='at-'+s.kind;document.documentElement.classList.toggle('at-big',s.kind==='switch');atTick()}
 function atTick(){const g=AT;if(!g)return;const W=innerWidth,H=innerHeight,b=document.querySelectorAll('#atWrap .at-b'),ring=document.querySelector('#atWrap .at-ring'),card=G('atCard');
  const set=(e,l,t,w,h)=>{e.style.cssText='left:'+l+'px;top:'+t+'px;width:'+Math.max(0,w)+'px;height:'+Math.max(0,h)+'px'};
- if(g.el&&document.contains(g.el)){const r=g.el.getBoundingClientRect(),p=6,l=Math.max(0,r.left-p),t=Math.max(0,r.top-p),R=Math.min(W,r.right+p),B=Math.min(H,r.bottom+p);
+ if(g.el&&document.contains(g.el)){const r=g.el.getBoundingClientRect(),p=6,mb=G('mdlB'),c=mb.contains(g.el)?mb.getBoundingClientRect():{top:0,bottom:H},l=Math.max(0,r.left-p),t=Math.max(c.top,r.top-p),R=Math.min(W,r.right+p),B=Math.max(t,Math.min(c.bottom,r.bottom+p));
   set(b[0],0,0,W,t);set(b[1],0,B,W,H-B);set(b[2],0,t,l,B-t);set(b[3],R,t,W-R,B-t);set(ring,l,t,R-l,B-t);ring.style.display='block';
-  const top=(r.top+r.bottom)/2>H/2;card.style.top=top?'12px':'';card.style.bottom=top?'':'12px';card.style.transform=''}
+  const top=g.side==='top';card.style.top=top?'8px':'';card.style.bottom=top?'':'8px';card.style.transform=''}
  else{set(b[0],0,0,W,H);set(b[1],0,0,0,0);set(b[2],0,0,0,0);set(b[3],0,0,0,0);ring.style.display='none';card.style.top='50%';card.style.bottom='';card.style.transform='translate(-50%,-50%)'}}
 function atClick(e){const g=AT;if(!g)return;const s=g.steps[g.i],a=e.target.closest&&e.target.closest('[data-at]');
  if(a){e.preventDefault();e.stopPropagation();const k=a.dataset.at;if(k==='next'){g.dir=1;g.i++;atShow();return}if(k==='back'){atBack();return}if(k==='exit'){atExit();return}setLang(k);setTimeout(atShow,60);return}
