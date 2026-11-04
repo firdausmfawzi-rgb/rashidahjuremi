@@ -1239,7 +1239,7 @@ const isExp=r=>{const d=dt(r[12]);return d>0&&d<T0};
 // A checked outcome (Sold / Call Off / Unsold) wins over the auction date. No outcome + date passed = plain Expired.
 const OUTC={unsold:1,calloff:1,sold:1};
 // Non-LACA with its date passed: nobody can tell whether it sold, so any result is ignored and the bidder confirms with the agent (3/11/2026; same test as tools/nonlaca.py)
-const stOf=r=>r[17]==='Non-LACA'&&isExp(r)?'nonlaca':OUTC[r[26]]?r[26]:(isExp(r)?'expired':'active');
+const stOf=r=>r[17]==='Non-LACA'&&isExp(r)&&!OUTC[r[26]]?'nonlaca':OUTC[r[26]]?r[26]:(isExp(r)?'expired':'active');   // 4/11/2026: published data keeps a Non-LACA result only when it is accepted (nonlaca.confirmed)
 const RECENT=30*864e5;const liveUnsold=r=>stOf(r)==='unsold'&&dt(r[12])>=T0-RECENT;   // a 'No bidder' unit still worth watching: ended within 30 days (older ones are history only)
 const isAvail=r=>stOf(r)==='active'||liveUnsold(r);
 const dkey=r=>{const t=dt(r[12])||9e15;return t>=T0?t:2e15-t};
