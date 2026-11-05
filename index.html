@@ -1224,7 +1224,7 @@ function facetOpts(){
   const avg=g=>g.k?g.sum/g.k:(g.token?-1:-2),list=[...m.keys()].sort((a,b)=>avg(m.get(b))-avg(m.get(a))||a.localeCompare(b));   // the bank that pays most on average first
   $('bankSel').innerHTML='<option value="">'+esc(tx('all_bank',{n:filtered('bankSel').length}))+'</option>'+list.map(b=>{const g=m.get(b);return '<option value="'+esc(b)+'">'+esc(b)+' - '+esc(g.k?faPct(g.lo,g.hi):tx(g.token?'fa_c_token':g.unl?'fa_c_unl':'fa_c_nil'))+' ('+g.n+')</option>'}).join('');
   $('bankSel').value=list.includes(cur.bank)?cur.bank:'';$('bankFld').hidden=false;
-  if(!$('sort').querySelector('[value="komisen"]')){const o=document.createElement('option');o.value='komisen';o.dataset.i18n='s_com';o.textContent=tx('s_com');$('sort').appendChild(o)}}
+  if(!$('sort').querySelector('[value="komisen"]')){const o=document.createElement('option');o.value='komisen';o.dataset.i18n='s_com';o.textContent=tx('s_com');$('sort').appendChild(o);if($('sort').value==='rich')$('sort').value='komisen'}}   // the main site's agent view opens on the highest commission (5/11/2026)
  const tm=count('jenis',28);
  fillOpt('jenis',tx('all_type',{n:filtered('jenis').length}),[...tm.keys()].sort((a,b)=>a.localeCompare(b)),tm,cur.jenis);
  const dm=count('tarikh',12),dl=[...dm.keys()].sort((a,b)=>dt(a)-dt(b));
@@ -1798,7 +1798,7 @@ function clearShared(){if(!sharedId)return;sharedId=null;try{history.replaceStat
 function reset(quiet){clearShared();favMode=false;LASTON=false;NEWONLY=false;ls.del('last');status='available';['q','negeri','jenis','cat','pegangan','bankSel'].forEach(k=>$(k).value='');selD.clear();selT.clear();selY.clear();tarikhToggle(false);cyToggle(false);cyFlag(false);$('daerahQ').value='';daerahOpts();$('pMin').value='';$('pMax').value='';bmv=0;laca='';if(!quiet){paint();render()}}
 document.querySelectorAll('.rs').forEach(b=>b.onclick=()=>reset());
 $('resetInline').onclick=()=>reset();
-$('resetBar').onclick=()=>{reset(true);$('sort').value='rich';paint();render();sheet(false);try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){window.scrollTo(0,0)}track('reset_top',{})};   // dock: everything back to the defaults, back to the top
+$('resetBar').onclick=()=>{reset(true);$('sort').value=faOn()&&ADS&&ADS.units?'komisen':'rich';paint();render();sheet(false);try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){window.scrollTo(0,0)}track('reset_top',{})};   // dock: everything back to the defaults, back to the top
 $('startOver').onclick=()=>{track('start_over');reset()};
 function toggleFav(id,btn){const on=!FAV.has(id);on?FAV.add(id):FAV.delete(id);saveFav();
  document.querySelectorAll('.fav[data-id="'+CSS.escape(id)+'"]').forEach(b=>{b.setAttribute('aria-pressed',String(on));b.textContent=tx(on?'saved':'save')});toast(tx(on?'fav_added':'fav_removed'));track(on?'fav_add':'fav_remove',{unit_id:id});
