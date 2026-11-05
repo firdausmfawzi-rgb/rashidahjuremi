@@ -291,6 +291,16 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .acts.v2.three .posreq{display:flex;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:4px 6px;border:1.5px solid #d93025;border-radius:12px;background:var(--surface);color:#d93025;font-weight:800;font-size:.86rem;line-height:1.15;text-decoration:none;text-align:center}.acts.v2.three .posreq .pdfi{width:16px;height:19px;flex:none}.acts.v2.three .posreq span{white-space:nowrap}.acts.v2.three .posreq.lk{opacity:.85}
 .posdl.sm{min-height:44px;padding:4px 8px;gap:6px;justify-content:center;border-radius:12px}.posdl.sm .pdfi{width:16px;height:19px}.posdl.sm span{font-weight:800;font-size:.95rem;color:#d93025}
 .acts.v3.icons{grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:6px}.acts.v3.icons .calbtn{grid-column:1/-1}.acts.v3.icons .cal{width:16px;height:16px;flex:none}.acts.v3.icons a,.acts.v3.icons button{min-height:40px;font-size:.8rem;padding:3px 4px;border-radius:10px;gap:4px}.acts.v3.icons .map .pin{width:16px;height:16px}.acts.v3.icons .calbtn{text-decoration:none}
+.fa{grid-column:1/-1;display:grid;gap:6px}.fa-menu{display:grid;gap:6px}.fa-menu[hidden]{display:none}
+.acts.v3.icons .fa-btn{position:relative;isolation:isolate;overflow:hidden;width:100%;min-height:46px;border:0;border-radius:12px;background:linear-gradient(120deg,#171104,#3d2d07 48%,#171104);color:#ffe9a8;font-size:.92rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-shadow:0 0 8px rgba(255,217,120,.9);box-shadow:0 0 0 1px #e6c25a,0 0 14px 2px rgba(230,194,90,.6),inset 0 0 12px rgba(230,194,90,.25);animation:faGlow 2.2s ease-in-out infinite}
+.acts.v3.icons .fa-btn::after{content:'';position:absolute;top:0;left:-40%;z-index:-1;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,240,190,.55),transparent);transform:skewX(-20deg);animation:faShine 3s ease-in-out infinite}
+.acts.v3.icons .fa-btn:focus-visible{outline:3px solid #ffd978;outline-offset:2px}
+@keyframes faGlow{50%{box-shadow:0 0 0 1px #ffd978,0 0 26px 7px rgba(255,205,90,.85),inset 0 0 16px rgba(255,217,120,.4)}}
+@keyframes faShine{60%,100%{left:120%}}
+.acts.v3.icons .fa-opt{width:100%;min-height:44px;border:1px solid #e6c25a;background:#fbf3dc;color:#5c4408;font-size:.9rem;font-weight:700;cursor:pointer}
+:root[data-theme="dark"] .acts.v3.icons .fa-opt{background:#2a2008;color:#ffe9a8}
+.fa-text{width:100%;min-height:46vh;box-sizing:border-box;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font:inherit;font-size:.95rem;line-height:1.45;white-space:pre-wrap}
+.fa-note{margin:0 0 8px;padding:8px 10px;border-radius:8px;background:var(--warn-bg);color:var(--warn);font-size:.9rem;font-weight:600}.fa-src{margin:0 0 8px;color:var(--muted);font-size:.88rem}
 .posbtn .pdfi,.pos-lbl .pdfi{width:18px;height:21px;flex:none}.pos-lbl{display:inline-flex;align-items:center;gap:6px}
 .card.detail{border:0;padding:0;box-shadow:none}.card.detail .head .addr{font-size:1.15rem}.dsec{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}
 .mdl.wide{width:min(720px,calc(100% - 24px))}
@@ -874,7 +884,7 @@ tag_unsold_u:'No bidder (not confirmed) · please confirm with the agent',unsold
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
 f_bed:'Bedrooms: {n}',f_bath:'Bathrooms: {n}',f_built:'Completed {y}',f_bu:'Built-up {v}',f_land:'Land {v}',
-date:'Auction Date:',pending:'Next date not set yet',cal_add:'Add to calendar',cal_title:'Auction: {t}',
+fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_copied:'Copied. Paste it into the ad.',fa_again:'Copy again',fa_miss:'Check before posting, not in this text yet:',fa_m_mv:'market value',fa_m_rooms:'bedrooms and bathrooms',fa_m_date:'auction date',fa_m_past:'the auction date has passed',fa_m_amen:'amenities',fa_m_contact:'contact details',fa_amen:'Amenities: found by AI, so check the names before posting.',fa_src_pos:'Rooms: read from the POS.',fa_src_ads:'Rooms: matched from {n} ads by other agents, so it is an estimate.',date:'Auction Date:',pending:'Next date not set yet',cal_add:'Add to calendar',cal_title:'Auction: {t}',
 cd_today:'Today!',cd_tom:'Tomorrow!',cd_in:'In {n} days',cd_yest:'Yesterday',cd_ago:'{n} days ago',nth:'{v} auction',
 wa_btn:'💬 WhatsApp {name} about this unit',wa_btn_end:'💬 Ask {name} about similar units',
 reset_top:'\u21BA Reset',pos_btn:'Request POS from agent',wa_pos:'Hi {name}, please send me the Proclamation of Sale (POS) for this unit:',wa_unit:'Hi {name}, I am interested in this auction unit:',wa_unit_end:'Hi {name}, I saw this unit ({st}). Do you have similar units?',
@@ -947,7 +957,7 @@ tag_unsold_u:'Tiada pembida (belum disahkan) · sila sahkan dengan ejen',unsold_
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
 f_bed:'Bilik tidur: {n}',f_bath:'Bilik air: {n}',f_built:'Siap {y}',f_bu:'Binaan {v}',f_land:'Tanah {v}',
-date:'Tarikh Lelong:',pending:'Tarikh seterusnya belum ditetapkan',cal_add:'Masukkan ke kalendar',cal_title:'Lelong: {t}',
+fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_copied:'Disalin. Tampal ke dalam iklan.',fa_again:'Salin lagi',fa_miss:'Semak sebelum siar, belum ada dalam teks ini:',fa_m_mv:'nilai pasaran',fa_m_rooms:'bilik tidur dan bilik air',fa_m_date:'tarikh lelong',fa_m_past:'tarikh lelong sudah lepas',fa_m_amen:'amenities',fa_m_contact:'maklumat contact',fa_amen:'Amenities: dicari oleh AI, jadi semak nama tempat sebelum siar.',fa_src_pos:'Bilik: dibaca daripada POS.',fa_src_ads:'Bilik: dipadankan daripada {n} iklan ejen lain, jadi ini anggaran.',date:'Tarikh Lelong:',pending:'Tarikh seterusnya belum ditetapkan',cal_add:'Masukkan ke kalendar',cal_title:'Lelong: {t}',
 cd_today:'Hari ini!',cd_tom:'Esok!',cd_in:'{n} hari lagi',cd_yest:'Semalam',cd_ago:'{n} hari lepas',nth:'Lelong ke-{v}',
 wa_btn:'💬 WhatsApp {name} tentang unit ini',wa_btn_end:'💬 Tanya {name} tentang unit serupa',
 reset_top:'\u21BA Reset',pos_btn:'Minta POS daripada ejen',wa_pos:'Hi {name}, mohon hantar Perisytiharan Jualan (POS) untuk unit ini:',wa_unit:'Hi {name}, saya berminat dengan unit lelong ini:',wa_unit_end:'Hi {name}, saya nampak unit ini ({st}). Ada unit yang serupa?',
@@ -1544,6 +1554,49 @@ function whenRows(r,ex,cn,cal,full){   // card: one line (date, time, days left)
 function specBox(r){const v=x=>locked(x)?XX:dash(x),c=(k,x)=>'<div><span>'+tx(k)+'</span><b>'+v(x)+'</b></div>',high=isHigh(r);
  return '<div class="specs'+(high?'':' three')+'">'+(high?'':c('land',r[10]))+c('built_up',r[11])+c('cy',r[19])+'<div class="sp-bank"><span>'+tx('bank')+'</span><b>'+v(r[16])+'</b></div></div>'}
 function mapBtn(r,short){return /^https:\/\//i.test(r[4]||'')?'<a class="map" href="'+esc(satUrl(r[4]))+'" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z" fill="#e53935"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg>'+(short?tx('map_short'):'Google Maps')+'</a>':''}
+// For Admin (5/11/2026): the two portal ad texts, built here from the listing. What a listing lacks (rooms, carpark, corner lot, amenities, the contact block) comes from agent/ads.json, sealed with the agent key.
+const FA_ICON={shop:'🛍️',hospital:'🏥',school:'🏫',road:'🚗',transit:'🚆',mosque:'🕌',park:'🌳',other:'📌'};
+const FA_MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function faArea(addr){const out=[];String(addr||'').split(',').map(x=>x.trim()).filter(Boolean).forEach((x,i)=>{
+  if(i===0&&/^(no\.?|lot|unit|blok|block|pt|parcel|tingkat|level|aras|suite)\b/i.test(x))return;
+  if(/^(jalan|jln|lorong|lrg|persiaran|psrn|lebuh|lebuhraya|lintang|off\s)/i.test(x))return;
+  const m=/^\d{5}\s*(.*)$/.exec(x),v=m?m[1]:x;if(v&&!out.some(y=>y.toLowerCase()===v.toLowerCase()))out.push(v)});return out}
+function faType(r,a){let t=String(r[5]||'');if(!t||t==='-'||t.includes('/'))t=String(r[28]||t);
+ const m=/^(\d(?:\.\d)?)\s*[- ]?Storey\s*/i.exec(t),st=m?m[1]:(a.storey||'');if(m)t=t.slice(m[0].length);
+ t=t.replace(/\s+House$/i,'').trim();const pre=st?st+'-Storey ':'';
+ const reno=a.reno?'Renovated ':'';return {plain:pre+t,title:reno+pre+(a.corner?'Corner Lot ':'')+t,short:(a.corner?'Corner ':'')+t}}
+function faDate(s){const d=new Date(dt(s));if(!dt(s))return '';const n=d.getDate(),j=n%10,k=n%100;return n+(j===1&&k!==11?'st':j===2&&k!==12?'nd':j===3&&k!==13?'rd':'th')+' '+FA_MON[d.getMonth()]+' '+d.getFullYear()}
+function faAd(r,kind){const emo=kind==='mudah',a=(ADS&&ADS.units&&ADS.units[r[SID]])||{},miss=[],area=faArea(r[1]),tp=faType(r,a),L=[];
+ const p=num(r[7]),mv=suspect(r)?0:num(r[8]),good=mv>p&&p>0,pct=good?(num(r[6])||Math.round((1-p/mv)*100)):0,bull=emo?'✅ ':'- ';
+ if(emo)L.push(tp.short+(area[0]?', '+area[0]:''),'');
+ L.push('MURAH! '+tp.title+' @ '+area.join(', '),'');
+ if(good)L.push('Below Market Value '+pct+'%'+(emo?'  😍':''),'');else miss.push('fa_m_mv');
+ L.push((emo?'🏠 ':'')+String(r[1]||''),'','PROPERTY DETAILS:',bull+tp.plain);
+ if(a.corner)L.push(bull+'Corner Lot');
+ if(a.reno)L.push(bull+'Renovated');
+ if(ok(r[11]))L.push(bull+'Built Up: '+r[11]);
+ if(ok(r[10]))L.push(bull+'Land Area: '+r[10]);
+ const bed=+a.bed||(/^\d{1,2}$/.test(r[23])?+r[23]:0),bath=+a.bath||(/^\d{1,2}$/.test(r[24])?+r[24]:0),car=+a.car||(/^\d{1,2}$/.test(r[25])?+r[25]:0);
+ if(bed)L.push(bull+'Approx. '+bed+' Bedroom'+(bed>1?'s':'')+(bath?' | '+bath+' Bathroom'+(bath>1?'s':''):''));else if(/Terrace|Bungalow|Condominium|Flat/.test(r[21]))miss.push('fa_m_rooms');
+ if(car)L.push(bull+'Car Park: '+car);
+ if(ok(r[9]))L.push(bull+r[9]);
+ L.push('',(emo?'🔥 ':'')+'Force Sale: '+r[7]+(emo?' 🔥':''));
+ if(good)L.push((emo?'❤️ ':'')+'Market Value: '+r[8],(emo?'💎 ':'')+'Potential Profit: RM '+Math.round(mv-p).toLocaleString('en-US'));
+ const when=faDate(r[12]);if(when)L.push('',(emo?'📆 ':'')+'Auction Date: '+when);else miss.push('fa_m_date');
+ if(when&&isExp(r))miss.push('fa_m_past');
+ const am=Array.isArray(a.amen)?a.amen:[];
+ if(am.length){L.push('','AMENITIES & ACCESSIBILITY:');am.forEach(x=>L.push((emo?(FA_ICON[x.t]||FA_ICON.other)+' ':'- ')+x.n))}else miss.push('fa_m_amen');
+ if(emo&&/^https:\/\//i.test(r[4]||''))L.push('','📍 NEARBY GOOGLE MAPS PIN:',r[4]);
+ L.push('','Kindly note the following:','+ NO INSIDE VIEWING. Self-survey from outside only','+ Cash ready: 10% Deposit | 5% legal cost | 2-5% misc');
+ const co=ADS&&Array.isArray(ADS.contact)?ADS.contact:[];if(co.length)L.push('',...co);else miss.push('fa_m_contact');
+ let text=L.join('\n');if(!emo)text=text.replace(/\p{Extended_Pictographic}️?/gu,'');
+ return {text,miss,src:bed?(a.src||''):'',n:a.n||0,amen:am.length>0}}
+function faOpen(r,kind){const ad=faAd(r,kind);copyText(ad.text).then(()=>toast(tx('fa_copied')));
+ const src=ad.src==='pos'?tx('fa_src_pos'):ad.src==='ads'?tx('fa_src_ads').replace('{n}',ad.n):'';
+ openModal(tx(kind==='mudah'?'fa_mudah':'fa_iprop'),(ad.miss.length?'<p class="fa-note">'+esc(tx('fa_miss'))+' '+ad.miss.map(k=>esc(tx(k))).join(', ')+'</p>':'')+(src?'<p class="fa-src">'+esc(src)+'</p>':'')+(ad.amen?'<p class="fa-src">'+esc(tx('fa_amen'))+'</p>':'')+'<textarea class="fa-text" readonly aria-label="'+esc(tx(kind==='mudah'?'fa_mudah':'fa_iprop'))+'">'+esc(ad.text)+'</textarea>',
+  '<button class="btn" type="button" id="faAgain">'+esc(tx('fa_again'))+'</button><button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>');
+ G('faAgain').onclick=()=>copyText(ad.text).then(()=>toast(tx('fa_copied')))}
+function faBtn(r,st){if(!faOn()||(st!=='active'&&st!=='unsold'))return '';const id=esc(r[20]);return '<div class="fa"><button type="button" class="fa-btn" aria-expanded="false" data-id="'+id+'">'+esc(tx('fa_btn'))+'</button><div class="fa-menu" hidden><button type="button" class="fa-opt" data-k="mudah" data-id="'+id+'">'+esc(tx('fa_mudah'))+'</button><button type="button" class="fa-opt" data-k="iprop" data-id="'+id+'">'+esc(tx('fa_iprop'))+'</button></div></div>'}
 function calBtn(cal){return cal?'<a class="calbtn ic" href="'+esc(cal)+'" target="_blank" rel="noopener">'+CALI+tx('cal_short')+'</a>':''}
 const CALI='<svg class="cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12.5v5M9.5 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 // POS (proclamation of sale) on the card (2/11/2026): agents download it, members ask the agent on WhatsApp, the free preview opens the Premium page
@@ -1569,7 +1622,7 @@ function card(r,i){
  +specBox(r)
  +(simple?'':xtraDrop(r,ex))
  +'<div class="acts v2 three"><button type="button" class="detbtn" data-id="'+esc(r[20])+'">'+tx('detail_btn')+'\u00a0\u203A</button><a class="wa-unit sm" href="'+esc(waUnit(r,st))+'" target="_blank" rel="noopener">'+tx('wa_short')+'</a>'+posCard(r)+'</div>'
- +'<div class="acts v3 icons">'+mapBtn(r,true)+favBtn(r,fav)+shareBtn(r)+calBtn(cal)+'</div></article>';
+ +'<div class="acts v3 icons">'+mapBtn(r,true)+favBtn(r,fav)+shareBtn(r)+calBtn(cal)+faBtn(r,st)+'</div></article>';
 }
 // Full details of one unit (1/11/2026): everything, nothing folded, in one window; the Back button closes it (modal history entry)
 function detailHtml(r){
@@ -1729,6 +1782,8 @@ function listClick(e){const t=e.target;
  const unit=el=>{const c=el.closest('.card');return {unit_id:c&&c.dataset.id}};
  const sb2=t.closest('.scbtn');if(sb2){const r=DATA.find(x=>x[20]===sb2.dataset.id);if(r)openModal(tx('sb_t'),scoreHtml(r),'<button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>');track('score_breakdown_open',unit(sb2));return}
  const pdl=t.closest('.posdl');if(pdl){posDownload(pdl.dataset.id);track('pos_download_click',unit(pdl));return}
+ const fb=t.closest('.fa-btn');if(fb){const m=fb.parentNode.querySelector('.fa-menu');m.hidden=!m.hidden;fb.setAttribute('aria-expanded',String(!m.hidden));return}
+ const fo=t.closest('.fa-opt');if(fo){const r=DATA.find(x=>x[20]===fo.dataset.id);if(r){faOpen(r,fo.dataset.k);track('admin_ad_copy',{kind:fo.dataset.k})}return}
  const cp=t.closest('.cpy');if(cp){const r=DATA.find(x=>x[20]===cp.dataset.id);copyText(r?String(r[1]):'').then(()=>toast(tx('addr_copied')));track('copy_address',unit(cp));return}
  const sb=t.closest('.simbtn');if(sb){track('similar_click',unit(sb));if(MDL)closeModal();reset(true);$('negeri').value=sb.dataset.ss;selD.add(sb.dataset.sd);daerahOpts();PEND.cat=sb.dataset.sc;
   paint();render();toast(txn('showing',ROWS.length));try{document.querySelector('.seg-row').scrollIntoView({behavior:'smooth',block:'start'})}catch(x){}return}
@@ -2027,7 +2082,7 @@ try{aiBoot()}catch(e){try{console.error('assistant',e)}catch(x){}}
 // so the listings cannot be read without one. The slow PBKDF2 step is remembered on the device: a returning client waits only once.
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));const ub64=a=>btoa(String.fromCharCode(...a));
 const normCode=c=>String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
-let ACCESS=null,CLIENT='',DKEY=null,DKEY2=null,DKEY3=null,AGINFO=null,ACODE='';   // DKEY3 / AGINFO: the agent key and the agent-only contacts by share id (agent codes only, 1/11/2026)   // ACODE: the code that opened the page (agents send it with Download POS)   // DKEY2: the VIP history key (sip codes only)
+let ACCESS=null,CLIENT='',DKEY=null,DKEY2=null,DKEY3=null,AGINFO=null,ADS=null,ACODE='';   // DKEY3 / AGINFO: the agent key and the agent-only contacts by share id (agent codes only, 1/11/2026)   // ACODE: the code that opened the page (agents send it with Download POS)   // DKEY2: the VIP history key (sip codes only)
 async function checkCode(code){const n=normCode(code);if(!n||!ACCESS||!ACCESS.codes||!ACCESS.kdf)return null;const k=ACCESS.kdf;let bits=null;
  try{const m=JSON.parse(localStorage.getItem('rashidahjuremi.kdk')||'null');if(m&&m.s===k.salt&&m.c===n)bits=b64(m.b)}catch(e){}
  if(!bits){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(n),'PBKDF2',false,['deriveBits']);
@@ -2087,6 +2142,7 @@ async function loadListings(){if(TRIAL)return RTRIAL?fetch(TRIAL_DATA+'?v='+Date
   const hj=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(h.iv)},DKEY2,b64(h.ct))));const ids=new Set(j.listings.map(o=>o.id));
   j.listings=j.listings.concat((hj.listings||[]).filter(o=>o&&o.id&&!ids.has(o.id)));j.vip_days=hj.days||365}catch(x){j.vip_err=true}}   // the member is told under the status buttons
  AGINFO=null;if(gp){try{const a=await gp;if(a&&a.ct&&a.kid===ACCESS.akid){const aj=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(a.iv)},DKEY3,b64(a.ct))));AGINFO=new Map(Object.entries(aj.units||{}))}}catch(x){AGINFO=null}}   // a key mismatch or any error = no column, never a wrong one
+ ADS=null;if(ISAGENT&&DKEY3&&faOn()){try{const a=await fetch('agent/ads.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);if(a&&a.ct&&a.kid===ACCESS.akid)ADS=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(a.iv)},DKEY3,b64(a.ct))))}catch(x){ADS=null}}   // no file yet: the text is built from the listing alone and says what is missing
  return j}
 let STARTED=false;
 function addScoreSort(){try{const so=G('sort');if(!so||TRIAL||TIER!=='sip'||so.querySelector('option[value=score]'))return;const o=document.createElement('option');o.value='score';o.dataset.i18n='s_score';o.textContent=(typeof tx==='function'?tx('s_score'):'Highest investor score');so.insertBefore(o,so.options[1]||null)}catch(e){}}   // runs before the main block exists: TRIAL / TIER only; every plan opens on 'Complete info first' (4/11/2026), the score stays a choice for VIP
@@ -2100,6 +2156,7 @@ const TAG={vip:['VIP Investor','<path d="M6 3h12l4 6-10 12L2 9z" fill="currentCo
 var REALAGENT=false,AVIEW='agent',RTRIAL=false,RTIER='',PAID_SITE='';   // PAID_SITE: set on trial sites by partner_sites.py (where access codes work)   // RTIER: the agent code's own plan, kept while a client view changes TIER   // RTRIAL: the free preview switched on in this page (an agent's Free view, a shared link without a code)
 const SHAREH=(location.hash||'').length>1;
 const TRIAL_DATA='https://lelongbidgroup.com/trial/data2.json';   // the free preview's masked listings (v2, 1/11/2026: photo, discount and map link open; address and paid values masked), the same file every trial site reads
+function faOn(){return REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(www\.)?lelongbidgroup\.com$/.test(location.hostname)}   // For Admin: the agent view of the main site only
 function agentView(){REALAGENT=!!ISAGENT;if(!REALAGENT)return;RTIER=TIER;let v='agent';try{v=sessionStorage.getItem(KP+'aview')||'agent'}catch(e){}
  if(v==='vip'&&TIER==='sip'){AVIEW='vip';ISAGENT=false}
  else if(v==='prem'){AVIEW='prem';ISAGENT=false;TIER='premium'}   // what a Premium client sees: the score locked, no 12-month history
