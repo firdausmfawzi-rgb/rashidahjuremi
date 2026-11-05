@@ -1597,7 +1597,7 @@ function faAd(r,kind){const emo=kind==='mudah',a=(ADS&&ADS.units&&ADS.units[r[SI
  if(when&&isExp(r))miss.push('fa_m_past');
  const am=Array.isArray(a.amen)?a.amen:[];
  if(am.length){L.push('','AMENITIES & ACCESSIBILITY:');am.forEach(x=>L.push((emo?(FA_ICON[x.t]||FA_ICON.other)+' ':'- ')+x.n))}else miss.push('fa_m_amen');
- if(emo&&/^https:\/\//i.test(r[4]||''))L.push('','📍 NEARBY GOOGLE MAPS PIN:',r[4]);
+ if(emo&&/^https:\/\//i.test(a.map||r[4]||''))L.push('','📍 NEARBY GOOGLE MAPS PIN:',a.map||r[4]);
  L.push('','Kindly note the following:','+ NO INSIDE VIEWING. Self-survey from outside only','+ Cash ready: 10% Deposit | 5% legal cost | 2-5% misc');
  const co=ADS&&Array.isArray(ADS.contact)?ADS.contact:[];if(co.length)L.push('',...co);else miss.push('fa_m_contact');
  let text=L.join('\n');if(!emo)text=text.replace(/\p{Extended_Pictographic}️?/gu,'');
