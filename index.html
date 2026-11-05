@@ -1557,8 +1557,19 @@ function mapBtn(r,short){return /^https:\/\//i.test(r[4]||'')?'<a class="map" hr
 // For Admin (5/11/2026): the two portal ad texts, built here from the listing. What a listing lacks (rooms, carpark, corner lot, amenities, the contact block) comes from agent/ads.json, sealed with the agent key.
 const FA_ICON={shop:'🛍️',hospital:'🏥',school:'🏫',road:'🚗',transit:'🚆',mosque:'🕌',park:'🌳',other:'📌'};
 const FA_MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const FA_UNIT=/^(nos?\b|unit\b|lot\b|pt\b|ptd\b|tb\b|hs\b|parcel\b|suite\b|plot\b|sublot\b|geran\b|mdld\b|gm\b|mbkt\b|mpkt\b|nt\b|town\s+lease\b|post\s+box\b)/i,FA_BARE=/^[a-z]{0,3}[-\s]?\d[\w-]*$/i;   // a house, unit or lot number: the keyword anywhere, or a bare number at the start
+const FA_NAMEWORD=/^(jalan|jln|lorong|lrg|lebuh|solok|medan|taman|tmn|blok|block|aras|level|tingkat|fasa|phase|kg|seri|sri|desa|alam|bukit|bdr|tower|wisma|plaza|menara|ss|usj|pju|pjs|bu|ttdi|sd|pj|kl|casa|villa|vista|indah)$/i;   // these words before a number name a road or a building, not a lot
+// iProperty shows the street but not the house (5/11/2026): No. 16 -> No. 1X, PT 2991 -> PT 29XX, 3C-02-06 -> 3C-02-XX, 16 Jalan Mawar -> 1X Jalan Mawar, Jd 169 Jalan Besar -> Jd 1XX Jalan Besar
+function faMaskNo(t){const part=t.split('-'),last=part.pop();if(part.length)return part.concat('X'.repeat(last.length)).join('-');return t.slice(0,t.length-Math.ceil(t.length/2))+'X'.repeat(Math.ceil(t.length/2))}
+function faMask(addr){return String(addr||'').split(',').map((x,i)=>{const v=x.trim();if(i>0&&/^\d{5}\b/.test(v))return x;
+  if(FA_UNIT.test(v)||(i===0&&FA_BARE.test(v)))return x.replace(/[a-z0-9-]*\d[a-z0-9-]*/gi,faMaskNo);
+  let y=x.replace(/\b(nos?\.?\s*(?:lot\s*)?)([a-z0-9-]*\d[a-z0-9-]*)/gi,(m,k,t)=>k+faMaskNo(t)).replace(/\b((?:pt|lot)\s+)(\d[a-z0-9-]*)/gi,(m,k,t)=>k+faMaskNo(t));
+  if(i<2)y=y.replace(/(^|\s)(#?[a-z]{0,12}\d*[a-z]?(?:-[a-z]?\d+[a-z]?){1,3})(?=\s|$)/gi,(m,k,t)=>/\d/.test(t)?k+faMaskNo(t):m);
+  if(i===0){y=y.replace(/^(\s*)([a-z0-9.\/#-]*\d[a-z0-9.\/#-]*)(?=\s|$)/i,(m,k,t)=>k+faMaskNo(t));
+   y=y.replace(/^(\s*)([a-z]{1,5})(\.?\s+)(\d[a-z0-9\/-]*)(?=\s|$)/i,(m,k,w,g,t)=>FA_NAMEWORD.test(w)?m:k+w+g+faMaskNo(t))}
+  return y}).join(',')}
 function faArea(addr){const out=[];String(addr||'').split(',').map(x=>x.trim()).filter(Boolean).forEach((x,i)=>{
-  if(i===0&&/^(no\.?|lot|unit|blok|block|pt|parcel|tingkat|level|aras|suite)\b/i.test(x))return;
+  if(/^(blok|block|tingkat|level|aras)\b/i.test(x)||/\bfloor\b/i.test(x)||/^\d+[a-z]*\s+(jalan|jln|lorong|lrg|persiaran|psrn|lebuh|lebuhraya)\b/i.test(x)||(!/^\d{5}\b/.test(x)&&(FA_UNIT.test(x)||(i===0&&FA_BARE.test(x)))))return;
   if(/^(jalan|jln|lorong|lrg|persiaran|psrn|lebuh|lebuhraya|lintang|off\s)/i.test(x))return;
   const m=/^\d{5}\s*(.*)$/.exec(x),v=m?m[1]:x;if(v&&!out.some(y=>y.toLowerCase()===v.toLowerCase()))out.push(v)});return out}
 function faType(r,a){let t=String(r[5]||'');if(!t||t==='-'||t.includes('/'))t=String(r[28]||t);
@@ -1566,12 +1577,12 @@ function faType(r,a){let t=String(r[5]||'');if(!t||t==='-'||t.includes('/'))t=St
  t=t.replace(/\s+House$/i,'').trim();const pre=st?st+'-Storey ':'';
  const reno=a.reno?'Renovated ':'';return {plain:pre+t,title:reno+pre+(a.corner?'Corner Lot ':'')+t,short:(a.corner?'Corner ':'')+t}}
 function faDate(s){const d=new Date(dt(s));if(!dt(s))return '';const n=d.getDate(),j=n%10,k=n%100;return n+(j===1&&k!==11?'st':j===2&&k!==12?'nd':j===3&&k!==13?'rd':'th')+' '+FA_MON[d.getMonth()]+' '+d.getFullYear()}
-function faAd(r,kind){const emo=kind==='mudah',a=(ADS&&ADS.units&&ADS.units[r[SID]])||{},miss=[],area=faArea(r[1]),tp=faType(r,a),L=[];
+function faAd(r,kind){const emo=kind==='mudah',a=(ADS&&ADS.units&&ADS.units[r[SID]])||{},miss=[],tp=faType(r,a),L=[];let area=faArea(r[1]);if(!area.length||/^\d/.test(area[0])||area[0].length>60)area=[r[3],r[2]].filter(ok);   // an address with no commas, or only a street: district and state
  const p=num(r[7]),mv=suspect(r)?0:num(r[8]),good=mv>p&&p>0,pct=good?(num(r[6])||Math.round((1-p/mv)*100)):0,bull=emo?'✅ ':'- ';
  if(emo)L.push(tp.short+(area[0]?', '+area[0]:''),'');
  L.push('MURAH! '+tp.title+' @ '+area.join(', '),'');
  if(good)L.push('Below Market Value '+pct+'%'+(emo?'  😍':''),'');else miss.push('fa_m_mv');
- L.push((emo?'🏠 ':'')+String(r[1]||''),'','PROPERTY DETAILS:',bull+tp.plain);
+ L.push(emo?'🏠 '+String(r[1]||''):faMask(r[1]),'','PROPERTY DETAILS:',bull+tp.plain);
  if(a.corner)L.push(bull+'Corner Lot');
  if(a.reno)L.push(bull+'Renovated');
  if(ok(r[11]))L.push(bull+'Built Up: '+r[11]);
