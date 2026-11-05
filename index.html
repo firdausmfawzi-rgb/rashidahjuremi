@@ -76,6 +76,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .status{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:6px 0 10px;font-size:.95rem;color:var(--muted)}
 .status .st-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;min-width:0;max-width:100%}
 .status select{width:auto;max-width:100%;padding:7px 10px;font-size:calc(15px * var(--fs))}
+.count-status{position:sticky;top:var(--count-top,78px);z-index:4;min-height:60px;padding:6px 0;pointer-events:none}
+.count-status::after{content:'';position:absolute;inset:-6px -3px -10px;z-index:-1;background:linear-gradient(var(--bg) calc(100% - 10px),transparent);opacity:0;transition:opacity .25s ease}
+.count-status.is-stuck::after{opacity:1}
+.count-status .st-r{pointer-events:auto}
+#count.count-ready{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:9px;max-width:100%;padding:10px 18px;border:1px solid #d4b45f;border-radius:18px;background:linear-gradient(135deg,#123453,#091e34);color:#fff6dc;box-shadow:0 4px 16px #162e4326,0 0 18px #d6b55240;font-variant-numeric:tabular-nums;line-height:1.15;transition:box-shadow .25s ease,transform .25s ease}
+#count.count-ready::before{content:'';position:absolute;inset:-2px;border-radius:inherit;box-shadow:0 0 18px #d6b55280,0 0 32px #d6b55230;opacity:.45;pointer-events:none;animation:countGlow 3s ease-in-out infinite}
+.count-value{display:inline-block;font-size:1.55rem;font-weight:800;color:#ffe49b;text-shadow:0 0 12px #f5c95680;min-width:var(--count-digits,3ch);text-align:right}
+.count-slash{font-size:1.15rem;color:#a9bbca}.count-total{font-size:1.22rem;font-weight:700}.count-label{font-size:.78rem;color:#d7e3ed;max-width:5em}
+.count-status.is-stuck #count{box-shadow:0 7px 22px #091e3440,0 0 22px #d6b55259;transform:translateY(0) scale(.98);transform-origin:left center}
+@keyframes countGlow{50%{opacity:1}}
+@media(max-width:420px){#count.count-ready{gap:7px;padding:10px 13px}.count-value{font-size:1.4rem}.count-total{font-size:1.1rem}}
+@media(prefers-reduced-motion:reduce){#count.count-ready::before{animation:none}}
 .vseg button{min-height:40px;font-size:.92rem;padding:0 12px}
 .reset-inline{border:0;background:var(--warn-bg);color:var(--warn);border-radius:99px;padding:0 14px;min-height:40px;font-weight:700}
 .loadmore{display:block;margin:16px auto 0;padding:12px 28px;border-radius:12px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-weight:700;cursor:pointer}.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:22px}
@@ -482,6 +494,50 @@ body{padding-block-end:100px}
 .lgnote{display:block;color:var(--muted);font-size:.78rem;line-height:1.45;margin:2px 0 0}.card.detail .lgnote{margin-top:6px}
 .gate-agree{font-size:.8rem;color:var(--muted);text-align:center;margin:0;line-height:1.5}
 .mdl-scrim{z-index:52}.mdl{z-index:53}
+/* Phone fit v2: denser cards and controls; saved A/A+/A++ sizes still scale. */
+@media screen and (max-width:699px){
+ html{font-size:calc(15px * var(--fs))}
+ body{padding-inline:8px;padding-block-start:8px;padding-block-end:calc(70px + env(safe-area-inset-bottom,0px));font-size:calc(15px * var(--fs))}
+ .hd{flex-wrap:wrap;gap:6px}.hd h1{font-size:1.25rem}.hd-acts{gap:6px}.share-all{padding-inline:12px}
+ .sub{font-size:.9375rem;padding:7px 8px;gap:6px;margin-bottom:8px}
+ .sub-acts{gap:6px}.sub-acts a{min-height:44px;padding-inline:11px;font-size:.9375rem}
+ .tools{gap:6px 10px;margin-bottom:8px}.ts button{min-width:44px;padding-inline:10px}
+ .at-i-g>button.at-i{width:44px;height:44px;margin-left:4px}.at-i-lbl{font-size:.875rem}
+ .start{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .qf-btn{min-width:0;min-height:46px;font-size:.9375rem;padding:4px 6px;border-radius:10px}.qf-btn small{font-size:.8125rem}
+ .top{gap:5px;padding-block:4px}.top input{min-height:44px;padding:9px 10px;font-size:calc(16px * var(--fs))}
+ .top .qwrap input{padding-right:48px}.qgo{right:1px;width:44px;height:44px}
+ .top .top-lang button{min-width:44px;min-height:44px;padding-inline:5px;font-size:.875rem}
+ #themeTop{min-height:44px;padding-inline:6px;font-size:1rem}
+ #openTop{display:none} /* Filter stays one tap away in the fixed bottom bar. */
+ .top.qopen .qwrap{flex-basis:100%}
+ .list{gap:10px}.status{margin-block:3px 6px}
+ .count-status{min-height:36px;padding-block:2px;gap:5px}
+ #count.count-ready{gap:5px;padding:6px 9px;border-radius:11px}
+ .count-value{font-size:1.2rem}.count-total{font-size:.95rem}.count-slash{font-size:.95rem}.count-label{font-size:.8125rem;max-width:none}
+ .count-status .reset-inline{min-height:44px;padding-inline:10px;font-size:.875rem}
+ .seg{gap:6px}.seg button{padding:5px 10px;font-size:.875rem;min-height:44px}
+ .vip-note{font-size:.875rem;margin-top:6px}
+ .card.v2{padding:8px;gap:6px;border-radius:12px}
+ .card.v2 .hero{aspect-ratio:2.2/1}.card.v2 .kindt{font-size:.8rem;letter-spacing:.04em}
+ .card.v2 .head .addr{font-size:.9375rem}.card.v2 .head .num{min-width:24px;height:24px;font-size:.85rem;padding-inline:5px}
+ .card.v2 .pricebox{padding:6px 8px;gap:2px 6px}.card.v2 .price{font-size:1.25rem;overflow-wrap:anywhere;white-space:normal}
+ .card.v2 .mv{font-size:.9375rem}.card.v2 .mv small{font-size:.875rem}.card.v2 .pval-r b{font-size:1rem}
+ .card.v2 .pval{margin-top:3px;padding-top:5px}.card.v2 .pval-s{font-size:.9375rem;gap:2px 6px;margin-top:4px}.card.v2 .pval-s span{font-size:.8125rem}
+ .card.v2 .pbar{height:auto;min-height:26px;line-height:1.25}.card.v2 .pbar i,.card.v2 .pbar u{padding:4px 2px;white-space:normal;overflow-wrap:anywhere;display:flex;align-items:center;justify-content:center}
+ .card.v2 .when{padding-top:6px;font-size:.875rem}.card.v2 .when .dtx b{font-size:.875rem}.card.v2 .when .tm{font-size:.875rem}.card.v2 .when .tm .chip{font-size:.8125rem;padding:2px 7px}
+ .card.v2 .specs{padding:6px 8px;gap:4px 7px}.card.v2 .specs b{font-size:.875rem}.card.v2 .specs .sp-bank{padding-top:5px}
+ .card.v2 .xtra summary{min-height:44px;padding:6px 10px;font-size:.9375rem}
+ .acts.v2.three{grid-template-columns:repeat(3,minmax(0,1fr))}.acts.v2.three .detbtn,.acts.v2.three .posreq span{white-space:normal;overflow-wrap:anywhere}
+ .acts.v3.icons a,.acts.v3.icons button{min-height:44px;font-size:.875rem}
+ .card.v2 .acts.v3.icons{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}.card.v2 .acts.v3.icons .calbtn{grid-column:auto}
+ .dock{padding:5px 8px calc(5px + env(safe-area-inset-bottom,0px));gap:6px}.dock .btn{min-height:44px;font-size:.9375rem}.dock #resetBar{padding-inline:10px}
+ .trial-bar{padding:9px 10px;gap:7px;font-size:.9375rem}.trial-bar #haveCode{min-height:44px;font-size:.9375rem}
+ .mdl-head{padding:12px 12px 6px}.mdl-head h2{font-size:1.15rem}.mdl-body{padding:4px 12px 12px;gap:10px;font-size:1rem;line-height:1.45}
+ .mdl-foot{padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))}.mdl-foot .btn{min-height:46px;font-size:1rem}.big-opts button{min-height:56px;font-size:1rem}
+}
+@media screen and (max-width:359px){.card.v2 .specs.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media screen and (max-width:480px){:root[data-size] .acts.v2.three{grid-template-columns:repeat(2,minmax(0,1fr))}:root[data-size] .acts.v2.three>:last-child{grid-column:1/-1}}
 /* printing My list: big plain cards, no buttons */
 @media print{
  *{color:#000!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important}
@@ -604,7 +660,7 @@ body{padding-block-end:100px}
 <div class="lbox" id="lbox" hidden role="dialog" aria-modal="true" aria-label="Photo"><button type="button" class="lbox-x" id="lboxX" aria-label="Close" data-i18n-al="lbox_close">✕</button><img id="lboxImg" alt=""><small id="lboxCap"></small></div>
 <div class="seg-row"><div class="seg" id="statusSeg" role="group" aria-label="Listing status" data-i18n-al="status_al"></div><button type="button" class="q" data-h="status" aria-label="What does this mean?" data-i18n-al="what">?</button></div>
 <div class="vip-note" id="vipNote" hidden></div>
-<div class="status"><span id="count">Loading listings…</span><span class="st-r"><button class="reset-inline" id="resetInline" type="button" hidden data-i18n="reset">Reset</button></span></div>
+<div class="status count-status" id="countStatus"><span id="count">Loading listings…</span><span class="st-r"><button class="reset-inline" id="resetInline" type="button" hidden data-i18n="reset">Reset</button></span></div>
 <div class="status"><div class="tgrp vseg" id="viewSeg" hidden role="group" aria-label="View" data-i18n-al="view_al"><button type="button" data-v="simple" data-i18n="view_simple">Simple</button><button type="button" data-v="detailed" data-i18n="view_detailed">Detailed</button></div><button type="button" class="favbtn" id="favBtn" aria-pressed="false" data-i18n="fav_lbl">♥ My list</button></div>
 <div class="consent" id="consent" hidden><span data-i18n="consent_msg">This site keeps your preferences on this device and uses anonymous Google Analytics to improve the page. By continuing to browse you agree.</span><button class="btn primary" id="consentOk" type="button" data-i18n="consent_ok">OK</button><button class="btn" id="consentNo" type="button" data-i18n="consent_no">Decline analytics</button><button type="button" class="lnk" data-legal="privacy" data-i18n="lg_privacy">Privacy Notice</button></div>
 <div class="list" id="list"><div class="skel" aria-hidden="true"><i style="aspect-ratio:16/9"></i><i style="height:20px;width:85%"></i><i style="height:84px"></i><i style="height:16px;width:55%"></i></div><div class="skel" aria-hidden="true"><i style="aspect-ratio:16/9"></i><i style="height:20px;width:85%"></i><i style="height:84px"></i><i style="height:16px;width:55%"></i></div><div class="skel" aria-hidden="true"><i style="aspect-ratio:16/9"></i><i style="height:20px;width:85%"></i><i style="height:84px"></i><i style="height:16px;width:55%"></i></div></div><button type="button" class="loadmore" id="more" hidden>Show more</button><button type="button" class="totop" id="toTop" aria-label="Back to top" data-i18n-al="totop">↑</button>
@@ -870,7 +926,7 @@ fav_empty:'Your list is empty. Tap <b>♡ Save</b> on a unit to keep it here.',f
 fav_added:'Saved to My list',fav_removed:'Removed from My list',save:'♡ Save',saved:'♥ Saved',
 view_al:'View',view_simple:'Simple',view_detailed:'Detailed',last_t:'Showing your last search',start_over:'Start over',
 sort_al:'Sort',s_new:'Newest listing',s_bmv:'Biggest discount',s_date:'Nearest auction date',s_lo:'Lowest price',s_hi:'Highest price',s_lbmv:'Smallest discount',
-reset:'Reset',reset_all:'Reset all',reset_all_f:'Reset all filters',show_n:'Show {n} units',close:'Close',ok:'OK',count:'{n} / {t} units',
+reset:'Reset',reset_all:'Reset all',reset_all_f:'Reset all filters',show_n:'Show {n} units',close:'Close',ok:'OK',count:'{n} / {t} units',count_left:'units left',count_read:'{n} of {t} units remaining in this list',
 empty1:'No {s} units match your filters',empty2:'There are {n} {s} units in total. Reset the filters to see them.',
 empty3:'No bidder, Cancelled and Sold units have auction dates that have already passed, so an Auction Date filter for upcoming dates hides them.',
 f_search:'Search',f_state:'State',f_district:'District',f_cat:'Property Category',f_type:'Type',f_date:'Auction Date',f_cy:'Completion Year',f_price:'Auction Price',f_bmv:'Discount',
@@ -943,7 +999,7 @@ fav_empty:'Senarai anda kosong. Tekan <b>♡ Simpan</b> pada unit untuk menyimpa
 fav_added:'Disimpan dalam Senarai saya',fav_removed:'Dibuang dari Senarai saya',save:'♡ Simpan',saved:'♥ Disimpan',
 view_al:'Paparan',view_simple:'Ringkas',view_detailed:'Terperinci',last_t:'Menunjukkan carian terakhir anda',start_over:'Mula semula',
 sort_al:'Susunan',s_new:'Senarai terbaru',s_bmv:'Diskaun paling besar',s_date:'Tarikh lelong paling dekat',s_lo:'Harga paling rendah',s_hi:'Harga paling tinggi',s_lbmv:'Diskaun paling kecil',
-reset:'Set semula',reset_all:'Set semula semua',reset_all_f:'Set semula semua penapis',show_n:'Tunjuk {n} unit',close:'Tutup',ok:'OK',count:'{n} / {t} unit',
+reset:'Set semula',reset_all:'Set semula semua',reset_all_f:'Set semula semua penapis',show_n:'Tunjuk {n} unit',close:'Tutup',ok:'OK',count:'{n} / {t} unit',count_left:'unit lagi',count_read:'{n} daripada {t} unit berbaki dalam senarai ini',
 empty1:'Tiada unit {s} yang sepadan dengan penapis anda',empty2:'Ada {n} unit {s} kesemuanya. Set semula penapis untuk melihatnya.',
 empty3:'Unit Tiada pembida, Dibatalkan dan Terjual mempunyai tarikh lelong yang sudah lepas, jadi penapis Tarikh Lelong untuk tarikh akan datang menyembunyikannya.',
 f_search:'Carian',f_state:'Negeri',f_district:'Daerah',f_cat:'Kategori Hartanah',f_type:'Jenis',f_date:'Tarikh Lelong',f_cy:'Tahun Siap',f_price:'Harga Lelong',f_bmv:'Diskaun',
@@ -1747,8 +1803,58 @@ function cmpHtml(){const rs=ROWS.slice(0,4),cdo=r=>r[21]===CATS[0]||r[21]===CATS
   return '<tr><th scope="row">'+esc(lab)+'</th>'+rs.map((r,k)=>{const b=best!=null&&v(r)===best;return '<td'+(b?' class="best"':'')+'>'+(b?'★ ':'')+cells[k]+'</td>'}).join('')+'</tr>'}).join('');
  return '<div class="cmpw"><table class="cmp"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div><p class="cmp-note">'+esc(tx('cmp_best'))+(ROWS.length>4?' '+esc(tx('cmp_more')):'')+'</p>'}
 let ROWS=[],SHOWN=0;const PAGE=60;
+// Remaining filtered units: keep the current card included, even at the end of a loaded batch.
+const unitCounter=(()=>{
+ const badge=$('count'),bar=$('countStatus'),top=document.querySelector('.top'),list=$('list'),dock=document.querySelector('.dock');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let cards=[],frame=0,value=-1,total=-1,number=null,motion=null,headerDirty=true,pin=78;
+ function show(n,animate){
+  if(n===value)return;
+  const previous=value;value=n;number.textContent=String(n);
+  badge.setAttribute('aria-label',tx('count_read',{n,t:total}));
+  if(motion){motion.cancel();motion=null}
+  if(animate&&previous>=0&&!reduced.matches&&number.animate)motion=number.animate([
+   {opacity:.35,transform:'translateY('+(n<previous?'-.3em':'.3em')+')'},
+   {opacity:1,transform:'translateY(0)'}],{duration:200,easing:'cubic-bezier(.22,1,.36,1)'});
+ }
+ function update(){
+  frame=0;if(!number||PRINTING)return;
+  if(headerDirty){pin=top.offsetHeight+(parseFloat(getComputedStyle(top).top)||0)+6;bar.style.setProperty('--count-top',pin+'px');headerDirty=false}
+  const rect=bar.getBoundingClientRect();bar.classList.toggle('is-stuck',rect.top<=pin+1&&total>0);
+  if(!total){show(0,false);return}
+  if(!cards.length){show(total,false);return}
+  const line=rect.bottom+8;
+  // Card bottoms are ordered by grid row; date headings are deliberately excluded.
+  let lo=0,hi=cards.length;
+  while(lo<hi){const m=(lo+hi)>>1;if(cards[m].getBoundingClientRect().bottom<=line)lo=m+1;else hi=m}
+  let passed=lo<cards.length?Number(cards[lo].dataset.k):cards.length;
+  const last=cards[cards.length-1],end=last.getBoundingClientRect();
+  const usable=innerHeight-(dock?dock.getBoundingClientRect().height:0)-12;
+  // Reaching a partial batch must not look like the end of all search results.
+  if(SHOWN===total&&rect.top<=pin+1&&end.bottom<=usable)passed=total-1;
+  show(Math.max(1,total-passed),true);
+ }
+ function schedule(){if(!frame)frame=requestAnimationFrame(update)}
+ function refresh(){cards=Array.from(list.querySelectorAll(':scope > .card[data-k]'));schedule()}
+ function reset(){
+  if(motion){motion.cancel();motion=null}
+  total=ROWS.length;value=-1;badge.classList.add('count-ready');badge.setAttribute('role','group');
+  badge.innerHTML='<b class="count-value"></b><span class="count-slash" aria-hidden="true">/</span><span class="count-total"></span><span class="count-label"></span>';
+  number=badge.querySelector('.count-value');number.style.setProperty('--count-digits',String(total).length+'ch');
+  badge.querySelector('.count-total').textContent=String(total);badge.querySelector('.count-label').textContent=tx('count_left');
+  show(total,false);refresh();
+ }
+ addEventListener('scroll',schedule,{passive:true});
+ addEventListener('resize',()=>{headerDirty=true;schedule()},{passive:true});
+ if('ResizeObserver' in window){
+  const sizes=new ResizeObserver(()=>{headerDirty=true;schedule()});sizes.observe(top);sizes.observe(list);sizes.observe(bar);
+ }
+ list.addEventListener('load',schedule,true);
+ return {reset,refresh};
+})();
 function moreBtn(){const b=$('more');b.hidden=SHOWN>=ROWS.length;b.textContent=tx('more_n',{n:ROWS.length-SHOWN})}
 function drawList(){$('list').innerHTML=cardsHtml(0,SHOWN);
+ unitCounter.refresh();
  setTimeout(()=>document.querySelectorAll('.hero img:not(.ok)').forEach(i=>{if(i.complete)i.classList.add('ok')}),1500)}
 function favMsg(fr){const rs=fr.slice(0,15),L=[tx('fav_wa'),''];
  rs.forEach((r,i)=>{L.push((i+1)+'. '+pv(typeName(r))+', '+pv(r[1]));L.push('   '+pv(r[7])+' · '+fmtDay(r[12])+(ok(r[13])?' '+r[13]:''));L.push('   '+BASE+'#'+r[20]);L.push('')});
@@ -1776,7 +1882,7 @@ function render(){facetOpts();
  let rows=filtered();const s=$('sort').value;
  rows=rows.slice().sort((a,b)=>s==='komisen'?((faAmt(b)-faAmt(a))||(dkey(a)-dkey(b))):s==='rich'?((richK(a)-richK(b))||(dkey(a)-dkey(b))):s==='score'?(invScore(b)??-1)-(invScore(a)??-1):s==='bmv'?bmvv(b)-bmvv(a):s==='lbmv'?bmvv(a)-bmvv(b):s==='harga'?num(a[7])-num(b[7]):s==='psf'?psfK(a)-psfK(b):s==='hharga'?num(b[7])-num(a[7]):s==='new'?((b[22]||'').localeCompare(a[22]||'')||POS.get(b)-POS.get(a)):dkey(a)-dkey(b));
  ROWS=rows;SHOWN=favMode?rows.length:Math.min(PAGE,rows.length);QTOKS=favMode||sharedId?[]:qToks();DAYN=grpOn()?dayCounts(rows):null;AUTO=0;drawList();moreBtn();fchipsUI();
- $('count').textContent=favMode?txn('fav_count',rows.length):tx('count',{n:rows.length,t:DATA.length});
+ unitCounter.reset();
  const a=activeN();
  document.querySelectorAll('.badge').forEach(b=>{b.hidden=!a||favMode;b.textContent=a});
  $('resetInline').hidden=!a||favMode;
@@ -1847,7 +1953,7 @@ document.addEventListener('input',e=>{const d=e.target.closest&&e.target.closest
 ['jenis','cat','pegangan','bankSel','sort'].forEach(k=>$(k).addEventListener('input',render));
 $('q').addEventListener('input',()=>{clearTimeout(QDEB);QDEB=setTimeout(render,160)});   // typing: one redraw after a short pause, not one per letter
 // search button / Enter (29/10/2026): results drawn now, keyboard closed, then the first listing just under the sticky bar
-function toFirst(now){const el=$('list').firstElementChild;if(!el)return;const y=el.getBoundingClientRect().top+window.scrollY-document.querySelector('.top').offsetHeight-8;
+function toFirst(now){const el=$('list').firstElementChild;if(!el)return;const top=document.querySelector('.top'),bar=$('countStatus');const y=el.getBoundingClientRect().top+window.scrollY-top.offsetHeight-(parseFloat(getComputedStyle(top).top)||0)-bar.offsetHeight-22;
  if(now){window.scrollTo(0,y);return}try{window.scrollTo({top:y,behavior:'smooth'})}catch(e){window.scrollTo(0,y)}}
 function qGo(){clearTimeout(QDEB);render();$('q').blur();track('search_go',{});setTimeout(toFirst,120)}
 $('qGo').onclick=qGo;
@@ -1882,7 +1988,7 @@ $('daerahQ').addEventListener('input',daerahOpts);
 $('daerahClear').onclick=()=>{selD.clear();daerahOpts();render()};
 $('daerahBtn').onclick=()=>daerahToggle($('daerahPanel').hidden);
 $('daerahDone').onclick=()=>daerahToggle(false);
-$('more').onclick=()=>{const n=Math.min(SHOWN+PAGE,ROWS.length);$('list').insertAdjacentHTML('beforeend',cardsHtml(SHOWN,n));SHOWN=n;moreBtn()};
+$('more').onclick=()=>{const n=Math.min(SHOWN+PAGE,ROWS.length);$('list').insertAdjacentHTML('beforeend',cardsHtml(SHOWN,n));SHOWN=n;moreBtn();unitCounter.refresh()};
 // more units load by themselves near the end of the list (4 times, up to 300 cards); after that the button takes over
 if('IntersectionObserver' in window)new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)&&!$('more').hidden&&AUTO<4&&!PRINTING){AUTO++;$('more').click()}},{rootMargin:'0px 0px 600px 0px'}).observe($('more'));
 $('fchips').onclick=e=>{const b=e.target.closest('.fchip');if(!b)return;const f=b.dataset.f;track('filter_chip_remove',{filter:f});
@@ -2410,7 +2516,7 @@ const clPlan=()=>TRIAL?'f':TIER==='sip'?'v':'p';
 function clDetBtn(){const x=document.querySelector('#list .card .xtra-b .score:not(.na)');return x&&x.closest('.card').querySelector('.detbtn')}
 function clToast(m){const el=G('toast');el.textContent=m;el.hidden=false;clearTimeout(clToast.t);clToast.t=setTimeout(()=>{el.hidden=true},4000)}
 function clSteps(){const c='#list .card ',pl=clPlan(),S=(id,ch,sel,kind)=>({id,ch,v:AVIEW,kind:kind||'info',sel,txt:id}),X=k=>()=>document.querySelector(c+'.xtra-b '+k);   // inside Premium & VIP: atPrep opens the box this part sits in
- return [S('c_hi_'+pl,'','','intro'),S('c_qf','find','#qfBtn'),S('c_q','find','#q'),S('c_filter','find','#openTop'),S('c_tabs','find','#statusSeg'),S('c_price','read',c+'.pricebox'),S('c_when','read',c+'.when')].concat(
+ return [S('c_hi_'+pl,'','','intro'),S('c_qf','find','#qfBtn'),S('c_q','find','#q'),S('c_filter','find',()=>G('openTop').getClientRects().length?G('openTop'):G('openFab')),S('c_tabs','find','#statusSeg'),S('c_price','read',c+'.pricebox'),S('c_when','read',c+'.when')].concat(
   pl==='f'?[S('c_xx','read',c+'.addr')]:[S('c_win','read',X('.wcalc')),S('c_det','read',c+'.detbtn')],
   [S(pl==='f'?'c_icons_f':'c_icons','next',c+'.acts.v3'),S('c_wa','next',c+'.wa-unit')],pl==='f'?[]:[S('c_pos','next',c+'.posreq')],[S('c_call','next','.sub')],
   pl==='f'?[S('c_open','plan','#trialBar')]:pl==='p'?[S('c_lock','plan',X('.xxbox'))]:[S('c_score','plan',X('.score:not(.na)')),S('c_sort','plan','#sort'),S('c_hist','plan','#mdl .hist')],
