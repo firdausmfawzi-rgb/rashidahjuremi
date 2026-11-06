@@ -238,7 +238,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .at-i-core{inset:6px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 34% 26%,#2c628f,#0a1d33 62%,#050d18);box-shadow:inset 0 0 12px rgba(94,231,255,.55),0 0 10px rgba(94,231,255,.4);overflow:hidden}.at-i-core::after{content:'';position:absolute;top:-30%;left:-60%;width:40%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(22deg);animation:atIShine 3.4s ease-in-out infinite}
 .at-i-core svg{width:29px;height:29px;filter:drop-shadow(0 0 5px rgba(124,240,255,.95));animation:atIBreath 2.2s ease-in-out infinite}
 @keyframes atISpin{to{transform:rotate(360deg)}}@keyframes atIHalo{0%{transform:scale(.82);opacity:.95}70%,100%{transform:scale(1.42);opacity:0}}@keyframes atIShine{0%,55%{left:-60%}85%,100%{left:125%}}@keyframes atIBreath{50%{transform:scale(1.1)}}
-.at-x{flex:none;min-width:40px;min-height:38px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:9px;background:transparent;color:#fff;font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer}.at-x:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.at-x{flex:none;min-width:40px;min-height:38px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:9px;background:transparent;color:#fff;font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer}#atWrap:not(.at-client) .at-top{position:sticky;top:0;z-index:1;flex-wrap:wrap;background:#0c2033}#atWrap:not(.at-client) .at-x{min-height:44px;min-width:44px}.at-x:focus-visible{outline:3px solid #fff;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.at-i-halo,.at-i-ring,.at-i-orbit,.at-i-core::after,.at-i-core svg{animation:none}}
 #atWrap .at-b{position:fixed;z-index:100000;background:rgba(3,10,20,.7);touch-action:none}#atWrap .at-cover{display:none;position:fixed;inset:0;z-index:100001;touch-action:none}#atWrap.at-info .at-cover,#atWrap.at-intro .at-cover,#atWrap.at-end .at-cover{display:block}
 #atWrap .at-ring{position:fixed;z-index:100002;pointer-events:none;border-radius:12px;border:3px solid #5ee7ff;box-shadow:0 0 0 2px rgba(94,231,255,.35),0 0 26px 6px rgba(94,231,255,.75);animation:atPulse 1.5s ease-in-out infinite}
@@ -1138,7 +1138,7 @@ function consentSet(v,how){try{localStorage.setItem(CONSENT_KEY,v)}catch(e){}G('
 (function(){let v='';try{v=localStorage.getItem(CONSENT_KEY)||''}catch(e){}if(v)return;G('consent').hidden=false;
  G('consentOk').onclick=()=>consentSet('yes','ok');G('consentNo').onclick=()=>consentSet('no');
  document.addEventListener('click',e=>{if(G('consent').hidden)return;const t=e.target;if(t&&t.closest&&(t.closest('#consent')||t.closest('.gate')||t.closest('#mdl')||t.closest('#atWrap')||t.closest('[data-l]')))return;consentSet('yes','continue')})})();
-document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const lb=G('lbox');if(lb&&!lb.hidden)return;if(MDL){closeModal();return}if(SHEETCLOSE)SHEETCLOSE()});   // a photo on top closes first (its own handler)
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(AT&&!AT.client){e.preventDefault();atExit();return}const lb=G('lbox');if(lb&&!lb.hidden)return;if(MDL){closeModal();return}if(SHEETCLOSE)SHEETCLOSE()});   // a photo on top closes first (its own handler)
 G('guideBtn').onclick=()=>guideOpen();
 G('bannerWa').addEventListener('click',()=>gtrack('whatsapp_banner_click'));G('bannerCall').addEventListener('click',()=>gtrack('call_click'));
 applyI18n();sizeUI();
@@ -2051,7 +2051,7 @@ LASTON=restoreLast();
 if(sharedId)track('shared_unit_open',{unit_id:sharedId});
 viewUI();paint();render();LASTSNAP=JSON.stringify(snapNow());
 atRentRow=id=>{const r=DATA.find(x=>x[20]===id);return !!r&&Array.isArray(r[33])&&r[33].some(a=>Array.isArray(a)&&num(a[0])>0)};
-if(!sharedId&&agTourDue())setTimeout(agTourStart,500);else if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(guideOpen,500);   // an agent's first visit: the required walkthrough; a fresh code: the welcome first, the guide after it
+if(!sharedId&&agTourDue())setTimeout(agTourStart,500);else if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(guideOpen,500);   // an agent's first visit: the dismissible walkthrough; a fresh code: the welcome first, the guide after it
 if(sharedId)setTimeout(()=>toFirst(true),350);   // shared unit link (#id, 29/10/2026): open straight on that unit's card, not the top of the page
 // ===== AI assistant (2/11/2026): an on-screen character (two looks) that answers questions about the auction data in this page,
 // shows the client around by highlighting and tapping the page's own controls, and reads the daily market summary written by the
@@ -2321,8 +2321,7 @@ function agentSwitch(t){const k=AVIEW;t.className='tier-tag aview '+k;
 function showTierBadge(){addScoreSort();const t=G('tierTag');if(!t)return;if(REALAGENT){agentSwitch(t);return}clInfo();if(TRIAL||!TIER){t.hidden=true;return}
  const k=ISAGENT?'agent':TIER==='sip'?'vip':'prem';t.className='tier-tag '+k;
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span>';t.hidden=false}   // the cyberpunk "Agentic AI Powered Data" tag (#aiTag) shows on every tier, the free preview included (29/10/2026)
-// Agent walkthrough (4/11/2026): an agent's first visit on this device opens a required tour through the four views; it cannot be closed,
-// only finished. Each step shows one thing, what to do and why it exists. The place is kept per code, so the reloads of a view switch resume it.
+// The specialist walkthrough stores progress per access code across view switches. Closing it silences the automatic tour on this device.
 const AT_TXT={ms:{more:'Leret atau tatal pada bahagian bercahaya untuk lihat selebihnya.',ai:'Pembantu AI',step:'Langkah {a} daripada {b}',view:'Paparan',why:'Kenapa:',note:'Ingat:',back:'‹ Kembali',xal:'Tutup panduan',next:'Seterusnya ›',start:'Mula ›',finish:'Mula guna laman',tap:'Tekan butang yang bercahaya',pick:'Tekan lencana yang bercahaya, kemudian pilih: {v}',wrong:'Bukan yang itu. Sila pilih: {v}',
  c_menu_all:'Tunjuk semua langkah ›',c_menu_or:'Atau pilih satu bahagian:',c_later:'Nanti dulu',c_close:'Tutup',c_tip:'Tip:',c_pick:'Pilih bahasa / Choose language',c_menu_back:'Kembali ke menu ›',c_try:'Cuba Carian Mudah ›',c_text:'Baca panduan bertulis',c_toast:'Panduan ada pada butang i di atas, bila-bila masa.',
  c_ch_find:'Cari hartanah',c_ch_read:'Faham maklumat',c_ch_next:'Langkah seterusnya',c_ch_plan_f:'Buka maklumat penuh',c_ch_plan_p:'Pelan Premium saya',c_ch_plan_v:'Khas untuk VIP',
@@ -2349,7 +2348,7 @@ const AT_TXT={ms:{more:'Leret atau tatal pada bahagian bercahaya untuk lihat sel
  c_sort:['Lihat skor tertinggi dahulu','Di sini, pilih Skor pelabur tertinggi. Unit dengan skor paling tinggi akan naik ke atas.',''],
  c_hist:['Sejarah lelong','Bahagian ini dalam Butiran penuh menunjukkan lelong lepas unit ini: berapa kali dilelong dan perubahan harganya.','VIP juga nampak keputusan 12 bulan pada butang status, bukan 30 hari sahaja.'],
  c_end:['Selesai!','Sekarang cuba sendiri. Tekan butang kuning di bawah dan jawab 3 soalan.','Nak lihat panduan ini lagi? Tekan butang i yang bercahaya di bahagian atas.'],
- a_hi:['Selamat datang, {name}','Saya akan tunjuk laman ini satu persatu, melalui 4 paparan. Panduan ini wajib dan mengambil masa sekitar 5 minit.','Laman ini membantu anda mencari maklumat untuk menasihati klien, dan menawarkan data berbayar terus kepada klien.'],
+ a_hi:['Selamat datang, {name}','Saya akan tunjuk laman ini satu persatu, melalui 4 paparan. Tekan Tutup untuk terus ke senarai. Tekan butang i untuk buka semula panduan.','Laman ini membantu anda mencari maklumat untuk menasihati klien, dan menawarkan data berbayar terus kepada klien.'],
  a_badge:['Ini paparan anda: Agent Specialist','Lihat lencana yang bercahaya. Ia menunjukkan paparan yang sedang dibuka.','Paparan ejen paling lengkap, kerana anda perlu semua maklumat untuk membantu klien.'],
  a_val:['Nilai pasaran','Lihat nilai pasaran, bar perbezaan dan jumlah jimat di bawah harga lelong.','Klien nampak terus sama ada unit ini berbaloi. Semua pelan nampak bahagian ini.'],
  a_pos:['Butang POS','Butang ini membuka POS unit. Jangan tekan lagi.','Bila klien minta POS, anda boleh dapatkannya sendiri dengan cepat.'],
@@ -2408,7 +2407,7 @@ const AT_TXT={ms:{more:'Leret atau tatal pada bahagian bercahaya untuk lihat sel
  c_sort:['See the highest scores first','Here, choose Highest investor score. The units with the highest score move to the top.',''],
  c_hist:['Auction history','This part of Full details shows past auctions of this unit: how many times it was auctioned and how the price changed.','VIP also sees 12 months of results on the status buttons, not just 30 days.'],
  c_end:['All done!','Now try it yourself. Press the yellow button below and answer 3 questions.','Want this guide again? Press the glowing i button at the top.'],
- a_hi:['Welcome, {name}','I will show you this site one step at a time, through 4 views. This guide is required and takes about 5 minutes.','This site helps you find information to advise clients, and offer paid data directly to them.'],
+ a_hi:['Welcome, {name}','I will show you this site one step at a time, through 4 views. Select Close to go straight to the listings. Use the i button to reopen the guide.','This site helps you find information to advise clients, and offer paid data directly to them.'],
  a_badge:['This is your view: Agent Specialist','Look at the glowing badge. It shows the view that is open.','The agent view is the most complete, because you need everything to help clients.'],
  a_val:['Market value','See the market value, the difference bar and the saving under the auction price.','Clients see at once whether the unit is worth it. Every plan sees this part.'],
  a_pos:['POS button','This button opens the POS of a unit. Do not press it yet.','When a client asks for a POS, you can get it yourself quickly.'],
@@ -2452,7 +2451,7 @@ function atSteps(){const c='#list .card ',S=(id,v,kind,sel,to,txt,m)=>({id,v,kin
 let AT=null,atRentRow=null;
 const atKey=()=>AT&&AT.client?'clguide':'agtour_'+ACODE;
 function agTourDue(){return REALAGENT&&!!ACODE&&ls.get(atKey())!=='done'}
-function agTourStart(){try{sessionStorage.removeItem('lelong.welcome')}catch(e){}ls.set('guide','1');
+function agTourStart(){if(AT||!agTourDue())return;try{sessionStorage.removeItem('lelong.welcome')}catch(e){}ls.set('guide','1');
  const steps=atSteps(),i=Math.max(0,steps.findIndex(s=>s.id===ls.get(atKey())));
  if(steps[i].v!==AVIEW){try{sessionStorage.setItem(KP+'aview',steps[i].v);location.reload();return}catch(e){return}}
  atMount(steps,i)}
@@ -2462,7 +2461,7 @@ function atMount(steps,i,client){
  w.addEventListener('wheel',e=>{if(e.target.closest('#atCard'))return;e.preventDefault();sc(e.deltaY)},{passive:false});
  w.addEventListener('touchstart',e=>{y0=e.target.closest('#atCard')?null:e.touches[0].clientY},{passive:true});
  w.addEventListener('touchmove',e=>{if(y0===null)return;e.preventDefault();const y=e.touches[0].clientY;sc(y0-y);y0=y},{passive:false});
- AT={steps,i,el:null,msg:'',dir:1,replay:!!client||ls.get('agtour_replay')==='1',client:!!client,only:''};document.addEventListener('click',atClick,true);document.addEventListener('change',atChange,true);if(i===0&&!client)gtrack('agent_tour_start',{});atShow();AT.timer=setInterval(atTick,100)}
+ AT={steps,i,el:null,msg:'',dir:1,client:!!client,only:''};document.addEventListener('click',atClick,true);document.addEventListener('change',atChange,true);if(i===0&&!client)gtrack('agent_tour_start',{});atShow();AT.timer=setInterval(atTick,100)}
 // puts the page in the state a step needs, so Back and a resumed tour work: the unit window open or closed, Premium & VIP open or closed
 function atPrep(s){const fn=typeof s.sel==='function',sel=fn?'':(s.sel||''),want=s.m||(sel.startsWith('#mdl')?'det':''),kind=G('mdl').hidden?'':G('mdlB').querySelector('.sb-top')?'score':'det';let wait=false;if(!want)G('mdlB').style.paddingBottom='';
  if(kind!==want){if(kind&&MDL){closeModal();wait=true}const o=want==='score'?atRentBtn():want==='det'?(AT&&AT.client&&clDetBtn())||document.querySelector('#list .card .detbtn'):null;if(o){o.click();wait=true}}
@@ -2488,7 +2487,7 @@ function atFit(){const g=AT,el=g.el,H=innerHeight,card=G('atCard'),ch=card.offse
 function atBack(){const g=AT;if(!g||g.busy||g.i<1)return;g.dir=-1;g.i--;atShow()}
 function atCard(){if(AT.client)return clCard();const g=AT,s=g.steps[g.i],t=atT(s.txt),on=s.to?TAG[s.to][0]:'',done=g.steps.filter((x,k)=>k<g.i).length;
  const act='<div class="at-btns">'+(g.i>0?'<button type="button" class="at-back" data-at="back">'+atT('back')+'</button>':'')+(s.kind==='intro'?'<button type="button" class="at-next" data-at="next">'+atT('start')+'</button>':s.kind==='end'?'<button type="button" class="at-next" data-at="next">'+atT('finish')+'</button>':s.kind==='info'?'<button type="button" class="at-next" data-at="next">'+atT('next')+'</button>':'<div class="at-wait'+(g.msg?' bad':'')+'">'+esc(g.msg||(s.kind==='tap'?atT('tap'):atT('pick').replace('{v}',on)))+'</div>')+'</div>';
- G('atCard').innerHTML='<div class="at-top"><span class="at-orb" aria-hidden="true"></span><b>'+atT('ai')+'</b><span class="at-lang"><button type="button" data-at="ms"'+(LANG==='ms'?' class="on"':'')+'>BM</button><button type="button" data-at="en"'+(LANG==='en'?' class="on"':'')+'>EN</button></span>'+(g.replay?'<button type="button" class="at-x" data-at="exit" aria-label="'+esc(atT('xal'))+'">✕</button>':'')+'</div>'
+ G('atCard').innerHTML='<div class="at-top"><span class="at-orb" aria-hidden="true"></span><b>'+atT('ai')+'</b><span class="at-lang"><button type="button" data-at="ms"'+(LANG==='ms'?' class="on"':'')+'>BM</button><button type="button" data-at="en"'+(LANG==='en'?' class="on"':'')+'>EN</button></span>'+'<button type="button" class="at-x at-xt" data-at="exit" aria-label="'+esc(atT('xal'))+'"><span aria-hidden="true">×</span> '+esc(atT('c_close'))+'</button>'+'</div>'
   +'<div class="at-meta"><span>'+atT('step').replace('{a}',done+1).replace('{b}',g.steps.length)+'</span><span>'+atT('view')+': '+TAG[s.v][0]+'</span></div><div class="at-bar"><i style="width:'+Math.round((done+1)*100/g.steps.length)+'%"></i></div>'
   +'<h3>'+esc(t[0].replace('{name}',CLIENT||''))+'</h3><p class="at-do">'+esc(t[1])+'</p><p class="at-why"><b>'+atT(s.kind==='end'?'note':'why')+'</b> '+esc(t[2])+'</p><p class="at-more" hidden>'+esc(atT('more'))+'</p>'+act;
  G('atWrap').className='at-'+s.kind;document.documentElement.classList.toggle('at-big',s.kind==='switch');atTick()}
@@ -2504,10 +2503,10 @@ function atClick(e){const g=AT;if(!g)return;const s=g.steps[g.i],a=e.target.clos
 function atChange(e){const g=AT;if(!g||e.target.id!=='aviewSel')return;const s=g.steps[g.i];
  if(s.kind==='switch'&&e.target.value===s.to){g.i++;if(g.steps[g.i])ls.set(atKey(),g.steps[g.i].id);return}   // the right view: the page reloads and the tour resumes on the next step
  e.stopImmediatePropagation();e.target.value=AVIEW;g.msg=atT('wrong').replace('{v}',s.to?TAG[s.to][0]:TAG[AVIEW][0]);atCard()}
-// the i button (4/11/2026): an agent can watch the guide again at any time; a replay can be closed, only the first run is required
-function atReplay(){if(AT)return;ls.set('agtour_replay','1');ls.del(atKey());gtrack('agent_tour_replay',{});agTourStart()}
-function atExit(){const cl=AT&&AT.client,back=AVIEW!=='agent'&&!cl;atDone();if(MDL)closeModal();G('mdlB').style.paddingBottom='';if(cl)clToast(atT('c_toast'));if(back){try{sessionStorage.setItem(KP+'aview','agent')}catch(e){}location.reload()}}
-function atDone(){const g=AT;if(!g)return;AT=null;clearInterval(g.timer);if(g.client){ls.set('guide','1');document.querySelectorAll('#list .card .xtra[open]').forEach(d=>d.open=false);window.scrollTo(0,0)}else{ls.del('agtour_replay');ls.set(atKey(),'done')}document.removeEventListener('click',atClick,true);document.removeEventListener('change',atChange,true);const w=G('atWrap');if(w)w.remove();document.documentElement.classList.remove('at-big');if(g.client)gtrack('client_guide_end',{plan:clPlan(),step:(g.steps[g.i]||{}).id});else gtrack('agent_tour_done',{})}
+// the i button (4/11/2026): an agent can watch the guide again at any time; the first visit, resumed steps and replays all offer Close
+function atReplay(){if(AT)return;ls.del(atKey());gtrack('agent_tour_replay',{});agTourStart()}
+function atExit(){const cl=AT&&AT.client,back=AVIEW!=='agent'&&!cl;atDone(true);if(MDL)closeModal();G('mdlB').style.paddingBottom='';if(cl)clToast(atT('c_toast'));if(back){try{sessionStorage.setItem(KP+'aview','agent')}catch(e){}location.reload()}else if(!cl)G('atInfo').focus({preventScroll:true})}
+function atDone(dismissed=false){const g=AT;if(!g)return;AT=null;clearInterval(g.timer);if(g.client){ls.set('guide','1');document.querySelectorAll('#list .card .xtra[open]').forEach(d=>d.open=false);window.scrollTo(0,0)}else{ls.del('agtour_replay');ls.set(atKey(),'done')}document.removeEventListener('click',atClick,true);document.removeEventListener('change',atChange,true);const w=G('atWrap');if(w)w.remove();document.documentElement.classList.remove('at-big');if(g.client)gtrack('client_guide_end',{plan:clPlan(),step:(g.steps[g.i]||{}).id});else gtrack(dismissed?'agent_tour_exit':'agent_tour_done',{})}
 // Client guide (6/11/2026): the lit walkthrough for Free, Premium and VIP, for people not used to websites. It is never required, offers itself once, and
 // has four short parts in the same order on every plan: find, understand, what to do next, what this plan gives. Only a yellow button moves it on, nothing has to be tapped on the page.
 function guideOpen(){if(REALAGENT&&AVIEW==='agent')showGuide();else clGuide()}
