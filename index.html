@@ -198,6 +198,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .bmvrow{display:flex;align-items:center;gap:6px;margin-top:4px}
 .bmv{align-self:flex-start;background:var(--prem-bg);color:var(--prem);border-radius:99px;padding:6px 14px;font-weight:800;font-size:1rem}
 .addr{font-size:1.15rem;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
+.rail-walk-note{display:flex;align-items:flex-start;gap:.45em;padding:.4em .65em;border-inline-start:3px solid var(--save);border-radius:8px;background:var(--ok-bg);color:var(--save);font-size:.95rem;font-weight:700;line-height:1.35;overflow-wrap:anywhere}
 .card.simple .addr{font-size:1.25rem}.card.simple .price{font-size:2rem}
 .dims{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px;padding:10px 12px;background:var(--bg);border-radius:12px}
@@ -306,6 +307,30 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .acts.v2.three .posreq{display:flex;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:4px 6px;border:1.5px solid #d93025;border-radius:12px;background:var(--surface);color:#d93025;font-weight:800;font-size:.86rem;line-height:1.15;text-decoration:none;text-align:center}.acts.v2.three .posreq .pdfi{width:16px;height:19px;flex:none}.acts.v2.three .posreq span{white-space:nowrap}.acts.v2.three .posreq.lk{opacity:.85}
 .posdl.sm{min-height:44px;padding:4px 8px;gap:6px;justify-content:center;border-radius:12px}.posdl.sm .pdfi{width:16px;height:19px}.posdl.sm span{font-weight:800;font-size:.95rem;color:#d93025}
 .acts.v3.icons{grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:6px}.acts.v3.icons .calbtn{grid-column:1/-1}.acts.v3.icons .cal{width:16px;height:16px;flex:none}.acts.v3.icons a,.acts.v3.icons button{min-height:40px;font-size:.8rem;padding:3px 4px;border-radius:10px;gap:4px}.acts.v3.icons .map .pin{width:16px;height:16px}.acts.v3.icons .calbtn{text-decoration:none}
+
+.dad-history-row{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.dad-history-row .btn{margin-top:6px;min-height:44px}#dadExpiryStatus{min-height:44px}
+.dad-card{grid-column:1/-1;min-width:0;border:2px solid #12665e;border-radius:12px;background:var(--surface);color:var(--fg);overflow:hidden}
+.dad-card>summary{display:grid;grid-template-columns:1.7rem minmax(0,1fr) auto .5rem;grid-template-rows:auto auto;align-items:center;gap:3px 8px;padding:10px 12px;min-height:56px;list-style:none;cursor:pointer;color:#fff;background:#104d48;line-height:1.25;text-align:left}
+.dad-card>summary::-webkit-details-marker{display:none}
+.dad-card>summary:focus-visible{outline:3px solid #ffd969;outline-offset:-4px}
+.dad-card>summary::after{content:"";grid-column:4;grid-row:1/3;width:.4rem;height:.4rem;border-right:2px solid;border-bottom:2px solid;transform:translateY(-2px) rotate(45deg)}
+.dad-card[open]>summary::after{transform:translateY(2px) rotate(225deg)}
+.dad-title{grid-column:2;grid-row:1;font-size:1rem;font-weight:800}.dad-icon{grid-column:1;grid-row:1/3;width:1.55rem;height:1.55rem;color:#b6f4d9}
+.dad-byline{grid-column:2;grid-row:2;color:#ddf2eb;font-size:.82rem;font-weight:500;overflow-wrap:anywhere}
+.dad-count{grid-column:3;grid-row:1/3;border-radius:999px;background:#d5f5e5;color:#123e35;padding:4px 8px;font-size:.82rem;font-weight:800;font-variant-numeric:tabular-nums;text-align:center}
+.dad-last{display:block}.dad-body{padding:5px 12px 8px;text-align:left}
+.dad-log{font-size:.86rem;border-top:1px solid var(--line)}
+.dad-log>summary{cursor:pointer;min-height:44px;align-content:center;color:var(--save);font-weight:750}
+.dad-log ol{margin:0 0 6px;padding-left:1.2rem;line-height:1.45}.dad-log li+li{margin-top:5px}
+.dad-log small{display:block;font-size:.83rem;color:var(--muted)}
+.dad-row{display:flex;align-items:center;gap:10px;min-height:48px;padding:7px 0;cursor:pointer}.dad-row+.dad-row{border-top:1px solid var(--line)}
+.dad-row input{flex:none;width:20px;height:20px;accent-color:var(--accent)}
+.dad-row small{display:block;font-size:.83rem;line-height:1.35;overflow-wrap:anywhere}
+.dad-row[data-expired="true"] .dad-note{font-weight:700;color:var(--warn)}
+.dad-body button[hidden],.dad-filters button[hidden]{display:none!important}
+.dad-filters label{display:block;font-weight:700}.dad-filters label[for="dadState"]{margin-top:6px}
+.dad-filters small:empty{display:none}
+
 .fa{grid-column:1/-1;display:grid;gap:6px}.fa-menu{display:grid;gap:6px}.fa-menu[hidden]{display:none}
 .acts.v3.icons .fa-btn{position:relative;isolation:isolate;overflow:hidden;width:100%;min-height:46px;border:0;border-radius:12px;background:linear-gradient(120deg,#171104,#3d2d07 48%,#171104);color:#ffe9a8;font-size:.92rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-shadow:0 0 8px rgba(255,217,120,.9);box-shadow:0 0 0 1px #e6c25a,0 0 14px 2px rgba(230,194,90,.6),inset 0 0 12px rgba(230,194,90,.25);animation:faGlow 2.2s ease-in-out infinite}
 .acts.v3.icons .fa-btn::after{content:'';position:absolute;top:0;left:-40%;z-index:-1;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,240,190,.55),transparent);transform:skewX(-20deg);animation:faShine 3s ease-in-out infinite}
@@ -893,6 +918,15 @@ body{padding-block-end:100px}
 <div class="fld"><span id="priceLbl"><span data-i18n="fl_price">Auction Price (RM) - your budget</span><button type="button" class="q" data-h="price" aria-label="What does this mean?" data-i18n-al="what">?</button></span><div class="pr"><label class="pr-f"><span data-i18n="p_from_l">From</span><input id="pMin" type="text" inputmode="numeric" placeholder="e.g. 100,000" data-i18n-ph="p_from" autocomplete="off" aria-label="Minimum auction price in RM" data-i18n-al="p_from_al"></label><label class="pr-f"><span data-i18n="p_to_l">To</span><input id="pMax" type="text" inputmode="numeric" placeholder="e.g. 300,000" data-i18n-ph="p_to" autocomplete="off" aria-label="Maximum auction price in RM" data-i18n-al="p_to_al"></label></div></div>
 <div class="fld" id="bmvFld"><span><span data-i18n="fl_bmv">Discount from market value (at least)</span><button type="button" class="q" data-h="bmv" aria-label="What does this mean?" data-i18n-al="what">?</button></span><div class="seg" id="bmvSeg"></div></div>
 <div class="fld"><span><span>LACA</span><button type="button" class="q" data-h="laca" aria-label="What does this mean?" data-i18n-al="what">?</button></span><div class="seg" id="lacaSeg"></div></div>
+<div class="fld" id="railFld" hidden><span data-i18n="f_rail">KTM / LRT / MRT</span><div class="seg"><button type="button" id="railToggle" aria-pressed="false" data-i18n="rail_walk">Verified walk below 1 km</button></div></div>
+<div class="fld dad-filters" id="dadFld" hidden>
+<label for="dadOwner">Admin Done Ads</label>
+<select id="dadOwner"><option value="" data-i18n="dad_all_owners">All admins</option><option>Faezah</option><option>Suhaila</option></select>
+<label for="dadState" data-i18n="dad_state">Posting status</label>
+<select id="dadState"><option value="" data-i18n="dad_all">All statuses</option><option value="posted" data-i18n="dad_posted">Posted on at least one portal</option><option value="pending" data-i18n="dad_pending">Still to post on at least one portal</option><option value="expired" data-i18n="dad_expired">Expired on at least one portal</option></select>
+<small id="dadFilterNote" role="status"></small><button id="dadRetry" type="button" class="btn" data-i18n="dad_retry" hidden>Retry</button>
+<button id="dadLedger" type="button" class="btn" data-i18n="dad_ledger">Ad expiry dates</button>
+</div>
 </div>
 <div class="sh-foot"><button class="btn rs" type="button" data-i18n="reset_all">Reset all</button><button class="btn primary" id="apply" type="button">Show</button></div>
 </div>
@@ -945,7 +979,7 @@ tag_unsold_u:'No bidder (not confirmed) · please confirm with the agent',unsold
 auction_price:'Auction price',market_value:'Market value',bmv_txt:'{p}% below market value',bmv_chip:'{p}% Below Market Value',
 built_up:'Built-up',cy:'Completion year',bed:'Bedrooms',bath:'Bathrooms',car:'Car parks',land:'Land size',district:'District',state:'State',bank:'Bank',more_info:'More info',share:'Share',hist:'Past auction transactions',hist_sub:'Auction date & reserve price',hist_now:'Current auction',
 f_bed:'Bedrooms: {n}',f_bath:'Bathrooms: {n}',f_built:'Completed {y}',f_bu:'Built-up {v}',f_land:'Land {v}',
-fl_bank:'Bank (agent commission)',f_bank:'Bank',all_bank:'All banks ({n})',s_com:'Highest commission',fa_c_btn:'Agent Commission',fa_c_token:'token only',fa_c_case:'case by case',fa_c_nil:'none for this case',fa_c_unl:'not in the table',fa_c_case_t:'Case',fa_c_price:'Reserve price',fa_c_rate:'Rate',fa_c_amt:'Commission',fa_c_rule:'Rule in the table',fa_c_n_approve:'Subject to bank approval.',fa_c_n_cap:'The cap of {v} applies.',fa_c_n_fee:'Shown after the {v}% system fee.',fa_c_n_parent:'The table does not name this Islamic arm, so the parent bank is used.',fa_c_n_venue:'No venue on record, so this is taken as a court case.',fa_c_n_reserve:'Worked out on the reserve price. The real figure follows the selling price.',fa_c_n_sst:'Before 8% SST.',fa_c_src:'From the bank commission table dated {d}.',fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_copied:'Copied. Paste it into the ad.',fa_again:'Copy again',fa_miss:'Check before posting, not in this text yet:',fa_m_mv:'market value',fa_m_rooms:'bedrooms and bathrooms',fa_m_date:'auction date',fa_m_past:'the auction date has passed',fa_m_amen:'amenities',fa_m_contact:'contact details',fa_amen:'Amenities: found by AI, so check the names before posting.',fa_src_pos:'Rooms: read from the POS.',fa_src_ads:'Rooms: matched from {n} ads by other agents, so it is an estimate.',date:'Auction Date:',pending:'Next date not set yet',cal_add:'Add to calendar',cal_title:'Auction: {t}',
+fl_bank:'Bank (agent commission)',f_bank:'Bank',all_bank:'All banks ({n})',s_com:'Highest commission',fa_c_btn:'Agent Commission',fa_c_token:'token only',fa_c_case:'case by case',fa_c_nil:'none for this case',fa_c_unl:'not in the table',fa_c_case_t:'Case',fa_c_price:'Reserve price',fa_c_rate:'Rate',fa_c_amt:'Commission',fa_c_rule:'Rule in the table',fa_c_n_approve:'Subject to bank approval.',fa_c_n_cap:'The cap of {v} applies.',fa_c_n_fee:'Shown after the {v}% system fee.',fa_c_n_parent:'The table does not name this Islamic arm, so the parent bank is used.',fa_c_n_venue:'No venue on record, so this is taken as a court case.',fa_c_n_reserve:'Worked out on the reserve price. The real figure follows the selling price.',fa_c_n_sst:'Before 8% SST.',fa_c_src:'From the bank commission table dated {d}.',fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_telegram:'Copy for Telegram',fa_manual_copy:'Select and copy the text below.',fa_m_price:'auction price',fa_m_map:'Google Maps pin',fa_copied:'Copied. Paste it into the ad.',fa_again:'Copy again',fa_miss:'Check before posting, not in this text yet:',fa_m_mv:'market value',fa_m_rooms:'bedrooms and bathrooms',fa_m_date:'auction date',fa_m_past:'the auction date has passed',fa_m_amen:'amenities',fa_m_contact:'contact details',fa_amen:'Amenities: found by AI, so check the names before posting.',fa_src_pos:'Rooms: read from the POS.',fa_src_ads:'Rooms: matched from {n} ads by other agents, so it is an estimate.',date:'Auction Date:',pending:'Next date not set yet',cal_add:'Add to calendar',cal_title:'Auction: {t}',
 cd_today:'Today!',cd_tom:'Tomorrow!',cd_in:'In {n} days',cd_yest:'Yesterday',cd_ago:'{n} days ago',nth:'{v} auction',
 wa_btn:'💬 WhatsApp {name} about this unit',wa_btn_end:'💬 Ask {name} about similar units',
 reset_top:'\u21BA Reset',pos_btn:'Request POS from agent',wa_pos:'Hi {name}, please send me the Proclamation of Sale (POS) for this unit:',wa_unit:'Hi {name}, I am interested in this auction unit:',wa_unit_end:'Hi {name}, I saw this unit ({st}). Do you have similar units?',
@@ -981,6 +1015,28 @@ h_bmv_t:'Market value and discount',
 h_bmv:'<p><b>Market value</b> is the value of the property estimated by a valuer for the bank.</p><p><b>Below market value</b> shows how much cheaper the auction price is. Example: "30% below market value" means a property worth RM 100,000 starts at RM 70,000.</p><p>If a market value looks wrong, it is shown as N/A.</p>',
 h_tenure_t:'Freehold and leasehold',
 h_tenure:'<p><b>Freehold</b> - you own it with no time limit.</p><p><b>Leasehold</b> - you own it for a fixed period, for example 99 years. When a date is shown, it is when the lease ends. Fewer years left usually means a lower value.</p>',
+f_rail:'KTM / LRT / MRT',rail_walk:'Verified walk below 1 km',
+rail_card_walk:'{metres} m walk to {station}',
+dad_all_owners:"All admins",
+dad_heading:"Admin Done Ads",
+dad_last:"Last posted {date}",dad_count:"{n}/2 posted",dad_log:"Posting history",dad_cleared:"Unchecked {date}",dad_no_post:"No current ad",dad_review:"Check unit match",
+dad_source_error:"Listing data is unavailable. Open Ad expiry & history in Filter to view saved dates, or retry.",dad_view_only:"View only",
+dad_state:"Posting status",
+dad_all:"All statuses",
+dad_posted:"Posted on at least one portal",
+dad_pending:"Still to post on at least one portal",
+dad_expired:"Expired on at least one portal",
+dad_tick:"Tick when posted · {days} days",
+dad_date:"Posted {date}",
+dad_until:"Expires {date}",
+dad_past:"Expired {date}",
+dad_saved_for:"Assigned to {admin}",
+dad_wait:"Loading ad status…",
+dad_busy:"Saving…",
+dad_error:"Unable to load the shared ad status.",
+dad_save_error:"Save could not be confirmed. Check the status and try again.",
+dad_retry:"Retry",
+dad_ledger:"Ad expiry & history",
 h_laca_t:'LACA and Non-LACA',
 h_laca:'<p><b>LACA</b> - the house title (geran) is not in the owner’s name yet, so the bank sells the owner’s rights under the loan agreement. Moving the property into your name can take longer.</p><p>In most LACA cases, the unpaid maintenance fee, quit rent (cukai tanah) and assessment (cukai pintu) can be claimed back from the bank.</p><p><b>Non-LACA</b> - the title (geran) is already in the owner’s name. The auction is ordered by the court or the land office.</p><p>In most Non-LACA cases, the unpaid maintenance fee cannot be claimed back. Only quit rent (cukai tanah) and assessment (cukai pintu) can be claimed.</p>',
 h_restr_t:'Restrictions',
@@ -1018,7 +1074,7 @@ tag_unsold_u:'Tiada pembida (belum disahkan) · sila sahkan dengan ejen',unsold_
 auction_price:'Harga lelong',market_value:'Nilai pasaran',bmv_txt:'{p}% bawah nilai pasaran',bmv_chip:'{p}% Bawah Nilai Pasaran',
 built_up:'Keluasan binaan',cy:'Tahun siap',bed:'Bilik tidur',bath:'Bilik air',car:'Parkir',land:'Keluasan tanah',district:'Daerah',state:'Negeri',bank:'Bank',more_info:'Maklumat lanjut',share:'Kongsi',hist:'Lelong terdahulu',hist_sub:'Tarikh lelong & harga rizab',hist_now:'Lelong semasa',
 f_bed:'Bilik tidur: {n}',f_bath:'Bilik air: {n}',f_built:'Siap {y}',f_bu:'Binaan {v}',f_land:'Tanah {v}',
-fl_bank:'Bank (komisen ejen)',f_bank:'Bank',all_bank:'Semua bank ({n})',s_com:'Komisen tertinggi',fa_c_btn:'Komisen Ejen',fa_c_token:'token sahaja',fa_c_case:'ikut kes',fa_c_nil:'tiada untuk kes ini',fa_c_unl:'tiada dalam jadual',fa_c_case_t:'Kes',fa_c_price:'Harga rizab',fa_c_rate:'Kadar',fa_c_amt:'Komisen',fa_c_rule:'Peraturan dalam jadual',fa_c_n_approve:'Tertakluk kepada kelulusan bank.',fa_c_n_cap:'Had {v} terpakai.',fa_c_n_fee:'Selepas yuran sistem {v}%.',fa_c_n_parent:'Jadual tidak menyebut cawangan Islamik ini, jadi kadar bank induk digunakan.',fa_c_n_venue:'Tiada rekod tempat lelong, jadi ini dianggap kes mahkamah.',fa_c_n_reserve:'Dikira pada harga rizab. Angka sebenar mengikut harga jualan.',fa_c_n_sst:'Sebelum SST 8%.',fa_c_src:'Daripada jadual komisen bank bertarikh {d}.',fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_copied:'Disalin. Tampal ke dalam iklan.',fa_again:'Salin lagi',fa_miss:'Semak sebelum siar, belum ada dalam teks ini:',fa_m_mv:'nilai pasaran',fa_m_rooms:'bilik tidur dan bilik air',fa_m_date:'tarikh lelong',fa_m_past:'tarikh lelong sudah lepas',fa_m_amen:'amenities',fa_m_contact:'maklumat contact',fa_amen:'Amenities: dicari oleh AI, jadi semak nama tempat sebelum siar.',fa_src_pos:'Bilik: dibaca daripada POS.',fa_src_ads:'Bilik: dipadankan daripada {n} iklan ejen lain, jadi ini anggaran.',date:'Tarikh Lelong:',pending:'Tarikh seterusnya belum ditetapkan',cal_add:'Masukkan ke kalendar',cal_title:'Lelong: {t}',
+fl_bank:'Bank (komisen ejen)',f_bank:'Bank',all_bank:'Semua bank ({n})',s_com:'Komisen tertinggi',fa_c_btn:'Komisen Ejen',fa_c_token:'token sahaja',fa_c_case:'ikut kes',fa_c_nil:'tiada untuk kes ini',fa_c_unl:'tiada dalam jadual',fa_c_case_t:'Kes',fa_c_price:'Harga rizab',fa_c_rate:'Kadar',fa_c_amt:'Komisen',fa_c_rule:'Peraturan dalam jadual',fa_c_n_approve:'Tertakluk kepada kelulusan bank.',fa_c_n_cap:'Had {v} terpakai.',fa_c_n_fee:'Selepas yuran sistem {v}%.',fa_c_n_parent:'Jadual tidak menyebut cawangan Islamik ini, jadi kadar bank induk digunakan.',fa_c_n_venue:'Tiada rekod tempat lelong, jadi ini dianggap kes mahkamah.',fa_c_n_reserve:'Dikira pada harga rizab. Angka sebenar mengikut harga jualan.',fa_c_n_sst:'Sebelum SST 8%.',fa_c_src:'Daripada jadual komisen bank bertarikh {d}.',fa_btn:'For Admin',fa_mudah:'Copy for Mudah Template',fa_iprop:'Copy for iProperty Template',fa_telegram:'Copy for Telegram',fa_manual_copy:'Pilih dan salin teks di bawah.',fa_m_price:'harga lelong',fa_m_map:'pin Google Maps',fa_copied:'Disalin. Tampal ke dalam iklan.',fa_again:'Salin lagi',fa_miss:'Semak sebelum siar, belum ada dalam teks ini:',fa_m_mv:'nilai pasaran',fa_m_rooms:'bilik tidur dan bilik air',fa_m_date:'tarikh lelong',fa_m_past:'tarikh lelong sudah lepas',fa_m_amen:'amenities',fa_m_contact:'maklumat contact',fa_amen:'Amenities: dicari oleh AI, jadi semak nama tempat sebelum siar.',fa_src_pos:'Bilik: dibaca daripada POS.',fa_src_ads:'Bilik: dipadankan daripada {n} iklan ejen lain, jadi ini anggaran.',date:'Tarikh Lelong:',pending:'Tarikh seterusnya belum ditetapkan',cal_add:'Masukkan ke kalendar',cal_title:'Lelong: {t}',
 cd_today:'Hari ini!',cd_tom:'Esok!',cd_in:'{n} hari lagi',cd_yest:'Semalam',cd_ago:'{n} hari lepas',nth:'Lelong ke-{v}',
 wa_btn:'💬 WhatsApp {name} tentang unit ini',wa_btn_end:'💬 Tanya {name} tentang unit serupa',
 reset_top:'\u21BA Reset',pos_btn:'Minta POS daripada ejen',wa_pos:'Hi {name}, mohon hantar Perisytiharan Jualan (POS) untuk unit ini:',wa_unit:'Hi {name}, saya berminat dengan unit lelong ini:',wa_unit_end:'Hi {name}, saya nampak unit ini ({st}). Ada unit yang serupa?',
@@ -1054,6 +1110,28 @@ h_bmv_t:'Nilai pasaran dan diskaun',
 h_bmv:'<p><b>Nilai pasaran</b> ialah nilai hartanah yang dianggarkan oleh penilai untuk bank.</p><p><b>Bawah nilai pasaran</b> menunjukkan berapa lebih murah harga lelong. Contoh: "30% bawah nilai pasaran" bermaksud hartanah bernilai RM 100,000 bermula pada RM 70,000.</p><p>Jika nilai pasaran nampak salah, ia ditunjukkan sebagai N/A.</p>',
 h_tenure_t:'Freehold dan leasehold',
 h_tenure:'<p><b>Freehold (pegangan bebas)</b> - milik anda tanpa had masa.</p><p><b>Leasehold (pajakan)</b> - milik anda untuk tempoh tertentu, contohnya 99 tahun. Jika ada tarikh, itu tarikh pajakan tamat. Baki tahun yang sedikit biasanya bermaksud nilai lebih rendah.</p>',
+f_rail:'KTM / LRT / MRT',rail_walk:'Jalan kaki disahkan bawah 1 km',
+rail_card_walk:'{metres} m jalan kaki ke {station}',
+dad_all_owners:"Semua admin",
+dad_heading:"Admin Done Ads",
+dad_last:"Iklan terakhir {date}",dad_count:"{n}/2 siap",dad_log:"Sejarah iklan",dad_cleared:"Tanda dibuang {date}",dad_no_post:"Tiada iklan semasa",dad_review:"Semak padanan unit",
+dad_source_error:"Data listing belum tersedia. Buka Tarikh luput & sejarah iklan dalam Filter untuk lihat rekod, atau cuba lagi.",dad_view_only:"Lihat sahaja",
+dad_state:"Status iklan",
+dad_all:"Semua status",
+dad_posted:"Dah iklan di sekurang-kurangnya satu portal",
+dad_pending:"Belum iklan di sekurang-kurangnya satu portal",
+dad_expired:"Luput di sekurang-kurangnya satu portal",
+dad_tick:"Tanda bila dah iklan · {days} hari",
+dad_date:"Diiklankan {date}",
+dad_until:"Luput {date}",
+dad_past:"Sudah luput {date}",
+dad_saved_for:"Admin bertugas: {admin}",
+dad_wait:"Memuatkan status iklan…",
+dad_busy:"Sedang menyimpan…",
+dad_error:"Status iklan bersama gagal dimuatkan.",
+dad_save_error:"Simpanan belum disahkan. Semak status dan cuba lagi.",
+dad_retry:"Cuba lagi",
+dad_ledger:"Tarikh luput & sejarah iklan",
 h_laca_t:'LACA dan Non-LACA',
 h_laca:'<p><b>LACA</b> - geran rumah belum atas nama pemilik, jadi bank menjual hak pemilik di bawah perjanjian pinjaman. Pindah milik ke nama anda boleh mengambil masa lebih lama.</p><p>Dalam kebanyakan kes LACA, tunggakan yuran penyelenggaraan (maintenance fee), cukai tanah dan cukai pintu boleh dituntut semula daripada bank.</p><p><b>Non-LACA</b> - geran sudah atas nama pemilik. Lelong diarahkan oleh mahkamah atau pejabat tanah.</p><p>Dalam kebanyakan kes Non-LACA, tunggakan yuran penyelenggaraan tidak boleh dituntut. Hanya cukai tanah dan cukai pintu boleh dituntut.</p>',
 h_restr_t:'Sekatan',
@@ -1093,7 +1171,7 @@ function openModal(title,body,foot,o){o=o||{};
  G('mdl').classList.toggle('wide',!!o.wide);
  G('mdlT').textContent=title;G('mdlB').innerHTML=body;G('mdlF').innerHTML=foot||'';
  G('mdl').hidden=false;G('mdlScrim').hidden=false;document.documentElement.style.overflow='hidden';G('mdlB').scrollTop=0;
- setTimeout(()=>{try{G('mdlX').focus()}catch(e){}},30)}
+ setTimeout(()=>{try{if(!G('mdl').hidden&&!G('mdl').contains(document.activeElement))G('mdlX').focus()}catch(e){}},30)}
 function closeModal(fromBack){if(!MDL)return;const m=MDL;MDL=null;
  if(m.onClose)m.onClose();
  if(MSTACK.length&&!m.nohist){const p=MSTACK.pop();MDL=p.m;G('mdlT').textContent=p.t;G('mdlB').innerHTML=p.b;G('mdlF').innerHTML=p.f;G('mdl').classList.toggle('wide',!!p.wide);G('mdlB').scrollTop=p.top||0;return}   // back to the window underneath; its history entry stays
@@ -1142,8 +1220,10 @@ document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(AT&&!AT.cl
 G('guideBtn').onclick=()=>guideOpen();
 G('bannerWa').addEventListener('click',()=>gtrack('whatsapp_banner_click'));G('bannerCall').addEventListener('click',()=>gtrack('call_click'));
 applyI18n();sizeUI();
-// back to top: shows after two screens of scrolling
-(function(){const b=document.getElementById('toTop');if(!b)return;const on=()=>b.classList.toggle('on',scrollY>innerHeight*1.5);addEventListener('scroll',on,{passive:true});b.onclick=()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})();
+// The main listing uses Reset in its dock; generated partner pages have their own controls.
+(function(){const b=document.getElementById('toTop');if(!b)return;
+ if(KP==='lelong.'&&!TRIAL){b.remove();return}
+ const on=()=>b.classList.toggle('on',scrollY>innerHeight*1.5);addEventListener('scroll',on,{passive:true});b.onclick=()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})();
 function boot(DATA,META){
 const $=G;
 const POS=new Map(DATA.map((r,i)=>[r,i]));   // original order, for stable 'Newest listing' ties (no indexOf per comparison)
@@ -1163,7 +1243,7 @@ const GENT={'Apartment / Condo / SOHO':1,'Terrace / Link / Townhouse':1,'Semi-De
 fill($('jenis'),uniq(28),tx('all_type',{n:DATA.length}));
 const selT=new Set();   // Auction Date: any number of dates can be ticked at once
 const selY=new Set();   // Completion Year (only offered under Condominium / Apartment / SOHO): any number of years
-let bmv=0,laca='',status='available';   // 'available' = Active + Unsold (shown as "No bidder"): what a client's search shows by default
+let bmv=0,laca='',railOnly=false,status='available';   // 'available' = Active + Unsold (shown as "No bidder"): what a client's search shows by default
 let sharedId=(location.hash||'').slice(1)||null;   // a shared link's unit: its share id (sid), or the real id in links made before 30/10/2026
 if(sharedId){const m=DATA.find(r=>r[20]===sharedId||r[SID]===sharedId);sharedId=m?m[20]:null}
 const track=gtrack;
@@ -1270,6 +1350,7 @@ function fmtDay(s){const d=dt(s);if(!d)return /pending/i.test(String(s||''))?tx(
 const PEND={cat:'',jenis:'',pegangan:'',bank:''};
 const tenOf=r=>/^\s*freehold/i.test(r[9])?'Freehold':/^\s*leasehold/i.test(r[9])?'Leasehold':'';   // 5/11/2026: 'Leasehold (12 Sep 2082)' counts as Leasehold; a unit with no tenure shows only under All
 function facetOpts(){
+ railUI();dadFilterUI();
  const cur={cat:PEND.cat||$('cat').value,jenis:PEND.jenis||$('jenis').value,pegangan:PEND.pegangan||$('pegangan').value,bank:PEND.bank||$('bankSel').value};PEND.cat=PEND.jenis=PEND.pegangan=PEND.bank='';
  const count=(skip,idx)=>{const m=new Map();filtered(skip).forEach(r=>{const v=r[idx];if(v)m.set(v,(m.get(v)||0)+1)});return m};
  const fillOpt=(id,all,list,m,keep,lab)=>{const el=$(id);
@@ -1359,6 +1440,200 @@ const pmt=(rate,yrs,L)=>{if(L<=0)return 0;const i=rate/1200,n=Math.max(1,Math.ro
 const sqftOf=r=>{const m=/([\d,.]+)\s*sq\.?\s*(ft|m)\b/i.exec(String(r[11]||''));if(!m)return 0;const v=(parseFloat(m[1].replace(/,/g,''))||0)*(/^m$/i.test(m[2])?10.7639:1);return v>=150?Math.round(v):0};   // Sq.m converted; under 150 sq ft = not a real size
 const bedsOf=r=>{const b=parseInt(r[23],10);return b>0&&b<10?b:0};
 const isHigh=r=>r[21]===CATS[0]||r[21]===CATS[5];
+// Shared specialist ad tracker. Storage and posting dates are authoritative on the portal.
+const DAD = (() => {
+ const url = 'https://agent.lelongbidgroup.com/api/admin-done-ads';
+ const platforms = ['iproperty','mudah'];
+ const units = new Map(), labels = new Map(), logs = new Map();
+ let aliases = new Map(), blocked = new Set(), sourceReady = true, writeRevision = 0;
+ let state = 'loading', notify = null, reading = null, stamp = '', lastRequest = 0;
+ const validSid = sid => /^[a-f0-9]{16}$/.test(sid);
+ const iso = d => typeof d === 'string' && /^\d{4}-\d\d-\d\d$/.test(d);
+ const nameOf = r => isHigh(r) ? 'Faezah' : 'Suhaila';
+ const canonical = sid => aliases.get(sid) || sid;
+ function changed() { if(notify) notify(); if(G('dadHistoryList'))dadRefreshLedger(); }
+ function putLabel(sid, label) {
+  if(!label || typeof label.address!=='string' || !['Faezah','Suhaila'].includes(label.owner))return false;
+  const old=labels.get(sid);
+  if(old && old.address===label.address && old.owner===label.owner)return false;
+  labels.set(sid,{address:label.address,owner:label.owner});
+  return true;
+ }
+ function merge(sid, platform, record, cycles) {
+  if(!validSid(sid) || !platforms.includes(platform) || !record || !Number.isSafeInteger(record.version) ||
+     record.version<0 || !(record.posted_on===null && record.expires_on===null || iso(record.posted_on)&&iso(record.expires_on)))
+   throw new Error('Invalid ad posting record');
+  const pair=units.get(sid)||{}, previous=pair[platform];
+  if(previous && previous.version>record.version)return false;
+  let logChanged=false;
+  if(Array.isArray(cycles)){
+   const key=sid+'/'+platform;
+   const entries=cycles.filter(c=>c&&iso(c.posted_on)&&iso(c.expires_on)&&(c.cleared_on===null||iso(c.cleared_on)))
+     .map(c=>({posted:c.posted_on,expires:c.expires_on,cleared:c.cleared_on,platform}));
+   if(JSON.stringify(entries)!==JSON.stringify(logs.get(key))){
+    logs.set(key,entries);logChanged=true;
+   }
+  }
+  if(previous && previous.version===record.version)return logChanged;
+  pair[platform]={posted:record.posted_on,expires:record.expires_on,version:record.version};
+  units.set(sid,pair);
+  return true;
+ }
+ async function request(method, body) {
+  if(!faOn()) throw new Error('Specialist access required');
+  const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
+  try {
+   const headers={Authorization:'Bearer '+ACODE};
+   if(body) headers['Content-Type']='application/json';
+   const res=await fetch(url,{method,headers,body:body?JSON.stringify(body):undefined,signal:controller.signal,
+                              mode:'cors',credentials:'omit',redirect:'error',cache:'no-store',referrerPolicy:'no-referrer'});
+   if(!res.ok && res.status!==409)throw new Error('Ad posting request failed');
+   const data=await res.json();
+   if(!iso(data.today))throw new Error('Invalid ad posting date');
+   return {data, conflict:res.status===409};
+  } finally {clearTimeout(timer);}
+ }
+ async function refresh() {
+  if(!faOn())return;
+  if(reading)return reading;
+  lastRequest=Date.now();
+  reading=(async()=>{
+   const revision=writeRevision;
+   try {
+    const {data}=await request('GET');
+    if(revision!==writeRevision)return;
+    if(!data.units || typeof data.units!=='object' || Array.isArray(data.units))throw new Error('Invalid ad posting list');
+    let update=state!=='ready' || stamp!==data.today;
+    const available=data.source_ready!==false;
+    if(available!==sourceReady)update=true;
+    sourceReady=available;
+    const conflicts=new Set((data.blocked||[]).filter(validSid));
+    if(conflicts.size!==blocked.size||[...conflicts].some(sid=>!blocked.has(sid)))update=true;
+    blocked=conflicts;
+    const links=new Map(Object.entries(data.aliases||{}).filter(([sid,target])=>validSid(sid)&&validSid(target)&&sid!==target));
+    if(links.size!==aliases.size||[...links].some(([sid,target])=>aliases.get(sid)!==target))update=true;
+    aliases=links;
+    for(const [sid,pair] of Object.entries({...data.units,...data.archive_units})) {
+     for(const platform of platforms)if(pair[platform])update=merge(sid,platform,pair[platform],data.history?.[sid]?.[platform])||update;
+    }
+    for(const [sid,label] of Object.entries(data.labels||{}))if(validSid(sid))update=putLabel(sid,label)||update;
+    stamp=data.today;state='ready';
+    if(update)changed();
+   } catch (err) {
+    const update=state!=='error';state='error';if(update)changed();
+   } finally {reading=null;if(revision!==writeRevision)refresh();}
+  })();
+  return reading;
+ }
+ function start(callback) {
+  if(!faOn() || notify)return;
+  notify=callback;
+  const sync=()=>{if(!document.hidden && Date.now()-lastRequest>10000)refresh();};
+  window.addEventListener('focus',sync);
+  document.addEventListener('visibilitychange',sync);
+  window.setInterval(sync,60000);
+  return refresh();
+ }
+ async function set(sid, platform, done) {
+  if(state!=='ready' || !sourceReady || blocked.has(sid) || !validSid(sid) || !platforms.includes(platform) || typeof done!=='boolean')throw new Error('Ad posting unavailable');
+  const old=(units.get(canonical(sid))||{})[platform];
+  if(!!(old && old.posted)===done)return;
+  try {
+   const {data,conflict}=await request('PUT',{sid,platform,done,version:old?old.version:0});
+   if(validSid(data.canonical_sid)){
+    if(sid===data.canonical_sid)aliases.delete(sid);
+    else aliases.set(sid,data.canonical_sid);
+   }
+   const target=canonical(sid);
+   merge(target,platform,data.record,data.history);
+   putLabel(target,data.label);stamp=data.today;
+   writeRevision++;
+   changed();
+   if(conflict && !!units.get(target)[platform].posted!==done)throw new Error('Ad posting changed');
+  } catch(err) {refresh();throw err;}
+ }
+ function get(sid,platform) {
+  const r=(units.get(canonical(sid))||{})[platform];return r && r.posted ? r : null;
+ }
+ function postings(sid) {
+  const id=canonical(sid);
+  return platforms.flatMap(platform=>{
+   const cycles=logs.get(id+'/'+platform);
+   if(cycles?.length)return cycles;
+   const rec=get(id,platform);
+   return rec?[{platform,posted:rec.posted,expires:rec.expires,cleared:null}]:[];
+  }).sort((a,b)=>b.posted.localeCompare(a.posted));
+ }
+ function history(owner,allPostings=false) {
+  const rows=[];
+  for(const [sid,label] of labels) {
+   if(canonical(sid)!==sid || (owner && owner!==label.owner))continue;
+   if(allPostings)rows.push(...postings(sid).map(cycle=>({sid,...label,...cycle})));
+   else for(const platform of platforms) {
+    const record=get(sid,platform);
+    if(record)rows.push({sid,platform,...label,...record});
+   }
+  }
+  return rows.sort((a,b)=>(allPostings?b.posted.localeCompare(a.posted):a.expires.localeCompare(b.expires))||a.address.localeCompare(b.address));
+ }
+ return {owner:nameOf,status:()=>state,get,start,refresh,set,today:()=>stamp,history,postings,blocked:sid=>blocked.has(sid),sourceReady:()=>sourceReady};
+})();
+
+function dadLedgerText(ms,en){return LANG==='ms'?ms:en;}
+function dadLedgerDate(isoDate){
+ return new Intl.DateTimeFormat(LANG==='ms'?'ms-MY':'en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})
+  .format(new Date(isoDate+'T00:00:00Z'));
+}
+function dadRefreshLedger(){
+ const target=G('dadHistoryList');if(!target)return;
+ if(DAD.status()!=='ready'){
+  target.innerHTML='<p role="status">'+esc(dadLedgerText('Rekod belum dapat dimuatkan.','Records are unavailable.'))+
+   '</p><button class="btn" type="button" data-dad-retry>'+esc(dadLedgerText('Cuba lagi','Retry'))+'</button>';return;
+ }
+ const mode=G('dadExpiryStatus').value;
+ const archive=mode==='history', rows=DAD.history(target.dataset.owner,archive), today=DAD.today();
+ const selected=rows.filter(r=>archive||mode==='all'||(mode==='expired'?r.expires<=today:r.expires>today));
+ const count=Number(target.dataset.limit)||50, pending=target.dataset.saving;
+ const clears=dadLedgerText('Nyah tanda','Uncheck');
+ target.innerHTML=selected.slice(0,count).map(r=>{
+  const expired=r.expires<=today;
+  return '<div class="dad-history-row"><b>'+esc(r.address)+'</b><div>'+esc(r.owner)+' · '+(r.platform==='mudah'?'Mudah':'iProperty')+
+   '</div><div>'+esc(dadLedgerText('Disiarkan','Posted'))+' '+esc(dadLedgerDate(r.posted))+' · <strong>'+
+   esc(expired?dadLedgerText('Tamat','Expired'):dadLedgerText('Luput','Expires'))+' '+esc(dadLedgerDate(r.expires))+
+   '</strong></div>'+(archive?(r.cleared?'<small>'+esc(tx('dad_cleared',{date:dadLedgerDate(r.cleared)}))+'</small>':''):
+    '<button type="button" class="btn" data-dad-unpost="'+esc(r.sid)+'" data-portal="'+esc(r.platform)+'"'+
+    (pending||!DAD.sourceReady()||DAD.blocked(r.sid)?' disabled':'')+'>'+esc(clears)+'</button>')+'</div>';
+ }).join('') || '<p>'+esc(dadLedgerText('Tiada iklan untuk pilihan ini.','No ads match this selection.'))+'</p>';
+ if(selected.length>count)target.insertAdjacentHTML('beforeend','<button class="btn" type="button" data-dad-more>'+
+  esc(dadLedgerText('Tunjuk lagi','Show more'))+'</button>');
+}
+function dadOpenLedger(owner){
+ if(!faOn())return;
+ const text=dadLedgerText;
+ const title=tx('dad_ledger')+(owner?' · '+owner:'');
+ const body='<label for="dadExpiryStatus">'+esc(text('Status iklan','Ad status'))+'</label> '+
+  '<select id="dadExpiryStatus"><option value="all">'+esc(text('Semua iklan','All posted ads'))+'</option>'+
+  '<option value="active">'+esc(text('Belum luput','Unexpired'))+'</option>'+
+  '<option value="expired">'+esc(text('Sudah luput','Expired'))+'</option><option value="history">'+esc(tx('dad_log'))+'</option></select>'+
+  '<p id="dadLedgerMessage" role="status" hidden></p><div id="dadHistoryList" data-owner="'+esc(owner)+'"></div>';
+ openModal(title,body,'<button type="button" class="btn" data-close>'+esc(tx('close'))+'</button>',{onClick:async e=>{
+  const target=G('dadHistoryList'); if(!target)return;
+  if(e.target.closest('[data-dad-retry]')){DAD.refresh();return;}
+  if(e.target.closest('[data-dad-more]')){target.dataset.limit=String((Number(target.dataset.limit)||50)+50);dadRefreshLedger();return;}
+  const btn=e.target.closest('[data-dad-unpost]');
+  if(!btn || target.dataset.saving)return;
+  const msg=G('dadLedgerMessage');msg.hidden=true;target.dataset.saving='1';
+  const sid=btn.dataset.dadUnpost, platform=btn.dataset.portal;
+  dadRefreshLedger();
+  try{await DAD.set(sid,platform,false);}
+  catch(err){msg.textContent=text('Perubahan belum disahkan. Semak semula rekod.','The change could not be confirmed. Check the record again.');msg.hidden=false;}
+  finally{delete target.dataset.saving;if(target.isConnected)dadRefreshLedger();}
+ }});
+ G('dadExpiryStatus').onchange=()=>{G('dadHistoryList').dataset.limit='50';dadRefreshLedger();};
+ dadRefreshLedger();
+ DAD.refresh();
+}
+
 const RESTRICT=/bumi|malay|native/i;
 const SHOW_RESTR=false;   // 2/11/2026: bumi / non-bumi labels hidden everywhere (chip, risk flag, score) until the labels are verified against the POS; set true to show them again
 const isCom=r=>r[21]===CATS[3]||r[21]===CATS[4]||r[21]===CATS[6];
@@ -1514,7 +1789,135 @@ function segUI(){
  const vn=$('vipNote');if(vn){if(canSip()){vn.hidden=!META.vip_err;vn.innerHTML=META.vip_err?tx('vip_err'):''}else{vn.hidden=false;vn.innerHTML=tx('vip_hist')+' '+lockLink2()}}   // Premium / free preview: what the VIP plan adds here
  seg($('bmvSeg'),[[0,tx('all')],[10,'10%+'],[20,'20%+'],[30,'30%+'],[40,'40%+'],[50,'50%+']],0,v=>bmv=+v);
  seg($('lacaSeg'),[['',tx('all')],['LACA','LACA'],['Non-LACA','Non-LACA']],0,v=>laca=v)}
+
+const dadPortals=['iproperty','mudah'];
+const dadSaving=new Set(),dadErrors=new Set();
+let dadLastStatus='loading';
+const dadDate=iso=>iso.split('-').reverse().join('/');
+function dadMatch(row,owner,state,forFacet){
+ if(!owner&&!state)return true;
+ const assigned=DAD.owner(row);
+ if(!assigned||(owner&&assigned!==owner)||!row[SID])return false;
+ const stage=stOf(row);
+ const ended=stage!=='active'&&stage!=='unsold';
+ if(ended && (DAD.status()!=='ready'||!DAD.sourceReady()||DAD.blocked(row[SID])||!DAD.postings(row[SID]).length))return false;
+ if(!state)return true;
+ if(DAD.status()!=='ready'||!DAD.sourceReady())return !!forFacet;
+ if(DAD.blocked(row[SID])||(ended&&state==='pending'))return false;
+ const records=dadPortals.map(p=>DAD.get(row[SID],p));
+ if(state==='pending')return records.some(rec=>!rec);
+ if(state==='expired')return records.some(rec=>rec&&rec.expires<=DAD.today());
+ return records.some(Boolean);
+}
+function dadFilterUI(){
+ const enabled=faOn();
+ $('dadFld').hidden=!enabled;
+ if(!enabled){$('dadOwner').value='';$('dadState').value='';return}
+ const status=DAD.status();
+ $('dadState').disabled=status!=='ready'||!DAD.sourceReady();
+ $('dadFilterNote').textContent=status==='ready'?(DAD.sourceReady()?'':tx('dad_source_error')):tx(status==='error'?'dad_error':'dad_wait');
+ $('dadRetry').hidden=status!=='error'&&DAD.sourceReady();
+}
+function dadNote(sid,portal,ended){
+ const status=DAD.status();
+ const key=sid+'/'+portal;
+ if(dadSaving.has(key))return tx('dad_busy');
+ if(status!=='ready')return tx(status==='error'?'dad_error':'dad_wait');
+ if(!DAD.sourceReady())return tx('dad_view_only');
+ if(DAD.blocked(sid))return tx('dad_review');
+ const rec=DAD.get(sid,portal);
+ const note=rec?tx('dad_date',{date:dadDate(rec.posted)})+' · '+
+  tx(rec.expires<=DAD.today()?'dad_past':'dad_until',{date:dadDate(rec.expires)}):
+  (ended?tx('dad_no_post'):tx('dad_tick',{days:portal==='mudah'?90:60}));
+ return dadErrors.has(key)?note+' · '+tx('dad_save_error'):note;
+}
+function dadCount(sid){
+ if(DAD.status()!=='ready')return '…';
+ if(DAD.blocked(sid))return tx('dad_review');
+ if(!DAD.sourceReady())return tx('dad_view_only');
+ const count=dadPortals.filter(p=>DAD.get(sid,p)).length;
+ return tx('dad_count',{n:count});
+}
+function dadLogItems(cycles){
+ return cycles.map(c=>'<li><b>'+(c.platform==='mudah'?'Mudah':'iProperty')+'</b> · '+esc(tx('dad_date',{date:dadDate(c.posted)}))+
+  '<small>'+esc(tx(c.expires<=DAD.today()?'dad_past':'dad_until',{date:dadDate(c.expires)}))+
+  (c.cleared?' · '+esc(tx('dad_cleared',{date:dadDate(c.cleared)})):'')+'</small></li>').join('');
+}
+function dadCard(r,ended){
+ const sid=r[SID],owner=DAD.owner(r);
+ if(!sid||!owner)return '';
+ const ready=DAD.status()==='ready'&&DAD.sourceReady();
+ const cycles=ready&&!DAD.blocked(sid)?DAD.postings(sid):[];
+ const rows=dadPortals.map(portal=>{
+  const rec=ready&&!DAD.blocked(sid)&&DAD.get(sid,portal);
+  return '<label class="dad-row" data-expired="'+!!(rec&&rec.expires<=DAD.today())+'"><input type="checkbox" data-portal="'+portal+'"'+
+   (rec?' checked':'')+(!ready||ended||DAD.blocked(sid)||dadSaving.has(sid+'/'+portal)?' disabled':'')+'><span><b>'+
+   (portal==='mudah'?'Mudah':'iProperty')+'</b><small class="dad-note">'+esc(dadNote(sid,portal,ended))+'</small></span></label>';
+ }).join('');
+ const clipboard='<svg class="dad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M8 5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="8" y="2" width="8" height="5" rx="2"/><path d="m8 14 3 3 5-6"/></svg>';
+ return '<details class="dad-card" data-sid="'+esc(sid)+'"'+(ended?' data-ended':'')+(ended&&!cycles.length?' hidden':'')+'><summary>'+clipboard+
+  '<span class="dad-title">'+esc(tx('dad_heading'))+'</span><span class="dad-byline">'+esc(tx('dad_saved_for',{admin:owner}))+
+  '<span class="dad-last">'+(cycles.length?esc(tx('dad_last',{date:dadDate(cycles[0].posted)})):'')+'</span></span>'+
+  '<span class="dad-count">'+esc(dadCount(sid))+'</span></summary><div class="dad-body"><small class="dad-source"'+(DAD.sourceReady()?' hidden':'')+'>'+esc(tx('dad_source_error'))+'</small>'+rows+
+  '<details class="dad-log"'+(cycles.length?'':' hidden')+'><summary>'+esc(tx('dad_log'))+'</summary><ol>'+dadLogItems(cycles)+'</ol></details>'+
+  '<button type="button" class="btn dad-retry"'+(DAD.status()==='error'||!DAD.sourceReady()?'':' hidden')+'>'+esc(tx('dad_retry'))+'</button></div></details>';
+}
+function dadSync(){
+ if(!faOn())return;
+ const statusChanged=dadLastStatus!==DAD.status();
+ dadLastStatus=DAD.status();
+ dadFilterUI();
+ if(($('dadState').value||$('dadOwner').value)&&!sharedId&&!favMode){
+  const matched=new Set(filtered());
+  if(statusChanged||ROWS.length!==matched.size||ROWS.some(row=>!matched.has(row))){
+   // Keep the user's place and any open posting controls when a filtered row enters or leaves.
+   const shown=SHOWN,openMenus=new Set([...$('list').querySelectorAll('.fa-btn[aria-expanded="true"]')].map(b=>b.dataset.id));
+   const openCards=new Set([...$('list').querySelectorAll('.dad-card[open]')].map(d=>d.dataset.sid));
+   render();
+   if(shown>SHOWN){const n=Math.min(shown,ROWS.length);$('list').insertAdjacentHTML('beforeend',cardsHtml(SHOWN,n));SHOWN=n;moreBtn();unitCounter.refresh()}
+   $('list').querySelectorAll('.fa-btn').forEach(b=>{if(openMenus.has(b.dataset.id)){b.setAttribute('aria-expanded','true');b.nextElementSibling.hidden=false}});
+   $('list').querySelectorAll('.dad-card').forEach(d=>{d.open=openCards.has(d.dataset.sid)});
+  }
+ }
+ $('list').querySelectorAll('.dad-card').forEach(d=>{
+  const sid=d.dataset.sid,ready=DAD.status()==='ready'&&DAD.sourceReady(),ended=d.hasAttribute('data-ended');
+  const cycles=ready&&!DAD.blocked(sid)?DAD.postings(sid):[];
+  d.hidden=ended&&!cycles.length;
+  d.querySelector('.dad-count').textContent=dadCount(sid);
+  d.querySelector('.dad-last').textContent=cycles.length?tx('dad_last',{date:dadDate(cycles[0].posted)}):'';
+  const log=d.querySelector('.dad-log');
+  log.hidden=!cycles.length;
+  const logHtml=dadLogItems(cycles);
+  if(log.lastElementChild.innerHTML!==logHtml)log.lastElementChild.innerHTML=logHtml;
+  d.querySelector('.dad-source').hidden=DAD.sourceReady();
+  d.querySelector('.dad-retry').hidden=DAD.status()!=='error'&&DAD.sourceReady();
+  d.querySelectorAll('input[data-portal]').forEach(box=>{
+   const portal=box.dataset.portal,rec=ready&&!DAD.blocked(sid)&&DAD.get(sid,portal);
+   box.checked=!!rec;
+   box.disabled=!ready||ended||DAD.blocked(sid)||dadSaving.has(sid+'/'+portal);
+   const row=box.closest('.dad-row');
+   row.dataset.expired=String(!!rec&&rec.expires<=DAD.today());
+   row.querySelector('.dad-note').textContent=dadNote(sid,portal,ended);
+  });
+ });
+}
+function dadRefresh(){if(faOn())DAD.refresh()}
+
+function railFilterOn(){return faOn()&&!!(ADS&&ADS.units)}
+function listingTrain(r){
+ if (!railFilterOn()) return null;
+ return faTrain(ADS.units[r[SID]]?.jay_amenities_v1);
+}
+function railWalkNote(r){
+ const train = listingTrain(r);
+ if (!train) return '';
+ const label = tx('rail_card_walk', {metres: train.walking_m, station: train.official_name});
+ return '<div class="rail-walk-note"><span aria-hidden="true">🚆</span><span>'+esc(label)+'</span></div>';
+}
+function railSelected(){return railFilterOn()&&railOnly}
+function railUI(){const on=railFilterOn();if(!on)railOnly=false;$('railFld').hidden=!on;$('railToggle').setAttribute('aria-pressed',String(railSelected()))}
 function paint(){
+ railUI();
  [...$('bmvSeg').children].forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===bmv)));
  [...$('statusSeg').children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===status)));
  [...$('lacaSeg').children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===laca)));
@@ -1541,13 +1944,14 @@ function filtered(skip){
  if(sharedId&&!skip)return DATA.filter(r=>r[20]===sharedId);
  if(favMode&&!skip)return DATA.filter(r=>FAV.has(r[20]));
  const qw=qToks(),n=$('negeri').value,j=$('jenis').value,pg=$('pegangan').value,bs=$('bankSel').value;
- return DATA.filter(r=>inPrice(r)&&(!qw.length||qw.every(w=>hay(r).includes(w)))&&(!NEWONLY||isNew(r))&&(!n||r[2]===n)&&(!selD.size||selD.has(r[3]))&&(skip==='jenis'||!j||r[28]===j)&&(skip==='pegangan'||!pg||tenOf(r)===pg)&&(skip==='bankSel'||!bs||(faC(r)||{}).b===bs)&&(!bmv||bmvv(r)>=bmv)&&(!laca||r[17]===laca)&&(skip==='tarikh'||!selT.size||selT.has(r[12]))&&(skip==='cat'||skip==='catcy'||!$('cat').value||r[21]===$('cat').value)&&(skip==='cy'||skip==='catcy'||!selY.size||selY.has(r[19]))&&(status==='all'||(status==='available'?isAvail(r):stOf(r)===status)));
+ const dadOwner=faOn()?$('dadOwner').value:'',dadState=faOn()?$('dadState').value:'';
+ return DATA.filter(r=>dadMatch(r,dadOwner,dadState,skip)&&inPrice(r)&&(!qw.length||qw.every(w=>hay(r).includes(w)))&&(!NEWONLY||isNew(r))&&(!n||r[2]===n)&&(!selD.size||selD.has(r[3]))&&(skip==='jenis'||!j||r[28]===j)&&(skip==='pegangan'||!pg||tenOf(r)===pg)&&(skip==='bankSel'||!bs||(faC(r)||{}).b===bs)&&(!bmv||bmvv(r)>=bmv)&&(!laca||r[17]===laca)&&(!railSelected()||listingTrain(r))&&(skip==='tarikh'||!selT.size||selT.has(r[12]))&&(skip==='cat'||skip==='catcy'||!$('cat').value||r[21]===$('cat').value)&&(skip==='cy'||skip==='catcy'||!selY.size||selY.has(r[19]))&&(status==='all'||(status==='available'?isAvail(r):stOf(r)===status)));
 }
 // Budget: auction price between From and To (either may be empty). A unit with no price is left out while a range is set.
 const priceLo=()=>num($('pMin').value),priceHi=()=>num($('pMax').value);
 const inPrice=r=>{const lo=priceLo(),hi=priceHi();if(!lo&&!hi)return true;const p=num(r[7]);return p>0&&p>=lo&&(!hi||p<=hi)};
 const fmtNum=v=>{const d=String(v||'').replace(/[^0-9]/g,'');return d?Number(d).toLocaleString('en-US'):''};
-function activeN(){return [$('q').value!=='',NEWONLY,$('negeri').value,selD.size,$('jenis').value,selT.size,selY.size,$('cat').value,$('pegangan').value,$('bankSel').value,bmv,laca,priceLo()||priceHi()].filter(Boolean).length}
+function activeN(){return [$('q').value!=='',NEWONLY,$('negeri').value,selD.size,$('jenis').value,selT.size,selY.size,$('cat').value,$('pegangan').value,$('bankSel').value,bmv,laca,railSelected(),$('dadOwner').value,$('dadState').value,priceLo()||priceHi()].filter(Boolean).length}
 // "Add to calendar": a Google Calendar event at the auction time (1 hour), or all day when the time is not known.
 function calUrl(r){const d0=dt(r[12]);if(!d0)return '';const d=new Date(d0),p2=n=>String(n).padStart(2,'0'),ymd=x=>x.getFullYear()+p2(x.getMonth()+1)+p2(x.getDate());
  let dates;const m=/(\d{1,2})[:.](\d{2})\s*([ap])?/i.exec(ok(r[13])?r[13]:'');
@@ -1621,6 +2025,42 @@ function specBox(r){const v=x=>locked(x)?XX:dash(x),c=(k,x)=>'<div><span>'+tx(k)
  return '<div class="specs'+(high?'':' three')+'">'+(high?'':c('land',r[10]))+c('built_up',r[11])+c('cy',r[19])+'<div class="sp-bank"><span>'+tx('bank')+'</span><b>'+v(r[16])+'</b></div></div>'}
 function mapBtn(r,short){return /^https:\/\//i.test(r[4]||'')?'<a class="map" href="'+esc(satUrl(r[4]))+'" target="_blank" rel="noopener"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z" fill="#e53935"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg>'+(short?tx('map_short'):'Google Maps')+'</a>':''}
 // For Admin (5/11/2026): the two portal ad texts, built here from the listing. What a listing lacks (rooms, carpark, corner lot, amenities, the contact block) comes from agent/ads.json, sealed with the agent key.
+// Shared researched rail validation: the filter and both ad templates use identical evidence.
+function faTrain(research) {
+ const rail = research && research.train;
+ if (rail && rail.verified === true && rail.route_mode === 'walking' &&
+     (rail.property_pin_verified === true || rail.project_route_verified === true || rail.mapped_address_verified === true) &&
+     Number.isInteger(rail.walking_m) && rail.walking_m > 0 && rail.walking_m < 1000 &&
+     typeof rail.source_url === 'string' && /^https:\/\/[^\s/]+\//.test(rail.source_url) &&
+     typeof rail.official_name === 'string' && /\b(?:MRT|KTM|LRT)\b/i.test(rail.official_name)) return rail;
+ return null;
+}
+// Researched nearby places for the main specialist templates.
+function faNearby(r, a) {
+ const legacy = Array.isArray(a.amen) ? a.amen : [];
+ if (!faOn()) return {amen: legacy.slice(0, 3), osm: a.amen_osm === true};
+ const research = a.jay_amenities_v1;
+ const locations = research ? research.amen : legacy;
+ const amen = [];
+ const rail = faTrain(research);
+ if (rail) {
+  const start = rail.project_route_verified ? 'from the development' :
+   (rail.mapped_address_verified ? 'from the mapped street address' : 'from the property entrance');
+  amen.push({t: 'transit', n: rail.official_name + ' (approx. ' + rail.walking_m + ' m walk ' + start + ')'});
+ }
+ for (const item of Array.isArray(locations) ? locations : []) {
+  if (amen.length === 2) break;
+  if (!item || !['hospital','school','shop','mosque','park','other'].includes(item.t) || typeof item.n !== 'string') continue;
+  const name = item.n.trim();
+  if (!name || /[\r\n]/.test(name) || /\b(?:railway|rail station|LRT|MRT|KTM|monorail|BRT|expressway|highway|lebuhraya)\b/i.test(name)) continue;
+  if (/^(?:AEON(?: Big| Mall)?|Econsave|Mydin|99\s*Speed\s*Mart|7[- ]?Eleven|Tesco|Giant|Lotus['’]?s?|Billion|Eco[- ]Shop|NSK|Segi Fresh|TF Value[- ]Mart|KK (?:Super )?Mart|Mr\.? DIY|Columbia Asia Hospital|shop|school|hospital|mall)$/i.test(name)) continue;
+  if (!amen.some(place => place.n.toLowerCase() === name.toLowerCase())) amen.push({t: item.t, n: name});
+ }
+ const road = research && research.highway;
+ const highway = road && road.t === 'road' && typeof road.n === 'string' ? road.n.trim() : '';
+ return {amen, highway, osm: research ? research.osm === true : a.amen_osm === true};
+}
+
 const FA_ICON={shop:'🛍️',hospital:'🏥',school:'🏫',road:'🚗',transit:'🚆',mosque:'🕌',park:'🌳',other:'📌'};
 const FA_MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const FA_UNIT=/^(nos?\b|unit\b|lot\b|pt\b|ptd\b|tb\b|hs\b|parcel\b|suite\b|plot\b|sublot\b|geran\b|mdld\b|gm\b|mbkt\b|mpkt\b|nt\b|town\s+lease\b|post\s+box\b)/i,FA_BARE=/^[a-z]{0,3}[-\s]?\d[\w-]*$/i;   // a house, unit or lot number: the keyword anywhere, or a bare number at the start
@@ -1661,18 +2101,184 @@ function faAd(r,kind){const emo=kind==='mudah',a=(ADS&&ADS.units&&ADS.units[r[SI
  if(good)L.push((emo?'❤️ ':'')+'Market Value: '+r[8],(emo?'💎 ':'')+'Potential Profit: RM '+Math.round(mv-p).toLocaleString('en-US'));
  const when=faDate(r[12]);if(when)L.push('',(emo?'📆 ':'')+'Auction Date: '+when);else miss.push('fa_m_date');
  if(when&&isExp(r))miss.push('fa_m_past');
- const am=Array.isArray(a.amen)?a.amen:[];
+ const nearby=faNearby(r,a),am=nearby.amen;
  if(am.length){L.push('','AMENITIES & ACCESSIBILITY:');am.forEach(x=>L.push((emo?(FA_ICON[x.t]||FA_ICON.other)+' ':'- ')+x.n))}else miss.push('fa_m_amen');
+ if(nearby.highway)L.push('', 'NEARBY HIGHWAY:', (emo?FA_ICON.road+' ':'- ')+nearby.highway);
  if(emo&&/^https:\/\//i.test(a.map||r[4]||''))L.push('','📍 NEARBY GOOGLE MAPS PIN:',a.map||r[4]);
  L.push('','Kindly note the following:','+ NO INSIDE VIEWING. Self-survey from outside only','+ Cash ready: 10% Deposit | 5% legal cost | 2-5% misc');
  const co=ADS&&Array.isArray(ADS.contact)?ADS.contact:[];if(co.length)L.push('',...co);else miss.push('fa_m_contact');
  let text=L.join('\n');if(!emo)text=text.replace(/\p{Extended_Pictographic}️?/gu,'');
- return {text,miss,src:bed?(a.src||''):'',n:a.n||0,amen:am.length>0}}
-function faOpen(r,kind){const ad=faAd(r,kind);copyText(ad.text).then(()=>toast(tx('fa_copied')));
+ return {text,miss,src:bed?(a.src||''):'',n:a.n||0,amen:am.length>0,osm:!!(am.length||nearby.highway)&&nearby.osm}}
+// Plain text for Telegram. Keep contacts in the encrypted specialist ad pack.
+function faTelegramMap(value) {
+ try {
+  const url = new URL(value);
+  if (url.protocol !== 'https:' || url.username || url.password || url.port) return '';
+  const host = url.hostname;
+  const maps = host === 'maps.app.goo.gl' && url.pathname.length > 1 ||
+   host === 'goo.gl' && url.pathname.startsWith('/maps/') ||
+   /^maps\.google\.com(?:\.my)?$/.test(host) && (url.searchParams.has('q') || url.pathname.length>1) ||
+   /^(?:www\.)?google\.com(?:\.my)?$/.test(host) && /^\/maps\//.test(url.pathname) &&
+    (url.searchParams.has('q') || url.searchParams.has('query') || /^\/maps\/(?:place|search)\/[^/]/.test(url.pathname));
+  return maps ? url.href : '';
+ } catch { return ''; }
+}
+function faTelegramProject(parts, area, type, localities) {
+ const named = area.find(s=>/\b(?:apartments?|pangsapuri|kondominium|condominium|condo|residences?|residensi|suites?|flat|soho|residency)\b/i.test(s) &&
+  s.toLowerCase()!==type.toLowerCase());
+ if (named) return named;
+ const street = /^(?:jalan|jln\.?|lorong|lrg\.?|persiaran|lebuh|lebuhraya|lengkok|lintang)\s+\S/i;
+ const unit = /^(?:(?:unit|no\.?|lot|parcel|petak)\s*[#.: -]*[a-z0-9/-]*\d|(?:blok|block|aras|level|tingkat|tower|floor)\s+\S+|\d+(?:st|nd|rd|th)\s+floor\b|[a-z0-9]+(?:[-/][a-z0-9]+){2})/i;
+ const subdivision = /^(?:taman|tmn|bandar|bandaraya|kampung|kg|kawasan|pusat|seksyen|sek\.?|section|presint|precinct|mukim|daerah|pekan|kota|fasa|phase|bukit|wilayah|blok|block|aras|level|tingkat|tower|floor|unit|no\.?|lot|pt|jalan|lorong)\b/i;
+ // A distinctive scheme can be the component between a unit and its street.
+ const pos = parts.findIndex(s=>street.test(s));
+ if (pos<2 || !unit.test(parts[pos-2])) return '';
+ const candidate = parts[pos-1];
+ if (candidate.length>65 || !/[a-z]{3}/i.test(candidate) || /^\d{5}\b/.test(candidate) ||
+     subdivision.test(candidate) || localities.some(s=>s && s.toLowerCase()===candidate.toLowerCase()) ||
+     candidate.toLowerCase()===type.toLowerCase()) return '';
+ return candidate;
+}
+function faTelegram(r) {
+ const a = ADS?.units?.[r[SID]] || {};
+ const miss = [], lines = [], high = isHigh(r);
+ const clean = value => {
+  const s = String(value ?? '').replace(/\s+/g,' ').trim();
+  return /^(?:-|n\/?a|nil|null|unknown|locked2?|xx)?$/i.test(s) ? '' : s;
+ };
+ const address = clean(r[1]), plainType = clean(faType(r,a).plain);
+ const positionText = high ? '' : clean(r[5])+' '+plainType;
+ const end = /\bend[\s-]+(?:unit|lot)\b/i.test(positionText);
+ const corner = /\bcorner\b/i.test(positionText);
+ const position = end && !corner ? 'End Unit' : corner && !end ? 'Corner Lot' :
+  !high && (end || a.corner) ? 'End / corner unit' : '';
+ // Put an explicit lot position on its own line, separate from the house type.
+ const type = position && end!==corner ? plainType
+  .replace(/\(?\s*\b(?:end[\s-]+(?:unit|lot)|corner(?:[\s-]+(?:unit|lot))?)\b\s*\)?/ig,' ')
+  .replace(/\s+house\s*$/i,'').trim().replace(/\s+/g,' ') || plainType : plainType;
+ const area = faArea(address).map(clean).filter(Boolean);
+ const district = clean(r[3]), state = clean(r[2]);
+ const parts = address.split(',').map(s=>s.trim());
+ const zip = parts.findIndex(s=>/^\d{5}\b/.test(s));
+ const town = zip < 0 ? '' : parts[zip].replace(/^\d{5}\s*/, '') || parts[zip+1] || '';
+ const project = high ? clean(a.tg_project) || faTelegramProject(parts,area,type,[town,district,state]) : '';
+ const local = high ? [town || district,state] : area.length && !/^\d/.test(area[0]) && area[0].length<=60 ? area : [district,state];
+ const place = local.filter((v,i,all)=>v && all.findIndex(s=>s.toLowerCase()===v.toLowerCase())===i).join(', ');
+ const money = value => {
+  const s = clean(value);
+  return /^(?:RM\s*)?\d[\d,]*(?:\.\d{1,2})?$/i.test(s) ? num(s) : 0;
+ };
+ const reserve = money(r[7]), rawMarket = money(r[8]);
+ const percentage = reserve && rawMarket ? Math.round(100*(1-reserve/rawMarket)) : 0;
+ const market = !suspect(r) && percentage<90 ? rawMarket : 0;
+ const saving = reserve && market>reserve ? market-reserve : 0;
+ const discount = saving && percentage>0 ? percentage : 0;
+ const pending = stOf(r)==='unsold';
+ const title = [project || type,place].filter(Boolean).join(high?', ':' @ ');
+ if (title) lines.push((!pending && discount?'MURAH! ':'')+title+
+  (!pending && high && discount?'- ✅'+discount+'% Discount!':''));
+ if (!pending && discount) lines.push('', 'Below Market Value '+discount+(high?'% 😍':'%  😍'));
+ if (address) lines.push('', (high?'📌 ':'🏠 ')+address);
+ const details = [];
+ const fact = value => { if(value) details.push('✅ '+value); };
+ if (project) details.push('🏠 '+project);
+ fact(type);
+ if (position && position.toLowerCase()!==type.toLowerCase()) fact(position);
+ const areaSize = (v,unit)=>clean(v).replace(/(\d)\s*sq\.?\s*(?:ft|feet)\b\.?/gi,'$1 '+unit);
+ if (!high && clean(r[10])) fact('Land Area: '+areaSize(r[10],'Sq.ft'));
+ if (clean(r[11])) fact((high?'Size : ':'Built Up: ')+areaSize(r[11],high?'sqft':'Sq.ft'));
+ const tenure = clean(r[9]);
+ if (high) fact(tenure.toUpperCase());
+ const restriction = ['Bumi Lot','Malay Reserve','Native Land'].includes(a.tg_restriction) ? a.tg_restriction : '';
+ if (restriction) fact(restriction);
+ const room = value => /^(?:[1-9]\d?)(?:\s*\+\s*\d{1,2})?$/.test(clean(value)) ? clean(value) : '';
+ const bed = room(a.bed) || room(r[23]), bath = room(a.bath) || room(r[24]);
+ const car = room(a.car) || room(r[25]);
+ const rooms = [bed && bed+(bed==='1'?' Bedroom':' Bedrooms'),bath && bath+(bath==='1'?' Bathroom':' Bathrooms')].filter(Boolean);
+ if (rooms.length) fact((!high || a.src==='ads'?'Approx. ':'')+rooms.join(high?',':' | '));
+ else if (high || /terrace|bungalow|semi.?detached|townhouse/i.test(type)) miss.push('fa_m_rooms');
+ if (car) fact(car+(car==='1'?' Carpark':' Carparks'));
+ if (!high) fact(tenure);
+ if (high && /^(?:19|20)\d{2}$/.test(clean(r[19]))) fact('Completed year '+clean(r[19]));
+ if (details.length) lines.push('',high?'PROPERTY DETAILS':'PROPERTY DETAILS:',...details);
+ const prices = [];
+ if (reserve) prices.push(pending?'Last auction price: '+faRm(reserve):
+  high?'🔥Force Sale          : '+faRm(reserve)+'🔥':'🔥 Force Sale: '+faRm(reserve)+' 🔥');
+ else miss.push('fa_m_price');
+ if (market) prices.push((high?'❤️Market Value     : ':'❤️ Market Value: ')+faRm(market));
+ else miss.push('fa_m_mv');
+ if (saving && !pending) prices.push((high?'💎Potential Profit    : ':'💎 Potential Profit: ')+faRm(saving));
+ if (prices.length) lines.push('',...prices);
+ const auction = faDate(r[12]);
+ if (pending) lines.push('', '📆 Auction date: Pending next auction');
+ else if (auction) {
+  const d = new Date(dt(r[12])), pad = n=>String(n).padStart(2,'0');
+  lines.push('',high?'📆 Auction date      : '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear():'📆 Auction Date: '+auction);
+  if (isExp(r)) miss.push('fa_m_past');
+ } else miss.push('fa_m_date');
+ const nearby = high ? {amen:[]} : faNearby(r,a);
+ if (nearby.amen.length || nearby.highway) {
+  lines.push('', 'CONVENIENCES:');
+  nearby.amen.forEach(item=>{
+   const waterfront = /^(?:park|other)$/.test(item.t) && /\bwaterfront\b/i.test(item.n);
+   lines.push((waterfront?'🌊':(FA_ICON[item.t]||FA_ICON.other))+' '+item.n);
+  });
+  if (nearby.highway) lines.push('🚗 Easy access via '+nearby.highway);
+ } else if (!high) miss.push('fa_m_amen');
+ if (!high) {
+  const originalMap = faTelegramMap(r[4]);
+  const map = faTelegramMap(a.map) || originalMap;
+  if (map) {
+   const mapData = new URL(originalMap || map);
+   const query = mapData.searchParams.get('query') || mapData.searchParams.get('q');
+   const pin = hasPin(r) || mapData.pathname.startsWith('/maps/place/') ||
+    /^[-+]?\d{1,3}(?:\.\d+)?\s*,\s*[-+]?\d{1,3}(?:\.\d+)?$/.test(query || '');
+   const caption = pin ? '📍 NEARBY GOOGLE MAPS PIN:' :
+    query || mapData.pathname.startsWith('/maps/search/') ? '📍 GOOGLE MAPS (ADDRESS SEARCH):' : '📍 GOOGLE MAPS LOCATION:';
+   lines.push('',caption,map);
+  } else miss.push('fa_m_map');
+ }
+ if (high) lines.push('');
+ lines.push('','Kindly note the following:',
+  '+ NO INSIDE VIEWING. Self-survey from outside only',
+  '+ Cash ready: 10% Deposit | 5% legal cost | 2-5% misc');
+ const contacts = ADS?.telegram_contacts?.[high?'highrise':'landed'];
+ if (Array.isArray(contacts) && contacts.length===3 && contacts.every(v=>typeof v==='string' && !/[\r\n]/.test(v) && clean(v))) {
+  lines.push('',high?'Contact Our Team ->':'Contact Our Team:');
+  if (high) lines.push('');
+  contacts.forEach((value,index)=>{
+   const line = value.trim();
+   const contact = high && /^([\p{L}][\p{L}\p{M} .'’()-]*?)[ \t]+(\+?\d[\d ()-]{5,}\d)$/u.exec(line);
+   lines.push(contact ? contact[1]+(index===0?'  ':'   ')+contact[2] : line);
+  });
+ } else miss.push('fa_m_contact');
+ lines.push('','📢 Get FIRST ACCESS!', 'View our website:', 'https://client.lelongbidgroup.com',
+  'Join my Telegram:', 'https://t.me/lelongbid8');
+ return {text:lines.join('\n').trim(),miss,src:bed?(a.src||''):'',n:a.n||0,
+  amen:nearby.amen.length>0,osm:!!(nearby.amen.length||nearby.highway)&&!!nearby.osm};
+}
+
+function faOpen(r,kind){
+ if (!faOn()) return;
+ const titleKey = {mudah:'fa_mudah',iprop:'fa_iprop',telegram:'fa_telegram'}[kind];
+ if (!titleKey) return;
+ const title = tx(titleKey);
+ const ad = kind==='telegram'?faTelegram(r):faAd(r,kind);
  const src=ad.src==='pos'?tx('fa_src_pos'):ad.src==='ads'?tx('fa_src_ads').replace('{n}',ad.n):'';
- openModal(tx(kind==='mudah'?'fa_mudah':'fa_iprop'),(ad.miss.length?'<p class="fa-note">'+esc(tx('fa_miss'))+' '+ad.miss.map(k=>esc(tx(k))).join(', ')+'</p>':'')+(src?'<p class="fa-src">'+esc(src)+'</p>':'')+(ad.amen?'<p class="fa-src">'+esc(tx('fa_amen'))+'</p>':'')+'<textarea class="fa-text" readonly aria-label="'+esc(tx(kind==='mudah'?'fa_mudah':'fa_iprop'))+'">'+esc(ad.text)+'</textarea>',
+ openModal(title,(ad.miss.length?'<p class="fa-note">'+esc(tx('fa_miss'))+' '+ad.miss.map(k=>esc(tx(k))).join(', ')+'</p>':'')+(src?'<p class="fa-src">'+esc(src)+'</p>':'')+(ad.amen?'<p class="fa-src">'+esc(tx('fa_amen'))+'</p>':'')+(ad.osm?'<p class="fa-src">Amenities: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors (ODbL)</a></p>':'')+'<textarea class="fa-text" readonly aria-label="'+esc(title)+'">'+esc(ad.text)+'</textarea>',
   '<button class="btn" type="button" id="faAgain">'+esc(tx('fa_again'))+'</button><button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>');
- G('faAgain').onclick=()=>copyText(ad.text).then(()=>toast(tx('fa_copied')))}
+ const area = G('faAgain').closest('[role="dialog"]').querySelector('textarea.fa-text');
+ const copy = async () => {
+  const copied = await copyText(ad.text);
+  if (!area.isConnected || G('mdl').hidden) return;
+  if (!copied) {
+   area.focus(); area.select();
+  }
+  toast(tx(copied?'fa_copied':'fa_manual_copy'));
+ };
+ G('faAgain').onclick=copy;
+ copy();
+}
 // Agent commission (5/11/2026), for the same view: each unit's rule and amount come in agent/ads.json (tools/commission.py, from the bank table). The amount is on the reserve price.
 function faC(r){const a=ADS&&ADS.units&&ADS.units[r[SID]];return a&&a.c||null}
 function faAmt(r){const c=faC(r);return c&&c.a&&c.a.length?c.a[c.a.length-1]:-1}
@@ -1687,7 +2293,14 @@ function faComOpen(r){const c=faC(r),row=(k,v)=>'<div><dt>'+esc(tx(k))+'</dt><dd
   +(c.r&&c.r.length?row('fa_c_rate',esc(faPct(c.r[0],c.r[c.r.length-1]))):'')+row('fa_c_amt','<b>'+esc(faComShort(c).split(': ').slice(1).join(': '))+'</b>')+row('fa_c_rule',esc(rule))+'</dl>'
   +(notes.length?'<ul class="fa-notes">'+notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<p class="fa-src">'+esc(tx('fa_c_src').replace('{d}',ADS.pdf||''))+'</p>',
   '<button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>')}
-function faBtn(r,st){if(!faOn()||(st!=='active'&&st!=='unsold'))return '';const id=esc(r[20]);return '<div class="fa"><button type="button" class="fa-btn" aria-expanded="false" data-id="'+id+'">'+esc(tx('fa_btn'))+'</button><div class="fa-menu" hidden><button type="button" class="fa-opt" data-k="mudah" data-id="'+id+'">'+esc(tx('fa_mudah'))+'</button><button type="button" class="fa-opt" data-k="iprop" data-id="'+id+'">'+esc(tx('fa_iprop'))+'</button><button type="button" class="fa-opt fa-com" data-k="com" data-id="'+id+'">'+esc(faComShort(faC(r)))+'</button></div></div>'}
+function faBtn(r,st){
+ if(!faOn())return '';
+ const ended=st!=='active'&&st!=='unsold';
+ const tracker=dadCard(r,ended);
+ if(ended)return tracker;
+ const id=esc(r[20]);
+ return tracker+'<div class="fa"><button type="button" class="fa-btn" aria-expanded="false" data-id="'+id+'">'+esc(tx('fa_btn'))+'</button><div class="fa-menu" hidden><button type="button" class="fa-opt" data-k="mudah" data-id="'+id+'">'+esc(tx('fa_mudah'))+'</button><button type="button" class="fa-opt" data-k="iprop" data-id="'+id+'">'+esc(tx('fa_iprop'))+'</button><button type="button" class="fa-opt" data-k="telegram" data-id="'+id+'">'+esc(tx('fa_telegram'))+'</button><button type="button" class="fa-opt fa-com" data-k="com" data-id="'+id+'">'+esc(faComShort(faC(r)))+'</button>'+'</div></div>';
+}
 function calBtn(cal){return cal?'<a class="calbtn ic" href="'+esc(cal)+'" target="_blank" rel="noopener">'+CALI+tx('cal_short')+'</a>':''}
 const CALI='<svg class="cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 12.5v5M9.5 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 // POS (proclamation of sale) on the card (2/11/2026): agents download it, members ask the agent on WhatsApp, the free preview opens the Premium page
@@ -1707,7 +2320,7 @@ function card(r,i){
  return '<article class="card v2'+(ex?' expired':'')+(simple?' simple':'')+(sharedId?' hl':'')+'" data-k="'+i+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,cn)
  +'<div class="head"><span class="num">'+(i+1)+'</span><div class="addr">'+hlAddr(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
- +priceBox(r,ex,fire,bt,onPhoto)
+ +railWalkNote(r)+priceBox(r,ex,fire,bt,onPhoto)
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')   // the No bidder note right under the last price it refers to (4/11/2026)
  +whenRows(r,ex,cn,cal)
  +specBox(r)
@@ -1724,7 +2337,7 @@ function detailHtml(r){
  const hz=hero(r).replace('loading="lazy"','loading="eager"');
  return '<div class="card detail'+(ex?' expired':'')+'" data-id="'+esc(r[20])+'">'+hz+(ex?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,'',true)+'<div class="head"><div class="addr">'+esc(r[1])+'</div>'+(TRIAL?'':'<button type="button" class="cpy" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('copy_al'))+'" title="'+esc(tx('copy_al'))+'">'+CPY+'</button>')+'</div>'
- +priceBox(r,ex,fire,bt,false,true)
+ +railWalkNote(r)+priceBox(r,ex,fire,bt,false,true)
  +(st==='unsold'&&liveUnsold(r)?unsoldNote(r):'')
  +dims(r,condo)+whenRows(r,ex,cn,cal,true)+posBtn(r)
  +'<dl class="more open"><div><dt>'+tx('district')+'</dt><dd>'+dash(r[3])+'</dd></div><div><dt>'+tx('state')+'</dt><dd>'+dash(r[2])+'</dd></div></dl>'
@@ -1747,8 +2360,8 @@ function hlAddr(s){s=String(s||'');const low=s.toLowerCase();if(!QTOKS.length||l
  let o='';for(let k=0;k<s.length;){let j=k;while(j<s.length&&on[j]===on[k])j++;o+=on[k]?'<mark>'+esc(s.slice(k,j))+'</mark>':esc(s.slice(k,j));k=j}return o}
 // Copy address (members): one tap puts the address on the clipboard, e.g. to look it up on a property portal
 const copyText=s=>{const old=()=>{const a=document.createElement('textarea');a.value=s;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;opacity:0';
- document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()};
- try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(s).catch(old)}catch(e){}old();return Promise.resolve()};
+ document.body.appendChild(a);a.select();try{return document.execCommand('copy')===true}catch(e){return false}finally{a.remove()}};
+ try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(s).then(()=>true,old)}catch(e){}return Promise.resolve(old())};
 const CPY='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
 // Similar units: other units of the same category still for sale in the same district (also under sold / ended units); one tap shows them
 function simBtn(r){const d=String(r[3]||'');if(!/^[A-Za-z]/.test(d)||!r[21])return '';
@@ -1779,6 +2392,9 @@ function fchipsUI(){const el=$('fchips'),c=[];
   const lo=priceLo(),hi=priceHi();if(lo||hi)add('harga',lo&&hi?rmF(lo)+' – '+rmF(hi):lo?'≥ '+rmF(lo):'≤ '+rmF(hi));
   if(bmv)add('bmv',tx('st_bmv',{p:bmv}));
   if(laca)add('laca',laca);
+  if($('dadOwner').value)add('dadOwner',$('dadOwner').value);
+  if($('dadState').value)add('dadState',tx('dad_'+$('dadState').value));
+  if(railSelected())add('rail',tx('f_rail')+' · '+tx('rail_walk'));
   if(c.length>1)c.push('<button type="button" class="fchip all" data-f="all">'+esc(tx('chip_all'))+'</button>')}
  el.innerHTML=c.join('');el.hidden=!c.length}
 // Compare (My list): the first four saved units side by side; ★ marks the best value of a row
@@ -1864,10 +2480,10 @@ function favUI(){const fr=DATA.filter(r=>FAV.has(r[20])),n=fr.length;
  $('favBar').hidden=!favMode;$('favCmp').hidden=n<2;
  if(favMode){$('favBarT').textContent=txn('fav_count',n);$('favSend').hidden=!n;$('favPrint').hidden=!n;$('favSend').textContent=tx('fav_send');$('favSend').href=n?AGENT.wa+'?text='+encodeURIComponent(favMsg(fr)):'#'}}
 // Last search: the filters (not the status tab or the sort) are kept on this device and come back on the next visit.
-const snapNow=()=>({q:$('q').value,n:$('negeri').value,d:[...selD],c:$('cat').value,pg:$('pegangan').value,bk:$('bankSel').value,j:$('jenis').value,t:[...selT],y:[...selY],lo:$('pMin').value,hi:$('pMax').value,b:bmv,l:laca});
+const snapNow=()=>({q:$('q').value,n:$('negeri').value,d:[...selD],c:$('cat').value,pg:$('pegangan').value,bk:$('bankSel').value,j:$('jenis').value,t:[...selT],y:[...selY],lo:$('pMin').value,hi:$('pMax').value,b:bmv,l:laca,rail:railSelected(),owner:$('dadOwner').value,adsState:$('dadState').value});
 function saveLast(){if(sharedId||favMode)return;
  const s=snapNow();
- if(s.q||s.n||s.d.length||s.c||s.j||s.t.length||s.y.length||s.lo||s.hi||s.b||s.l)ls.set('last',JSON.stringify(s));else ls.del('last')}
+ if(s.q||s.n||s.d.length||s.c||s.j||s.t.length||s.y.length||s.lo||s.hi||s.b||s.l||s.rail||s.owner||s.adsState)ls.set('last',JSON.stringify(s));else ls.del('last')}
 function restoreLast(){let s=null;try{s=JSON.parse(ls.get('last')||'null')}catch(e){}if(!s||typeof s!=='object')return false;
  const arr=a=>Array.isArray(a)?a.map(String):[];
  $('q').value=typeof s.q==='string'?s.q:'';
@@ -1876,7 +2492,8 @@ function restoreLast(){let s=null;try{s=JSON.parse(ls.get('last')||'null')}catch
  PEND.cat=typeof s.c==='string'?s.c:'';PEND.jenis=typeof s.j==='string'?s.j:'';PEND.pegangan=typeof s.pg==='string'?s.pg:'';PEND.bank=typeof s.bk==='string'?s.bk:'';
  arr(s.t).forEach(x=>selT.add(x));arr(s.y).forEach(x=>selY.add(x));
  $('pMin').value=fmtNum(s.lo);$('pMax').value=fmtNum(s.hi);
- bmv=[0,10,20,30,40,50].includes(+s.b)?+s.b:0;laca=['','LACA','Non-LACA'].includes(s.l)?s.l:'';
+ bmv=[0,10,20,30,40,50].includes(+s.b)?+s.b:0;laca=['','LACA','Non-LACA'].includes(s.l)?s.l:'';railOnly=railFilterOn()&&s.rail===true;
+ if(faOn()){$('dadOwner').value=['Faezah','Suhaila'].includes(s.owner)?s.owner:'';$('dadState').value=['posted','pending','expired'].includes(s.adsState)?s.adsState:''}
  return true}
 function render(){facetOpts();
  let rows=filtered();const s=$('sort').value;
@@ -1888,10 +2505,13 @@ function render(){facetOpts();
  $('resetInline').hidden=!a||favMode;
  $('empty').hidden=rows.length>0;$('emptyReset').hidden=favMode;
  if(!rows.length&&favMode)$('emptyMsg').innerHTML=tx('fav_empty');
- else if(!rows.length){   // say which status tab is empty, which filters cause it, and how many units Reset brings back
+ else if(!rows.length&&faOn()&&$('dadState').value&&(DAD.status()!=='ready'||!DAD.sourceReady())){
+  $('emptyMsg').innerHTML=esc(tx(!DAD.sourceReady()?'dad_source_error':DAD.status()==='error'?'dad_error':'dad_wait'))+
+   (DAD.status()==='error'||!DAD.sourceReady()?' <button type="button" class="btn dad-retry">'+esc(tx('dad_retry'))+'</button>':'');
+ }else if(!rows.length){   // say which status tab is empty, which filters cause it, and how many units Reset brings back
   const lbl=stName(status);
   const tot=status==='available'?cnt.active+cnt.unsold:(cnt[status]||0);
-  const on=[[$('q').value!=='','f_search'],[$('negeri').value,'f_state'],[selD.size,'f_district'],[$('cat').value,'f_cat'],[$('pegangan').value,'f_tenure'],[$('bankSel').value,'f_bank'],[$('jenis').value,'f_type'],[selT.size,'f_date'],[selY.size,'f_cy'],[priceLo()||priceHi(),'f_price'],[bmv,'f_bmv'],[laca,'LACA'],[NEWONLY,'f_new']].filter(f=>f[0]).map(f=>tx(f[1]));
+  const on=[[$('q').value!=='','f_search'],[$('negeri').value,'f_state'],[selD.size,'f_district'],[$('cat').value,'f_cat'],[$('pegangan').value,'f_tenure'],[$('bankSel').value,'f_bank'],[$('jenis').value,'f_type'],[selT.size,'f_date'],[selY.size,'f_cy'],[priceLo()||priceHi(),'f_price'],[bmv,'f_bmv'],[laca,'LACA'],[railSelected(),'rail_walk'],[$('dadState').value,'dad_'+$('dadState').value],[$('dadOwner').value,'dad_heading'],[NEWONLY,'f_new']].filter(f=>f[0]).map(f=>tx(f[1]));
   $('emptyMsg').innerHTML=tx('empty1',{s:'<b>'+esc(lbl)+'</b>'})+(on.length?' ('+esc(on.join(', '))+')':'')+'.'
    +(tot&&on.length?'<small>'+tx('empty2',{n:tot,s:esc(lbl)})+'</small>':'')
    +((status==='sold'||status==='calloff'||status==='unsold')&&selT.size?'<small>'+tx('empty3')+'</small>':'');
@@ -1904,7 +2524,26 @@ function render(){facetOpts();
  saveLast();
 }
 function clearShared(){if(!sharedId)return;sharedId=null;try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}}
-function reset(quiet){clearShared();favMode=false;LASTON=false;NEWONLY=false;ls.del('last');status='available';['q','negeri','jenis','cat','pegangan','bankSel'].forEach(k=>$(k).value='');selD.clear();selT.clear();selY.clear();tarikhToggle(false);cyToggle(false);cyFlag(false);$('daerahQ').value='';daerahOpts();$('pMin').value='';$('pMax').value='';bmv=0;laca='';if(!quiet){paint();render()}}
+function reset(quiet){clearShared();favMode=false;LASTON=false;NEWONLY=false;ls.del('last');status='available';['q','negeri','jenis','cat','pegangan','bankSel'].forEach(k=>$(k).value='');selD.clear();selT.clear();selY.clear();tarikhToggle(false);cyToggle(false);cyFlag(false);$('daerahQ').value='';daerahOpts();$('pMin').value='';$('pMax').value='';bmv=0;laca='';railOnly=false;$('dadOwner').value='';$('dadState').value='';if(!quiet){paint();render()}}
+
+$('dadOwner').onchange=$('dadState').onchange=()=>{if(!faOn())return;clearShared();favMode=false;render()};
+$('dadRetry').onclick=dadRefresh;
+$('dadLedger').onclick=()=>dadOpenLedger($('dadOwner').value);
+$('emptyMsg').addEventListener('click',e=>{if(e.target.closest('.dad-retry'))dadRefresh()});
+$('list').addEventListener('click',e=>{if(e.target.closest('.dad-retry'))dadRefresh()});
+$('list').addEventListener('change',async e=>{
+ const box=e.target.closest('.dad-card input[data-portal]');
+ if(!box||!faOn())return;
+ const sid=box.closest('.dad-card').dataset.sid,portal=box.dataset.portal,key=sid+'/'+portal;
+ if(box.closest('[data-ended]')||!DAD.sourceReady()||DAD.blocked(sid)||dadSaving.has(key)||DAD.status()!=='ready'){dadSync();return}
+ const checked=box.checked;
+ dadSaving.add(key);dadErrors.delete(key);dadSync();
+ try{await DAD.set(sid,portal,checked)}
+ catch{dadErrors.add(key);toast(tx('dad_save_error'))}
+ finally{dadSaving.delete(key);dadSync()}
+});
+
+$('railToggle').onclick=()=>{if(!railFilterOn())return;clearShared();favMode=false;railOnly=!railOnly;paint();render();track('filter_rail',{on:railOnly})};
 document.querySelectorAll('.rs').forEach(b=>b.onclick=()=>reset());
 $('resetInline').onclick=()=>reset();
 $('resetBar').onclick=()=>{reset(true);$('sort').value=faOn()&&ADS&&ADS.units?'komisen':'rich';paint();render();sheet(false);try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){window.scrollTo(0,0)}track('reset_top',{})};   // dock: everything back to the defaults, back to the top
@@ -1996,7 +2635,7 @@ $('fchips').onclick=e=>{const b=e.target.closest('.fchip');if(!b)return;const f=
  if(f==='q')$('q').value='';else if(f==='new')NEWONLY=false;else if(f==='negeri'){$('negeri').value='';daerahOpts()}
  else if(f==='daerah'){b.dataset.v!=null?selD.delete(b.dataset.v):selD.clear();daerahOpts()}
  else if(f==='cat'){$('cat').value='';cyFlag(false)}else if(f==='pegangan')$('pegangan').value='';else if(f==='bankSel')$('bankSel').value='';else if(f==='jenis')$('jenis').value='';else if(f==='tarikh')selT.clear();else if(f==='cy')selY.clear();
- else if(f==='harga'){$('pMin').value='';$('pMax').value=''}else if(f==='bmv')bmv=0;else if(f==='laca')laca='';
+ else if(f==='harga'){$('pMin').value='';$('pMax').value=''}else if(f==='bmv')bmv=0;else if(f==='laca')laca='';else if(f==='rail')railOnly=false;else if(f==='dadOwner'||f==='dadState')$(f).value='';
  paint();render()};
 // summary tiles: show exactly those units (the free preview's discount tile leads to the Premium page)
 $('stats').onclick=e=>{const b=e.target.closest('.stat');if(!b)return;const k=b.dataset.st;track('stats_click',{stat:k});
@@ -2050,6 +2689,7 @@ daerahOpts();
 LASTON=restoreLast();
 if(sharedId)track('shared_unit_open',{unit_id:sharedId});
 viewUI();paint();render();LASTSNAP=JSON.stringify(snapNow());
+if(faOn())DAD.start(dadSync);
 atRentRow=id=>{const r=DATA.find(x=>x[20]===id);return !!r&&Array.isArray(r[33])&&r[33].some(a=>Array.isArray(a)&&num(a[0])>0)};
 if(!sharedId&&agTourDue())setTimeout(agTourStart,500);else if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(guideOpen,500);   // an agent's first visit: the dismissible walkthrough; a fresh code: the welcome first, the guide after it
 if(sharedId)setTimeout(()=>toFirst(true),350);   // shared unit link (#id, 29/10/2026): open straight on that unit's card, not the top of the page
@@ -2298,7 +2938,7 @@ const TAG={vip:['VIP Investor','<path d="M6 3h12l4 6-10 12L2 9z" fill="currentCo
 var REALAGENT=false,AVIEW='agent',RTRIAL=false,RTIER='',PAID_SITE='';   // PAID_SITE: set on trial sites by partner_sites.py (where access codes work)   // RTIER: the agent code's own plan, kept while a client view changes TIER   // RTRIAL: the free preview switched on in this page (an agent's Free view, a shared link without a code)
 const SHAREH=(location.hash||'').length>1;
 const TRIAL_DATA='https://lelongbidgroup.com/trial/data2.json';   // the free preview's masked listings (v2, 1/11/2026: photo, discount and map link open; address and paid values masked), the same file every trial site reads
-function faOn(){return REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(www\.)?lelongbidgroup\.com$/.test(location.hostname)}   // For Admin: the agent view of the main site only
+function faOn(){return KP==='lelong.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(www\.)?lelongbidgroup\.com$/.test(location.hostname)}   // For Admin: the agent view of the main site only
 function agentView(){REALAGENT=!!ISAGENT;if(!REALAGENT)return;RTIER=TIER;let v='agent';try{v=sessionStorage.getItem(KP+'aview')||'agent'}catch(e){}
  if(v==='vip'&&TIER==='sip'){AVIEW='vip';ISAGENT=false}
  else if(v==='prem'){AVIEW='prem';ISAGENT=false;TIER='premium'}   // what a Premium client sees: the score locked, no 12-month history
