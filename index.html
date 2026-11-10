@@ -2952,7 +2952,7 @@ function visitStart(){try{
   try{fetch(VISIT_API,{method:'POST',body:b,mode:'cors',keepalive:true,headers:{'Content-Type':'text/plain'}}).catch(()=>{})}catch(x){}};
  const tick=()=>{clearInterval(beat);beat=setInterval(()=>{if(on)send('ping')},60000)};
  const out=()=>{if(!on)return;on=false;hid=Date.now();clearInterval(beat);send('out',Math.min(86400,Math.round((Date.now()-t0)/1000)))};
- const back=()=>{if(on)return;on=true;if(Date.now()-hid>30*60000)sid=rid();t0=Date.now();send('in');tick()};   // back after 30 minutes = a new visit
+ const back=()=>{if(on)return;on=true;const fresh=Date.now()-hid>30*60000;if(fresh)sid=rid();t0=Date.now();send(fresh?'in':'ping');tick()};   // back within 30 minutes = the same visit (a beat), after that a new visit (11/11/2026: quick app switches counted many visits)
  document.addEventListener('visibilitychange',()=>{document.visibilityState==='hidden'?out():back()});
  addEventListener('pagehide',out);addEventListener('pageshow',e=>{if(e.persisted)back()});
  send('in');tick();
