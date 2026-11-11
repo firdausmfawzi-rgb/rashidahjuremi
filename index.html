@@ -392,7 +392,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 @media (prefers-reduced-motion:reduce){.ai-tag,.ai-in::before,.ai-in::after,.ai-chip,.ai-txt,.ai-txt::before,.ai-txt::after,.ai-cur{animation:none}}
 .hd-acts{display:flex;gap:8px;align-items:center;flex:none}
 .theme-btn{min-height:44px;min-width:46px;padding:0 12px;background:var(--surface);color:var(--fg);border-color:var(--line);font-size:1.15rem;line-height:1}
-/* 11/11/2026: the Agent Portal button, Khairul's page only for now (agent view); a holographic look of its own, unlike the rest of the page */
+/* 11/11/2026: the Agent Portal button on every agent's page (agent view); a holographic look of its own, unlike the rest of the page */
 @property --apa{syntax:'<angle>';initial-value:0deg;inherits:false}
 .ap-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex:0 0 auto}
 .ap-btn{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 12px 0 10px;border-radius:12px;text-decoration:none;isolation:isolate;
@@ -3255,8 +3255,8 @@ function atDone(dismissed=false){const g=AT;if(!g)return;AT=null;clearInterval(g
 // has four short parts in the same order on every plan: find, understand, what to do next, what this plan gives. Only a yellow button moves it on, nothing has to be tapped on the page.
 function guideOpen(){if(REALAGENT&&AVIEW==='agent')showGuide();else clGuide()}
 // Agent Specialist view (11/11/2026): 'Need help?' next to the i button opens the agent guide; no A / A+ / A++, the normal size only
-function apOn(){return KP==='khairul.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}
-// 11/11/2026: Agent Portal button on Khairul's page only for now (apOn: his site, agent view, an agent code), with a short walkthrough the
+function apOn(){return REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}   // 11/11/2026: every agent's page (was Khairul's only): agent view with an agent code
+// 11/11/2026: Agent Portal button on every agent's page (apOn: agent view, an agent code), with a short walkthrough the
 // first time and a "Need help?" link to see it again. The portal itself asks the agent to log in with their own link.
 const AP_URL='https://agent.lelongbidgroup.com/portal';
 const AP_TXT={en:{help:'Need help?',sub:'Agents only',k:'AGENT PORTAL GUIDE',next:'Next',back:'Back',done:'Got it',open:'Open portal',
