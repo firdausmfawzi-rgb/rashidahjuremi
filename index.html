@@ -1405,10 +1405,28 @@ const typeName=r=>GENT[r[5]]?r[28]:r[5];
 function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2500)}
 // sh: the photo chip, e.g. "42% Below Market Value" in a smaller type that fits one line (28/10/2026); elsewhere "42% below market value"
 const bmvTxt=(r,sh)=>{if(TRIAL&&/^XX%/.test(String(r[6]||'')))return sh?tx('bmv_chip',{p:'XX'}):tx('bmv_lock');const v=suspect(r)||!ok(r[6])?'':String(r[6]);if(!v||/^\s*0%/.test(v))return '';const m=/^\s*(\d+(?:\.\d+)?)%\s*(?:BMV)?\s*$/i.exec(v);return m?tx(sh?'bmv_chip':'bmv_txt',{p:m[1]}):v};
+// 11/11/2026 (owner): a shared unit says what matters first, one fact a line with an emoji: address, auction price, market value,
+// the saving, auction date, built-up, land size and completion year (when known), tenure. Locked values stay locked (free preview).
+function shareUnitText(r,b){const ms=LANG==='ms',L=[],has=v=>ok(v)&&!locked(v)&&!locked2(v);
+ const line=(e,en,bm,v)=>{if(v)L.push(e+' '+(ms?bm:en)+': '+v)};
+ L.push('\u{1F3E0} *'+pv(typeName(r))+(ok(r[3])?' \u00b7 '+pv(r[3]):'')+(ok(r[2])?', '+pv(r[2]):'')+'*','');
+ line('\u{1F4CD}','Address','Alamat',pv(r[1]));
+ line('\u{1F4B0}','Auction price','Harga lelong',pv(r[7]));
+ if(!suspect(r))line('\u{1F3F7}\uFE0F','Market value','Nilai pasaran',pv(r[8]));
+ const p=num(r[7]),mv=num(r[8]);
+ if(has(r[7])&&has(r[8])&&!suspect(r)&&mv>p&&p>0)line('\u2705','You save','Jimat','RM '+Math.round(mv-p).toLocaleString('en-US')+(b?' ('+b+')':''));
+ line('\u{1F4C6}','Auction date','Tarikh lelong',fmtDay(r[12])+(ok(r[13])?', '+r[13]:''));
+ L.push('');
+ line('\u{1F4D0}','Built-up','Keluasan binaan',pv(r[11]));
+ if(ok(r[10]))line('\u{1F33F}','Land size','Keluasan tanah',pv(r[10]));
+ if(ok(r[19]))line('\u{1F3D7}\uFE0F','Completion year','Tahun siap',pv(r[19]));
+ line('\u{1F4DC}','Tenure','Pegangan',pv(r[9]));
+ L.push('',ms?'\u{1F449} Lihat butiran penuh:':'\u{1F449} See the full details:');
+ return L.join('\n')}
 async function doShare(kind,r){
  const url=BASE+'?utm_source=share&utm_medium='+(r?'unit':'list')+'&utm_campaign=client_share'+(r?'#'+(r[SID]||r[20]):'');
  const b=r?bmvTxt(r):'';
- const text=r?tx('share_unit',{t:pv(typeName(r)),d:pv(r[3]),s:pv(r[2]),p:pv(r[7]),b:b?' ('+b+')':'',a:fmtDay(r[12])}):tx('share_list');
+ const text=r?shareUnitText(r,b):tx('share_list');
  track('share_click',{share_type:kind,unit_id:r?r[20]:'list',category:r?(r[21]||''):''});
  if(navigator.share){try{await navigator.share({title:tx('h1'),text:text,url:url});track('share_done',{share_type:kind});return}catch(e){if(e&&e.name==='AbortError')return}}
  const wa='https://wa.me/?text='+encodeURIComponent(text+'\n'+url);
