@@ -397,7 +397,10 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 @keyframes aiGlitchA{0%,86%,100%{opacity:0;transform:none;clip-path:none}88%{opacity:.9;transform:translate(-2px,1px);clip-path:inset(10% 0 55% 0)}91%{opacity:.9;transform:translate(2px,-1px);clip-path:inset(60% 0 8% 0)}94%{opacity:.7;transform:translate(-1px,0);clip-path:inset(35% 0 35% 0)}}
 @keyframes aiGlitchB{0%,87%,100%{opacity:0;transform:none;clip-path:none}89%{opacity:.9;transform:translate(2px,0);clip-path:inset(50% 0 20% 0)}92%{opacity:.9;transform:translate(-2px,1px);clip-path:inset(5% 0 70% 0)}95%{opacity:.6;transform:translate(1px,-1px);clip-path:inset(70% 0 5% 0)}}
 @media (max-width:480px){.tier-row{flex-wrap:nowrap;gap:6px}.tier-row .tier-tag{flex:none;font-size:.7rem;letter-spacing:.08em;padding:6px 10px 6px 8px}.ai-tag{min-width:0}.ai-in{white-space:normal;font-size:.62rem;letter-spacing:.1em;line-height:1.25;padding:6px 10px 6px 8px;gap:6px}.ai-txt{max-width:10.5em}.ai-txt::before,.ai-txt::after{display:none}.ai-chip{width:14px;height:14px}.ai-cur{height:1.1em}}
-@media (max-width:330px){.tier-row{flex-wrap:wrap}}   /* very small phones: the tag goes under the label */
+@media (max-width:330px){.tier-row{flex-wrap:wrap}}
+/* 11/11/2026 (agents' pages): Need help? sits in the badge row, right of the Agentic AI tag, compact */
+.tier-row .at-i-g{margin-left:auto;gap:4px}.tier-row .at-i-g>button.at-i{width:42px;height:42px;margin-left:0}.tier-row .at-i-lbl{min-height:42px;font-size:.82rem;line-height:1.1}
+@media (max-width:480px){.tier-row .at-i-g>button.at-i{width:36px;height:36px}.tier-row .at-i-lbl{font-size:.74rem;min-height:36px}}   /* very small phones: the tag goes under the label */   /* very small phones: the tag goes under the label */
 @media (prefers-reduced-motion:reduce){.ai-tag,.ai-in::before,.ai-in::after,.ai-chip,.ai-txt,.ai-txt::before,.ai-txt::after,.ai-cur{animation:none}}
 .hd-acts{display:flex;gap:8px;align-items:center;flex:none}
 .theme-btn{min-height:44px;min-width:46px;padding:0 12px;background:var(--surface);color:var(--fg);border-color:var(--line);font-size:1.15rem;line-height:1}
@@ -623,6 +626,7 @@ body{padding-block-end:100px}
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap">
 <script>/* apply the client's saved light / dark choice, text size and language before first paint (no flash); KP = this site's settings prefix */var ISAGENT=false;var KP='rashidahjuremi.',TRIAL=false,LANDING='premium/',SIP_URL='https://clientrashidahjuremi.lelongbidgroup.com/premium/#sip',TIER='premium';if(TRIAL)document.documentElement.classList.add('trial');try{var _t=localStorage.getItem('rashidahjuremi.theme');if(_t==='dark')document.documentElement.setAttribute('data-theme','dark');localStorage.removeItem(KP+'size');if(localStorage.getItem(KP+'lang')==='ms')document.documentElement.lang='ms'}catch(e){}</script>
 <style id="aiCss">
 /* AI assistant (2/11/2026): the character button, the chat panel, the guided-tour spotlight */
@@ -686,6 +690,98 @@ body{padding-block-end:100px}
 @media print{.ai-fab,.ai-panel,.ai-spot{display:none!important}}
 .ai-av.m svg.f-svg,.ai-av.f svg.m-svg{display:none}
 </style>
+<style id="agenticCss">
+/* 11/11/2026: the Agentic AI look, from the owner's page to every agent's page (Free, Premium, VIP and agent views). A theme layer over the page: neon cyan / violet on deep
+   navy, glass surfaces, a living grid, an AI status line, reveal-on-scroll, glow on what can be pressed. Nothing here changes what the page does;
+   remove this block and the agenticJs script to go back. Motion stops under prefers-reduced-motion. */
+:root{--neon:#00b8d9;--neon2:#7c4dff;--neon3:#16c784;--glass:rgba(255,255,255,.78);--glow:0 0 0 1px rgba(0,184,217,.18),0 10px 30px rgba(15,42,68,.10);
+ --bg:#f2f6fc;--surface:#ffffff;--line:#dbe4f0;--accent:#0a1a3a;--display:'Space Grotesk','IBM Plex Sans',system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#050b18;--surface:#0c1628;--line:#1b2c4a;--fg:#e6f1ff;--muted:#9fb3cc;
+ --accent:#22d3ee;--accent-fg:#03121f;--glass:rgba(12,22,40,.72);--glow:0 0 0 1px rgba(34,211,238,.22),0 10px 34px rgba(0,0,0,.45)}}
+:root[data-theme="dark"]{--bg:#050b18;--surface:#0c1628;--line:#1b2c4a;--fg:#e6f1ff;--muted:#9fb3cc;--accent:#22d3ee;--accent-fg:#03121f;
+ --glass:rgba(12,22,40,.72);--glow:0 0 0 1px rgba(34,211,238,.22),0 10px 34px rgba(0,0,0,.45)}
+
+/* the living background: a fine grid, two slow glows, and the neural canvas (agenticJs) */
+body{background:var(--bg);position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+ background:radial-gradient(60vmax 40vmax at 12% -10%,rgba(0,184,217,.16),transparent 60%),radial-gradient(50vmax 40vmax at 110% 20%,rgba(124,77,255,.14),transparent 60%),
+ linear-gradient(rgba(0,184,217,.07) 1px,transparent 1px) 0 0/34px 34px,linear-gradient(90deg,rgba(0,184,217,.07) 1px,transparent 1px) 0 0/34px 34px;
+ animation:agDrift 26s ease-in-out infinite alternate}
+@keyframes agDrift{to{background-position:0 0,0 0,0 34px,34px 0;filter:hue-rotate(18deg)}}
+#agNet{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55}
+:root[data-theme="dark"] #agNet{opacity:.8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #agNet{opacity:.8}}
+
+/* scroll progress */
+#agProg{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);z-index:60;
+ background:linear-gradient(90deg,var(--neon),var(--neon2),var(--neon3));box-shadow:0 0 12px rgba(0,184,217,.7)}
+
+/* AI status line under the title */
+.ag-status{display:flex;align-items:center;gap:10px;margin:6px 0 10px;padding:8px 12px;border-radius:12px;font:600 .8rem/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+ letter-spacing:.04em;color:var(--fg);background:var(--glass);border:1px solid rgba(0,184,217,.35);box-shadow:var(--glow);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);overflow:hidden;position:relative}
+.ag-status::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(0,184,217,.18) 50%,transparent 70%) -120% 0/60% 100% no-repeat;animation:agSweep 3.8s ease-in-out infinite}
+@keyframes agSweep{to{background-position:220% 0}}
+.ag-dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--neon3);box-shadow:0 0 0 0 rgba(22,199,132,.6);animation:agPing 1.8s ease-out infinite}
+@keyframes agPing{70%{box-shadow:0 0 0 9px rgba(22,199,132,0)}100%{box-shadow:0 0 0 0 rgba(22,199,132,0)}}
+.ag-k{flex:0 0 auto;color:var(--neon);font-weight:800}
+.ag-t{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ag-t::after{content:"\258C";margin-left:2px;color:var(--neon);animation:agBlink 1s steps(2) infinite}
+@keyframes agBlink{50%{opacity:0}}
+
+/* title */
+.hd h1{font-family:var(--display);letter-spacing:-.01em;background:linear-gradient(90deg,var(--fg) 0%,var(--fg) 40%,var(--neon) 55%,var(--neon2) 70%,var(--fg) 85%);
+ background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:agTitle 7s ease-in-out infinite}
+@keyframes agTitle{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.eyebrow{color:var(--neon)!important;letter-spacing:.22em}
+
+/* glass surfaces and neon edges */
+.stat,.card,.sub,.vbox,.trial-bar,.sheet,.mdl{border-color:rgba(0,184,217,.22)}
+.stat{background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:var(--glow);transition:transform .25s,box-shadow .25s,border-color .25s}
+button.stat:hover,button.stat:focus-visible{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon),0 0 22px rgba(0,184,217,.35);transform:translateY(-2px)}
+.stat b,.stat .n,.stat strong{font-family:var(--display)}
+.card{box-shadow:var(--glow);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.card:hover{box-shadow:0 0 0 1px rgba(0,184,217,.45),0 16px 40px rgba(0,120,180,.18)}
+.card .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%) -150% 0/200% 100% no-repeat;transition:background-position .9s}
+.card:hover .hero::after{background-position:150% 0}
+.btn{transition:box-shadow .2s,transform .12s,border-color .2s}
+.btn:hover{border-color:var(--neon);box-shadow:0 0 0 1px rgba(0,184,217,.35),0 0 16px rgba(0,184,217,.25)}
+.btn:active{transform:scale(.98)}
+.top{background:transparent;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.top input,#q{border-color:rgba(0,184,217,.35)!important}
+.top input:focus,#q:focus{outline:none;box-shadow:0 0 0 3px rgba(0,184,217,.25),0 0 18px rgba(0,184,217,.25)}
+.dock{background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(0,184,217,.3);box-shadow:0 -8px 30px rgba(0,120,180,.18)}
+.sub2{background:linear-gradient(135deg,#0a1a3a 0%,#11285a 55%,#2a1b6b 100%);box-shadow:0 0 0 1px rgba(0,184,217,.35),0 12px 30px rgba(42,27,107,.35);position:relative;overflow:hidden;color:#fff}
+.sub2::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(0,229,255,.08) 1px,transparent 1px) 0 0/22px 22px,linear-gradient(90deg,rgba(0,229,255,.08) 1px,transparent 1px) 0 0/22px 22px}
+.sub2>*{position:relative}
+.sub2 .sub-acts a:not(.sub-wa){background:#fff;color:#0a1a3a}
+.sheet,.mdl{-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+
+/* reveal on scroll: what enters the screen fades up */
+.ag-rv{opacity:0;transform:translateY(18px) scale(.985)}
+.ag-rv.ag-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+
+/* first load: a short boot screen, once a session */
+#agBoot{position:fixed;inset:0;z-index:99990;display:grid;place-items:center;background:#040a16;color:#cfefff;font:700 .9rem/1.4 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;transition:opacity .5s ease,visibility .5s}
+#agBoot.ag-off{opacity:0;visibility:hidden}
+#agBoot .b{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+#agBoot .core{width:64px;height:64px;border-radius:50%;border:2px solid rgba(0,229,255,.25);border-top-color:#00e5ff;border-right-color:#7c4dff;animation:agSpin .8s linear infinite;box-shadow:0 0 30px rgba(0,229,255,.35)}
+@keyframes agSpin{to{transform:rotate(360deg)}}
+#agBoot .bar{width:200px;height:3px;border-radius:2px;background:rgba(0,229,255,.15);overflow:hidden}
+#agBoot .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#00e5ff,#7c4dff);animation:agLoad 1s ease forwards}
+@keyframes agLoad{to{width:100%}}
+
+/* the code gate: the first thing a client sees */
+.gate{background:radial-gradient(70vmax 50vmax at 15% 0%,rgba(0,184,217,.22),transparent 60%),radial-gradient(60vmax 50vmax at 100% 100%,rgba(124,77,255,.22),transparent 60%),#050b18}
+.gate::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(0,229,255,.07) 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,rgba(0,229,255,.07) 1px,transparent 1px) 0 0/30px 30px}
+.gate .box{position:relative;background:rgba(10,20,38,.82);color:#e6f1ff;border:1px solid rgba(0,229,255,.35);box-shadow:0 0 0 1px rgba(124,77,255,.25),0 0 40px rgba(0,184,217,.25),0 24px 60px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.gate .box::before{content:"AGENTIC AI | SECURE ACCESS";display:block;font:800 .68rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.22em;color:#00e5ff;text-align:center}
+.gate .box h1,.gate .box h2,.gate .box p,.gate .box small,.gate .box span{color:inherit}
+.gate .box .gate-agree,.gate .box p{color:#b9cbe3}
+.gate .box .lnk{color:#7fe9ff}
+.gate .box button[type=submit],.gate .box .btn.primary{background:linear-gradient(90deg,#00b8d9,#7c4dff)!important;color:#fff!important;border:0!important;box-shadow:0 0 22px rgba(0,184,217,.45)}
+@media (prefers-reduced-motion:reduce){body::before,.ag-status::after,.ag-dot,.ag-t::after,.hd h1{animation:none!important}.ag-rv{opacity:1;transform:none}#agNet,#agBoot{display:none}}
+@media print{.ag-rv{opacity:1!important;transform:none!important}#agNet,#agProg,.ag-status,#agBoot{display:none!important}body::before{display:none}.hd h1{color:#000;background:none}}
+</style>
 </head>
 <body>
 <div class="gate" id="gate" hidden><form class="box" id="gateForm">
@@ -703,13 +799,13 @@ body{padding-block-end:100px}
 </form></div>
 <div class="wrap">
 <div class="hd"><div class="hd-title"><div><span class="eyebrow" data-i18n="eyebrow">Members-only list</span><h1 data-i18n="h1">Auction List</h1></div></div><div class="hd-acts"><div class="tgrp top-lang" role="group" aria-label="Language / Bahasa"><button type="button" data-l="en" lang="en">EN</button><button type="button" data-l="ms" lang="ms">BM</button></div><button class="btn theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode" title="Light / dark mode">🌙</button><button class="btn share-all" id="shareAll" type="button" data-i18n="share">Share</button></div></div>
-<div class="tier-row"><span class="tier-tag" id="tierTag" hidden></span><span class="ai-tag" id="aiTag" role="img" aria-label="Agentic AI Powered Data"><span class="ai-in"><svg class="ai-chip" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M12 2v4M15 2v4M9 18v4M12 18v4M15 18v4M2 9h4M2 12h4M2 15h4M18 9h4M18 12h4M18 15h4"/></svg><span class="ai-txt" data-text="Agentic AI Powered Data">Agentic AI Powered Data</span><i class="ai-cur" aria-hidden="true"></i></span></span></div><p class="aview-note" id="aviewNote" hidden data-i18n="aview_note">This view is for your client</p>
+<div class="tier-row"><span class="tier-tag" id="tierTag" hidden></span><span class="ai-tag" id="aiTag" role="img" aria-label="Agentic AI Powered Data"><span class="ai-in"><svg class="ai-chip" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M12 2v4M15 2v4M9 18v4M12 18v4M15 18v4M2 9h4M2 12h4M2 15h4M18 9h4M18 12h4M18 15h4"/></svg><span class="ai-txt" data-text="Agentic AI Powered Data">Agentic AI Powered Data</span><i class="ai-cur" aria-hidden="true"></i></span></span><div class="at-i-g"><button class="at-i" id="atInfo" type="button" hidden aria-label="Agent guide" data-i18n-al="at_info_al"><span class="at-i-halo"></span><span class="at-i-ring"></span><span class="at-i-orbit"></span><span class="at-i-core"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="atIg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#7cf0ff"/><stop offset="1" stop-color="#f3d67a"/></linearGradient></defs><circle cx="12" cy="5.6" r="2.5" fill="url(#atIg)"/><rect x="9.9" y="10.2" width="4.2" height="11" rx="2.1" fill="url(#atIg)"/></svg></span></button><button class="at-i-lbl" id="atInfoLbl" type="button" hidden data-i18n="c_info_lbl">Need help?</button></div></div><p class="aview-note" id="aviewNote" hidden data-i18n="aview_note">This view is for your client</p>
 <p class="upd" id="upd"></p>
 <div class="stats" id="stats" aria-live="polite"></div>
 <div class="trial-bar" id="trialBar" hidden><span data-i18n="trial_msg">You are viewing the free preview. Full details are for premium members.</span><a class="btn" id="trialCta" href="premium/" data-i18n="lock">Unlock Premium RM50 only</a><button type="button" class="btn" id="haveCode" hidden><svg class="key" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2a7.5 7.5 0 0 0-7.1 9.9L2 17.3V22h4.7l1.2-1.2v-2.3h2.3l1.4-1.4v-2.2h2.2l.9-.9A7.5 7.5 0 1 0 14.5 2zm2 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg><span data-i18n="have_code">I have an access code</span></button></div>
 <div class="tools">
 <div class="tgrp ts" hidden role="group" aria-label="Text size" data-i18n-al="size_al"><button type="button" data-s="" aria-label="Normal text" data-i18n-al="size0">A</button><button type="button" data-s="l" aria-label="Bigger text" data-i18n-al="size1">A+</button><button type="button" data-s="xl" aria-label="Biggest text" data-i18n-al="size2">A++</button></div>
-<div class="at-i-g"><button class="at-i" id="atInfo" type="button" hidden aria-label="Agent guide" data-i18n-al="at_info_al"><span class="at-i-halo"></span><span class="at-i-ring"></span><span class="at-i-orbit"></span><span class="at-i-core"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="atIg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#7cf0ff"/><stop offset="1" stop-color="#f3d67a"/></linearGradient></defs><circle cx="12" cy="5.6" r="2.5" fill="url(#atIg)"/><rect x="9.9" y="10.2" width="4.2" height="11" rx="2.1" fill="url(#atIg)"/></svg></span></button><button class="at-i-lbl" id="atInfoLbl" type="button" hidden data-i18n="c_info_lbl">Need help?</button></div>
+
 
 </div>
 <div class="sub sub2"><span class="sub-av" aria-hidden="true"></span><span class="sub-who"><span class="sub-k" data-i18n="banner_k">Interested? Contact</span><span class="sub-name">Rashidah Juremi</span><a class="sub-ph" href="tel:018-2808043">018-2808043</a></span><span class="sub-acts"><a id="bannerCall" href="#" data-i18n="call">📞 Call</a><a class="sub-wa" id="bannerWa" href="https://wa.me/60182808043" target="_blank" rel="noopener">💬 WhatsApp</a></span></div>
@@ -3342,5 +3438,51 @@ function trialLocks(){const so=G('sort');so.value='rich';   // the free preview 
 if(TRIAL){G('trialBar').hidden=false;G('trialCta').href=LANDING;G('haveCode').hidden=false;G('haveCode').onclick=goCode;trialLocks();start()}else access().then(ok=>{if(ok==='free')freeShare();else if(ok)start()}).catch(()=>openGate('gate_err'));
 </script>
 
+<script id="agenticJs">
+// 11/11/2026: the Agentic AI layer (agents' pages, from the owner's page): boot screen once a session, neural background, scroll progress, the AI status line, reveal on scroll.
+(function(){
+ var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var ms=function(){return (document.documentElement.lang||'en')==='ms'};
+ // boot screen, once a session
+ try{if(!RM&&!sessionStorage.getItem('ag.boot')){sessionStorage.setItem('ag.boot','1');var b=document.createElement('div');b.id='agBoot';
+  b.innerHTML='<div class="b"><div class="core"></div><div>AGENTIC AI</div><div class="bar"><i></i></div><div style="font-size:.7rem;opacity:.7">'+(ms()?'MENYAMBUNG EJEN AI\u2026':'CONNECTING AI AGENTS\u2026')+'</div></div>';
+  document.body.appendChild(b);setTimeout(function(){b.classList.add('ag-off');setTimeout(function(){b.remove()},600)},1150)}}catch(e){}
+ // scroll progress
+ var pr=document.createElement('div');pr.id='agProg';document.body.appendChild(pr);
+ var tick=false;function prog(){tick=false;var h=document.documentElement.scrollHeight-innerHeight;pr.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(prog)}},{passive:true});
+ // the AI status line, under the title
+ var hd=document.querySelector('.hd');
+ if(hd){var st=document.createElement('div');st.className='ag-status';st.setAttribute('aria-hidden','true');
+  st.innerHTML='<span class="ag-dot"></span><span class="ag-k">AI&nbsp;AGENT</span><span class="ag-t"></span>';hd.insertAdjacentElement('afterend',st);
+  var tEl=st.querySelector('.ag-t'),i=0,j=0,del=false;
+  function lines(){var n=(document.querySelector('#stats b')||{}).textContent||'';
+   return ms()?['Mengimbas '+(n||'')+' unit lelong bank secara langsung','Membandingkan harga lelong dengan nilai pasaran','Mengesan unit 30% di bawah nilai pasaran','Menyemak keputusan lelong terkini','Memadankan unit dengan kehendak klien']
+              :['Scanning '+(n||'')+' bank auction units live','Comparing auction prices with market value','Spotting units 30% below market value','Checking the latest auction results','Matching units to what clients want']}
+  function type(){var L=lines(),t=L[i%L.length].replace(/\s+/g,' ');
+   if(RM){tEl.textContent=t;i++;return setTimeout(type,3200)}
+   if(!del){j++;tEl.textContent=t.slice(0,j);if(j>=t.length){del=true;return setTimeout(type,1800)}}
+   else{j-=2;tEl.textContent=t.slice(0,Math.max(0,j));if(j<=0){del=false;j=0;i++}}
+   setTimeout(type,del?18:38)}
+  setTimeout(type,1300)}
+ // reveal on scroll: stats, contact card and every listing card as it is drawn
+ if(!RM&&'IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('ag-in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});
+  var watch=function(el){if(el.nodeType===1&&!el.classList.contains('ag-rv')&&el.matches('.card,.stat,.sub,.vbox')){el.classList.add('ag-rv');io.observe(el)}};
+  document.querySelectorAll('.stat,.sub,.vbox,#list>.card').forEach(watch);
+  new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1){watch(n);if(n.querySelectorAll)n.querySelectorAll('.stat').forEach(watch)}})})})
+   .observe(document.body,{childList:true,subtree:true})}
+ // neural background: a few drifting nodes joined when close; paused when hidden, light on phones
+ if(!RM){var c=document.createElement('canvas');c.id='agNet';document.body.prepend(c);var x=c.getContext('2d'),N=innerWidth<700?26:44,P=[],W=0,H=0,dpr=Math.min(2,devicePixelRatio||1);
+  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';x.setTransform(dpr,0,0,dpr,0,0)}
+  size();addEventListener('resize',size);
+  for(var k=0;k<N;k++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});
+  var last=0;function draw(t){requestAnimationFrame(draw);if(document.hidden||t-last<40)return;last=t;x.clearRect(0,0,W,H);
+   for(var a=0;a<N;a++){var p=P[a];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    for(var q=a+1;q<N;q++){var o=P[q],dx=p.x-o.x,dy=p.y-o.y,d=dx*dx+dy*dy;if(d<16000){x.strokeStyle='rgba(0,184,217,'+(0.16*(1-d/16000))+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(o.x,o.y);x.stroke()}}
+    x.fillStyle='rgba(124,77,255,.35)';x.beginPath();x.arc(p.x,p.y,1.6,0,6.283);x.fill()}}
+  requestAnimationFrame(draw)}
+})();
+</script>
 </body>
 </html>
