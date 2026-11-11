@@ -392,6 +392,39 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 @media (prefers-reduced-motion:reduce){.ai-tag,.ai-in::before,.ai-in::after,.ai-chip,.ai-txt,.ai-txt::before,.ai-txt::after,.ai-cur{animation:none}}
 .hd-acts{display:flex;gap:8px;align-items:center;flex:none}
 .theme-btn{min-height:44px;min-width:46px;padding:0 12px;background:var(--surface);color:var(--fg);border-color:var(--line);font-size:1.15rem;line-height:1}
+/* 11/11/2026: the Agent Portal button, Khairul's page only for now (agent view); a holographic look of its own, unlike the rest of the page */
+@property --apa{syntax:'<angle>';initial-value:0deg;inherits:false}
+.ap-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex:0 0 auto}
+.ap-btn{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 12px 0 10px;border-radius:12px;text-decoration:none;isolation:isolate;
+ font:800 .74rem/1.1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#d9fbff;background:#060b1a;
+ box-shadow:0 0 10px rgba(0,229,255,.55),0 0 24px rgba(124,77,255,.45),inset 0 0 12px rgba(0,229,255,.18);animation:apPulse 3s ease-in-out infinite}
+.ap-btn::before{content:"";position:absolute;inset:-2px;border-radius:14px;padding:2px;z-index:-1;
+ background:conic-gradient(from var(--apa),#00e5ff,#7c4dff,#39ff88,#00e5ff);
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:apSpin 3.5s linear infinite}
+.ap-btn::after{content:"";position:absolute;inset:0;border-radius:12px;z-index:-1;
+ background:linear-gradient(105deg,transparent 35%,rgba(0,229,255,.28) 50%,transparent 65%) -150% 0/200% 100% no-repeat,repeating-linear-gradient(0deg,rgba(0,229,255,.07) 0 1px,transparent 1px 3px);animation:apScan 2.8s ease-in-out infinite}
+.ap-btn svg{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:#39ff88;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px #39ff88)}
+.ap-btn .ap-t{display:flex;flex-direction:column;text-shadow:0 0 6px rgba(0,229,255,.9)}.ap-btn .ap-t small{font-size:.56rem;letter-spacing:.2em;color:#9ef3ff;opacity:.85}
+.ap-btn .ap-dot{width:7px;height:7px;border-radius:50%;background:#39ff88;box-shadow:0 0 8px #39ff88;animation:apBlink 1.4s steps(2) infinite}
+.ap-btn:hover,.ap-btn:focus-visible{color:#fff;box-shadow:0 0 14px rgba(0,229,255,.8),0 0 34px rgba(124,77,255,.6),inset 0 0 14px rgba(0,229,255,.3)}
+.ap-help{border:0;background:none;padding:2px 4px;font:700 .7rem/1 system-ui,sans-serif;color:#6a3df0;text-decoration:underline dotted;cursor:pointer;min-height:20px}
+:root[data-theme="dark"] .ap-help{color:#b39dff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ap-help{color:#b39dff}}
+@keyframes apSpin{to{--apa:360deg}}@keyframes apScan{0%,30%{background-position:-150% 0,0 0}100%{background-position:250% 0,0 0}}
+@keyframes apPulse{0%,100%{box-shadow:0 0 10px rgba(0,229,255,.5),0 0 22px rgba(124,77,255,.4),inset 0 0 12px rgba(0,229,255,.18)}50%{box-shadow:0 0 16px rgba(0,229,255,.8),0 0 34px rgba(124,77,255,.6),inset 0 0 16px rgba(0,229,255,.3)}}
+@keyframes apBlink{50%{opacity:.25}}
+@media (max-width:420px){.ap-btn{padding:0 9px 0 8px;gap:5px;font-size:.64rem;letter-spacing:.08em}.ap-btn .ap-t small{font-size:.5rem}.ap-btn svg{width:15px;height:15px}}
+#apTour{position:fixed;inset:0;z-index:2147483000}#apTour .ap-dim{position:absolute;inset:0;background:transparent}
+#apTour .ap-ring{position:absolute;border-radius:16px;box-shadow:0 0 0 3px #00e5ff,0 0 30px 8px rgba(0,229,255,.6),0 0 0 200vmax rgba(3,6,18,.72);pointer-events:none;transition:all .3s}   /* the dim is the ring's own shadow: the button inside stays bright */
+#apTour .ap-card{position:absolute;left:16px;right:16px;max-width:380px;margin-left:auto;background:#0a1124;color:#e6fbff;border-radius:16px;padding:16px 16px 12px;
+ border:1px solid rgba(0,229,255,.5);box-shadow:0 0 24px rgba(0,229,255,.35),0 20px 40px rgba(0,0,0,.5)}
+#apTour .ap-k{font:800 .68rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;color:#39ff88}
+#apTour h3{margin:6px 0 6px;font-size:1.08rem;color:#fff}#apTour p{margin:0 0 6px;line-height:1.45;font-size:.95rem;color:#cfe9f2}
+#apTour .ap-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+#apTour .ap-nav button,#apTour .ap-nav a{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:10px;font-weight:800;border:1px solid rgba(0,229,255,.5);background:transparent;color:#bff6ff;cursor:pointer;text-decoration:none}
+#apTour .ap-nav .ap-go{background:linear-gradient(90deg,#00e5ff,#7c4dff);color:#06101e;border:0}
+@media (prefers-reduced-motion:reduce){.ap-btn,.ap-btn::before,.ap-btn::after,.ap-btn .ap-dot{animation:none}}
+@media print{.ap-wrap{display:none}}
 .share-all{min-height:44px;padding:0 16px;background:var(--surface);color:var(--accent);border-color:var(--accent)}
 .shared-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--ok-bg);color:var(--accent);border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:600;font-size:.95rem}
 .shared-bar button{border:0;background:var(--accent);color:var(--accent-fg);border-radius:8px;padding:0 12px;min-height:44px;font-weight:600}
@@ -1159,7 +1192,7 @@ function applyI18n(){document.documentElement.lang=LANG;const qq=document.getEle
  G('bannerWa').href=AGENT.wa+'?text='+encodeURIComponent(tx('wa_hi'));G('gateWa').href=AGENT.wa+'?text='+encodeURIComponent(tx(RENEW?'gate_wa_renew_msg':'gate_wa_msg'));
  G('bannerCall').href='tel:+6'+AGENT.phone.replace(/\D/g,'');
  const ge=G('gateErr');if(ge.dataset.k)ge.textContent=tx(ge.dataset.k)}
-function setLang(l){if(l!=='en'&&l!=='ms')return;LANG=l;ls.set('lang',l);applyI18n();if(ONLANG)ONLANG();gtrack('language',{lang:l})}
+function setLang(l){if(l!=='en'&&l!=='ms')return;LANG=l;ls.set('lang',l);applyI18n();try{apI18n()}catch(e){}if(ONLANG)ONLANG();gtrack('language',{lang:l})}
 function sizeUI(){const s=document.documentElement.getAttribute('data-size')||'';document.querySelectorAll('[data-s]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.s===s)))}
 function setSize(s){if(s==='l'||s==='xl')document.documentElement.setAttribute('data-size',s);else{s='';document.documentElement.removeAttribute('data-size')}ls.set('size',s);sizeUI();gtrack('text_size',{size:s||'normal'})}
 // One pop-up box for the "?" help, Quick Find and How to use. Esc, Close or a tap outside closes it.
@@ -3028,7 +3061,7 @@ function agentSwitch(t){const k=AVIEW;t.className='tier-tag aview '+k;
  const s=document.createElement('select');s.id='aviewSel';s.dataset.i18nAl='aview_al';s.setAttribute('aria-label',tx('aview_al'));
  ['agent'].concat(RTIER==='sip'?['vip']:[],['prem','free']).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=TAG[v][0];o.selected=v===k;s.appendChild(o)});
  s.onchange=()=>{try{sessionStorage.setItem(KP+'aview',s.value)}catch(e){}try{gtrack('agent_view',{view:s.value})}catch(e){}location.reload()};
- t.appendChild(s);t.hidden=false;const ib=G('atInfo');if(ib){ib.hidden=false;ib.onclick=atReplay;if(k!=='agent')clInfo();else agentHelp()}const n=G('aviewNote');n.className=k==='agent'?'agflag':'aview-note';n.dataset.i18n=k==='agent'?'aview_agent':'aview_note';n.textContent=tx(n.dataset.i18n);n.hidden=false}
+ t.appendChild(s);t.hidden=false;const ib=G('atInfo');if(ib){ib.hidden=false;ib.onclick=atReplay;if(k!=='agent')clInfo();else agentHelp()}apInit();const n=G('aviewNote');n.className=k==='agent'?'agflag':'aview-note';n.dataset.i18n=k==='agent'?'aview_agent':'aview_note';n.textContent=tx(n.dataset.i18n);n.hidden=false}
 function showTierBadge(){addScoreSort();const t=G('tierTag');if(!t)return;if(REALAGENT){agentSwitch(t);return}clInfo();if(TRIAL||!TIER){t.hidden=true;return}
  const k=ISAGENT?'agent':TIER==='sip'?'vip':'prem';t.className='tier-tag '+k;
  t.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+TAG[k][1]+'</svg><span>'+TAG[k][0]+'</span>';t.hidden=false}   // the cyberpunk "Agentic AI Powered Data" tag (#aiTag) shows on every tier, the free preview included (29/10/2026)
@@ -3222,6 +3255,40 @@ function atDone(dismissed=false){const g=AT;if(!g)return;AT=null;clearInterval(g
 // has four short parts in the same order on every plan: find, understand, what to do next, what this plan gives. Only a yellow button moves it on, nothing has to be tapped on the page.
 function guideOpen(){if(REALAGENT&&AVIEW==='agent')showGuide();else clGuide()}
 // Agent Specialist view (11/11/2026): 'Need help?' next to the i button opens the agent guide; no A / A+ / A++, the normal size only
+function apOn(){return KP==='khairul.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}
+// 11/11/2026: Agent Portal button on Khairul's page only for now (apOn: his site, agent view, an agent code), with a short walkthrough the
+// first time and a "Need help?" link to see it again. The portal itself asks the agent to log in with their own link.
+const AP_URL='https://agent.lelongbidgroup.com/portal';
+const AP_TXT={en:{help:'Need help?',sub:'Agents only',k:'AGENT PORTAL GUIDE',next:'Next',back:'Back',done:'Got it',open:'Open portal',
+ s:[['Your own Agent Portal button','Only agents see this button. VIP, Premium and Free clients never see it.'],
+    ['What is in the portal','Ask for access codes for your clients, see your clients and their plans, and set Client match so new units that suit a client are found for you.'],
+    ['How to get in','Press this button. It signs you in with your own agent code, so you do not need to type anything.']]},
+ ms:{help:'Perlu bantuan?',sub:'Ejen sahaja',k:'PANDUAN PORTAL EJEN',next:'Seterusnya',back:'Kembali',done:'Faham',open:'Buka portal',
+ s:[['Butang Portal Ejen anda','Hanya ejen nampak butang ini. Klien VIP, Premium dan Free tidak nampak.'],
+    ['Apa ada di portal','Minta kod akses untuk klien anda, lihat klien dan pelan mereka, dan pasang Client match supaya unit baru yang sesuai dengan klien dicarikan untuk anda.'],
+    ['Cara masuk','Tekan butang ini. Ia terus log masuk dengan kod ejen anda sendiri, jadi anda tidak perlu taip apa-apa.']]}};
+const apT=()=>AP_TXT[LANG]||AP_TXT.en;
+function apI18n(){const b=G('apBtn'),h=G('apHelp');if(b)b.querySelector('small').textContent=apT().sub;if(h)h.textContent=apT().help}
+function apInit(){if(!apOn()){const w=G('apWrap');if(w)w.remove();return}
+ if(!G('apWrap')){const acts=document.querySelector('.hd .hd-acts');if(!acts)return;const w=document.createElement('div');w.className='ap-wrap';w.id='apWrap';
+  w.innerHTML='<a class="ap-btn" id="apBtn" href="'+AP_URL+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l3 2-3 2M12 13h4"/></svg><span class="ap-t">Agent Portal<small></small></span><i class="ap-dot" aria-hidden="true"></i></a><button type="button" class="ap-help" id="apHelp"></button>';
+  acts.appendChild(w);G('apHelp').onclick=()=>apTour(true);G('apBtn').addEventListener('click',e=>{e.preventDefault();gtrack('agent_portal_open',{});apGo()})}
+ apI18n();
+ if(ls.get('aptour_'+ACODE)!=='done')setTimeout(()=>{if(!AT&&!agTourDue()&&!G('apTour')&&apOn())apTour(false)},1500)}   // first time: after the main agent guide, never on top of it
+function apGo(){if(!ACODE){window.open(AP_URL,'_blank','noopener');return}   // signed in at once with the agent's own code (portal /a/kod)
+ const f=document.createElement('form');f.method='POST';f.action='https://agent.lelongbidgroup.com/a/kod';f.target='_blank';
+ const i=document.createElement('input');i.type='hidden';i.name='c';i.value=ACODE;f.appendChild(i);document.body.appendChild(f);f.submit();f.remove()}
+function apTour(again){const b=G('apBtn');if(!b||G('apTour'))return;let i=0;const n=apT().s.length;gtrack(again?'agent_portal_help':'agent_portal_tour',{});
+ window.scrollTo({top:0,behavior:'auto'});const w=document.createElement('div');w.id='apTour';w.innerHTML='<div class="ap-dim"></div><div class="ap-ring"></div><div class="ap-card" role="dialog" aria-modal="true" aria-live="polite"></div>';document.body.appendChild(w);
+ const onKey=e=>{if(e.key==='Escape')close()};
+ function close(){ls.set('aptour_'+ACODE,'done');w.remove();document.removeEventListener('keydown',onKey);window.removeEventListener('resize',place)}
+ function place(){const r=b.getBoundingClientRect(),g=w.querySelector('.ap-ring'),c=w.querySelector('.ap-card');g.style.cssText='left:'+(r.left-6)+'px;top:'+(r.top-6)+'px;width:'+(r.width+12)+'px;height:'+(r.height+12)+'px';c.style.top=(r.bottom+18)+'px'}
+ function draw(){const t=apT(),st=t.s[i],c=w.querySelector('.ap-card');
+  c.innerHTML='<div class="ap-k">'+esc(t.k)+' \u00b7 '+(i+1)+'/'+n+'</div><h3>'+esc(st[0])+'</h3><p>'+esc(st[1])+'</p><div class="ap-nav">'+(i?'<button type="button" data-a="b">'+esc(t.back)+'</button>':'<button type="button" data-a="x" aria-label="Close">\u2715</button>')+
+   (i<n-1?'<button type="button" class="ap-go" data-a="n">'+esc(t.next)+'</button>':'<button type="button" data-a="x">'+esc(t.done)+'</button><a class="ap-go" href="'+AP_URL+'" target="_blank" rel="noopener" data-a="o">'+esc(t.open)+'</a>')+'</div>';
+  place();(c.querySelector('.ap-go')||c.querySelector('button')).focus()}
+ w.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(!a){if(e.target.classList.contains('ap-dim'))close();return}const k=a.dataset.a;if(k==='n'){i++;draw()}else if(k==='b'){i--;draw()}else if(k==='x')close();else if(k==='o'){e.preventDefault();close();apGo()}});
+ document.addEventListener('keydown',onKey);window.addEventListener('resize',place);draw()}
 function agentHelp(){const l=G('atInfoLbl');if(l){l.hidden=false;l.onclick=atReplay}const g=document.querySelector('.tgrp.ts');if(g)g.hidden=true;
  if(document.documentElement.hasAttribute('data-size')){document.documentElement.removeAttribute('data-size');try{ls.set('size','')}catch(e){}}}
 function clInfo(){const b=G('atInfo'),l=G('atInfoLbl');if(!b)return;b.hidden=false;b.onclick=clGuide;b.dataset.i18nAl='c_info_al';b.setAttribute('aria-label',tx('c_info_al'));if(l){l.hidden=false;l.onclick=clGuide}}
