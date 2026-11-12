@@ -350,7 +350,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 @keyframes faShine{60%,100%{left:120%}}
 .acts.v3.icons .fa-opt{width:100%;min-height:44px;border:1px solid #e6c25a;background:#fbf3dc;color:#5c4408;font-size:.9rem;font-weight:700;cursor:pointer}
 :root[data-theme="dark"] .acts.v3.icons .fa-opt{background:#2a2008;color:#ffe9a8}
-.fa-dl{margin:0 0 8px}.fa-notes{margin:0 0 8px;padding-left:18px;font-size:.9rem;color:var(--fg)}.fa-notes li{margin:3px 0}.acts.v3.icons .fa-com{background:#17120a;color:#ffe9a8;border-color:#e6c25a}.fld[hidden]{display:none}
+.fa-dl{margin:0 0 8px}.fa-notes{margin:0 0 8px;padding-left:18px;font-size:.9rem;color:var(--fg)}.fa-notes li{margin:3px 0}.acts.v3.icons .fa-soldcom{grid-column:1/-1}.acts.v3.icons .fa-com{background:#17120a;color:#ffe9a8;border-color:#e6c25a}.fld[hidden]{display:none}
 .fa-text{width:100%;min-height:46vh;box-sizing:border-box;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font:inherit;font-size:.95rem;line-height:1.45;white-space:pre-wrap}
 .fa-note{margin:0 0 8px;padding:8px 10px;border-radius:8px;background:var(--warn-bg);color:var(--warn);font-size:.9rem;font-weight:600}.fa-src{margin:0 0 8px;color:var(--muted);font-size:.88rem}
 .posbtn .pdfi,.pos-lbl .pdfi{width:18px;height:21px;flex:none}.pos-lbl{display:inline-flex;align-items:center;gap:6px}
@@ -1521,11 +1521,11 @@ function facetOpts(){
  fillOpt('cat',tx('all_cat',{n:filtered('cat').length}),CATS.filter(c=>cm.get(c)),cm,cur.cat,catName);
  const nm=new Map();filtered('pegangan').forEach(r=>{const v=tenOf(r);if(v)nm.set(v,(nm.get(v)||0)+1)});
  fillOpt('pegangan',tx('all_tenure',{n:filtered('pegangan').length}),['Freehold','Leasehold'].filter(v=>nm.get(v)),nm,cur.pegangan);
- if(faOn()&&ADS&&ADS.units){const m=new Map();filtered('bankSel').forEach(r=>{const c=faC(r);if(!c)return;const g=m.get(c.b)||{n:0,lo:1e9,hi:0,sum:0,k:0,token:false,unl:false};g.n++;if(c.s==='token')g.token=true;if(c.s==='unlisted')g.unl=true;if(c.r&&c.r.length){g.lo=Math.min(g.lo,c.r[0]);g.hi=Math.max(g.hi,c.r[c.r.length-1]);g.sum+=(c.r[0]+c.r[c.r.length-1])/2;g.k++}m.set(c.b,g)});
+ if((faOn()&&ADS&&ADS.units)||(comOn()&&COMS&&COMS.units)){const m=new Map();filtered('bankSel').forEach(r=>{const c=faC(r);if(!c)return;const g=m.get(c.b)||{n:0,lo:1e9,hi:0,sum:0,k:0,token:false,unl:false};g.n++;if(c.s==='token')g.token=true;if(c.s==='unlisted')g.unl=true;if(c.r&&c.r.length){g.lo=Math.min(g.lo,c.r[0]);g.hi=Math.max(g.hi,c.r[c.r.length-1]);g.sum+=(c.r[0]+c.r[c.r.length-1])/2;g.k++}m.set(c.b,g)});
   const avg=g=>g.k?g.sum/g.k:(g.token?-1:-2),list=[...m.keys()].sort((a,b)=>avg(m.get(b))-avg(m.get(a))||a.localeCompare(b));   // the bank that pays most on average first
   $('bankSel').innerHTML='<option value="">'+esc(tx('all_bank',{n:filtered('bankSel').length}))+'</option>'+list.map(b=>{const g=m.get(b);return '<option value="'+esc(b)+'">'+esc(b)+' - '+esc(g.k?faPct(g.lo,g.hi):tx(g.token?'fa_c_token':g.unl?'fa_c_unl':'fa_c_nil'))+' ('+g.n+')</option>'}).join('');
   $('bankSel').value=list.includes(cur.bank)?cur.bank:'';$('bankFld').hidden=false;
-  if(!$('sort').querySelector('[value="komisen"]')){const o=document.createElement('option');o.value='komisen';o.dataset.i18n='s_com';o.textContent=tx('s_com');$('sort').appendChild(o);if($('sort').value==='rich')$('sort').value='komisen'}}   // the main site's agent view opens on the highest commission (5/11/2026)
+  if(faOn()&&!$('sort').querySelector('[value="komisen"]')){const o=document.createElement('option');o.value='komisen';o.dataset.i18n='s_com';o.textContent=tx('s_com');$('sort').appendChild(o);if($('sort').value==='rich')$('sort').value='komisen'}}   // the main site's agent view opens on the highest commission (5/11/2026)
  {const fi=filtered('imp'),ages=fi.map(impAge),byD=new Map();fi.forEach((r,k)=>{if(ages[k]>=2&&ages[k]<=29){const d=String(r[22]).slice(0,10);byD.set(d,(byD.get(d)||0)+1)}});
   const cnt=f=>ages.filter(f).length,o=[['today',tx('imp_today'),cnt(a=>a===0)],['yday',tx('imp_yday'),cnt(a=>a===1)]].concat([3,7,14,30].map(n=>['l'+n,tx('imp_last',{n}),cnt(a=>a>=0&&a<n)])).filter(x=>x[2]),dl=[...byD.keys()].sort().reverse(),vals=o.map(x=>x[0]).concat(dl.map(d=>'d'+d));
   $('impSel').innerHTML='<option value="">'+esc(tx('all_imp',{n:fi.length}))+'</option>'+o.map(x=>'<option value="'+x[0]+'">'+esc(x[1])+' ('+x[2]+')</option>').join('')+(dl.length?'<optgroup label="'+esc(tx('imp_g'))+'">'+dl.map(d=>'<option value="d'+d+'">'+esc(fmtDay(d))+' ('+byD.get(d)+')</option>').join('')+'</optgroup>':'');
@@ -2471,21 +2471,22 @@ function faOpen(r,kind){
  copy();
 }
 // Agent commission (5/11/2026), for the same view: each unit's rule and amount come in agent/ads.json (tools/commission.py, from the bank table). The amount is on the reserve price.
-function faC(r){const a=ADS&&ADS.units&&ADS.units[r[SID]];return a&&a.c||null}
+function faC(r){const a=(ADS&&ADS.units&&ADS.units[r[SID]])||(COMS&&COMS.units&&COMS.units[r[SID]]);return a&&a.c||null}
 function faAmt(r){const c=faC(r);return c&&c.a&&c.a.length?c.a[c.a.length-1]:-1}
 const faPct=(lo,hi)=>(lo===hi?String(lo):lo+'-'+hi)+'%';
 const faRm=v=>'RM '+Math.round(v).toLocaleString('en-US');
 function faComShort(c){if(!c)return tx('fa_c_btn')+': -';if(c.a&&c.a.length)return tx('fa_c_btn')+': '+(c.a.length>1?faRm(c.a[0])+' - '+faRm(c.a[1]):faRm(c.a[0]));return tx('fa_c_btn')+': '+tx(c.s==='token'?'fa_c_token':c.s==='case'?'fa_c_case':c.s==='unlisted'?'fa_c_unl':'fa_c_nil')}
 function faComOpen(r){const c=faC(r),row=(k,v)=>'<div><dt>'+esc(tx(k))+'</dt><dd>'+v+'</dd></div>';if(!c)return;
- const rule=(ADS.rules||[])[c.w]||'',notes=[];
+ const rule=((ADS||COMS).rules||[])[c.w]||'',notes=[];
  if(c.s==='approve')notes.push(tx('fa_c_n_approve'));if(c.k)notes.push(tx('fa_c_n_cap').replace('{v}',faRm(c.k)));if(c.f)notes.push(tx('fa_c_n_fee').replace('{v}',c.f));
  if(c.p)notes.push(tx('fa_c_n_parent'));if(c.g)notes.push(tx('fa_c_n_venue'));if(c.a&&c.a.length)notes.push(tx('fa_c_n_reserve'),tx('fa_c_n_sst'));
  openModal(tx('fa_c_btn'),'<dl class="more open fa-dl">'+row('bank',esc(String(r[16]||'-')))+row('fa_c_case_t',esc([r[17],r[14],r[2]].filter(ok).join(' · ')))+row('fa_c_price',esc(String(r[7]||'-')))
   +(c.r&&c.r.length?row('fa_c_rate',esc(faPct(c.r[0],c.r[c.r.length-1]))):'')+row('fa_c_amt','<b>'+esc(faComShort(c).split(': ').slice(1).join(': '))+'</b>')+row('fa_c_rule',esc(rule))+'</dl>'
-  +(notes.length?'<ul class="fa-notes">'+notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<p class="fa-src">'+esc(tx('fa_c_src').replace('{d}',ADS.pdf||''))+'</p>',
+  +(notes.length?'<ul class="fa-notes">'+notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<p class="fa-src">'+esc(tx('fa_c_src').replace('{d}',(ADS||COMS).pdf||''))+'</p>',
   '<button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>')}
 function faBtn(r,st){
- if(!faOn())return '';
+ if(!faOn()){if(!comOn()||!COMS||(st!=='active'&&st!=='unsold'))return '';   // owner 12/11/2026: Khairul and Aezran's agent view shows the commission on the card
+  return '<button type="button" class="fa-opt fa-com fa-soldcom" data-k="com" data-id="'+esc(r[20])+'">'+esc(faComShort(faC(r)))+'</button>'}
  const ended=st!=='active'&&st!=='unsold';
  const tracker=dadCard(r,ended);
  if(ended)return tracker;
@@ -3056,7 +3057,7 @@ try{aiBoot()}catch(e){try{console.error('assistant',e)}catch(x){}}
 // so the listings cannot be read without one. The slow PBKDF2 step is remembered on the device: a returning client waits only once.
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));const ub64=a=>btoa(String.fromCharCode(...a));
 const normCode=c=>String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
-let ACCESS=null,CLIENT='',DKEY=null,DKEY2=null,DKEY3=null,AGINFO=null,ADS=null,ACODE='';   // DKEY3 / AGINFO: the agent key and the agent-only contacts by share id (agent codes only, 1/11/2026)   // ACODE: the code that opened the page (agents send it with Download POS)   // DKEY2: the VIP history key (sip codes only)
+let ACCESS=null,CLIENT='',DKEY=null,DKEY2=null,DKEY3=null,AGINFO=null,ADS=null,COMS=null,ACODE='';   // DKEY3 / AGINFO: the agent key and the agent-only contacts by share id (agent codes only, 1/11/2026)   // ACODE: the code that opened the page (agents send it with Download POS)   // DKEY2: the VIP history key (sip codes only)
 // instant codes (11/11/2026): a code made a moment ago is not in the published access.json yet; the portal wraps the key for it with
 // this page's salt and key id. LIVE_ERR: the portal could not be reached (the gate then waits for the published file instead).
 let LIVE_ERR=false;
@@ -3130,6 +3131,7 @@ async function loadListings(){if(TRIAL)return RTRIAL?fetch(TRIAL_DATA+'?v='+Date
   j.listings=j.listings.concat((hj.listings||[]).filter(o=>o&&o.id&&!ids.has(o.id)));j.vip_days=hj.days||365}catch(x){j.vip_err=true}}   // the member is told under the status buttons
  AGINFO=null;if(gp){try{const a=await gp;if(a&&a.ct&&a.kid===ACCESS.akid){const aj=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(a.iv)},DKEY3,b64(a.ct))));AGINFO=new Map(Object.entries(aj.units||{}))}}catch(x){AGINFO=null}}   // a key mismatch or any error = no column, never a wrong one
  ADS=null;if(ISAGENT&&DKEY3&&faOn()){try{const a=await fetch('agent/ads.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);if(a&&a.ct&&a.kid===ACCESS.akid)ADS=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(a.iv)},DKEY3,b64(a.ct))))}catch(x){ADS=null}}   // no file yet: the text is built from the listing alone and says what is missing
+ COMS=null;if(ISAGENT&&DKEY3&&comOn()){try{const a=await fetch('https://lelongbidgroup.com/agent/com.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);if(a&&a.ct&&a.kid===ACCESS.akid)COMS=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(a.iv)},DKEY3,b64(a.ct))))}catch(x){COMS=null}}   // partner commission filter: any failure = no filter
  return j}
 // visitor counter (11/11/2026: every agent's site counted, shown to the owner in the Control Room and the portal): 'in' when the page opens,
 // a beat each minute while it is on screen, 'out' with the seconds when it is left; a random browser id (none after the visitor declined
@@ -3167,6 +3169,9 @@ var REALAGENT=false,AVIEW='agent',RTRIAL=false,RTIER='',PAID_SITE='';   // PAID_
 const SHAREH=(location.hash||'').length>1;
 const TRIAL_DATA='https://lelongbidgroup.com/trial/data2.json';   // the free preview's masked listings (v2, 1/11/2026: photo, discount and map link open; address and paid values masked), the same file every trial site reads
 function faOn(){return KP==='lelong.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(www\.)?lelongbidgroup\.com$/.test(location.hostname)}   // For Admin: the agent view of the main site only
+// Bank commission filter on chosen partner pages (owner 12/11/2026: Khairul and Aezran only, Agent Specialist view): partner_sites.py
+// sets COMSITE on those builds; they load agent/com.json (the commission part only, never the For Admin data).
+var COMSITE=false;function comOn(){return COMSITE&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}
 function agentView(){REALAGENT=!!ISAGENT;if(!REALAGENT)return;RTIER=TIER;let v='agent';try{v=sessionStorage.getItem(KP+'aview')||'agent'}catch(e){}
  if(v==='vip'&&TIER==='sip'){AVIEW='vip';ISAGENT=false}
  else if(v==='prem'){AVIEW='prem';ISAGENT=false;TIER='premium'}   // what a Premium client sees: the score locked, no 12-month history
