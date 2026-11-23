@@ -1607,8 +1607,8 @@ const bedsOf=r=>{const b=parseInt(r[23],10);return b>0&&b<10?b:0};
 const isHigh=r=>r[21]===CATS[0]||r[21]===CATS[5];
 // Shared specialist ad tracker. Storage and posting dates are authoritative on the portal.
 const DAD = (() => {
- const url = 'https://agent.lelongbidgroup.com/api/admin-done-ads';
- const platforms = ['iproperty','mudah'];
+ const url = () => 'https://agent.lelongbidgroup.com/api/admin-done-ads'+(khOn()?'?site=khairul':'');
+ const plats = () => khOn() ? ['mudah'] : ['iproperty','mudah'];
  const units = new Map(), labels = new Map(), logs = new Map();
  let aliases = new Map(), blocked = new Set(), sourceReady = true, writeRevision = 0;
  let state = 'loading', notify = null, reading = null, stamp = '', lastRequest = 0;
@@ -1625,7 +1625,7 @@ const DAD = (() => {
   return true;
  }
  function merge(sid, platform, record, cycles) {
-  if(!validSid(sid) || !platforms.includes(platform) || !record || !Number.isSafeInteger(record.version) ||
+  if(!validSid(sid) || !plats().includes(platform) || !record || !Number.isSafeInteger(record.version) ||
      record.version<0 || !(record.posted_on===null && record.expires_on===null || iso(record.posted_on)&&iso(record.expires_on)))
    throw new Error('Invalid ad posting record');
   const pair=units.get(sid)||{}, previous=pair[platform];
@@ -1645,12 +1645,12 @@ const DAD = (() => {
   return true;
  }
  async function request(method, body) {
-  if(!faOn()) throw new Error('Specialist access required');
+  if(!adOn()) throw new Error('Specialist access required');
   const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
   try {
    const headers={Authorization:'Bearer '+ACODE};
    if(body) headers['Content-Type']='application/json';
-   const res=await fetch(url,{method,headers,body:body?JSON.stringify(body):undefined,signal:controller.signal,
+   const res=await fetch(url(),{method,headers,body:body?JSON.stringify(body):undefined,signal:controller.signal,
                               mode:'cors',credentials:'omit',redirect:'error',cache:'no-store',referrerPolicy:'no-referrer'});
    if(!res.ok && res.status!==409)throw new Error('Ad posting request failed');
    const data=await res.json();
@@ -1659,7 +1659,7 @@ const DAD = (() => {
   } finally {clearTimeout(timer);}
  }
  async function refresh() {
-  if(!faOn())return;
+  if(!adOn())return;
   if(reading)return reading;
   lastRequest=Date.now();
   reading=(async()=>{
@@ -1679,7 +1679,7 @@ const DAD = (() => {
     if(links.size!==aliases.size||[...links].some(([sid,target])=>aliases.get(sid)!==target))update=true;
     aliases=links;
     for(const [sid,pair] of Object.entries({...data.units,...data.archive_units})) {
-     for(const platform of platforms)if(pair[platform])update=merge(sid,platform,pair[platform],data.history?.[sid]?.[platform])||update;
+     for(const platform of plats())if(pair[platform])update=merge(sid,platform,pair[platform],data.history?.[sid]?.[platform])||update;
     }
     for(const [sid,label] of Object.entries(data.labels||{}))if(validSid(sid))update=putLabel(sid,label)||update;
     stamp=data.today;state='ready';
@@ -1691,7 +1691,7 @@ const DAD = (() => {
   return reading;
  }
  function start(callback) {
-  if(!faOn() || notify)return;
+  if(!adOn() || notify)return;
   notify=callback;
   const sync=()=>{if(!document.hidden && Date.now()-lastRequest>10000)refresh();};
   window.addEventListener('focus',sync);
@@ -1700,7 +1700,7 @@ const DAD = (() => {
   return refresh();
  }
  async function set(sid, platform, done) {
-  if(state!=='ready' || !sourceReady || blocked.has(sid) || !validSid(sid) || !platforms.includes(platform) || typeof done!=='boolean')throw new Error('Ad posting unavailable');
+  if(state!=='ready' || !sourceReady || blocked.has(sid) || !validSid(sid) || !plats().includes(platform) || typeof done!=='boolean')throw new Error('Ad posting unavailable');
   const old=(units.get(canonical(sid))||{})[platform];
   if(!!(old && old.posted)===done)return;
   try {
@@ -1722,7 +1722,7 @@ const DAD = (() => {
  }
  function postings(sid) {
   const id=canonical(sid);
-  return platforms.flatMap(platform=>{
+  return plats().flatMap(platform=>{
    const cycles=logs.get(id+'/'+platform);
    if(cycles?.length)return cycles;
    const rec=get(id,platform);
@@ -1734,7 +1734,7 @@ const DAD = (() => {
   for(const [sid,label] of labels) {
    if(canonical(sid)!==sid || (owner && owner!==label.owner))continue;
    if(allPostings)rows.push(...postings(sid).map(cycle=>({sid,...label,...cycle})));
-   else for(const platform of platforms) {
+   else for(const platform of plats()) {
     const record=get(sid,platform);
     if(record)rows.push({sid,platform,...label,...record});
    }
@@ -1981,7 +1981,7 @@ function segUI(){
  seg($('bmvSeg'),[[0,tx('all')],[10,'10%+'],[20,'20%+'],[30,'30%+'],[40,'40%+'],[50,'50%+']],0,v=>bmv=+v);
  seg($('lacaSeg'),[['',tx('all')],['LACA','LACA'],['Non-LACA','Non-LACA']],0,v=>laca=v)}
 
-const dadPortals=['iproperty','mudah'];
+const dadP=()=>khOn()?['mudah']:['iproperty','mudah'];   // Khairul's page: Mudah only
 const dadSaving=new Set(),dadErrors=new Set();
 let dadLastStatus='loading';
 const dadDate=iso=>iso.split('-').reverse().join('/');
@@ -1995,7 +1995,7 @@ function dadMatch(row,owner,state,forFacet){
  if(!state)return true;
  if(DAD.status()!=='ready'||!DAD.sourceReady())return !!forFacet;
  if(DAD.blocked(row[SID])||(ended&&state==='pending'))return false;
- const records=dadPortals.map(p=>DAD.get(row[SID],p));
+ const records=dadP().map(p=>DAD.get(row[SID],p));
  if(state==='pending')return records.some(rec=>!rec);
  if(state==='expired')return records.some(rec=>rec&&rec.expires<=DAD.today());
  return records.some(Boolean);
@@ -2026,8 +2026,8 @@ function dadCount(sid){
  if(DAD.status()!=='ready')return '…';
  if(DAD.blocked(sid))return tx('dad_review');
  if(!DAD.sourceReady())return tx('dad_view_only');
- const count=dadPortals.filter(p=>DAD.get(sid,p)).length;
- return tx('dad_count',{n:count});
+ const count=dadP().filter(p=>DAD.get(sid,p)).length;
+ return tx('dad_count',{n:count}).replace('/2','/'+dadP().length);
 }
 function dadLogItems(cycles){
  return cycles.map(c=>'<li><b>'+(c.platform==='mudah'?'Mudah':'iProperty')+'</b> · '+esc(tx('dad_date',{date:dadDate(c.posted)}))+
@@ -2039,7 +2039,7 @@ function dadCard(r,ended){
  if(!sid||!owner)return '';
  const ready=DAD.status()==='ready'&&DAD.sourceReady();
  const cycles=ready&&!DAD.blocked(sid)?DAD.postings(sid):[];
- const rows=dadPortals.map(portal=>{
+ const rows=dadP().map(portal=>{
   const rec=ready&&!DAD.blocked(sid)&&DAD.get(sid,portal);
   return '<label class="dad-row" data-expired="'+!!(rec&&rec.expires<=DAD.today())+'"><input type="checkbox" data-portal="'+portal+'"'+
    (rec?' checked':'')+(!ready||ended||DAD.blocked(sid)||dadSaving.has(sid+'/'+portal)?' disabled':'')+'><span><b>'+
@@ -2047,14 +2047,14 @@ function dadCard(r,ended){
  }).join('');
  const clipboard='<svg class="dad-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M8 5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="8" y="2" width="8" height="5" rx="2"/><path d="m8 14 3 3 5-6"/></svg>';
  return '<details class="dad-card" data-sid="'+esc(sid)+'"'+(ended?' data-ended':'')+(ended&&!cycles.length?' hidden':'')+'><summary>'+clipboard+
-  '<span class="dad-title">'+esc(tx('dad_heading'))+'</span><span class="dad-byline">'+esc(tx('dad_saved_for',{admin:owner}))+
+  '<span class="dad-title">'+esc(tx('dad_heading'))+'</span><span class="dad-byline">'+(khOn()?'':esc(tx('dad_saved_for',{admin:owner})))+
   '<span class="dad-last">'+(cycles.length?esc(tx('dad_last',{date:dadDate(cycles[0].posted)})):'')+'</span></span>'+
   '<span class="dad-count">'+esc(dadCount(sid))+'</span></summary><div class="dad-body"><small class="dad-source"'+(DAD.sourceReady()?' hidden':'')+'>'+esc(tx('dad_source_error'))+'</small>'+rows+
   '<details class="dad-log"'+(cycles.length?'':' hidden')+'><summary>'+esc(tx('dad_log'))+'</summary><ol>'+dadLogItems(cycles)+'</ol></details>'+
   '<button type="button" class="btn dad-retry"'+(DAD.status()==='error'||!DAD.sourceReady()?'':' hidden')+'>'+esc(tx('dad_retry'))+'</button></div></details>';
 }
 function dadSync(){
- if(!faOn())return;
+ if(!adOn())return;
  const statusChanged=dadLastStatus!==DAD.status();
  dadLastStatus=DAD.status();
  dadFilterUI();
@@ -2092,7 +2092,7 @@ function dadSync(){
   });
  });
 }
-function dadRefresh(){if(faOn())DAD.refresh()}
+function dadRefresh(){if(adOn())DAD.refresh()}
 
 function railFilterOn(){return faOn()&&!!(ADS&&ADS.units)}
 function listingTrain(r){
@@ -2449,12 +2449,46 @@ function faTelegram(r) {
   amen:nearby.amen.length>0,osm:!!(nearby.amen.length||nearby.highway)&&!!nearby.osm};
 }
 
+// Khairul's Mudah text (owner 23/11/2026): the owner's layout for Khairul, from the listing alone (no agent/ads.json), his own contact.
+const KH_CONTACT=[];
+function khAd(r){
+ const clean=v=>{const s=String(v??'').replace(/\s+/g,' ').trim();return /^(?:-|n\/?a|nil|null|unknown|locked2?|xx)?$/i.test(s)?'':s};
+ const miss=[],L=[],high=isHigh(r),address=clean(r[1]),type=clean(faType(r,{}).plain);
+ const parts=address.split(',').map(x=>x.trim()).filter(Boolean),zip=parts.findIndex(x=>/^\d{5}\b/.test(x));
+ const district=clean(r[3]),state=clean(r[2]),town=zip<0?'':parts[zip].replace(/^\d{5}\s*/,'')||parts[zip+1]||'';
+ let area=faArea(address).map(clean).filter(Boolean);if(!area.length||/^\d/.test(area[0])||area[0].length>60)area=[district];
+ const project=high?faTelegramProject(parts,area,type,[town,district,state]):'';
+ const local=high?[project||area[0],town||district,state]:[area[0],town||district,state];
+ const place=local.filter((v,i,all)=>v&&all.findIndex(x=>x.toLowerCase()===v.toLowerCase())===i).join(', ');
+ const p=num(r[7]),mv=suspect(r)?0:num(r[8]),good=mv>p&&p>0,pct=good?Math.round(100*(1-p/mv)):0,pending=stOf(r)==='unsold';
+ L.push(!pending&&good?'MURAH! '+place+'- ✅'+pct+'% Discount!':(type?type+' @ ':'')+place);
+ if(!pending&&good)L.push('','Below Market Value '+pct+'%  😍');else if(!pending)miss.push('fa_m_mv');
+ if(address)L.push('','🏠 '+address);
+ const D=[],fact=v=>{if(v)D.push('✅ '+v)},size=v=>clean(v).replace(/(\d)\s*sq\.?\s*(?:ft|feet)\b\.?/gi,'$1 Sq.ft');
+ fact(type);
+ if(!high&&clean(r[10]))fact('Land Area: '+size(r[10]));
+ if(clean(r[11]))fact('Built Up: '+size(r[11]));
+ const room=v=>/^[1-9]\d?$/.test(clean(v))?clean(v):'',bed=room(r[23]),bath=room(r[24]);
+ if(bed)fact('Approx. '+bed+(bed==='1'?' Bedroom':' Bedrooms')+(bath?' | '+bath+(bath==='1'?' Bathroom':' Bathrooms'):''));else miss.push('fa_m_rooms');
+ const ten=clean(r[9]);fact(ten?ten.charAt(0).toUpperCase()+ten.slice(1).toLowerCase():'');
+ if(D.length)L.push('','PROPERTY DETAILS:',...D);
+ if(p)L.push('',pending?'🔥 Last Auction Price: '+faRm(p):'🔥 Force Sale: '+faRm(p)+' 🔥');else miss.push('fa_m_price');
+ if(good){L.push('❤️ Market Value: '+faRm(mv));if(!pending)L.push('💎 Potential Profit: '+faRm(mv-p))}
+ const when=faDate(r[12]);
+ if(pending)L.push('','📆 Auction Date: Pending next auction');
+ else if(when){L.push('','📆 Auction Date: '+when);if(isExp(r))miss.push('fa_m_past')}else miss.push('fa_m_date');
+ const map=faTelegramMap(r[4]);if(map)L.push('','📍 NEARBY GOOGLE MAPS PIN:',map);else miss.push('fa_m_map');
+ L.push('','Kindly note the following:','+ NO INSIDE VIEWING. Self-survey from outside only','+ Cash ready: 10% Deposit | 5% legal cost | 2-5% misc');
+ L.push('',...KH_CONTACT);
+ return {text:L.join('\n').trim(),miss,src:'',n:0,amen:false,osm:false}}
+
 function faOpen(r,kind){
- if (!faOn()) return;
+ if (khOn()&&kind!=='mudah') return;
+ if (!faOn()&&!khOn()) return;
  const titleKey = {mudah:'fa_mudah',iprop:'fa_iprop',telegram:'fa_telegram'}[kind];
  if (!titleKey) return;
  const title = tx(titleKey);
- const ad = kind==='telegram'?faTelegram(r):faAd(r,kind);
+ const ad = khOn()?khAd(r):kind==='telegram'?faTelegram(r):faAd(r,kind);
  const src=ad.src==='pos'?tx('fa_src_pos'):ad.src==='ads'?tx('fa_src_ads').replace('{n}',ad.n):'';
  openModal(title,(ad.miss.length?'<p class="fa-note">'+esc(tx('fa_miss'))+' '+ad.miss.map(k=>esc(tx(k))).join(', ')+'</p>':'')+(src?'<p class="fa-src">'+esc(src)+'</p>':'')+(ad.amen?'<p class="fa-src">'+esc(tx('fa_amen'))+'</p>':'')+(ad.osm?'<p class="fa-src">Amenities: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors (ODbL)</a></p>':'')+'<textarea class="fa-text" readonly aria-label="'+esc(title)+'">'+esc(ad.text)+'</textarea>',
   '<button class="btn" type="button" id="faAgain">'+esc(tx('fa_again'))+'</button><button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>');
@@ -2485,6 +2519,11 @@ function faComOpen(r){const c=faC(r),row=(k,v)=>'<div><dt>'+esc(tx(k))+'</dt><dd
   +(notes.length?'<ul class="fa-notes">'+notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<p class="fa-src">'+esc(tx('fa_c_src').replace('{d}',(ADS||COMS).pdf||''))+'</p>',
   '<button class="btn" type="button" data-close>'+esc(tx('close'))+'</button>')}
 function faBtn(r,st){
+ if(khOn()){   // Khairul's page: Admin Done Ads (Mudah), his commission, For Admin with Copy for Mudah Template only
+  const ended=st!=='active'&&st!=='unsold',tracker=dadCard(r,ended),id=esc(r[20]);
+  const com=comOn()&&COMS?'<button type="button" class="fa-opt fa-com fa-soldcom" data-k="com" data-id="'+id+'">'+esc(faComShort(faC(r)))+'</button>':'';
+  if(ended)return tracker;
+  return tracker+com+'<div class="fa"><button type="button" class="fa-btn" aria-expanded="false" data-id="'+id+'">'+esc(tx('fa_btn'))+'</button><div class="fa-menu" hidden><button type="button" class="fa-opt" data-k="mudah" data-id="'+id+'">'+esc(tx('fa_mudah'))+'</button></div></div>'}
  if(!faOn()){if(!comOn()||!COMS||(st!=='active'&&st!=='unsold'))return '';   // owner 12/11/2026: Khairul and Aezran's agent view shows the commission on the card
   return '<button type="button" class="fa-opt fa-com fa-soldcom" data-k="com" data-id="'+esc(r[20])+'">'+esc(faComShort(faC(r)))+'</button>'}
  const ended=st!=='active'&&st!=='unsold';
@@ -2726,7 +2765,7 @@ $('emptyMsg').addEventListener('click',e=>{if(e.target.closest('.dad-retry'))dad
 $('list').addEventListener('click',e=>{if(e.target.closest('.dad-retry'))dadRefresh()});
 $('list').addEventListener('change',async e=>{
  const box=e.target.closest('.dad-card input[data-portal]');
- if(!box||!faOn())return;
+ if(!box||!adOn())return;
  const sid=box.closest('.dad-card').dataset.sid,portal=box.dataset.portal,key=sid+'/'+portal;
  if(box.closest('[data-ended]')||!DAD.sourceReady()||DAD.blocked(sid)||dadSaving.has(key)||DAD.status()!=='ready'){dadSync();return}
  const checked=box.checked;
@@ -2882,7 +2921,7 @@ daerahOpts();
 LASTON=restoreLast();
 if(sharedId)track('shared_unit_open',{unit_id:sharedId});
 viewUI();paint();render();LASTSNAP=JSON.stringify(snapNow());
-if(faOn())DAD.start(dadSync);
+if(adOn())DAD.start(dadSync);
 atRentRow=id=>{const r=DATA.find(x=>x[20]===id);return !!r&&Array.isArray(r[33])&&r[33].some(a=>Array.isArray(a)&&num(a[0])>0)};
 if(!sharedId&&agTourDue())setTimeout(agTourStart,500);else if(welcomePending())setTimeout(showWelcome,400);else if(!ls.get('guide')&&!sharedId)setTimeout(guideOpen,500);   // an agent's first visit: the dismissible walkthrough; a fresh code: the welcome first, the guide after it
 if(sharedId)setTimeout(()=>toFirst(true),350);   // shared unit link (#id, 29/10/2026): open straight on that unit's card, not the top of the page
@@ -3172,6 +3211,11 @@ function faOn(){return KP==='lelong.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(w
 // Bank commission filter on chosen partner pages (owner 12/11/2026: Khairul and Aezran only, Agent Specialist view): partner_sites.py
 // sets COMSITE on those builds; they load agent/com.json (the commission part only, never the For Admin data).
 var COMSITE=false;function comOn(){return COMSITE&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}
+// Admin Done Ads + Copy for Mudah Template on Khairul's page only (owner 23/11/2026). partner_sites.py turns KHADS on for Khairul's
+// build alone (never another agent, never a trial site); only his agent code opens it. Mudah only, its own ledger on the portal
+// (?site=khairul), no admin name, no agent/ads.json (the text is built from the listing).
+var KHADS=false;function khOn(){return KHADS&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL}
+function adOn(){return faOn()||khOn()}
 function agentView(){REALAGENT=!!ISAGENT;if(!REALAGENT)return;RTIER=TIER;let v='agent';try{v=sessionStorage.getItem(KP+'aview')||'agent'}catch(e){}
  if(v==='vip'&&TIER==='sip'){AVIEW='vip';ISAGENT=false}
  else if(v==='prem'){AVIEW='prem';ISAGENT=false;TIER='premium'}   // what a Premium client sees: the score locked, no 12-month history
