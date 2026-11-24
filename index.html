@@ -793,7 +793,7 @@ button.stat:hover,button.stat:focus-visible{border-color:var(--neon);box-shadow:
 .fav.hrt[aria-pressed="true"]{color:#c62828}.fav.hrt[aria-pressed="true"] svg{fill:currentColor}
 .fav.hrt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .fav.hrt.inl{position:static;flex:none;box-shadow:0 0 0 1px var(--line)}
-/* the share icon (owner 24/11/2026): small, beside the heart, no glow (his second word on it); shown where the Share button always was (members, not the free preview) */
+/* the share icon (owner 24/11/2026): small, beside the heart, no glow; on every client view, the free preview too */
 .sh.shi{position:absolute;right:56px;bottom:10px;z-index:3;width:36px;height:36px;min-height:0;padding:0;border:0;border-radius:50%;display:grid;place-items:center;background:#0f2a44;color:#f8e29a;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 0 0 1.5px rgba(248,226,154,.95),0 2px 8px rgba(0,0,0,.28)}
 .sh.shi svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .sh.shi:focus-visible{outline:3px solid #fff;outline-offset:2px}
@@ -2663,9 +2663,10 @@ function priceLite(r,ex,bt){const p=num(r[7]),mv=ex||suspect(r)||locked(r[8])?0:
 function cardLite(r,i,st,end,ex){QLOCK=true;try{
  const bt=bmvTxt(r),cn=nthTxt(r),fav=FAV.has(r[20]);
  const cal=!ex&&dt(r[12])>=T0?calUrl(r):'';   // owner 24/11/2026: 'Add to calendar' is on the front of the card too
- let hz=hero(r);if(i<2)hz=hz.replace('loading="lazy"','loading="eager" fetchpriority="high"');   // owner 24/11/2026: 'See photo' and 'Google Maps location' stay on the photo of the card, as on the full card
+ let hz=hero(r);if(i<2)hz=hz.replace('loading="lazy"','loading="eager" fetchpriority="high"');hz=hz.replace(/<span class="hchip due[^"]*"><span class="cd[^"]*">[^<]*<\/span><\/span>/,'');   // owner 24/11/2026: no date chip on the photo; the date row says it
+    // owner 24/11/2026: 'See photo' and 'Google Maps location' stay on the photo of the card, as on the full card
  const hb='<button type="button" class="fav hrt'+(hz?'':' inl')+'" data-id="'+esc(r[20])+'" aria-pressed="'+fav+'" aria-label="'+esc(favWord(fav))+'">'+HRTI+'</button>';
- const sb=shareBtn(r)?'<button type="button" class="sh shi'+(hz?'':' inl')+'" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('share'))+'" title="'+esc(tx('share'))+'">'+SHRI+'</button>':'';   // owner 24/11/2026: a small share icon beside the heart (no glow); shown where the Share button always was (members, not the free preview)
+ const sb=true?'<button type="button" class="sh shi'+(hz?'':' inl')+'" data-id="'+esc(r[20])+'" aria-label="'+esc(tx('share'))+'" title="'+esc(tx('share'))+'">'+SHRI+'</button>':'';   // owner 24/11/2026: a small share icon beside the heart (no glow); owner 24/11/2026: on every client view, the free preview too
  return '<article class="card v2 lite'+(ex?' expired':'')+(sharedId?' hl':'')+'" data-k="'+i+'" data-id="'+esc(r[20])+'">'
  +(hz?'<div class="lt-ph">'+hz+sb+hb+'</div>':'')+(end?'<div class="exp-tag '+st+'">'+tagText(r,st)+'</div>':'')
  +kindLine(r,cn)+'<div class="head"><div class="addr">'+hlAddr(r[1])+'</div>'+(hz?'':sb+hb)+'</div>'
