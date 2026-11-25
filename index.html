@@ -2983,7 +2983,7 @@ document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.mat
 document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('.wsel'))return;winPaint(el.closest('.wcalc'));track('win_price_change',{price:+el.value})});
 document.addEventListener('input',e=>{const d=e.target.closest&&e.target.closest('details.sip');if(d&&e.target.matches('input[data-k]'))sipRecalc(d,e.target)});
 ['jenis','cat','pegangan','impSel','bankSel','sort'].forEach(k=>$(k).addEventListener('input',render));
-$('q').addEventListener('input',()=>{clearTimeout(QDEB);QDEB=setTimeout(render,160)});   // typing: one redraw after a short pause, not one per letter
+$('q').addEventListener('input',()=>{clearTimeout(QDEB);if(!$('q').value.trim())QDEB=setTimeout(render,160)});   // 25/11/2026: typing no longer redraws the list (felt heavy); results come on the search button or Enter, and an emptied box brings the full list back
 // search button / Enter (29/10/2026): results drawn now, keyboard closed, then the first listing just under the sticky bar
 function toFirst(now){const el=$('list').firstElementChild;if(!el)return;const top=document.querySelector('.top'),bar=$('countStatus');const y=el.getBoundingClientRect().top+window.scrollY-top.offsetHeight-(parseFloat(getComputedStyle(top).top)||0)-bar.offsetHeight-22;
  if(now){window.scrollTo(0,y);return}try{window.scrollTo({top:y,behavior:'smooth'})}catch(e){window.scrollTo(0,y)}}
