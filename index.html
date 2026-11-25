@@ -117,6 +117,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .lbox img{max-width:100%;max-height:100%;min-height:0;object-fit:contain;border-radius:8px}
 .lbox small{font-size:.85rem;opacity:.85}
 .lbox-x{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:calc(10px + env(safe-area-inset-right,0px));width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:1.25rem;cursor:pointer}
+/* 26/11/2026: on the Free view only (html.trial), the agent's own site name as a watermark over the full-size photo (See photo); the script below sets the name in --wm */
+html.trial .lbox::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:var(--wm) 0 0/260px 140px repeat}
+.lbox-x{z-index:3}
 .hchip{position:absolute;top:10px;z-index:1;max-width:58%;border-radius:999px;padding:5px 11px;font-size:.8rem;font-weight:800;line-height:1.2;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .hchip.gold{left:10px;background:var(--gold);color:var(--gold-fg)}.hchip.due{right:10px;background:#0f2a44;color:#fff}.hchip .cd,.hchip .cd.soon,.hchip .cd.now{all:unset}
 .mo{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}.mo-s{display:inline-flex;gap:4px;flex-wrap:wrap}
@@ -3368,6 +3371,10 @@ const TAG={vip:['VIP Investor','<path d="M6 3h12l4 6-10 12L2 9z" fill="currentCo
 // agent view switch (30/10/2026): an agent's own code can show the page the way a VIP client or a free visitor sees it, to show a
 // client; the choice lives in this tab only (sessionStorage) and the page reloads into it. VIP is offered only to a VIP agent code.
 var REALAGENT=false,AVIEW='agent',RTRIAL=false,RTIER='',PAID_SITE='';   // PAID_SITE: set on trial sites by partner_sites.py (where access codes work)   // RTIER: the agent code's own plan, kept while a client view changes TIER   // RTRIAL: the free preview switched on in this page (an agent's Free view, a shared link without a code)
+// 26/11/2026: the watermark names this agent's own site, e.g. khairul.lelongbidgroup.com: a trial page uses its agent's site (PAID_SITE), an agent page its own subdomain (KP); shown on the Free view only (CSS above)
+(()=>{try{const h=String(PAID_SITE||'').replace(/^https?:\/\//,'').replace(/\/.*$/,'')||(String(KP).replace(/\.$/,'')+'.lelongbidgroup.com'),s=h.replace(/[^a-z0-9.\-]/gi,'');
+ const svg="<svg xmlns='http://www.w3.org/2000/svg' width='260' height='140'><text x='130' y='75' text-anchor='middle' transform='rotate(-24 130 70)' font-family='Arial,sans-serif' font-size='17' font-weight='700' fill='#fff' fill-opacity='.55' stroke='#000' stroke-opacity='.35' stroke-width='.8'>"+s+"</text></svg>";
+ document.documentElement.style.setProperty('--wm','url("data:image/svg+xml,'+encodeURIComponent(svg)+'")')}catch(e){}})();
 const SHAREH=(location.hash||'').length>1;
 const TRIAL_DATA='https://lelongbidgroup.com/trial/data2.json';   // the free preview's masked listings (v2, 1/11/2026: photo, discount and map link open; address and paid values masked), the same file every trial site reads
 function faOn(){return KP==='lelong.'&&REALAGENT&&ISAGENT&&!!ACODE&&!TRIAL&&/^(www\.)?lelongbidgroup\.com$/.test(location.hostname)}   // For Admin: the agent view of the main site only
