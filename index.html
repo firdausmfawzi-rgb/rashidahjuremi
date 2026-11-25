@@ -839,12 +839,14 @@ button.stat:hover,button.stat:focus-visible{border-color:var(--neon);box-shadow:
  html:not(.agv) .wrap>#fchips{order:1}
  html:not(.agv) .wrap>.start{order:2;flex:0 0 auto;display:block;margin:0 0 6px}
  html:not(.agv) .wrap>#sortRow{flex:1 1 0;margin:0 0 6px}
- html:not(.agv) .wrap>#stats{order:9;margin:16px 0 8px}
- html:not(.agv) .wrap>.sub2{order:10}
+ /* 25/11/2026: the numbers, the agent's contact card, the date line, the AI ticker and the AI badge come back to the top, under the plan label, as one tidy group */
+ html:not(.agv) .wrap>.hd,html:not(.agv) .wrap>.tier-row{order:-9}
+ html:not(.agv) .wrap>#stats{order:-8;margin:2px 0 8px}
+ html:not(.agv) .wrap>.sub2{order:-7;margin-bottom:6px}
+ html:not(.agv) .wrap>#upd{order:-6;margin:0 0 6px;text-align:center;font-size:.8rem}
+ html:not(.agv) .wrap>.ag-status{order:-5;margin:0 0 6px}
+ html:not(.agv) .wrap>.below{order:-4;display:flex;justify-content:center;margin:0 0 12px}
  html:not(.agv) .wrap>#vipNote{order:11;margin:0 0 8px}
- html:not(.agv) .wrap>#upd{order:12;margin:0 0 6px;text-align:center}
- html:not(.agv) .wrap>.ag-status{order:13}
- html:not(.agv) .wrap>.below{order:14;display:flex;justify-content:center;margin:4px 0 6px}
  /* header: one slim row */
  html:not(.agv) .hd{flex-wrap:nowrap;align-items:center;gap:8px;margin-bottom:4px}
  html:not(.agv) .hd .eyebrow{display:none}
