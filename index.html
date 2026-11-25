@@ -284,6 +284,7 @@ html.trial #cyNote,html.trial #bmvSeg,html.trial #cyBtn,html.trial #cyPanel{disp
 .when .dtx b{font-size:1.08rem;line-height:1.3}
 .when .tm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;color:var(--fg);font-size:.98rem}
 .when .tm:empty{display:none}
+.cyl{display:flex;align-items:baseline;gap:8px;margin-top:-4px;font-size:.92rem;color:var(--fg)}.cyl span{font-weight:700;color:var(--muted)}.cyl b{font-weight:700}
 .cd{border-radius:99px;padding:4px 11px;font-weight:700;font-size:.92rem;background:var(--bg);color:var(--fg);white-space:nowrap}
 .cd.soon{background:var(--warn-bg);color:var(--warn)}
 .cd.now{background:var(--red);color:var(--surface)}
@@ -2321,7 +2322,7 @@ function priceBox(r,ex,fire,bt,onPhoto,help){const pv=valueBox(r,ex,help);
   +(bt&&!onPhoto&&!pv?'<div class="bmvrow"><span class="bmv">'+esc(bt)+'</span>'+(help?qb('bmv'):'')+'</div>':'')+'</div>'}
 function whenRows(r,ex,cn,cal,full){   // card: one line (date, time, days left) + chips; Full details: the long form with the count and the calendar row
  const main='<div class="when"><span class="dlab">'+(full?tx('date'):tx('when_lbl')+':')+'</span><span class="dtx"><b>'+esc(fmtDay(r[12]))+'</b><span class="tm">'+(ok(r[13])?'<span>'+esc(r[13])+'</span>':'')+cdChip(r[12])+(full?'':chips(r,true))+'</span></span></div>';
- if(!full)return main;
+ if(!full)return main+(isHigh(r)&&ok(r[19])?'<div class="cyl"><span>'+tx('cy')+':</span><b>'+(locked(r[19])?XX:esc(r[19]))+'</b></div>':'');   // 26/11/2026: highrise card shows the completion year under the auction time
  return main+(cn||cal?'<div class="when2">'+(cn?'<span class="cnt">'+cn+qb('count')+'</span>':'<span></span>')+(cal?'<a class="calbtn" href="'+esc(cal)+'" target="_blank" rel="noopener">'+tx('cal_add')+'</a>':'')+'</div>':'')+chips(r)}
 // Card front (2/11/2026): size, completion year and bank in one tidy block; free-preview values stay XX
 function specBox(r){const v=x=>locked(x)?XX:dash(x),c=(k,x)=>'<div><span>'+tx(k)+'</span><b>'+v(x)+'</b></div>',high=isHigh(r);
