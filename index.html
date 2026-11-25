@@ -638,6 +638,7 @@ body{padding-block-end:100px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap">
+<script>/* the owner's own bots: #lbp=<pass> is kept and taken off the address before any other script reads the hash */try{var _lbp=location.hash.match(/^#lbp=([A-Za-z0-9_-]{24,80})$/);if(_lbp){localStorage.setItem('lelong.botpass',_lbp[1]);history.replaceState(null,'',location.pathname+location.search)}}catch(e){}</script>
 <script>/* apply the client's saved light / dark choice, text size and language before first paint (no flash); KP = this site's settings prefix */var ISAGENT=false;var KP='rashidahjuremi.',TRIAL=false,LANDING='premium/',SIP_URL='https://clientrashidahjuremi.lelongbidgroup.com/premium/#sip',TIER='premium';if(TRIAL)document.documentElement.classList.add('trial');try{var _t=localStorage.getItem('rashidahjuremi.theme');if(_t==='dark')document.documentElement.setAttribute('data-theme','dark');localStorage.removeItem(KP+'size');var _ag=localStorage.getItem(KP+'agv')==='1'&&!/^(vip|prem|free)$/.test(sessionStorage.getItem(KP+'aview')||''),_lg=localStorage.getItem(KP+'lang');if(_ag)document.documentElement.classList.add('agv');if(_lg==='ms'||(_lg!=='en'&&!_ag))document.documentElement.lang='ms'}catch(e){}</script>
 <style id="aiCss">
 /* AI assistant (2/11/2026): the character button, the chat panel, the guided-tour spotlight */
@@ -3296,7 +3297,7 @@ async function checkCode(code){const n=normCode(code);if(!n||!ACCESS||!ACCESS.co
   bits=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:b64(k.salt),iterations:k.iter},base,256))}
  const tag=new Uint8Array([...bits,...new TextEncoder().encode('lelong-id')]);
  const id=[...new Uint8Array(await crypto.subtle.digest('SHA-256',tag))].slice(0,16).map(x=>x.toString(16).padStart(2,'0')).join('');
- let e=ACCESS.codes[id];if(!e){const r=await liveCode(n,k);if(!r||!r.found||!r.entry)return null;if(r.expired)return 'expired';if(r.id!==id)return null;if(r.kid&&r.kid!==ACCESS.kid){ACCESS.kid=r.kid;if(r.akid)ACCESS.akid=r.akid}e=ACCESS.codes[id]=r.entry}if(e.exp&&new Date(e.exp)<new Date())return 'expired';
+ BGCID=id;let e=ACCESS.codes[id];if(!e){const r=await liveCode(n,k);if(!r||!r.found||!r.entry)return null;if(r.expired)return 'expired';if(r.id!==id)return null;if(r.kid&&r.kid!==ACCESS.kid){ACCESS.kid=r.kid;if(r.akid)ACCESS.akid=r.akid}e=ACCESS.codes[id]=r.entry}if(e.exp&&new Date(e.exp)<new Date())return 'expired';
  try{const wk=await crypto.subtle.importKey('raw',bits,'AES-GCM',false,['decrypt']);
   DKEY=await crypto.subtle.importKey('raw',await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(e.iv)},wk,b64(e.wk)),'AES-GCM',false,['decrypt']);
   DKEY2=null;if(e.wk2&&e.iv2){try{DKEY2=await crypto.subtle.importKey('raw',await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(e.iv2)},wk,b64(e.wk2)),'AES-GCM',false,['decrypt'])}catch(y){DKEY2=null}}
@@ -3343,10 +3344,34 @@ async function rekey(){try{ACCESS=await fetch('https://lelongbidgroup.com/rashid
 const getData=fresh=>fetch('https://lelongbidgroup.com/data.json'+(fresh?'?v='+Date.now():''),{cache:'no-store'}).then(r=>r.json());
 async function gunzip(buf){if(window.DecompressionStream)return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
  const f=await import('https://cdn.jsdelivr.net/npm/fflate@0.8.2/esm/browser.js');return f.strFromU8(f.gunzipSync(new Uint8Array(buf)))}   // Safari before iOS 16.4
-async function loadListings(){if(TRIAL)return RTRIAL?fetch(TRIAL_DATA+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()):getData(true);
+/* Page check (26/11/2026, anti-bot; no owner name here: agent pages refuse it): every view checks in with the portal at each load; the Free data key comes from it. */
+const BG_API='https://agent.lelongbidgroup.com/api/k';let BGCID='',BGHP=null,BGPASS='';
+try{BGPASS=localStorage.getItem('lelong.botpass')||''}catch(e){}   // the owner's own bots: a pass from the Bot Detector (kept by the first script), never scored
+const bgHex=a=>Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');
+function bgDev(){let d='';try{d=localStorage.getItem('lelong.bdev')||''}catch(e){}if(!/^[a-z0-9]{16,40}$/.test(d)){d=Array.from(crypto.getRandomValues(new Uint8Array(20)),b=>(b%36).toString(36)).join('');try{localStorage.setItem('lelong.bdev',d)}catch(e){}}return d}
+function bgTrap(){if(BGHP)return BGHP.value||'';BGHP=document.createElement('input');BGHP.type='text';BGHP.name='email_address';BGHP.autocomplete='off';BGHP.tabIndex=-1;BGHP.setAttribute('aria-hidden','true');
+ const a=document.createElement('a');a.href='https://agent.lelongbidgroup.com/api/x/'+bgHex(crypto.getRandomValues(new Uint8Array(4)))+'/listings.json';a.rel='nofollow';a.tabIndex=-1;a.setAttribute('aria-hidden','true');a.textContent='listings';
+ const w=document.createElement('div');w.style.cssText='position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden';w.append(BGHP,a);document.body.appendChild(w);return ''}
+function bgSig(){const n=navigator,s={};try{s.wd=n.webdriver===true?1:0;s.ua=/HeadlessChrome|PhantomJS/.test(n.userAgent)?1:0;s.lg=(n.languages||[]).length;s.pl=(n.plugins||[]).length;
+ s.sc=screen.width+'x'+screen.height;s.tp=n.maxTouchPoints||0;s.ch=window.chrome?1:0;
+ s.au=(['__playwright__binding__','__pwInitScripts','callPhantom','_phantom','__nightmare','domAutomation','domAutomationController','__selenium_unwrapped','__webdriver_evaluate','__driver_evaluate'].some(k=>k in window)||Object.keys(document).some(k=>/^\$?cdc_|^\$wdc_/.test(k)))?1:0;
+ try{const c=document.createElement('canvas').getContext('webgl'),d=c&&c.getExtension('WEBGL_debug_renderer_info');s.gl=d?String(c.getParameter(d.UNMASKED_RENDERER_WEBGL)).slice(0,60):''}catch(e){s.gl=''}
+ s.tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'').slice(0,40)}catch(e){}return s}
+async function bgAsk(view,fid){const nn=bgHex(crypto.getRandomValues(new Uint8Array(8)));
+ const r=await fetch(BG_API,{method:'POST',mode:'cors',cache:'no-store',headers:{'Content-Type':'text/plain'},body:JSON.stringify({v:view,f:fid||'',d:bgDev(),n:nn,h:bgTrap(),s:bgSig(),c:BGCID,b:BGPASS,p:(location.host+location.pathname).slice(0,120)})});
+ if(!r.ok)throw new Error('net');const j=await r.json(),k=b64(j.k);
+ const mac=new Uint8Array(await crypto.subtle.sign('HMAC',await crypto.subtle.importKey('raw',k,{name:'HMAC',hash:'SHA-256'},false,['sign']),new TextEncoder().encode('ok|'+nn)));
+ return {k:j.k,ok:bgHex(mac.slice(0,8))===j.t}}
+async function bgPaid(){let r=null;try{r=await bgAsk(ISAGENT?'a':(TIER==='sip'?'v':'p'),'')}catch(e){return}if(!r.ok)throw new Error('load')}   // the portal out of reach: a paid view opens as before
+async function freeOpen(j){if(!j||!j.ct||!j.fid){bgAsk('f','').catch(()=>{});return j}   // a plain file (before the lock): read as before, still check in
+ let k='';try{const r=await bgAsk('f',j.fid);if(!r.ok)throw new Error('load');k=r.k;try{localStorage.setItem('lelong.fk',JSON.stringify([j.fid,k]))}catch(e){}}
+ catch(e){if(e.message==='load')throw e;try{const c=JSON.parse(localStorage.getItem('lelong.fk')||'[]');if(c[0]===j.fid)k=c[1]}catch(x){}if(!k)throw new Error('load')}
+ const dk=await crypto.subtle.importKey('raw',b64(k),'AES-GCM',false,['decrypt']);
+ return JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(j.iv)},dk,b64(j.ct))))}
+async function loadListings(){if(TRIAL)return (RTRIAL?fetch(TRIAL_DATA+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()):getData(true)).then(freeOpen);
  const hp=(TIER==='sip'&&DKEY2)?fetch('https://lelongbidgroup.com/vip/history.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null):null;   // VIP history downloads alongside the main data
  const gp=(ISAGENT&&DKEY3)?fetch('https://lelongbidgroup.com/agent/info.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null):null;   // agent-only contacts: agent view with an agent code only
- let env=await getData(false);
+ const bgp=bgPaid();let env=await getData(false);await bgp;
  if(env.kid!==ACCESS.kid){if(!(await rekey()))throw new Error('code');if(env.kid!==ACCESS.kid)env=await getData(true);if(env.kid!==ACCESS.kid)throw new Error('key')}
  const j=JSON.parse(await gunzip(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(env.iv)},DKEY,b64(env.ct))));
  // VIP Investor Plan (26/10/2026): 12 months of No bidder / Cancelled / Sold units from vip/history.json, sealed with its own key that
